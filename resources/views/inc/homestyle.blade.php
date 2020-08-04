@@ -1,5 +1,14 @@
 <style>
     
+h1, h2, h3, h4, h5, h6 { font-family: 'Questrial', sans-serif; font-weight: 600; margin: 0px; line-height: 1.5; color: #374948; }
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { color: inherit; }
+label { font-weight: normal; }
+h1 { font-size: 3.052em; }
+h2 { font-size: 2.300em; }
+h3 { font-size: 1.953em; }
+h4 { font-size: 1.400em; }
+h5 { font-size: 1.200em; }
+h6 { font-size: 1.0em; }
     .titles{
         color:#2b2732;
         font-weight: bold;
@@ -130,6 +139,10 @@ h1.spot{
     line-height: 2em;
     color: #ffa500;
     font-family: 'Grenze', serif;
+}
+h1.spot a,
+h1.spot a:hover{
+    text-decoration: none;
 }
 h3.subtheme{
     color:#ffa6009b;

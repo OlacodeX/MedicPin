@@ -2,7 +2,7 @@
 
 #navbar {
   overflow: hidden;
-  background: #f1f1f1;
+  background: #ffffff;
 }
 
 .sticky {
@@ -17,10 +17,10 @@
 }
 
   .container-fluid.top{
-    background:rgb(11, 15, 236); 
+    background:#f1f9f9; 
     margin-bottom:0;
     padding: 5px 150px 5px 150px;
-    color: #ffa500;
+    color: #0084ff;
     z-index: 99;
     position: relative;
   }
@@ -32,21 +32,21 @@
   }
   .container-fluid.top span.float{
     float:right;
-    color: #ffa500;
+    color: #0084ff;
     padding-right: 100px;
   }
   .container-fluid.top .nav.navbar-nav.navbar-right{
         padding-top: 0px;
         padding-right: 10px;
         font-weight: bold;
-        color: #ffa500;
+        color: #0084ff;
       border: none;
     }
     .container-fluid.top .nav.navbar-nav.navbar-right li.nav-item a.nav-link{
         font-weight: bold;
         font-size: 10px;
         line-height: 1.5em;
-        color: #ffa500;
+        color: #0084ff;
         border: none;
         text-decoration: wavy;
         background: transparent;
@@ -55,9 +55,9 @@
         font-weight: 700;
         font-size: 15px;
         line-height: 1.5em;
-        color: #ffa500;
+        color: #0084ff;
         background: transparent;
-        border: solid 1px #ffa500;
+        border: solid 1px #0084ff;
         padding: 5px 15px;
         margin-top: 5px;
     }
@@ -74,30 +74,30 @@
         padding-top: 15px;
         padding-right: 10px;
         font-weight: bold;
-        color: #2b2732;
+        color: #777D74;
       border: none;
     }
     .nav.navbar-nav.navbar-right li a{
         font-weight: bold;
         font-size: 10px;
         line-height: 1.5em;
-        color: #ffa500;
+        color: #777D74;
         border: none;
     }
     .nav.navbar-nav.navbar-right li a:hover{
         font-weight: 900;
         font-size: 12px;
         line-height: 1.5em;
-        color: #ffa500;
-        border-bottom: 3px solid #ffa500;
+        color: #777D74;
+        border-bottom: 3px solid #777D74;
     }
     .nav.navbar-nav.navbar-right li a.btn.btn-info{
         font-weight: 700;
         font-size: 15px;
         line-height: 1.5em;
-        color: #ffa500;
+        color: #777D74;
         background: transparent;
-        border: solid 1px #ffa500;
+        border: solid 1px #777D74;
         padding: 5px 15px;
         margin-top: 5px;
     }
@@ -105,9 +105,9 @@
         font-weight: 700;
         font-size: 15px;
         line-height: 1.5em;
-        color: #ffa500;
-        background: #ffa500;
-        border: solid 1px #ffa500;
+        color: #777D74;
+        background: #ffffff;
+        border: solid 1px #777D74;
         
     }
     a.navbar-brand img{
@@ -147,7 +147,8 @@
       background: transparent;
       border: none;
       padding-top: 20px;
-      color: #ffa500;
+      
+      color: #0084ff;
       padding-right: 20px;
     }
 
@@ -160,7 +161,8 @@
   top: 0;
   left: 0;
   bottom: 0;
-  background-color: #f1f1f1;
+  color: #777D74;
+  background: #f1f9f9;
   overflow-x: hidden;
   transition: 0.5s;
 
@@ -168,7 +170,7 @@
 .w3-sidebar p{
     text-align: center;
     padding-top: 5px;
-    color: #ffa500;
+    color: #777D74;
     font-weight: bold;
     font-size: 20px;
     padding-right: 20px;
@@ -192,7 +194,7 @@ nav.navbar.navbar-default div.container-fluid,
           top: 150px;
           right: 5px;
           font-size: 20px;
-          color: #ffa500;
+          color: #0084ff;
           z-index: 0;
         }
         
@@ -208,22 +210,24 @@ nav.navbar.navbar-default div.container-fluid,
         ul.nv li a{
              padding-left: 10px;
              padding-right: 10px;
-             color: #ffa500;
+             color: #777D74;
              text-decoration: none;
          }   
          ul.nv{
              padding-left: 0;
              margin-left: 0;
+             
+              margin-top: 180px;
          }  
          ul.nv li{
              list-style: square;
              padding-left: 0;
              margin-left: 0;
-             color: #ffa500;
-             background: rgb(11, 15, 236);
+             color: #0084ff;;
+             background: #ffffff;
          }   
          ul.nv li.group{
-             border-bottom: 1px solid #ffa500;
+             border-bottom: 1px solid #f1f9f9;
              padding-bottom: 6px;
          }   
          
@@ -469,15 +473,13 @@ img.img-responsive.top{
                       @endguest
                   </ul>
   <p>
-    <a style="color:#ffa500;" href="https://www.twitter.com/"><i class="fa fa-twitter"></i></a>
-    <a href="https://api.whatsapp.com/send?phone=239471632" style="color:#ffa500;"><i class="fa fa-whatsapp" style="font-weight:300;padding-right:5px;"></i></a> 
-    <a href="https://www.instagram.com/" style="color:#ffa500;"><i class="fa fa-instagram"></i></a>
-    <a href="https://www.youtube.com/" style="color:#ffa500;"><i class="fa fa-youtube-play"></i></a>
-    <a href="https://www.facebook.com/" style="color:#ffa500;"><i class="fa fa-facebook"></i></a>
+    <a style="color:#0084ff;" href="https://www.twitter.com/"><i class="fa fa-twitter"></i></a>
+    <a href="https://www.instagram.com/" style="color:#0084ff;"><i class="fa fa-instagram"></i></a>
+    <a href="https://www.facebook.com/" style="color:#0084ff;"><i class="fa fa-facebook"></i></a>
 <span class="float">
-<a target="blank"style="text-decoration:none; color:#ffa500;" href="mailto:support@medicpin.com?Subject=Hello Medicpin, I Have an Enquiry"><i class="fa fa-envelope-o" style="color:#ffa500;"></i>
+<a target="blank"style="text-decoration:none; color:#0084ff;" href="mailto:support@medicpin.com?Subject=Hello Medicpin, I Have an Enquiry"><i class="fa fa-envelope-o" style="color:#0084ff;"></i>
   support@medicpin.com</a>
-<a target="blank" style="text-decoration:none; color:#ffa500;" href="tel:2349471632"><i class="fa fa-phone" style="color:#ffa500;"></i>+2349471632</a>
+<a target="blank" style="text-decoration:none; color:#0084ff;" href="tel:2349471632"><i class="fa fa-phone" style="color:#0084ff;"></i>+2349471632</a>
 </span>
 </p>
 </div><!---end div for container top---->
@@ -495,7 +497,7 @@ img.img-responsive.top{
 <!-- Sidebar -->
 <div id="myNav" class="w3-sidebar overlay1" style="width:200px">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNavOne()"><i class="fa fa-close"></i></a>
-  <img src="img/cover_images/{{Auth::user()->pp}}" class="img-responsive top" alt="">
+  <!--<img src="img/cover_images/{{Auth::user()->pp}}" class="img-responsive top" alt=""> -->
   <ul class="nv" style="border: none;">
       <li><i class="fa fa-dashboard"></i><a href="./dashboard">Dashboard</a></li>
       <li class="group"><i class="fa fa-envelope-o"></i><a href="./chat">Messages </a></li>

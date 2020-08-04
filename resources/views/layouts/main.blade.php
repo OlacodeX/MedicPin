@@ -12,8 +12,12 @@
         <link rel="icon" href="{{asset('img/yy.jpg')}}">
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Grenze&display=swap" rel="stylesheet">
+      <!-- Typography CSS -->
+      <link rel="stylesheet" href="css/typography.css">
+      <!-- Style CSS -->
+      <link rel="stylesheet" href="css/style.css">
+      <!-- Responsive CSS -->
+      <link rel="stylesheet" href="css/responsive.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
@@ -21,7 +25,10 @@
                 margin: 0;
                 padding: 0;
                 background: #ffffff;
-                font-family: 'Fira Code', monospace;
+                font-family: 'Poppins', sans-serif;
+                font-style: normal; 
+                font-size: 14px;
+                 line-height: 1.8;
                 overflow-x: hidden;
                 height: 100%;
                 width: 100%;
@@ -57,6 +64,15 @@
             .fa-github{
                 color: rgb(0, 0, 0);
             }
+            h1, h2, h3, h4, h5, h6 { font-family: 'Questrial', sans-serif; font-weight: 600; margin: 0px; line-height: 1.5; color: #374948; }
+            h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { color: inherit; }
+            label { font-weight: normal; }
+            h1 { font-size: 3.052em; }
+            h2 { font-size: 2.300em; }
+            h3 { font-size: 1.953em; }
+            h4 { font-size: 1.400em; }
+            h5 { font-size: 1.200em; }
+            h6 { font-size: 1.0em; }
         </style>
     </head>
     <body>
@@ -128,7 +144,7 @@
             }     
                 
                         </script>
-        <!-- GetButton.io widget -->
+        <!-- GetButton.io widget
         <script type="text/javascript">
             (function () {
                 var options = {
@@ -142,7 +158,7 @@
                 var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
             })();
         </script>
-        <!-- /GetButton.io widget -->
+        /GetButton.io widget -->
         </div>
         
     </body>

@@ -8,11 +8,19 @@
                 height: 100%;
                padding-bottom: 800px;
                 margin: 0;
-
     }
     div.jumbotron{
         margin-top: 200px;
         background: transparent;
+        text-align: center;
+    }
+    div.jumbotron img{
+        width: 100px;
+        height: 100px;
+        margin-left: 300px;
+        margin-top: 50px;
+        transform: rotate(-20deg);
+        box-shadow: 0 10px 12px 0 rgba(0, 0, 0, 0.2);
     }
     div.col-sm-6{
                 color: #ffa500;
@@ -24,14 +32,15 @@
         padding-left: 20px;
         padding-top: 60px;
     }
-    div.col-sm-6 div.card input.form-control{
-        background: rgb(241, 239, 239);
-        padding: 25px 15px;
-        margin-bottom: 10px;
-        margin-top: 10px;
-        border-radius: 0;
-        border: none;
-    }
+h1.spot a:hover{
+    text-decoration: none;
+}
+       /*----------------------------------------------
+Input
+------------------------------------------------*/
+div.col-sm-6 div.card input.form-control { height: 45px; line-height: 45px; background: #e9edf4; border: 0px solid #d7dbda; font-size: 14px; color: #777D74; }
+div.col-sm-6 div.card input.form-control:focus { color: #374948; background-color: #e5f2ff; box-shadow: none; }
+
     div.col-sm-6 div.card form{
         padding-left: 12px;
     }
@@ -88,6 +97,10 @@ a.btn.btn-success.pull-right.transparent:hover{
     color: #fff;
 
 }
+p.pull-right a{
+    background:rgba(241, 237, 237, 0.726);
+    padding: 8px 5px;
+}
 @media only screen and (max-width: 768px) {
 
     div.col-sm-6.one{
@@ -131,14 +144,10 @@ p.text-center{
 
 <div class="">
     <div class="">
-        <div class="col-sm-6 one">
-            <div class="jumbotron">
-            <p class="text-center">
-                Hi there, <br>
-                It is nice having you here..... <br>
-                To enjoy our services, kindly create an account with us...
-            </p>
-            <p><a href="{{ route('login') }}" class="btn btn-success btn-lg pull-left">SIGN IN HERE</a><a href="./" class="btn btn-success btn-lg pull-right transparent">GO TO HOMEPAGE</a></p>
+        <div class="col-sm-6 one text-center">
+            <div class="jumbotron text-center">
+                <h1 class="spot"><a href="./" style="text-decoration: none;color: #ffa500;">Medicpin</a></h1>
+                <img src="img/cope.png" alt="" class="img-responsive">
             </div>
         </div>
         <div class="col-sm-6">
@@ -157,7 +166,7 @@ p.text-center{
                             <label for="name" class="col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Your full name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -171,7 +180,7 @@ p.text-center{
                             <label for="email" class="col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Your email" required autocomplete="email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -185,7 +194,7 @@ p.text-center{
                             <label for="password" class="col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="password" required autocomplete="new-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -199,17 +208,33 @@ p.text-center{
                             <label for="password-confirm" class="col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm password" required autocomplete="new-password">
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-info">
+                            <div class="form-check pull-left">
+                                <input class="form-check-input" type="checkbox" name="Terms and Conditions" id="Terms and Conditions" {{ old('Terms and Conditions') ? 'checked' : '' }}>
+
+                                <label class="form-check-label" for="Terms and Conditions">
+                                   <p> I accept <a href="">Terms and Conditions</a> </p>
+                                </label>
+                            </div>
+                            <div class="">
+                                <button type="submit" class="btn btn-info pull-right">
                                     {{ __('Register') }}
                                 </button>
                             </div>
                         </div>
+                        <hr>
+                        <p class="pull-left">Already Have Account ? <a href="{{ route('login') }}"> Sign In</a></p>
+                        
+    
+                        <p class="pull-right">
+                            <a style="color:#ffa500;" href="https://www.twitter.com/"><i class="fa fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/" style="color:#ffa500;"><i class="fa fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/" style="color:#ffa500;"><i class="fa fa-facebook"></i></a>
+                        </p>
                     </form>
                 </div>
             </div>

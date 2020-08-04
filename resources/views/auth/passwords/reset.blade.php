@@ -24,14 +24,12 @@
         padding-left: 20px;
         padding-top: 60px;
     }
-    div.col-sm-6 div.card input.form-control{
-        background: rgb(241, 239, 239);
-        padding: 25px 15px;
-        margin-bottom: 10px;
-        margin-top: 10px;
-        border-radius: 0;
-        border: none;
-    }
+    /*----------------------------------------------
+Input
+------------------------------------------------*/
+div.col-sm-6 div.card input.form-control { height: 45px; line-height: 45px; background: #e9edf4; border: 0px solid #d7dbda; font-size: 14px; color: #777D74; }
+div.col-sm-6 div.card input.form-control:focus { color: #374948; background-color: #e5f2ff; box-shadow: none; }
+
     div.col-sm-6 div.card form{
         padding-left: 12px;
     }

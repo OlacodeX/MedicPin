@@ -14,4 +14,5 @@
 Route::get('/', 'PagesController@index');
 Auth::routes();
 
+Route::resource('/patients', 'PatientsController');
 Route::get('/home', 'HomeController@index')->name('home');
