@@ -214,9 +214,10 @@ div.container-fluid.main{
                 background-attachment:fixed;
                 color: #ffa500;
 
+
 }
 div.container-fluid.main .container{
-    padding-top: 20px;
+    padding-top: 50px;
 }
 div.container-fluid.main .container div.col-sm-4{
   text-align: center;
@@ -275,7 +276,7 @@ p.btn.btn-info{
 
 }
 a.btn.btn-success.pull-right.transparent{
-    margin-right: 66px;
+    margin-right: 100px;
     margin-top: 50px;
     margin-bottom: 200px;
     background: transparent;
