@@ -426,7 +426,6 @@
     <div id="content-page" class="content-page">
         <div class="container-fluid">
             <div class="row row-eq-height">
-                @include('inc.messages')
                 <!-- Content Top Banner Start -->
                 <div class="col-lg-3 col-md-12">
                   <div class="row">
@@ -531,6 +530,7 @@
                 </div>
                 </div>
                 <div class="col-lg-9 col-md-12">
+                    @include('inc.messages')
                     <div class="row">
                         <div class="col-md-12">
                                 
