@@ -8,7 +8,18 @@ use App\Mail\patientMail;
 use Illuminate\Support\Facades\Mail;
 use App\patients;
 class PatientsController extends Controller
-{
+{ 
+    
+     /**
+    * Create a new controller instance.
+    *
+    * @return void
+    */
+   public function __construct()
+   {
+       $this->middleware('auth');
+   }
+   
     /**
      * Display a listing of the resource.
      *
