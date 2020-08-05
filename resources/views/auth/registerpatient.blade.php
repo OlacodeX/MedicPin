@@ -154,14 +154,14 @@ p.text-center{
             <div class="card">
                 <div class="card-header text-justify">
                     <h2 class="title">
-                        Sign Up
+                       Complete Account Set Up
                     </h2>
-                    <p>Enter your details and let's get you an account.</p>
+                    <p>Remeber to use the email address that you got this link from.</p>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-                        <input type="hidden" name="role" value="Doctor">
+                        <input type="hidden" name="role" value="Patient">
                         <div class="form-group row">
                             <label for="name" class="col-form-label text-md-right">{{ __('Name') }}</label>
 

@@ -48,8 +48,9 @@
                <nav class="iq-sidebar-menu">
                   <ul id="iq-sidebar-toggle" class="iq-menu">
                      <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
+                     @if (auth()->user()->role == 'Doctor')
                      <li class="active">
-                        <a href="../home"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                        <a href="../D_dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                        
                      </li>
                      <li>
@@ -66,7 +67,49 @@
                        
                      </li>
                      
-                     <li><a href=""><i class="ri-login-box-line ml-2"></i>Sign out</a></li>
+                     <li>
+                        
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+                        
+                          
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form> 
+                    </li>
+                    
+                         
+                    @endif
+                    @if (auth()->user()->role == 'Patient')
+                    <li class="active">
+                       <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                      
+                    </li>
+                    <li>
+                       <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                       <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                          <li><a href="profile.html">My Profile</a></li>
+                          <!---<li><a href="profile-edit.html">User Edit</a></li>--->
+                          <li><a href="">My Appointments</a></li>
+                       </ul>
+                    </li>
+                    <li>
+                       <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
+                      
+                    </li>
+                    
+                    <li>
+                       
+                       <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+                       
+                         
+
+                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                           @csrf
+                       </form> 
+                   </li>
+                        
+                    @endif
                      <!----
                      <li><a href="calendar.html" class="iq-waves-effect"><i class="ri-calendar-2-line"></i><span>Calendar</span></a></li>
                      <li><a href="chat.html" class="iq-waves-effect"><i class="ri-message-line"></i><span>Chat</span></a></li>
@@ -321,11 +364,26 @@
                   </div>
                   <ul class="navbar-list">
                      <li>
-                        <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
+                        <a href="#" class="search-toggle iq-waves-effect text-white">
+                            
+                            @if (auth()->user()->role == 'Patient')
+                            <img src="img/cover_img/{{$patient->img}}"
+                             class="img-fluid mb-3 avatar-120 rounded-circle" alt="">
+                        @endif
+                        @if (auth()->user()->role == 'Doctor')
+                            <img src="images/user/1.jpg"
+                             class="img-fluid mb-3 avatar-120 rounded-circle" alt="">
+                        @endif
+                        </a>
                         <div class="iq-sub-dropdown iq-user-dropdown">
                            <div class="iq-card shadow-none m-0">
                                  <div class="d-inline-block w-100 text-center p-3">
-                                    <a class="iq-bg-danger iq-sign-btn" href="" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
+                                    <a href="{{ route('logout') }}" class="iq-bg-danger iq-sign-btn" href="{{ route('logout') }}" role="button" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+                                
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                    
                                  </div>
                               </div>
                            </div>
@@ -348,7 +406,13 @@
                                    <ul class="breadcrumb">
                                       <li class="breadcrumb-item"><a href="">Home</a></li>
                                       <li class="breadcrumb-item active" aria-current="page">Patient Dashboard</li>
-                                      <li class="breadcrumb-item"><a href="">Sign out<i class="ri-login-box-line ml-2"></i></a></li>
+                                      <li class="breadcrumb-item">
+                                        <a href="{{ route('logout') }}" class="iq-bg-danger iq-sign-btn" href="{{ route('logout') }}" role="button" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+                                    
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
                                    </ul>
                                 </nav>
                              </div>
@@ -362,6 +426,7 @@
     <div id="content-page" class="content-page">
         <div class="container-fluid">
             <div class="row row-eq-height">
+                @include('inc.messages')
                 <!-- Content Top Banner Start -->
                 <div class="col-lg-3 col-md-12">
                   <div class="row">
@@ -369,31 +434,42 @@
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height iq-profile-card text-center">
                         <div class="iq-card-body">
                             <div class="iq-team text-center p-0">
-                                <img src="images/user/1.jpg"
+                                @if (auth()->user()->role == 'Patient')
+                                    <img src="img/cover_img/{{$patient->img}}"
                                      class="img-fluid mb-3 avatar-120 rounded-circle" alt="">
+                                @endif
+                                @if (auth()->user()->role == 'Doctor')
+                                    <img src="images/user/1.jpg"
+                                     class="img-fluid mb-3 avatar-120 rounded-circle" alt="">
+                                @endif
                                 <h4 class="mb-0">{{ Auth::user()->name }}</h4>
-                                <a href="#" class="d-inline-block w-100"><span class="__cf_email__" data-cfemail="b4dadddff4c7dbd2d6dbccd5d0d9ddda9ad7dbd9">{{ Auth::user()->email}}</span></a>
-                                <p class="mt-1">{{ Auth::user()->address}}</p>
+                                <a href="#" class="d-inline-block w-100"><span class="__cf_email__" data-cfemail="b4dadddff4c7dbd2d6dbccd5d0d9ddda9ad7dbd9" style="font-size: 13px;">{{ Auth::user()->email}}</span></a>
+                                
                                 <hr>
+                                
+                                @if (auth()->user()->role == 'Patient')
                                 <ul class="list-inline mb-0 d-flex justify-content-between">
                                     <li class="list-inline-item">
                                         <h5>Blood</h5>
-                                        <p class="text-success">AB+</p>
+                                        <p class="text-success">{{$patient->b_group}}</p>
                                     </li>
                                     <li class="list-inline-item">
                                         <h5>Height</h5>
-                                        <p class="text-success">161cm</p>
+                                        <p class="text-success">{{$patient->height}}cm</p>
                                     </li>
                                     <li class="list-inline-item">
                                         <h5>Weight</h5>
-                                        <p class="text-success">64kg</p>
+                                        <p class="text-success">{{$patient->weight}}kg</p>
                                     </li>
                                 </ul>
+                            
+                                @endif
                             </div>
                             <div id="Dash1BarChart"></div>
                         </div>
                     </div>
                   </div>
+                  @if (auth()->user()->role == 'Patient')
                   <div class="col-sm-12">
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height wow fadeInUp" data-wow-delay="0.6s">
                         <div class="iq-card-header d-flex justify-content-between">
@@ -451,11 +527,14 @@
                         </div>
                     </div>
                   </div>
+                  @endif
                 </div>
                 </div>
                 <div class="col-lg-9 col-md-12">
                     <div class="row">
                         <div class="col-md-12">
+                                
+                            @if (auth()->user()->role == 'Patient')
                             <div class="iq-card iq-card-block iq-card-stretch iq-card-height wow fadeInUp" data-wow-delay="0.6s">
                                 <div class="iq-card-header d-flex justify-content-between">
                                     <div class="iq-header-title">
@@ -467,14 +546,12 @@
                                         <div class="col-md-4">
                                             <div class="iq-card shadow-none mb-0">
                                                 <div class="iq-card-body p-1">
-                                                    <span class="text-dark float-right"><i
-                                                            class="ri-arrow-up-fill mr-1"></i>+30%</span>
                                                     <span class="font-size-14">Blood pressure</span>
-                                                    <h2>75
+                                                    <h2>{{$patient->bp}}
                                                         <img class="float-right summary-image-top mt-1" src="images/page-img/04.png" alt="summary-image" /> </h2>
                                                     <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
                                                         <div class="iq-progress-bar">
-                                                            <span class="bg-primary" data-percent="90"></span>
+                                                            <span class="bg-primary" data-percent={{$patient->bp}}></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -483,14 +560,12 @@
                                         <div class="col-md-4">
                                             <div class="iq-card shadow-none mb-0">
                                                 <div class="iq-card-body p-1">
-                                                    <span class="text-dark float-right"><i
-                                                            class="ri-arrow-up-fill mr-1"></i>+30%</span>
                                                     <span class="font-size-14">Temperature</span>
-                                                    <h2>28.6
+                                                    <h2>{{$patient->temp}}
                                                     <img class="float-right summary-image-top mt-1" src="images/page-img/06.png" alt="summary-image" /> </h2>
                                                     <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
                                                         <div class="iq-progress-bar">
-                                                            <span class="bg-success" data-percent="90"></span>
+                                                            <span class="bg-success" data-percent={{$patient->temp}}></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -499,19 +574,76 @@
                                         <div class="col-md-4">
                                             <div class="iq-card shadow-none mb-0">
                                                 <div class="iq-card-body p-1">
-                                                    <span class="text-dark float-right"><i
-                                                            class="ri-arrow-down-fill mr-1"></i>+30%</span>
                                                     <span class="font-size-14">Heart Rate</span>
-                                                    <h2>60
+                                                    <h2>{{$patient->h_rate}}
                                                     <img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
                                                     <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
                                                         <div class="iq-progress-bar">
-                                                            <span class="bg-danger" data-percent="90"></span>
+                                                            <span class="bg-danger" data-percent={{$patient->h_rate}}></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        @endif
+                                
+                                        @if (auth()->user()->role == 'Doctor')
+                                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height wow fadeInUp" data-wow-delay="0.6s">
+                                            <div class="iq-card-header d-flex justify-content-between">
+                                                <div class="iq-header-title">
+                                                    <h4 class="card-title">Summary</h4>
+                                                </div>
+                                            </div>
+                                            <div class="iq-card-body">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="iq-card shadow-none mb-0">
+                                                            <div class="iq-card-body p-1">
+                                                                <span class="font-size-14">Total Patients</span>
+                                                                <h2>
+                                                                    {{App\patients::where('doc_email', auth()->user()->email)->count()}}
+                                                                    </h2>
+                                                                <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                                    <div class="iq-progress-bar">
+                                                                        <span class="bg-primary" data-percent= {{App\patients::where('doc_email', auth()->user()->email)->count()}}></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="iq-card shadow-none mb-0">
+                                                            <div class="iq-card-body p-1">
+                                                                <span class="font-size-14">Temperature</span>
+                                                                <h2>28.6
+                                                                <img class="float-right summary-image-top mt-1" src="images/page-img/06.png" alt="summary-image" /> </h2>
+                                                                <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                                    <div class="iq-progress-bar">
+                                                                        <span class="bg-success" data-percent="90"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="iq-card shadow-none mb-0">
+                                                            <div class="iq-card-body p-1">
+                                                                <span class="text-dark float-right"><i
+                                                                        class="ri-arrow-down-fill mr-1"></i>+30%</span>
+                                                                <span class="font-size-14">Heart Rate</span>
+                                                                <h2>60
+                                                                <img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
+                                                                <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                                    <div class="iq-progress-bar">
+                                                                        <span class="bg-danger" data-percent="90"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    @endif
                                     </div>
                                 </div>
                             </div>

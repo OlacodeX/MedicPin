@@ -61,7 +61,15 @@
                        
                      </li>
                      
-                     <li><a href=""><i class="ri-login-box-line ml-2"></i>Sign out</a></li>
+                     <li>
+                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+                        
+                          
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
                      <!----
                      <li><a href="calendar.html" class="iq-waves-effect"><i class="ri-calendar-2-line"></i><span>Calendar</span></a></li>
                      <li><a href="chat.html" class="iq-waves-effect"><i class="ri-message-line"></i><span>Chat</span></a></li>
@@ -320,7 +328,7 @@
                         <div class="iq-sub-dropdown iq-user-dropdown">
                            <div class="iq-card shadow-none m-0">
                                  <div class="d-inline-block w-100 text-center p-3">
-                                    <a class="iq-bg-danger iq-sign-btn" href="" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
+                                    <a class="iq-bg-danger iq-sign-btn" href="{{ route('logout') }}" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
                                  </div>
                               </div>
                            </div>
@@ -343,7 +351,7 @@
                                    <ul class="breadcrumb">
                                       <li class="breadcrumb-item"><a href="">Home</a></li>
                                       <li class="breadcrumb-item active" aria-current="page">Patient Dashboard</li>
-                                      <li class="breadcrumb-item"><a href="">Sign out<i class="ri-login-box-line ml-2"></i></a></li>
+                                      <li class="breadcrumb-item"><a href="{{ route('logout') }}">Sign out<i class="ri-login-box-line ml-2"></i></a></li>
                                    </ul>
                                 </nav>
                              </div>
@@ -365,8 +373,9 @@
                           </div>
                        </div>
                        <div class="iq-card-body">
-                          <form>
-                             <div class="form-group">
+                        {!! Form::open(['action' => 'PatientsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
+                        **/ !!}
+                          <div class="form-group">
                                 <div class="add-img-user profile-img-edit">
                                    <div class="p-image">
                                      <!-- <h5 class="upload-button">file upload</h5> -->
@@ -384,12 +393,21 @@
                                   </div>
                                </div>
                              </div>
+                             <!----
                              <div class="form-group">
                                 <label>User Role:</label>
                                 <select class="form-control" id="selectuserrole">
                                    <option>Select</option>
                                    <option>Doctor</option>
                                    <option>Patient</option>
+                                </select>
+                             </div>---->
+                             <div class="form-group">
+                                <label>Gender</label>
+                                <select class="form-control" id="selectuserrole" name="gender">
+                                   <option>Select</option>
+                                   <option value="Male">Male</option>
+                                   <option value="Female">Female</option>
                                 </select>
                              </div>
                        </div>
@@ -406,12 +424,12 @@
                           <div class="new-user-info">
                                 <div class="row">
                                    <div class="form-group col-md-6">
-                                      <label for="fname">Name:</label>
+                                      <label for="name">Name:</label>
                                       <input type="text" class="form-control" id="name" name="name" placeholder="First Name">
                                    </div>
                                    <div class="form-group col-md-6">
-                                      <label for="add1">Address</label>
-                                      <input type="text" class="form-control" id="add" placeholder="Street Address">
+                                      <label for="add">Address</label>
+                                      <input type="text" class="form-control" name="add" id="add" placeholder="Street Address">
                                    </div>
                                    <div class="form-group col-md-6">
                                       <label for="mobno">Mobile Number:</label>
@@ -426,14 +444,14 @@
                                 <h5 class="mb-3">Medical Records</h5>
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                       <label for="add1">Blood Group</label>
-                                       <select class="form-control" id="selectbp">
+                                       <label for="Blood Group">Blood Group</label>
+                                       <select class="form-control" id="selectbg" name="b_group">
                                           <option>Select</option>
-                                          <option>O+</option>
-                                          <option>AB+</option>
-                                          <option>AB+</option>
-                                          <option>AB+</option>
-                                          <option>AB+</option>
+                                          <option value="O+">O+</option>
+                                          <option value="AB+">AB+</option>
+                                          <option value="AB+">AB+</option>
+                                          <option value="AB+">AB+</option>
+                                          <option value="AB+">AB+</option>
                                        </select>
                                     </div>
                                     <div class="form-group col-md-6">
@@ -446,11 +464,11 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                        <label for="genotype">Genotype</label>
-                                       <select class="form-control" id="selectgenotype">
+                                       <select class="form-control" id="selectgenotype" name="genotype">
                                           <option>Select</option>
-                                          <option>AA</option>
-                                          <option>AS</option>
-                                          <option>SS</option>
+                                          <option value="AA">AA</option>
+                                          <option value="AS">AS</option>
+                                          <option value="SS">SS</option>
                                        </select>
                                     </div>
                                     <div class="form-group col-md-6">
@@ -466,8 +484,9 @@
                                        <input type="text" class="form-control" id="temprature" name="temprature" placeholder="Temprature">
                                     </div>
                                 </div>
+                                
                                 <button type="submit" class="btn btn-primary">Add New User</button>
-                             </form>
+                                {!! Form::close() !!}
                           </div>
                        </div>
                     </div>

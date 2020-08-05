@@ -15,13 +15,13 @@ class AddColumnsToPatientsTable extends Migration
     {
         Schema::table('patients', function (Blueprint $table) {
             //
-            $table->string('bp');
-            $table->string('temp');
-            $table->string('h_rate');
-            $table->string('b_group');
-            $table->string('height');
-            $table->string('weight');
-            $table->string('genotype');
+            $table->string('bp')->nullable();
+            $table->string('temp')->nullable();
+            $table->string('h_rate')->nullable();
+            $table->string('b_group')->nullable();
+            $table->string('height')->nullable();
+            $table->string('weight')->nullable();
+            $table->string('genotype')->nullable();
         });
     }
 

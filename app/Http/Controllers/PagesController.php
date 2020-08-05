@@ -20,9 +20,9 @@ class PagesController extends Controller
         return view('pages.home');//here i can return any page i want.
     }
      
-    public function portfolio(){
-        $portfolios = Portfolio::orderBy('created_at', 'desc')->paginate(20);
-        return view("pages.portfolio")->with('portfolios', $portfolios);
+    public function reg_patient(){
+       
+        return view("auth.registerpatient");
     }
 
     public function reachout(){
