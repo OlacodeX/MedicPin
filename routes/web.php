@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'PagesController@index');
+Route::get('/myprofile', 'PagesController@pro');
 Auth::routes();
 Route::get('/account_set_up', 'PagesController@reg_patient');
 Route::resource('/patients', 'PatientsController');

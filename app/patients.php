@@ -15,6 +15,14 @@ class patients extends Model
     public $timestamps = true;
 
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'status',
+    ];
     public function user(){
         return $this->belongsTo('App\User');
     }

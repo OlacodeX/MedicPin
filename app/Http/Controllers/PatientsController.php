@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Mail\patientMail;
 use Illuminate\Support\Facades\Mail;
 use App\patients;
+use App\User;
 class PatientsController extends Controller
 { 
     
@@ -19,7 +20,7 @@ class PatientsController extends Controller
    {
        $this->middleware('auth');
    }
-   
+
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +28,8 @@ class PatientsController extends Controller
      */
     public function index()
     {
-        //
+        $users = patients::where('doc_email', auth()->user()->email)->paginate(100);
+        return view("patients.list")->with('users', $users);
     }
 
     /**
@@ -103,6 +105,7 @@ class PatientsController extends Controller
             $patient->h_rate = $request->input('h_rate');
             $patient->bp = $request->input('bp');
             $patient->b_group = $request->input('b_group');
+            //$patient->status = 'pending';
             $patient->img = $fileNameTostore;
              //Save to db
              $patient->save(); 
@@ -162,6 +165,27 @@ class PatientsController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        
+       // //
+       $email = $_POST['email'];
+      $user = patients::find($id);
+      if (!empty(User::where('email', $email)->first())) {
+        $user2 = User::where('email', $email)->first();
+        $user2->delete();
+      }
+
+     // if($user->img != '1.jpg'){
+       //Delete image
+      // unlink(public_path().'/img/cover_img/'.$user->img);
+  // }
+      
+              //check correct user (this will restrict destroy access only to the post owner)
+             // if(auth()->user()->id !==$post->user_id){
+               //   return redirect('/posts')->with('error', 'Unauthorized page.');
+              //}
+              $user->delete();
+              return redirect('/patients')->with('success', 'User Record Deleted');
+        
+   }
+
 }

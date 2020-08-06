@@ -6,18 +6,23 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       
             @section('page_title')
-            {{config('app.name')}} | Add User
+            {{config('app.name')}} | Users List
             @endsection
-      <!-- Favicon -->
-      <link rel="shortcut icon" href="../images/favicon.ico" />
       <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="../css/bootstrap.min.css">
+      <link rel="stylesheet" href="./css/bootstrap.min.css">
       <!-- Typography CSS -->
-      <link rel="stylesheet" href="../css/typography.css">
+      <link rel="stylesheet" href="./css/typography.css">
       <!-- Style CSS -->
-      <link rel="stylesheet" href="../css/style.css">
+      <link rel="stylesheet" href="./css/style.css">
       <!-- Responsive CSS -->
-      <link rel="stylesheet" href="../css/responsive.css">
+      <link rel="stylesheet" href="./css/responsive.css">
+      <style>
+         button.btn.btn-info{
+            border: none;
+            background: transparent;
+            color: rgb(20, 109, 224);
+         }
+      </style>
    </head>
 @section('content')
 <!-- Wrapper Start -->
@@ -25,8 +30,8 @@
     <!-- Sidebar  -->
     <div class="iq-sidebar">
             <div class="iq-sidebar-logo d-flex justify-content-between">
-               <a href="../">
-               <img src="../img/yy.jpg" class="img-fluid" alt="">
+               <a href="./">
+               <img src="./img/yy.jpg" class="img-fluid" alt="">
                <span>
                 {{config('app.name')}}
                </span>
@@ -44,20 +49,20 @@
                   <ul id="iq-sidebar-toggle" class="iq-menu">
                      <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
                      <li>
-                        <a href="../home"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                        <a href="./home"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                        
                      </li>
                      <li class="active">
                         <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Doctor's Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                         <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="../myprofile">My Profile</a></li>
+                           <li><a href="./myprofile">My Profile</a></li>
                            <!---<li><a href="profile-edit.html">User Edit</a></li>--->
-                           <li><a href="../patients/create">Add Patient</a></li>
-                           <li><a href="../patients">Patients List</a></li>
+                           <li><a href="./patients/create">Add Patient</a></li>
+                           <li><a href="./patients">Patients List</a></li>
                         </ul>
                      </li>
                      <li>
-                        <a href="../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
+                        <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                        
                      </li>
                      
@@ -221,8 +226,8 @@
         <div class="iq-navbar-custom">
             <div class="iq-sidebar-logo">
                 <div class="top-logo">
-                    <a href="../">
-                    <img src="../img/yy.jpg" class="img-fluid" alt="">
+                    <a href="./">
+                    <img src="./img/yy.jpg" class="img-fluid" alt="">
                     <span>
                      {{config('app.name')}}
                     </span>
@@ -264,7 +269,7 @@
                                     <a href="#" class="iq-sub-card" >
                                        <div class="media align-items-center">
                                           <div class="">
-                                             <img class="avatar-40 rounded" src="../images/user/01.jpg" alt="">
+                                             <img class="avatar-40 rounded" src="./images/user/01.jpg" alt="">
                                           </div>
                                           <div class="media-body ml-3">
                                              <h6 class="mb-0 ">Nik Emma Watson</h6>
@@ -324,7 +329,7 @@
                   </div>
                   <ul class="navbar-list">
                      <li>
-                        <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="../images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
+                        <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="./images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
                         <div class="iq-sub-dropdown iq-user-dropdown">
                            <div class="iq-card shadow-none m-0">
                                  <div class="d-inline-block w-100 text-center p-3">
@@ -360,190 +365,156 @@
                  </div>
               </div>
         </div>
-  <!-- Responsive Breadcrumb End-->
-     <!-- Page Content  -->
-     <div id="content-page" class="content-page">
-        <div class="container-fluid">
-           <div class="row">
-              <div class="col-lg-3">
-                    <div class="iq-card">
-                       <div class="iq-card-header d-flex justify-content-between">
-                          <div class="iq-header-title">
-                             <h4 class="card-title">Add New User</h4>
-                          </div>
-                       </div>
-                       <div class="iq-card-body">
-                        {!! Form::open(['action' => 'PatientsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
-                        **/ !!}
-                          <div class="form-group">
-                                <div class="add-img-user profile-img-edit">
-                                   <div class="p-image">
-                                     <!-- <h5 class="upload-button">file upload</h5> -->
-                                     <a href="javascript:void();" class="upload-button btn iq-bg-primary">File Upload</a>
-                                     <input class="file-upload" type="file" accept="image/*" name="pp">
-                                  </div>
-                                </div>
-                               <div class="img-extension mt-3">
-                                  <div class="d-inline-block align-items-center">
-                                      <span>Only</span>
-                                     <a href="javascript:void();">.jpg</a>
-                                     <a href="javascript:void();">.png</a>
-                                     <a href="javascript:void();">.jpeg</a>
-                                     <span>allowed</span>
-                                  </div>
+  <!-- Responsive Breadcrumb End-->      <!-- Page Content  -->
+   <div id="content-page" class="content-page">
+    <div class="container-fluid">
+       <div class="row">
+          <div class="col-sm-12">
+                <div class="iq-card">
+                   <div class="iq-card-header d-flex justify-content-between">
+                      <div class="iq-header-title">
+                         <h4 class="card-title">Your Patients List</h4>
+                      </div>
+                   </div>
+                   <div class="iq-card-body">
+                      <div class="table-responsive">
+                         <div class="row justify-content-between">
+                            <div class="col-sm-12 col-md-6">
+                               <div id="user_list_datatable_info" class="dataTables_filter">
+                                  <form class="mr-3 position-relative">
+                                     <div class="form-group mb-0">
+                                        <input type="search" class="form-control" id="exampleInputSearch" placeholder="Search" aria-controls="user-list-table">
+                                     </div>
+                                  </form>
                                </div>
-                             </div>
-                             <!----
-                             <div class="form-group">
-                                <label>User Role:</label>
-                                <select class="form-control" id="selectuserrole">
-                                   <option>Select</option>
-                                   <option>Doctor</option>
-                                   <option>Patient</option>
-                                </select>
-                             </div>---->
-                             <div class="form-group">
-                                <label>Gender</label>
-                                <select class="form-control" id="selectuserrole" name="gender">
-                                   <option>Select</option>
-                                   <option value="Male">Male</option>
-                                   <option value="Female">Female</option>
-                                </select>
-                             </div>
-                       </div>
-                    </div>
-              </div>
-              <div class="col-lg-9">
-                    <div class="iq-card">
-                       <div class="iq-card-header d-flex justify-content-between">
-                          <div class="iq-header-title">
-                             <h4 class="card-title">New User Information</h4>
-                          </div>
-                       </div>
-                       <div class="iq-card-body">
-                          <div class="new-user-info">
-                                <div class="row">
-                                   <div class="form-group col-md-6">
-                                      <label for="name">Name:</label>
-                                      <input type="text" class="form-control" id="name" name="name" placeholder="First Name">
-                                   </div>
-                                   <div class="form-group col-md-6">
-                                      <label for="add">Address</label>
-                                      <input type="text" class="form-control" name="add" id="add" placeholder="Street Address">
-                                   </div>
-                                   <div class="form-group col-md-6">
-                                      <label for="mobno">Mobile Number:</label>
-                                      <input type="text" class="form-control" id="number" name="number" placeholder="Mobile Number">
-                                   </div>
-                                   <div class="form-group col-md-6">
-                                      <label for="email">Email:</label>
-                                      <input type="email" class="form-control" id="email" placeholder="Email" name="email">
-                                   </div>
+                            </div>
+                            @if (count($users) > 0)
+                            <div class="col-sm-12 col-md-6">
+                               <div class="user-list-files d-flex float-right">
+                                  <a href="javascript:void();" class="chat-icon-phone">
+                                     Print
+                                   </a>
+                                  <a href="javascript:void();" class="chat-icon-video">
+                                     Excel
+                                   </a>
+                                   <a href="javascript:void();" class="chat-icon-delete">
+                                     Pdf
+                                   </a>
+                                 </div>
+                            </div>
+                         </div>
+                         <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
+                           <thead>
+                               
+                               <tr>
+                                  <th>Profile</th>
+                                  <th>Name</th>
+                                  <th>Gender</th>
+                                  <th>Contact</th>
+                                  <th>Email</th>
+                                  <th>Address</th>
+                                  <th>Status</th>
+                                  <th>Join Date</th>
+                                  <th>Action</th>
+                               </tr>
+                           </thead>
+                           <tbody>
+                            @foreach ($users as $user)
+                               <tr>
+                                  <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="img/cover_img/{{$user->img}}" alt="profile"></td>
+                                  <td>{{$user->name.$user->id}}</td>
+                                  <td>{{$user->gender}}</td>
+                                  <td><a href="tel:{{$user->phone}}">{{$user->phone}}</a></td>
+                                  <td><a href="mailto:{{$user->email}}" class="__cf_email__" data-cfemail="80e1eeeee1f3f4e8e5f3e9e1c0e7ede1e9ecaee3efed">{{$user->email}}</a></td>
+                                  <td>{{$user->address}}</td>
+                                  <td>
+                                      @if (!empty(App\User::where('email', $user->email)->first()))
+                                      <span class="badge iq-bg-primary">Active</span>
+                                      @else
+                                      <span class="badge iq-bg-danger">Inactive</span>
+                                      @endif
+                                   </td>
+                                  <td>{{$user->created_at}}</td>
+                                  <td>
+                                     <div class="flex align-items-center list-user-action">
+                                        {!!Form::open(['action' => ['PatientsController@destroy', $user->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                        {{Form::hidden('email', $user->email)}}
+                                        {{Form::hidden('_method', 'DELETE')}}
+                                        <button type="submit" class ="btn btn-info btn-sm" ><i class="ri-delete-bin-line"></i></button>
+                                       
+                                        {!!Form::close()!!}
+                                     </div>
+                                  </td>
+                               </tr> 
+                               @endforeach                      
+                           </tbody>
+                         </table>
+                      </div>
+                            <div class="col-md-6">
+                                <div style="text-align:right;">
+                                        <!-----The pagination link----->
+                                        {{$users->links()}}
                                 </div>
-                                <hr>
-                                <h5 class="mb-3">Medical Records</h5>
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                       <label for="Blood Group">Blood Group</label>
-                                       <select class="form-control" id="selectbg" name="b_group">
-                                          <option>Select</option>
-                                          <option value="O+">O+</option>
-                                          <option value="AB+">AB+</option>
-                                          <option value="AB+">AB+</option>
-                                          <option value="AB+">AB+</option>
-                                          <option value="AB+">AB+</option>
-                                       </select>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                       <label for="bp">Blood Pressure</label>
-                                       <input type="text" class="form-control" id="bp" name="bp" placeholder="Blood Pressure">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                       <label for="h_rate">Heart Rate</label>
-                                       <input type="text" class="form-control" id="h_rate" name="h_rate" placeholder="Heart Rate">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                       <label for="genotype">Genotype</label>
-                                       <select class="form-control" id="selectgenotype" name="genotype">
-                                          <option>Select</option>
-                                          <option value="AA">AA</option>
-                                          <option value="AS">AS</option>
-                                          <option value="SS">SS</option>
-                                       </select>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                       <label for="weight">Weight</label>
-                                       <input type="text" class="form-control" id="weight" name="weight" placeholder="Weight">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                       <label for="height">Height</label>
-                                       <input type="text" class="form-control" id="height" name="height" placeholder="Height">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                       <label for="temprature">Temperature</label>
-                                       <input type="text" class="form-control" id="temprature" name="temprature" placeholder="Temprature">
-                                    </div>
-                                </div>
-                                
-                                <button type="submit" class="btn btn-primary">Add New User</button>
-                                {!! Form::close() !!}
-                          </div>
-                       </div>
-                    </div>
-              </div>
-           </div>
-        </div>
-     </div>
-     </div>
-     <!-- Wrapper END -->
-      <!-- Footer -->
-        <footer class="bg-white iq-footer">
-           <div class="container-fluid">
-              <div class="row">
-                 <div class="col-lg-6">
-                    <ul class="list-inline mb-0">
-                       <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
-                       <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
-                    </ul>
-                 </div>
-                 <div class="col-lg-6 text-right">
-                    Copyright 2020 <a href="#">Medicpin</a> All Rights Reserved.
-                 </div>
-              </div>
-           </div>
-        </footer>
-        <!-- Footer END -->
-      <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="../js/jquery.min.js"></script>
-        <script src="../js/popper.min.js"></script>
-        <script src="../js/bootstrap.min.js"></script>
-        <!-- Appear JavaScript -->
-        <script src="../js/jquery.appear.js"></script>
-        <!-- Countdown JavaScript -->
-        <script src="../js/countdown.min.js"></script>
-        <!-- Counterup JavaScript -->
-        <script src="../js/waypoints.min.js"></script>
-        <script src="../js/jquery.counterup.min.js"></script>
-        <!-- Wow JavaScript -->
-        <script src="../js/wow.min.js"></script>
-        <!-- Apexcharts JavaScript -->
-        <script src="../js/apexcharts.js"></script>
-        <!-- Slick JavaScript -->
-        <script src="../js/slick.min.js"></script>
-        <!-- Select2 JavaScript -->
-        <script src="../js/select2.min.js"></script>
-        <!-- Owl Carousel JavaScript -->
-        <script src="../js/owl.carousel.min.js"></script>
-        <!-- Magnific Popup JavaScript -->
-        <script src="../js/jquery.magnific-popup.min.js"></script>
-        <!-- Smooth Scrollbar JavaScript -->
-        <script src="../js/smooth-scrollbar.js"></script>
-        <!-- lottie JavaScript -->
-        <script src="../js/lottie.js"></script>
-        <!-- Chart Custom JavaScript -->
-        <script src="../js/chart-custom.js"></script>
-        <!-- Custom JavaScript -->
-        <script src="../js/custom.js"></script>
-        
+                                @else
+                                <p>No Record Found</p>    
+                                @endif
+                            </div>
+                         </div>
+                   </div>
+                </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ </div>
+ <!-- Wrapper END -->
+  <!-- Footer -->
+    <footer class="bg-white iq-footer">
+       <div class="container-fluid">
+          <div class="row">
+             <div class="col-lg-6">
+                <ul class="list-inline mb-0">
+                   <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
+                   <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
+                </ul>
+             </div>
+             <div class="col-lg-6 text-right">
+                Copyright 2020 <a href="./">Medicpin</a> All Rights Reserved.
+             </div>
+          </div>
+       </div>
+    </footer>
+    <!-- Footer END -->
+  <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Appear JavaScript -->
+    <script src="js/jquery.appear.js"></script>
+    <!-- Countdown JavaScript -->
+    <script src="js/countdown.min.js"></script>
+    <!-- Counterup JavaScript -->
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <!-- Wow JavaScript -->
+    <script src="js/wow.min.js"></script>
+    <!-- Apexcharts JavaScript -->
+    <script src="js/apexcharts.js"></script>
+    <!-- Slick JavaScript -->
+    <script src="js/slick.min.js"></script>
+    <!-- Select2 JavaScript -->
+    <script src="js/select2.min.js"></script>
+    <!-- Owl Carousel JavaScript -->
+    <script src="js/owl.carousel.min.js"></script>
+    <!-- Magnific Popup JavaScript -->
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <!-- Smooth Scrollbar JavaScript -->
+    <script src="js/smooth-scrollbar.js"></script>
+    <!-- lottie JavaScript -->
+    <script src="js/lottie.js"></script>
+    <!-- Chart Custom JavaScript -->
+    <script src="js/chart-custom.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="js/custom.js"></script>
 @endsection

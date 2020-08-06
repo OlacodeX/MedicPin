@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\patients;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -53,6 +54,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role' => ['required', 'string', 'max:255'],
+            //'status' => ['nullable', 'string', 'max:255'],
         ]);
     }
 
@@ -64,12 +66,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+      
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'role' => $data['role'],
             'password' => Hash::make($data['password']),
-
+            //patients::where('email', $data['email'])->get('status') => $data['status'],
         ]);
+        //$pt = patients::find($data['email'])->get('status');
+        //$pt = 'active';
+        //$pt->save(); 
+       //return patients::where('email', $data['email'])->create(['status' => 'active']);
     }
 }

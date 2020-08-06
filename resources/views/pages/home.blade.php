@@ -23,7 +23,13 @@
             <p class="btn btn-info">
                Fast, Secure and Reliable....
             </p>
+            <!-- Authentication Links -->
+            @guest
+            
             <p><a href="{{ route('register') }}" class="btn btn-success btn-lg pull-left">SIGN UP NOW</a><a href="{{ route('login') }}" class="btn btn-success btn-lg pull-right transparent">SIGN IN HERE</a></p>
+            @else
+            <p><a href="./dashboard" class="btn btn-success btn-lg pull-left">Go To Dashboard</a></p>
+            @endguest
         </div>
         <div class="col-sm-4">
             <img src="img/cope.png" alt="" class="img-responsive">

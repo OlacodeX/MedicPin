@@ -56,10 +56,10 @@
                      <li>
                         <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Doctor's Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                         <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="profile.html">My Profile</a></li>
+                           <li><a href="./myprofile">My Profile</a></li>
                            <!---<li><a href="profile-edit.html">User Edit</a></li>--->
                            <li><a href="patients/create">Add Patient</a></li>
-                           <li><a href="user-list.html">Patients List</a></li>
+                           <li><a href="./patients">Patients List</a></li>
                         </ul>
                      </li>
                      <li>
@@ -88,7 +88,7 @@
                     <li>
                        <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                        <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                          <li><a href="profile.html">My Profile</a></li>
+                          <li><a href="./myprofile">My Profile</a></li>
                           <!---<li><a href="profile-edit.html">User Edit</a></li>--->
                           <li><a href="">My Appointments</a></li>
                        </ul>
@@ -473,57 +473,23 @@
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height wow fadeInUp" data-wow-delay="0.6s">
                         <div class="iq-card-header d-flex justify-content-between">
                             <div class="iq-header-title">
-                                <h4 class="card-title">Notifications</h4>
-                            </div>
-                            <div class="iq-card-header-toolbar d-flex align-items-center">
-                                <a href="#" class="">See all</a>
+                                <h4 class="card-title">Address</h4>
                             </div>
                         </div>
                         <div class="iq-card-body">
-                            <div class="media">
-                                <img class="mr-3 rounded-circle" src="images/user/01.jpg"
-                                     alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="mt-0 mb-0">Dr. Jay <small
-                                            class="text-muted font-size-12">Yesterday</small></h5>
-                                    <i class="ri-close-line float-right"></i>
-                                    <p>Lorem Ipsum is simply dummy text.</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="media">
-                                <img class="mr-3 rounded-circle" src="images/user/02.jpg"
-                                     alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="mt-0 mb-0">Dr. Lilly <small
-                                            class="text-muted font-size-12">Yesterday</small></h5>
-                                    <i class="ri-close-line float-right"></i>
-                                    <p>Lorem Ipsum is simply dummy text.</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="media">
-                                <img class="mr-3 rounded-circle" src="images/user/03.jpg"
-                                     alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="mt-0 mb-0">Dr. Steve <small
-                                            class="text-muted font-size-12">Yesterday</small></h5>
-                                    <i class="ri-close-line float-right"></i>
-                                    <p>Lorem Ipsum is simply dummy text.</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="media">
-                                <img class="mr-3 rounded-circle" src="images/user/04.jpg"
-                                     alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="mt-0 mb-0">Dr. Mia <small
-                                            class="text-muted font-size-12">Yesterday</small></h5>
-                                    <i class="ri-close-line float-right"></i>
-                                    <p>Lorem Ipsum is simply dummy text.</p>
+                            <div class="owl-carousel" data-autoplay="true" data-loop="true" data-nav="false"
+                                 data-dots="true" data-items="1" data-items-laptop="1" data-items-tab="1"
+                                 data-items-mobile="1" data-items-mobile-sm="1" data-margin="30">
+                                <div class="item">
+                                    <div class="">
+                                        <p>
+                                            {{$patient->address}}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                   </div>
                   @endif
@@ -682,34 +648,59 @@
                         <div class="col-lg-4 col-md-12">
                             <div class="iq-card iq-card-block iq-card-stretch iq-card-height wow fadeInUp" data-wow-delay="0.6s">
                                 <div class="iq-card-header d-flex justify-content-between">
-                                    <div class="iq-header-title">
-                                        <h4 class="card-title">Diet Plan</h4>
-                                    </div>
-                                    <div class="iq-card-header-toolbar d-flex align-items-center">
-                                        <a href="#" class="">See all</a>
-                                    </div>
-                                </div>
-                                <div class="iq-card-body">
-                                    <div class="owl-carousel" data-autoplay="true" data-loop="true" data-nav="false"
-                                         data-dots="true" data-items="1" data-items-laptop="1" data-items-tab="1"
-                                         data-items-mobile="1" data-items-mobile-sm="1" data-margin="30">
-                                        <div class="item">
-                                            <div class="">
-                                                <a class="mb-3 d-block font-size-16" href="#"><i
-                                                        class="ri-pencil-ruler-2-line mr-1"></i>Breakfast</a>
-                                                <h5 class="mb-2">Meal plan is for a person aged 19-50 years.</h5>
-                                                <p>
-                                                  Wholegrain toast with polyunsaturated margarine
-                                                  2 slices toast.
-                                                  2 teaspoon margarine.
-                                                  20g cheese2 teaspoon margarine.
-                                                  1 cup mixed salad vegetables.Unsalted nuts	30g	1 meat.</p>
-                                                <button type="button" class="btn btn-primary mt-3">Read More</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                
+                            <div class="iq-header-title">
+                                <h4 class="card-title">Notifications</h4>
+                            </div>
+                            <div class="iq-card-header-toolbar d-flex align-items-center">
+                                <a href="#" class="">See all</a>
+                            </div>
+                        </div>
+                        <div class="iq-card-body">
+                            <div class="media">
+                                <img class="mr-3 rounded-circle" src="images/user/01.jpg"
+                                     alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="mt-0 mb-0">Dr. Jay <small
+                                            class="text-muted font-size-12">Yesterday</small></h5>
+                                    <i class="ri-close-line float-right"></i>
+                                    <p>Lorem Ipsum is simply dummy text.</p>
                                 </div>
                             </div>
+                            <hr>
+                            <div class="media">
+                                <img class="mr-3 rounded-circle" src="images/user/02.jpg"
+                                     alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="mt-0 mb-0">Dr. Lilly <small
+                                            class="text-muted font-size-12">Yesterday</small></h5>
+                                    <i class="ri-close-line float-right"></i>
+                                    <p>Lorem Ipsum is simply dummy text.</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="media">
+                                <img class="mr-3 rounded-circle" src="images/user/03.jpg"
+                                     alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="mt-0 mb-0">Dr. Steve <small
+                                            class="text-muted font-size-12">Yesterday</small></h5>
+                                    <i class="ri-close-line float-right"></i>
+                                    <p>Lorem Ipsum is simply dummy text.</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="media">
+                                <img class="mr-3 rounded-circle" src="images/user/04.jpg"
+                                     alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="mt-0 mb-0">Dr. Mia <small
+                                            class="text-muted font-size-12">Yesterday</small></h5>
+                                    <i class="ri-close-line float-right"></i>
+                                    <p>Lorem Ipsum is simply dummy text.</p>
+                                </div>
+                            </div>
+                        </div>
                         </div>
                     </div>
                     <div class="row">
@@ -746,7 +737,7 @@
                 </ul>
             </div>
             <div class="col-lg-6 text-right">
-                Copyright 2020 <a href="#">Medicpin</a> All Rights Reserved.
+                Copyright 2020 <a href="./">Medicpin</a> All Rights Reserved.
             </div>
         </div>
     </div>

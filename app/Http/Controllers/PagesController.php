@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use App\Post;
+use App\User;
 //use App\Contact;
 
 class PagesController extends Controller
@@ -31,10 +31,9 @@ class PagesController extends Controller
     public function hireus(){
         return view("pages.hireform");
     }
-    public function pricelist(){
-        $portfolios = Portfolio::orderBy('created_at', 'desc')->paginate(20);
-        
-        return view("pages.pricelist")->with('portfolios', $portfolios);
+    public function pro(){
+        $pro = User::find(auth()->user()->id);
+        return view("pro")->with('pro',$pro);
     }
     public function services(){
         $portfolios = Portfolio::orderBy('created_at', 'desc')->paginate(20);
