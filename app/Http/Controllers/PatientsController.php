@@ -142,7 +142,10 @@ class PatientsController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        $user = User::find($id);
+
+        return view('edituser')->with('user', $user);
     }
 
     /**

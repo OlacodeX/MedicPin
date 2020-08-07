@@ -4,26 +4,20 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class patients extends Model
+class Notifications extends Model
 {
     //
     // Table name
-    protected $table = 'patients';
+    protected $table = 'notifications';
     // primary key
     public $primaryKey = 'id';
     //timestamps
     public $timestamps = true;
-
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     public function user(){
         return $this->belongsTo('App\User');
     }
     public function patient(){
         return $this->belongsTo('App\patients');
     }
+
 }

@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('page_title')
-{{config('app.name')}}
+{{config('app.name')}} | {{auth()->user()->name}}
 @endsection
 @section('content')
 <!-- Mirrored from iqonic.design/themes/sofbox-admin/html/patient-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 Aug 2020 01:39:48 GMT -->
@@ -8,8 +8,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="images/favicon.ico"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- Typography CSS -->
@@ -50,13 +48,15 @@
                      <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
                      @if (auth()->user()->role == 'Doctor')
                      <li class="active">
-                        <a href="../D_dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                        <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                        
                      </li>
-                     <li>
+                     <li class="active">
                         <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Doctor's Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                         <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                            <li><a href="./myprofile">My Profile</a></li>
+                           <li><a href="./notifications">Sent Notifications</a></li>
+                           <li><a href="./notifications/create">Send Notification</a></li>
                            <!---<li><a href="profile-edit.html">User Edit</a></li>--->
                            <li><a href="patients/create">Add Patient</a></li>
                            <li><a href="./patients">Patients List</a></li>
@@ -81,14 +81,15 @@
                          
                     @endif
                     @if (auth()->user()->role == 'Patient')
-                    <li class="active">
-                       <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                    <li>
+                       <a href="./dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                       
                     </li>
-                    <li>
+                    <li class="active">
                        <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                        <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                           <li><a href="./myprofile">My Profile</a></li>
+                          <li><a href="./notifications">My Notifications</a></li>
                           <!---<li><a href="profile-edit.html">User Edit</a></li>--->
                           <li><a href="">My Appointments</a></li>
                        </ul>
@@ -433,8 +434,8 @@
                          <div class="cover-container">
                             <img src="images/page-img/profile-bg.jpg" alt="profile-bg" class="rounded img-fluid w-100"> 
                             <ul class="header-nav d-flex flex-wrap justify-end p-0 m-0">
-                               <li><a href="javascript:void();"><i class="ri-pencil-line"></i></a></li>
-                               <li><a href="javascript:void();"><i class="ri-settings-4-line"></i></a></li>
+                               <li><a href="patients/{{$pro->id}}/edit" title="Edit Profile"><i class="ri-pencil-line"></i></a></li>
+                               
                             </ul>
                          </div>
                          <div class="profile-info p-4">

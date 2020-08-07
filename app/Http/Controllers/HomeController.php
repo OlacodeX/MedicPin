@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\patients;
+use  App\Notifications;
 class HomeController extends Controller
 {
     /**
@@ -23,8 +24,15 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $notices = Notifications::where('to',auth()->user()->id)->paginate(5);
+        $notices_sent = Notifications::where('from',auth()->user()->id)->paginate(5);
         $patient = patients::where('email',auth()->user()->email)->first();
-        return view('home')->with('patient', $patient);
+        $data = array(
+            'patient' => $patient,
+            'notices_sent' => $notices_sent,
+            'notices' => $notices
+        );
+        return view('home', $data);
     }
   
 }

@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('page_title')
-{{config('app.name')}}
+{{config('app.name')}} | Dashboard
 @endsection
 @section('content')
 <!-- Mirrored from iqonic.design/themes/sofbox-admin/html/patient-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 Aug 2020 01:39:48 GMT -->
@@ -50,15 +50,17 @@
                      <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
                      @if (auth()->user()->role == 'Doctor')
                      <li class="active">
-                        <a href="../D_dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                        <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                        
                      </li>
                      <li>
                         <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Doctor's Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                         <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                            <li><a href="./myprofile">My Profile</a></li>
+                           <li><a href="./notifications">Sent Notifications</a></li>
+                           <li><a href="./notifications/create">Send Notification</a></li>
                            <!---<li><a href="profile-edit.html">User Edit</a></li>--->
-                           <li><a href="patients/create">Add Patient</a></li>
+                           <li><a href="./patients/create">Add Patient</a></li>
                            <li><a href="./patients">Patients List</a></li>
                         </ul>
                      </li>
@@ -89,6 +91,7 @@
                        <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                        <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                           <li><a href="./myprofile">My Profile</a></li>
+                          <li><a href="./notifications">My Notifications</a></li>
                           <!---<li><a href="profile-edit.html">User Edit</a></li>--->
                           <li><a href="">My Appointments</a></li>
                        </ul>
@@ -648,59 +651,69 @@
                         <div class="col-lg-4 col-md-12">
                             <div class="iq-card iq-card-block iq-card-stretch iq-card-height wow fadeInUp" data-wow-delay="0.6s">
                                 <div class="iq-card-header d-flex justify-content-between">
+                        
+                        @if (auth()->user()->role == 'Patient')
                                 
-                            <div class="iq-header-title">
-                                <h4 class="card-title">Notifications</h4>
-                            </div>
-                            <div class="iq-card-header-toolbar d-flex align-items-center">
-                                <a href="#" class="">See all</a>
-                            </div>
+                        <div class="iq-header-title">
+                            <h4 class="card-title">Notifications</h4>
                         </div>
+                        <div class="iq-card-header-toolbar d-flex align-items-center">
+                            <a href="./notifications" class="">See all</a>
+                        </div>
+                    </div>
+                        @if (count($notices) > 0)
                         <div class="iq-card-body">
+                            @foreach ($notices as $notice)
+                            <a href="notifications/{{$notice->id}}" style="text-decoration: none;">
                             <div class="media">
                                 <img class="mr-3 rounded-circle" src="images/user/01.jpg"
                                      alt="Generic placeholder image">
                                 <div class="media-body">
-                                    <h5 class="mt-0 mb-0">Dr. Jay <small
-                                            class="text-muted font-size-12">Yesterday</small></h5>
+                                    <h5 class="mt-0 mb-0">Dr.{!!Str::words( $notice->from_name,1)!!} <br><small
+                                            class="text-muted font-size-12">{!!Str::words( $notice->created_at,2)!!}</small></h5>
                                     <i class="ri-close-line float-right"></i>
-                                    <p>Lorem Ipsum is simply dummy text.</p>
+                                    <p>{!!Str::words( $notice->content,5)!!}</p>
                                 </div>
                             </div>
+                         </a>
                             <hr>
-                            <div class="media">
-                                <img class="mr-3 rounded-circle" src="images/user/02.jpg"
-                                     alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="mt-0 mb-0">Dr. Lilly <small
-                                            class="text-muted font-size-12">Yesterday</small></h5>
-                                    <i class="ri-close-line float-right"></i>
-                                    <p>Lorem Ipsum is simply dummy text.</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="media">
-                                <img class="mr-3 rounded-circle" src="images/user/03.jpg"
-                                     alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="mt-0 mb-0">Dr. Steve <small
-                                            class="text-muted font-size-12">Yesterday</small></h5>
-                                    <i class="ri-close-line float-right"></i>
-                                    <p>Lorem Ipsum is simply dummy text.</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="media">
-                                <img class="mr-3 rounded-circle" src="images/user/04.jpg"
-                                     alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="mt-0 mb-0">Dr. Mia <small
-                                            class="text-muted font-size-12">Yesterday</small></h5>
-                                    <i class="ri-close-line float-right"></i>
-                                    <p>Lorem Ipsum is simply dummy text.</p>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
+                        @else
+                        <p class="text-center">No Notifications Yet</p>    
+                        @endif
+                        @endif
+                        @if (auth()->user()->role == 'Doctor')
+                                
+                        <div class="iq-header-title">
+                            <h4 class="card-title">Sent Notifications</h4>
+                        </div>
+                        <div class="iq-card-header-toolbar d-flex align-items-center">
+                            <a href="#" class="./notifications">See all</a>
+                        </div>
+                    </div>
+                        @if (count($notices_sent) > 0)
+                        <div class="iq-card-body">
+                            @foreach ($notices_sent as $notice_sent)
+                            <a href="notifications/{{$notices_sent->id}}" style="text-decoration: none;">
+                            <div class="media">
+                                <img class="mr-3 rounded-circle" src="images/user/01.jpg"
+                                     alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="mt-0 mb-0">{!!Str::words( $notice_sent->to_name,1)!!} <small
+                                            class="text-muted font-size-12">{!!Str::words( $notice_sent->created_at,2)!!}</small></h5>
+                                    <i class="ri-close-line float-right"></i>
+                                    <p>{!!Str::words( $notice_sent->content,5)!!}</p>
+                                </div>
+                            </div>
+                          </a>
+                            <hr>
+                            @endforeach
+                        </div>
+                        @else
+                        <p class="text-center">No Sent Notifications Yet</p>    
+                        @endif
+                        @endif
                         </div>
                     </div>
                     <div class="row">
@@ -854,7 +867,6 @@
 <script src="js/chart-custom.js"></script>
 <!-- Custom JavaScript -->
 <script src="js/custom.js"></script>
-</body>
 
 <!-- Mirrored from iqonic.design/themes/sofbox-admin/html/patient-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 Aug 2020 01:39:53 GMT -->
 

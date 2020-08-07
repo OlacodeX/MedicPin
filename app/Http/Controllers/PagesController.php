@@ -35,9 +35,43 @@ class PagesController extends Controller
         $pro = User::find(auth()->user()->id);
         return view("pro")->with('pro',$pro);
     }
-    public function services(){
-        $portfolios = Portfolio::orderBy('created_at', 'desc')->paginate(20);
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+        $user = User::find($id);
+
+        return view('edituser')->with('user', $user);
+    }
+    
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        //
         
-        return view("pages.servicelist")->with('portfolios', $portfolios);
+        $this->validate($request, [
+            'name' => 'nullable',
+            'twitter' => 'nullable',
+        ]); 
+        $id=$_POST['id'];
+        $user = User::find($id);
+        $user->name = $request->input('name');//This will get the user input for title
+        $user->email = $request->input('email');
+        //Save to db
+        $user->save();
+        //print success message and redirect
+        return redirect('/dashboard')->with('success', 'Profile Updated');//I just set the message for session(success).
+
     }
 }

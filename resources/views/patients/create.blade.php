@@ -8,8 +8,6 @@
             @section('page_title')
             {{config('app.name')}} | Add User
             @endsection
-      <!-- Favicon -->
-      <link rel="shortcut icon" href="../images/favicon.ico" />
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="../css/bootstrap.min.css">
       <!-- Typography CSS -->
@@ -44,7 +42,7 @@
                   <ul id="iq-sidebar-toggle" class="iq-menu">
                      <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
                      <li>
-                        <a href="../home"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                        <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                        
                      </li>
                      <li class="active">
@@ -54,6 +52,8 @@
                            <!---<li><a href="profile-edit.html">User Edit</a></li>--->
                            <li><a href="../patients/create">Add Patient</a></li>
                            <li><a href="../patients">Patients List</a></li>
+                           <li><a href="../notifications">Sent Notifications</a></li>
+                           <li><a href="../notifications/create">Send Notification</a></li>
                         </ul>
                      </li>
                      <li>
