@@ -383,6 +383,7 @@
                       <div class="table-responsive">
                          <div class="row justify-content-between">
                             <div class="col-sm-12 col-md-6">
+                              @include('inc.messages')
                                <div id="user_list_datatable_info" class="dataTables_filter">
                                   <form class="mr-3 position-relative">
                                      <div class="form-group mb-0">
@@ -394,12 +395,6 @@
                             @if (count($users) > 0)
                             <div class="col-sm-12 col-md-6">
                                <div class="user-list-files d-flex float-right">
-                                  <a href="javascript:void();" class="chat-icon-phone">
-                                     Print
-                                   </a>
-                                  <a href="javascript:void();" class="chat-icon-video">
-                                     Excel
-                                   </a>
                                    <a href="javascript:void();" class="chat-icon-delete">
                                      Pdf
                                    </a>
@@ -410,23 +405,20 @@
                            <thead>
                                
                                <tr>
-                                  <th>Profile</th>
+                                  <th>MedicPin</th>
                                   <th>Name</th>
-                                  <th>Gender</th>
                                   <th>Contact</th>
                                   <th>Email</th>
                                   <th>Address</th>
                                   <th>Status</th>
-                                  <th>Join Date</th>
                                   <th>Action</th>
                                </tr>
                            </thead>
                            <tbody>
                             @foreach ($users as $user)
                                <tr>
-                                  <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="img/cover_img/{{$user->img}}" alt="profile"></td>
-                                  <td>{{$user->name.$user->id}}</td>
-                                  <td>{{$user->gender}}</td>
+                                  <td class="text-center">{{$user->pin}}</td>
+                                  <td>{{$user->username}}</td>
                                   <td><a href="tel:{{$user->phone}}">{{$user->phone}}</a></td>
                                   <td><a href="mailto:{{$user->email}}" class="__cf_email__" data-cfemail="80e1eeeee1f3f4e8e5f3e9e1c0e7ede1e9ecaee3efed">{{$user->email}}</a></td>
                                   <td>{{$user->address}}</td>
@@ -437,8 +429,18 @@
                                       <span class="badge iq-bg-danger">Inactive</span>
                                       @endif
                                    </td>
-                                  <td>{{$user->created_at}}</td>
                                   <td>
+                                    {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                                    {{Form::hidden('pin', $user->pin)}}
+                                    <button type="submit" class ="btn btn-info btn-sm" >Add Medical Record</button>
+                                   
+                                    {!!Form::close()!!}
+                                    {!!Form::open(['action' => 'RecordsController@index', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
+                                    {{Form::hidden('pin', $user->pin)}}
+                                    {{Form::hidden('username', $user->username)}}
+                                    <button type="submit" class ="btn btn-info btn-sm" >Check Medical Records</button>
+                                   
+                                    {!!Form::close()!!}
                                      <div class="flex align-items-center list-user-action">
                                         {!!Form::open(['action' => ['PatientsController@destroy', $user->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
                                         {{Form::hidden('email', $user->email)}}

@@ -692,10 +692,10 @@
                             <a href="#" class="./notifications">See all</a>
                         </div>
                     </div>
-                        @if (count($notices_sent) > 0)
+                        @if (count($notice_sents) > 0)
                         <div class="iq-card-body">
-                            @foreach ($notices_sent as $notice_sent)
-                            <a href="notifications/{{$notices_sent->id}}" style="text-decoration: none;">
+                            @foreach ($notice_sents as $notice_sent)
+                            <a href="notifications/{{$notice_sent->id}}" style="text-decoration: none;">
                             <div class="media">
                                 <img class="mr-3 rounded-circle" src="images/user/01.jpg"
                                      alt="Generic placeholder image">

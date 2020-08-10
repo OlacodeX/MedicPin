@@ -6,16 +6,16 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       
             @section('page_title')
-            {{config('app.name')}} | Add User
+            {{config('app.name')}} | Add Record
             @endsection
       <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="../css/bootstrap.min.css">
+      <link rel="stylesheet" href="./css/bootstrap.min.css">
       <!-- Typography CSS -->
-      <link rel="stylesheet" href="../css/typography.css">
+      <link rel="stylesheet" href="./css/typography.css">
       <!-- Style CSS -->
-      <link rel="stylesheet" href="../css/style.css">
+      <link rel="stylesheet" href="./css/style.css">
       <!-- Responsive CSS -->
-      <link rel="stylesheet" href="../css/responsive.css">
+      <link rel="stylesheet" href="./css/responsive.css">
    </head>
 @section('content')
 <!-- Wrapper Start -->
@@ -23,8 +23,8 @@
     <!-- Sidebar  -->
     <div class="iq-sidebar">
             <div class="iq-sidebar-logo d-flex justify-content-between">
-               <a href="../">
-               <img src="../img/yy.jpg" class="img-fluid" alt="">
+               <a href="./">
+               <img src="./img/yy.jpg" class="img-fluid" alt="">
                <span>
                 {{config('app.name')}}
                </span>
@@ -42,22 +42,22 @@
                   <ul id="iq-sidebar-toggle" class="iq-menu">
                      <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
                      <li>
-                        <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                        <a href="./dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                        
                      </li>
                      <li class="active">
                         <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Doctor's Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                         <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="../myprofile">My Profile</a></li>
+                           <li><a href="./myprofile">My Profile</a></li>
                            <!---<li><a href="profile-edit.html">User Edit</a></li>--->
-                           <li><a href="../patients/create">Add Patient</a></li>
-                           <li><a href="../patients">Patients List</a></li>
-                           <li><a href="../notifications">Sent Notifications</a></li>
-                           <li><a href="../notifications/create">Send Notification</a></li>
+                           <li><a href="./patients/create">Add Patient</a></li>
+                           <li><a href="./patients">Patients List</a></li>
+                           <li><a href="./notifications">Sent Notifications</a></li>
+                           <li><a href="./notifications/create">Send Notification</a></li>
                         </ul>
                      </li>
                      <li>
-                        <a href="../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
+                        <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                        
                      </li>
                      
@@ -221,8 +221,8 @@
         <div class="iq-navbar-custom">
             <div class="iq-sidebar-logo">
                 <div class="top-logo">
-                    <a href="../">
-                    <img src="../img/yy.jpg" class="img-fluid" alt="">
+                    <a href="./">
+                    <img src="./img/yy.jpg" class="img-fluid" alt="">
                     <span>
                      {{config('app.name')}}
                     </span>
@@ -365,6 +365,7 @@
      <div id="content-page" class="content-page">
         <div class="container-fluid">
            <div class="row">
+              <!---
               <div class="col-lg-3">
                     <div class="iq-card">
                        <div class="iq-card-header d-flex justify-content-between">
@@ -372,8 +373,8 @@
                              <h4 class="card-title">Add New Patient</h4>
                           </div>
                        </div>
-                       <div class="iq-card-body">
-                        {!! Form::open(['action' => 'PatientsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
+                       <div class="iq-card-body">--->
+                        {!! Form::open(['action' => 'RecordsController@store', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
                         **/ !!}
                         <!-- 
                           <div class="form-group">
@@ -403,6 +404,7 @@
                                    <option>Patient</option>
                                 </select>
                              </div>---->
+                                <!----
                              <div class="form-group">
                                 <label>Gender</label>
                                 <select class="form-control" id="selectuserrole" name="gender">
@@ -413,8 +415,8 @@
                              </div>
                        </div>
                     </div>
-              </div>
-              <div class="col-lg-9">
+              </div>--->
+              <div class="col-lg-12">
                     <div class="iq-card">
                        <div class="iq-card-header d-flex justify-content-between">
                           <div class="iq-header-title">
@@ -424,6 +426,7 @@
                        <div class="iq-card-body">
                           <div class="new-user-info">
                                 <div class="row">
+                                   <!----
                                    <div class="form-group col-md-6">
                                       <label for="name">Name:</label>
                                       <input type="text" class="form-control" id="name" name="name" placeholder="First Name">
@@ -441,10 +444,12 @@
                                       <input type="email" class="form-control" id="email" placeholder="Email" name="email">
                                    </div>
                                 </div>
-                                <hr>
-                                <!----
+                                <hr>---->
                                 <h5 class="mb-3">Medical Records</h5>
                                 <div class="row">
+                                   
+                                 <input type="hidden" class="form-control" id="pin" name="pin" value="{{$pin}}">
+                                   
                                     <div class="form-group col-md-6">
                                        <label for="Blood Group">Blood Group</label>
                                        <select class="form-control" id="selectbg" name="b_group">
@@ -477,7 +482,7 @@
                                        <label for="weight">Weight</label>
                                        <input type="text" class="form-control" id="weight" name="weight" placeholder="Weight">
                                     </div>
-                                    <div class="form-group col-md-6">
+                                     <div class="form-group col-md-6">
                                        <label for="height">Height</label>
                                        <input type="text" class="form-control" id="height" name="height" placeholder="Height">
                                     </div>
@@ -486,8 +491,7 @@
                                        <input type="text" class="form-control" id="temprature" name="temprature" placeholder="Temprature">
                                     </div>
                                 </div>
-                                ----->
-                                <button type="submit" class="btn btn-primary">Add New Patient</button>
+                                <button type="submit" class="btn btn-primary">Update Record</button>
                                 {!! Form::close() !!}
                           </div>
                        </div>

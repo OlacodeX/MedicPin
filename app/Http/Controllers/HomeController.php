@@ -25,11 +25,11 @@ class HomeController extends Controller
     public function index()
     {
         $notices = Notifications::where('to',auth()->user()->id)->paginate(5);
-        $notices_sent = Notifications::where('from',auth()->user()->id)->paginate(5);
+        $notice_sents = Notifications::where('from',auth()->user()->id)->paginate(5);
         $patient = patients::where('email',auth()->user()->email)->first();
         $data = array(
             'patient' => $patient,
-            'notices_sent' => $notices_sent,
+            'notice_sents' => $notice_sents,
             'notices' => $notices
         );
         return view('home', $data);
