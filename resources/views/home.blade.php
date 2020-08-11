@@ -571,7 +571,7 @@
                                                             <div class="iq-card-body p-1">
                                                                 <span class="font-size-14">Total Patients</span>
                                                                 <h2>
-                                                                    {{App\Records::where('doc_email', auth()->user()->email)->count()}}
+                                                                    {{App\patients::where('doc_email', auth()->user()->email)->count()}}
                                                                     </h2>
                                                                 <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
                                                                     <div class="iq-progress-bar">

@@ -92,6 +92,8 @@ class PatientsController extends Controller
             $patient->phone = $request->input('number');
             $patient->gender = $request->input('gender');
             $patient->address = $request->input('add');
+            $patient->doctor = auth()->user()->name;
+            $patient->doc_email = auth()->user()->email;
             $patient->pin = $pin;
             //$patient->status = 'pending';
            /// $patient->img = $fileNameTostore;
