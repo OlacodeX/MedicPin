@@ -22,7 +22,6 @@ class DropColumnsFromPatientsTable extends Migration
             $table->dropColumn('h_rate');
             $table->dropColumn('bp');
             $table->dropColumn('b_group');
-            $table->dropColumn('img');
             $table->dropColumn('doc_email');
             $table->dropColumn('doctor');
         });

@@ -60,13 +60,6 @@ class PatientsController extends Controller
             'number' => 'required',
             'gender' => 'required',
             'add' => 'required',
-            'temprature' => 'nullable',
-            'height' => 'nullable',
-            'weight' => 'nullable',
-            'genotype' => 'nullable',
-            'h_rate' => 'nullable',
-            'bp' => 'nullable',
-            'b_group' => 'nullable',
              //image means it must be in image format|nullable means the field is optional, then max size is 1999
              ///'pp' => 'image|nullable|max:1999'
              ]);
@@ -99,16 +92,7 @@ class PatientsController extends Controller
             $patient->phone = $request->input('number');
             $patient->gender = $request->input('gender');
             $patient->address = $request->input('add');
-            $patient->doctor = auth()->user()->name;
-            $patient->doc_email = auth()->user()->email;
-            $patient->temp = $request->input('temprature');
-            $patient->height = $request->input('height');
-            $patient->weight = $request->input('weight');
-            $patient->genotype = $request->input('genotype');
-            $patient->h_rate = $request->input('h_rate');
-            $patient->bp = $request->input('bp');
             $patient->pin = $pin;
-            $patient->b_group = $request->input('b_group');
             //$patient->status = 'pending';
            /// $patient->img = $fileNameTostore;
              //Save to db
