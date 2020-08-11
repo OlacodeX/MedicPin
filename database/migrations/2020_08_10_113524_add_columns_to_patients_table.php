@@ -15,7 +15,7 @@ class AddColumnsToPatientsTable extends Migration
     {
         Schema::table('patients', function (Blueprint $table) {
             //
-            $table->string('username')->unique();
+            $table->text('username')->unique();
             $table->string('pin');
         });
     }
