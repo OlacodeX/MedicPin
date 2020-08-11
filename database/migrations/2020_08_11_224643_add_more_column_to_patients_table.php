@@ -15,8 +15,8 @@ class AddMoreColumnToPatientsTable extends Migration
     {
         Schema::table('patients', function (Blueprint $table) {
             //
-            $table->string('doc_email');
-            $table->string('doctor');
+            $table->string('doc_email')->nullable();
+            $table->string('doctor')->nullable();
         });
     }
 
