@@ -18,10 +18,12 @@ class RecordsController extends Controller
         //
         $pin = $_GET['pin'];
         $username = $_GET['username'];
-        $records = Records::where('pin', $pin)->paginate(10);
+        $record = Records::where('pin', $pin)->orderBy('created_at', 'desc')->first();
+        $records = Records::where('pin', $pin)->orderBy('created_at', 'desc')->paginate(50);
         $data = array(
             'username' => $username,
-            'records' => $records
+            'records' => $records,
+            'record' => $record
         );
         return view('patients.index', $data);
     }

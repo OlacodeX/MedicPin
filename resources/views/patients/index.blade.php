@@ -46,7 +46,7 @@
                          <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
                          @if (auth()->user()->role == 'Doctor')
                          <li>
-                            <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                            <a href="./dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                            
                          </li>
                          <li class="active">
@@ -267,11 +267,11 @@
                </div>
             </div>
                <div class="navbar-breadcrumb">
-                  <h5 class="mb-0">Notifications</h5>
+                  <h5 class="mb-0">Patient Records</h5>
                   <nav aria-label="breadcrumb">
                      <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="./">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Notifications</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{$username}}'s Medical Records</li>
                      </ul>
                   </nav>
                </div>
@@ -406,45 +406,183 @@
             <div class="container-fluid">
                <div class="row">
                   <div class="col-sm-12">
-                     <div class="iq-card">
-                        <div class="iq-card-body chat-page p-0">
-                           <div class="chat-data-block">
-                           <div class="row" style="padding-left: 10px;">
-                              <div class="col-lg-12 p-0">
+                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height wow fadeInUp" data-wow-delay="0.6s">
+                         <div class="iq-card-header d-flex justify-content-between">
+                             <div class="iq-header-title">
+                                 <h4 class="card-title">Summary</h4>
+                                 <small>Most Recent Record Dated {{$record->created_at}}</small>
+                             </div>
+                         </div>
+                              <div class="">
                                 @if (auth()->user()->role == 'Patient')
-                                 @if (count($records) > 0)
+                                 <div class="iq-card-body chat-page p-0">
+                                    <div class="chat-data-block">
+                                    <div class="row" style="padding-left: 10px;">
 
-                                 <div class="scroller mt-4 pl-3">
-                                    <h5 class="">{{$username}}'s Medical Records</h5>
-                                    <ul class="iq-chat-ui nav flex-column nav-pills">
-                                        @foreach ($records as $record)
-                                       <li>
-                                       	<a href="notifications/{{$record->id}}">
-                                          <div class="d-flex align-items-center">
-                                             <div class="chat-sidebar-name">
-                                             </div>
+                                 <div class="">
+                                        <div class="iq-card-body">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="iq-card shadow-none mb-0">
+                                                        <div class="iq-card-body p-1">
+                                                           <span class="font-size-14">Blood pressure</span>
+                                                           <h2>{{$record->bp}}
+                                                               <img class="float-right summary-image-top mt-1" src="images/page-img/04.png" alt="summary-image" /> </h2>
+                                                           <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                               <div class="iq-progress-bar">
+                                                                   <span class="bg-primary" data-percent={{$record->bp}}></span>
+                                                               </div>
+                                                           </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="iq-card shadow-none mb-0">
+                                                        <div class="iq-card-body p-1">
+                                                            <span class="font-size-14">Temperature</span>
+                                                            <h2>{{$record->temp}}
+                                                            <img class="float-right summary-image-top mt-1" src="images/page-img/06.png" alt="summary-image" /> </h2>
+                                                            <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                                <div class="iq-progress-bar">
+                                                                    <span class="bg-success" data-percent={{$record->temp}}></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="iq-card shadow-none mb-0">
+                                                        <div class="iq-card-body p-1">
+                                                            <span class="font-size-14">Heart Rate</span>
+                                                            <h2>{{$record->h_rate}}
+                                                            <img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
+                                                            <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                                <div class="iq-progress-bar">
+                                                                    <span class="bg-danger" data-percent={{$record->h_rate}}></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div>
+                                      <div class="">
+                                      <div class="row">
+                                          <div class="col-md-3">
+                                              <div class="iq-card shadow-none mb-0">
+                                                  <div class="iq-card-body p-1">
+                                                        <span class="font-size-14">Genotype</span>
+                                                        <h6>
+                                                            {{$record->genotype}}
+                                                        </h6>
+                                                  </div>
+                                              </div>
                                           </div>
-                                      </a>
-                                       </li>
-                                       @endforeach
-                                    </ul>
+                                          <div class="col-md-3">
+                                              <div class="iq-card shadow-none mb-0">
+                                                  <div class="iq-card-body p-1">
+                                                        <span class="font-size-14">Blood Group</span>
+                                                        <h6>
+                                                            {{$record->b_group}}
+                                                        </h6>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="col-md-3">
+                                              <div class="iq-card shadow-none mb-0">
+                                                  <div class="iq-card-body p-1">
+                                                     <div class="">
+                                                        <span class="font-size-14">Weight</span>
+                                                        <h6>
+                                                            {{$record->weight}}
+                                                        </h6>
+        
+                                                     </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="col-md-3">
+                                              <div class="iq-card shadow-none mb-0">
+                                                  <div class="iq-card-body p-1">
+                                                     <div class="">
+                                                        <span class="font-size-14">Height</span>
+                                                        <h6>
+                                                            {{$record->height}}
+                                                        </h6>
+        
+                                                     </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div><br>
+                                      <a href="#records" data-toggle="collapse" class="btn btn-primary">See Past Records</a>
+                                      <div class="col-md-12 collapse" id="records">
+                                          <div class="iq-card shadow-none mb-0">
+                                              <div class="iq-card-body p-1">
+                                                 <div class="">
+                                                  @if (count($records) > 0)
+                                                  <div class="col-sm-12 col-md-6">
+                                                     <div class="user-list-files d-flex">
+                                                         <a href="javascript:void();" class="chat-icon-delete">
+                                                           Pdf
+                                                         </a>
+                                                       </div>
+                                                  </div>
+                                               </div>
+                                               <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
+                                                 <thead>
+                                                     
+                                                     <tr>
+                                                        <th>Date</th>
+                                                        <th>Temperature</th>
+                                                        <th>BP</th>
+                                                        <th>Heart Rate</th>
+                                                        <th>Genotype</th>
+                                                        <th>Blood Group</th>
+                                                        <th>Weight</th>
+                                                        <th>Height</th>
+                                                     </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                  @foreach ($records as $record)
+                                                     <tr>
+                                                        <td class="text-center">{{$record->created_at}}</td>
+                                                        <td>{{$record->temp}}</td>
+                                                        <td>{{$record->bp}}</td>
+                                                        <td>{{$record->h_rate}}</td>
+                                                        <td>{{$record->genotype}}</td>
+                                                        <td>{{$record->b_group}}</td>
+                                                        <td>{{$record->weight}}</td>
+                                                        <td>{{$record->height}}</td>
+                                                     </tr> 
+                                                     @endforeach                      
+                                                 </tbody>
+                                               </table>
+                                            </div>
+                                                  <div class="col-md-6">
+                                                      <div style="text-align:right;">
+                                                              <!-----The pagination link----->
+                                                              {{$records->links()}}
+                                                      </div>
+                                                      @else
+                                                      <p>No Record Found</p>    
+                                                      @endif
+                                                 </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      </div>
+                                   <hr>
                                 </div>
-                                @else
-                                <p class="text-center">No Records Yet</p>    
-                                @endif
-                                
                                 @endif
                                 @if (auth()->user()->role == 'Doctor')
-                                 @if (count($records) > 0)
-
                                  <div class="mt-4 pl-3">
-                                    <h5 class="">{{$username}}'s Medical Records</h5>
-                                    <ul class="top">
                                        <style>
                                           div.col-sm-2 .iq-card.shadow-none.mb-0,
                                           .iq-card-body.p-1{
                                              box-shadow: 0 5px 6px 0 rgba(105, 105, 105, 0.2);
-                                             text-align: center;
 
                                           }
                                           li.top{
@@ -454,34 +592,103 @@
                                              padding-left: 0;
                                              margin-left: 0;
                                           }
+                                          .iq-card.shadow-none.mb-0 .iq-card-body span,
+                                          .iq-card.shadow-none.mb-0 .iq-card-body h6,
+                                          .iq-card.shadow-none.mb-0 .iq-card-body h2{
+                                             padding-left: 20px;
+                                          }
+                                          a.btn.btn-primary{
+                                             margin-left: 10px;
+                                          }
                                        @media only screen and (max-width: 768px) {
-                                             div.col-sm-2,
-                                             div.col-sm-2 .iq-card.shadow-none.mb-0,
-                                          .iq-card-body.p-1{
-                                                width: 33.3%;
-                                                float: left;
-                                             }
+                                          div.col-md-3{
+                                             width: 50%;
+                                             float: left;
+                                             margin-bottom: 30px;
+                                          }
+                                          div.col-md-3 .iq-card.shadow-none.mb-0{
+                                             width: 150px;
+                                             margin-left: 10px;
+                                          }
+                                          div.col-md-3 .iq-card.shadow-none.mb-0 .iq-card-body span,
+                                          div.col-md-3 .iq-card.shadow-none.mb-0 .iq-card-body h6{
+                                             padding-left: 20px;
+                                          }
+                                            
+                                            
                                           }
                                        </style>
-                                        @foreach ($records as $record)
-                                       <li class="top">
-                                       	<a href="notifications/{{$record->id}}">
+                                            <div class="iq-card-body">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="iq-card shadow-none mb-0">
+                                                            <div class="iq-card-body p-1">
+                                                               <span class="font-size-14">Blood pressure</span>
+                                                               <h2>{{$record->bp}}
+                                                                   <img class="float-right summary-image-top mt-1" src="images/page-img/04.png" alt="summary-image" /> </h2>
+                                                               <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                                   <div class="iq-progress-bar">
+                                                                       <span class="bg-primary" data-percent={{$record->bp}}></span>
+                                                                   </div>
+                                                               </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="iq-card shadow-none mb-0">
+                                                            <div class="iq-card-body p-1">
+                                                                <span class="font-size-14">Temperature</span>
+                                                                <h2>{{$record->temp}}
+                                                                <img class="float-right summary-image-top mt-1" src="images/page-img/06.png" alt="summary-image" /> </h2>
+                                                                <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                                    <div class="iq-progress-bar">
+                                                                        <span class="bg-success" data-percent={{$record->temp}}></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="iq-card shadow-none mb-0">
+                                                            <div class="iq-card-body p-1">
+                                                                <span class="font-size-14">Heart Rate</span>
+                                                                <h2>{{$record->h_rate}}
+                                                                <img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
+                                                                <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                                    <div class="iq-progress-bar">
+                                                                        <span class="bg-danger" data-percent={{$record->h_rate}}></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                       </div>
                                           <div class="">
                                           <div class="row">
-                                              <div class="col-md-2">
+                                              <div class="col-md-3">
                                                   <div class="iq-card shadow-none mb-0">
-                                                      <div class="iq-card-body p-1 text-center">
-                                                         <div class="">
-                                                            <span class="font-size-14">Height</span>
+                                                      <div class="iq-card-body p-1">
+                                                            <span class="font-size-14">Genotype</span>
                                                             <h6>
-                                                                {{$record->height}}
+                                                                {{$record->genotype}}
                                                             </h6>
-            
-                                                         </div>
                                                       </div>
                                                   </div>
                                               </div>
-                                              <div class="col-md-2">
+                                              <div class="col-md-3">
+                                                  <div class="iq-card shadow-none mb-0">
+                                                      <div class="iq-card-body p-1">
+                                                            <span class="font-size-14">Blood Group</span>
+                                                            <h6>
+                                                                {{$record->b_group}}
+                                                            </h6>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-md-3">
                                                   <div class="iq-card shadow-none mb-0">
                                                       <div class="iq-card-body p-1">
                                                          <div class="">
@@ -494,20 +701,7 @@
                                                       </div>
                                                   </div>
                                               </div>
-                                              <div class="col-md-2">
-                                                  <div class="iq-card shadow-none mb-0">
-                                                      <div class="iq-card-body p-1">
-                                                         <div class="">
-                                                            <span class="font-size-14">Heart Rate</span>
-                                                            <h6>
-                                                                {{$record->h_rate}}
-                                                            </h6>
-            
-                                                         </div>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                              <div class="col-md-2">
+                                              <div class="col-md-3">
                                                   <div class="iq-card shadow-none mb-0">
                                                       <div class="iq-card-body p-1">
                                                          <div class="">
@@ -520,44 +714,66 @@
                                                       </div>
                                                   </div>
                                               </div>
-                                              <div class="col-md-2">
-                                                  <div class="iq-card shadow-none mb-0">
-                                                      <div class="iq-card-body p-1">
-                                                         <div class="">
-                                                            <span class="font-size-14">Height</span>
-                                                            <h6>
-                                                                {{$record->height}}
-                                                            </h6>
-            
-                                                         </div>
+                                          </div><br>
+                                          <a href="#records" data-toggle="collapse" class="btn btn-primary">See Past Records</a>
+                                          <div class="col-md-12 collapse" id="records">
+                                              <div class="iq-card shadow-none mb-0">
+                                                  <div class="iq-card-body p-1">
+                                                     <div class="">
+                                                      @if (count($records) > 0)
+                                                      <div class="col-sm-12 col-md-6">
+                                                         <div class="user-list-files d-flex">
+                                                             <a href="javascript:void();" class="chat-icon-delete">
+                                                               Pdf
+                                                             </a>
+                                                           </div>
                                                       </div>
-                                                  </div>
-                                              </div>
-                                              <div class="col-md-2">
-                                                  <div class="iq-card shadow-none mb-0">
-                                                      <div class="iq-card-body p-1">
-                                                         <div class="">
-                                                            <span class="font-size-14">Height</span>
-                                                            <h6>
-                                                                {{$record->height}}
-                                                            </h6>
-            
-                                                         </div>
-                                                      </div>
+                                                   </div>
+                                                   <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
+                                                     <thead>
+                                                         
+                                                         <tr>
+                                                            <th>Date</th>
+                                                            <th>Temperature</th>
+                                                            <th>BP</th>
+                                                            <th>Heart Rate</th>
+                                                            <th>Genotype</th>
+                                                            <th>Blood Group</th>
+                                                            <th>Weight</th>
+                                                            <th>Height</th>
+                                                         </tr>
+                                                     </thead>
+                                                     <tbody>
+                                                      @foreach ($records as $record)
+                                                         <tr>
+                                                            <td class="text-center">{{$record->created_at}}</td>
+                                                            <td>{{$record->temp}}</td>
+                                                            <td>{{$record->bp}}</td>
+                                                            <td>{{$record->h_rate}}</td>
+                                                            <td>{{$record->genotype}}</td>
+                                                            <td>{{$record->b_group}}</td>
+                                                            <td>{{$record->weight}}</td>
+                                                            <td>{{$record->height}}</td>
+                                                         </tr> 
+                                                         @endforeach                      
+                                                     </tbody>
+                                                   </table>
+                                                </div>
+                                                      <div class="col-md-6">
+                                                          <div style="text-align:right;">
+                                                                  <!-----The pagination link----->
+                                                                  {{$records->links()}}
+                                                          </div>
+                                                          @else
+                                                          <p>No Record Found</p>    
+                                                          @endif
+                                                     </div>
                                                   </div>
                                               </div>
                                           </div>
                                           </div>
-                                      </a>
-                                       </li>
                                        <hr>
-                                       @endforeach
-                                    </ul>
-                                </div>
-                                @else
-                                <p class="text-center">No Records Yet</p>    
-                                @endif
-                                
+                                </div>   
                                 @endif
                                  </div>
                               </div>
