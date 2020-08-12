@@ -8,6 +8,17 @@ use App\Records;
 
 class RecordsController extends Controller
 {
+     /**
+    * Create a new controller instance.
+    *
+    * @return void
+    */
+   public function __construct()
+   {
+       $this->middleware('auth');
+   }
+
+   
     /**
      * Display a listing of the resource.
      *
@@ -81,6 +92,10 @@ class RecordsController extends Controller
              $patient->gender = $patientt->gender;
              $patient->doc_email = auth()->user()->email;
              $patient->doctor = auth()->user()->name;
+             $patient->oxygen = $request->input('oxygen');
+             $patient->glucose = $request->input('glucose');
+             $patient->r_rate = $request->input('r_rate');
+             $patient->BMI = $request->input('BMI');
              $patient->pin = $pin;
              if($request->input('b_group') !== 'select'){
              $patient->b_group = $request->input('b_group');

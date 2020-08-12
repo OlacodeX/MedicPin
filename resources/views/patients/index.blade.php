@@ -440,7 +440,7 @@
                                                     <div class="iq-card shadow-none mb-0">
                                                         <div class="iq-card-body p-1">
                                                             <span class="font-size-14">Temperature</span>
-                                                            <h2>{{$record->temp}}
+                                                            <h2>{{$record->temp}}Celsius 
                                                             <img class="float-right summary-image-top mt-1" src="images/page-img/06.png" alt="summary-image" /> </h2>
                                                             <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
                                                                 <div class="iq-progress-bar">
@@ -454,7 +454,7 @@
                                                     <div class="iq-card shadow-none mb-0">
                                                         <div class="iq-card-body p-1">
                                                             <span class="font-size-14">Heart Rate</span>
-                                                            <h2>{{$record->h_rate}}
+                                                            <h2>{{$record->h_rate}}%
                                                             <img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
                                                             <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
                                                                 <div class="iq-progress-bar">
@@ -496,7 +496,7 @@
                                                      <div class="">
                                                         <span class="font-size-14">Weight</span>
                                                         <h6>
-                                                            {{$record->weight}}
+                                                            {{$record->weight}}kg
                                                         </h6>
         
                                                      </div>
@@ -513,6 +513,57 @@
                                                         </h6>
         
                                                      </div>
+                                                  </div>
+                                              </div>
+                                           </div>
+                                              <div class="col-md-3">
+                                                  <div class="iq-card shadow-none mb-0">
+                                                      <div class="iq-card-body p-1">
+                                                            <span class="font-size-14">Oxygen Saturation</span>
+                                                            <h6>
+                                                                {{$record->oxygen}}%
+                                                            </h6>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-md-3">
+                                                  <div class="iq-card shadow-none mb-0">
+                                                      <div class="iq-card-body p-1">
+                                                            <span class="font-size-14">Glucose level</span>
+                                                            <h6>
+                                                                {{$record->glucose}}%
+                                                            </h6>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-md-3">
+                                                  <div class="iq-card shadow-none mb-0">
+                                                      <div class="iq-card-body p-1">
+                                                            <span class="font-size-14">Respiratory rate</span>
+                                                            <h6>
+                                                                {{$record->r_rate}}%
+                                                            </h6>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-md-3">
+                                                  <div class="iq-card shadow-none mb-0">
+                                                      <div class="iq-card-body p-1">
+                                                            <span class="font-size-14">BMI</span>
+                                                            <h6>
+                                                                {{$record->BMI}}
+                                                            </h6>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-md-12">
+                                                  <div class="iq-card shadow-none mb-0">
+                                                      <div class="iq-card-body p-1">
+                                                            <span class="font-size-14">General Note</span>
+                                                            <h6>
+                                                                {{$record->note}}
+                                                            </h6>
+                                                      </div>
                                                   </div>
                                               </div>
                                           </div>
@@ -543,6 +594,11 @@
                                                         <th>Blood Group</th>
                                                         <th>Weight</th>
                                                         <th>Height</th>
+                                                        <th>Oxygen Saturation</th>
+                                                        <th>Glucose Level</th>
+                                                        <th>Respiratory Rate</th>
+                                                        <th>BMI</th>
+                                                        <th>Note</th>
                                                      </tr>
                                                  </thead>
                                                  <tbody>
@@ -556,6 +612,11 @@
                                                         <td>{{$record->b_group}}</td>
                                                         <td>{{$record->weight}}</td>
                                                         <td>{{$record->height}}</td>
+                                                        <td>{{$record->oxygen}}</td>
+                                                        <td>{{$record->glucose}}</td>
+                                                        <td>{{$record->r_rate}}</td>
+                                                        <td>{{$record->BMI}}</td>
+                                                        <td>{{$record->note}}</td>
                                                      </tr> 
                                                      @endforeach                      
                                                  </tbody>
@@ -638,7 +699,7 @@
                                                         <div class="iq-card shadow-none mb-0">
                                                             <div class="iq-card-body p-1">
                                                                 <span class="font-size-14">Temperature</span>
-                                                                <h2>{{$record->temp}}
+                                                                <h2>{{$record->temp}}C
                                                                 <img class="float-right summary-image-top mt-1" src="images/page-img/06.png" alt="summary-image" /> </h2>
                                                                 <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
                                                                     <div class="iq-progress-bar">
@@ -652,7 +713,7 @@
                                                         <div class="iq-card shadow-none mb-0">
                                                             <div class="iq-card-body p-1">
                                                                 <span class="font-size-14">Heart Rate</span>
-                                                                <h2>{{$record->h_rate}}
+                                                                <h2>{{$record->h_rate}}%
                                                                 <img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
                                                                 <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
                                                                     <div class="iq-progress-bar">
@@ -694,7 +755,7 @@
                                                          <div class="">
                                                             <span class="font-size-14">Weight</span>
                                                             <h6>
-                                                                {{$record->weight}}
+                                                                {{$record->weight}}kg
                                                             </h6>
             
                                                          </div>
@@ -707,13 +768,65 @@
                                                          <div class="">
                                                             <span class="font-size-14">Height</span>
                                                             <h6>
-                                                                {{$record->height}}
+                                                                {{$record->height}}cm
                                                             </h6>
             
                                                          </div>
                                                       </div>
                                                   </div>
                                               </div>
+                           
+                                              <div class="col-md-3">
+                                                 <div class="iq-card shadow-none mb-0">
+                                                     <div class="iq-card-body p-1">
+                                                           <span class="font-size-14">Oxygen Saturation</span>
+                                                           <h6>
+                                                               {{$record->oxygen}}%
+                                                           </h6>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <div class="col-md-3">
+                                                 <div class="iq-card shadow-none mb-0">
+                                                     <div class="iq-card-body p-1">
+                                                           <span class="font-size-14">Glucose level</span>
+                                                           <h6>
+                                                               {{$record->glucose}}%
+                                                           </h6>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <div class="col-md-3">
+                                                 <div class="iq-card shadow-none mb-0">
+                                                     <div class="iq-card-body p-1">
+                                                           <span class="font-size-14">Respiratory rate</span>
+                                                           <h6>
+                                                               {{$record->r_rate}}%
+                                                           </h6>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <div class="col-md-3">
+                                                 <div class="iq-card shadow-none mb-0">
+                                                     <div class="iq-card-body p-1">
+                                                           <span class="font-size-14">BMI</span>
+                                                           <h6>
+                                                               {{$record->BMI}}
+                                                           </h6>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <div class="col-md-12">
+                                                 <div class="iq-card shadow-none mb-0">
+                                                     <div class="iq-card-body p-1">
+                                                           <span class="font-size-14">General Note</span>
+                                                           <h6>
+                                                               {{$record->note}}
+                                                           </h6>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                   
                                           </div><br>
                                           <a href="#records" data-toggle="collapse" class="btn btn-primary">See Past Records</a>
                                           <div class="col-md-12 collapse" id="records">
@@ -732,29 +845,39 @@
                                                    <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
                                                      <thead>
                                                          
-                                                         <tr>
-                                                            <th>Date</th>
-                                                            <th>Temperature</th>
-                                                            <th>BP</th>
-                                                            <th>Heart Rate</th>
-                                                            <th>Genotype</th>
-                                                            <th>Blood Group</th>
-                                                            <th>Weight</th>
-                                                            <th>Height</th>
-                                                         </tr>
-                                                     </thead>
-                                                     <tbody>
-                                                      @foreach ($records as $record)
-                                                         <tr>
-                                                            <td class="text-center">{{$record->created_at}}</td>
-                                                            <td>{{$record->temp}}</td>
-                                                            <td>{{$record->bp}}</td>
-                                                            <td>{{$record->h_rate}}</td>
-                                                            <td>{{$record->genotype}}</td>
-                                                            <td>{{$record->b_group}}</td>
-                                                            <td>{{$record->weight}}</td>
-                                                            <td>{{$record->height}}</td>
-                                                         </tr> 
+                                                     <tr>
+                                                      <th>Date</th>
+                                                      <th>Temperature</th>
+                                                      <th>BP</th>
+                                                      <th>Heart Rate</th>
+                                                      <th>Genotype</th>
+                                                      <th>Blood Group</th>
+                                                      <th>Weight</th>
+                                                      <th>Height</th>
+                                                      <th>Oxygen Saturation</th>
+                                                      <th>Glucose Level</th>
+                                                      <th>Respiratory Rate</th>
+                                                      <th>BMI</th>
+                                                      <th>Note</th>
+                                                   </tr>
+                                               </thead>
+                                               <tbody>
+                                                @foreach ($records as $record)
+                                                   <tr>
+                                                      <td class="text-center">{{$record->created_at}}</td>
+                                                      <td>{{$record->temp}}</td>
+                                                      <td>{{$record->bp}}</td>
+                                                      <td>{{$record->h_rate}}</td>
+                                                      <td>{{$record->genotype}}</td>
+                                                      <td>{{$record->b_group}}</td>
+                                                      <td>{{$record->weight}}</td>
+                                                      <td>{{$record->height}}</td>
+                                                      <td>{{$record->oxygen}}</td>
+                                                      <td>{{$record->glucose}}</td>
+                                                      <td>{{$record->r_rate}}</td>
+                                                      <td>{{$record->BMI}}</td>
+                                                      <td>{{$record->note}}</td>
+                                                   </tr> 
                                                          @endforeach                      
                                                      </tbody>
                                                    </table>

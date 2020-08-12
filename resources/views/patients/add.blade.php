@@ -376,6 +376,7 @@
                        <div class="iq-card-body">--->
                         {!! Form::open(['action' => 'RecordsController@store', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
                         **/ !!}
+                        @include('inc.messages')
                         <!-- 
                           <div class="form-group">
                                 <div class="add-img-user profile-img-edit">
@@ -467,7 +468,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                        <label for="h_rate">Heart Rate</label>
-                                       <input type="text" class="form-control" id="h_rate" name="h_rate" placeholder="Heart Rate">
+                                       <input type="text" class="form-control" id="h_rate" name="h_rate" placeholder="Heart Rate in %">
                                     </div>
                                     <div class="form-group col-md-6">
                                        <label for="genotype">Genotype</label>
@@ -480,18 +481,38 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                        <label for="weight">Weight</label>
-                                       <input type="text" class="form-control" id="weight" name="weight" placeholder="Weight">
+                                       <input type="text" class="form-control" id="weight" name="weight" placeholder="Weight in kg">
                                     </div>
                                      <div class="form-group col-md-6">
                                        <label for="height">Height</label>
-                                       <input type="text" class="form-control" id="height" name="height" placeholder="Height">
+                                       <input type="text" class="form-control" id="height" name="height" placeholder="Height in cm">
                                     </div>
                                     <div class="form-group col-md-6">
                                        <label for="temprature">Temperature</label>
-                                       <input type="text" class="form-control" id="temprature" name="temprature" placeholder="Temprature">
+                                       <input type="text" class="form-control" id="temprature" name="temprature" placeholder="Temprature in Celsius">
                                     </div>
+                                    <div class="form-group col-md-6">
+                                      <label for="height">Oxygen Saturation</label>
+                                      <input type="text" class="form-control" id="oxygen" name="oxygen" placeholder="Oxygen Saturation in %">
+                                   </div>
+                                   <div class="form-group col-md-6">
+                                      <label for="temprature">Glucose Level</label>
+                                      <input type="text" class="form-control" id="glucose" name="glucose" placeholder="Glucose level in %">
+                                   </div>
+                                   <div class="form-group col-md-6">
+                                     <label for="height">Respiratory Rate</label>
+                                     <input type="text" class="form-control" id="r_rate" name="r_rate" placeholder="Respiratory rate in %">
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                     <label for="temprature">BMI</label>
+                                     <input type="text" class="form-control" id="bmi" name="bmi" placeholder="BMI">
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                     <label for="temprature">Note</label>
+                                     <textarea class="form-control" id="note" name="note" placeholder="General note on patient medical status"></textarea>
+                                  </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Update Record</button>
+                                <button type="submit" class="btn btn-primary">Create Record</button>
                                 {!! Form::close() !!}
                           </div>
                        </div>

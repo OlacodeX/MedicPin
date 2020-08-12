@@ -8,6 +8,17 @@ use App\User;
 
 class PagesController extends Controller
 {
+
+     /**
+    * Create a new controller instance.
+    *
+    * @return void
+    */
+   public function __construct()
+   {
+       $this->middleware('auth', ['except' => ['index']]);
+   }
+
     //
     public function index(){
        // $posts = Post::orderBy('created_at', 'desc')->paginate(2);
