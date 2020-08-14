@@ -6,8 +6,9 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       
             @section('page_title')
-            {{config('app.name')}} | Users List
+            {{config('app.name')}} | Transfer Patient
             @endsection
+            <link rel="icon" href="{{asset('img/yy.jpg')}}">
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="./css/bootstrap.min.css">
       <!-- Typography CSS -->
@@ -16,13 +17,6 @@
       <link rel="stylesheet" href="./css/style.css">
       <!-- Responsive CSS -->
       <link rel="stylesheet" href="./css/responsive.css">
-      <style>
-         button.btn.btn-info{
-            border: none;
-            background: transparent;
-            color: rgb(20, 109, 224);
-         }
-      </style>
    </head>
 @section('content')
 <!-- Wrapper Start -->
@@ -56,11 +50,11 @@
                         <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Doctor's Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                         <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                            <li><a href="./myprofile">My Profile</a></li>
-                           <li><a href="./notifications">Sent Notifications</a></li>
-                           <li><a href="./notifications/create">Send Notification</a></li>
                            <!---<li><a href="profile-edit.html">User Edit</a></li>--->
                            <li><a href="./patients/create">Add Patient</a></li>
                            <li><a href="./patients">Patients List</a></li>
+                           <li><a href="./notifications">Sent Notifications</a></li>
+                           <li><a href="./notifications/create">Send Notification</a></li>
                         </ul>
                      </li>
                      <li>
@@ -282,7 +276,7 @@
                                     <a href="#" class="iq-sub-card" >
                                        <div class="media align-items-center">
                                           <div class="">
-                                             <img class="avatar-40 rounded" src="../images/user/02.jpg" alt="">
+                                             <img class="avatar-40 rounded" src="./images/user/02.jpg" alt="">
                                           </div>
                                           <div class="media-body ml-3">
                                              <h6 class="mb-0 ">Lorem Ipsum Watson</h6>
@@ -293,7 +287,7 @@
                                     <a href="#" class="iq-sub-card" >
                                        <div class="media align-items-center">
                                           <div class="">
-                                             <img class="avatar-40 rounded" src="../images/user/03.jpg" alt="">
+                                             <img class="avatar-40 rounded" src="./images/user/03.jpg" alt="">
                                           </div>
                                           <div class="media-body ml-3">
                                              <h6 class="mb-0 ">Why do we use it?</h6>
@@ -304,7 +298,7 @@
                                     <a href="#" class="iq-sub-card" >
                                        <div class="media align-items-center">
                                           <div class="">
-                                             <img class="avatar-40 rounded" src="../images/user/04.jpg" alt="">
+                                             <img class="avatar-40 rounded" src="./images/user/04.jpg" alt="">
                                           </div>
                                           <div class="media-body ml-3">
                                              <h6 class="mb-0 ">Variations Passages</h6>
@@ -315,7 +309,7 @@
                                     <a href="#" class="iq-sub-card" >
                                        <div class="media align-items-center">
                                           <div class="">
-                                             <img class="avatar-40 rounded" src="images/user/05.jpg" alt="">
+                                             <img class="avatar-40 rounded" src="./images/user/05.jpg" alt="">
                                           </div>
                                           <div class="media-body ml-3">
                                              <h6 class="mb-0 ">Lorem Ipsum generators</h6>
@@ -367,166 +361,96 @@
                  </div>
               </div>
         </div>
-  <!-- Responsive Breadcrumb End-->  
-   <!-- Page Content  -->
-   <div id="content-page" class="content-page">
-    <div class="container-fluid">
-       <div class="row">
-          <div class="col-sm-12">
+  <!-- Responsive Breadcrumb End-->
+     <!-- Page Content  -->
+     <div id="content-page" class="content-page">
+        <div class="container-fluid">
                 <div class="iq-card">
-                   <div class="iq-card-header d-flex justify-content-between">
-                      <div class="iq-header-title">
-                         <h4 class="card-title">Your Patients List</h4>
-                      </div>
-                   </div>
-                   <div class="iq-card-body">
-                      <div class="table-responsive">
-                         <div class="row justify-content-between">
-                            <div class="col-sm-12 col-md-6">
-                              @include('inc.messages')
-                               <div id="user_list_datatable_info" class="dataTables_filter">
-                                  <form class="mr-3 position-relative">
-                                     <div class="form-group mb-0">
-                                        <input type="search" class="form-control" id="exampleInputSearch" placeholder="Search" aria-controls="user-list-table">
-                                     </div>
-                                  </form>
-                               </div>
-                            </div>
-                            @if (count($users) > 0)
-                            <div class="col-sm-12 col-md-6">
-                               <div class="user-list-files d-flex float-right">
-                                   <a href="javascript:void();" class="chat-icon-delete">
-                                     Pdf
-                                   </a>
-                                 </div>
-                            </div>
-                         </div>
-                         <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
-                           <thead>
+                        {!! Form::open(['action' => 'PatientsController@store_transfer', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
+                        **/ !!}
+                       <div class="iq-card-header d-flex justify-content-between">
+                          <div class="iq-header-title">
+                             <h4 class="card-title">Transfer Patient With MedicPin {!! $patient->pin!!} To Another Doctor</h4>
+                          </div>
+                       </div>
+                       <div class="iq-card-body">
+                                <hr>
+                                <div class="">
+                                    <div class="form-group">
+                                       <label for="patient">Transfer To</label>
+                                       <input type="hidden" class="form-control" name="pin" value="{{$patient->pin}}">
+                                       <input type="hidden" class="form-control" name="name" value="{{$patient->name}}">
+                                       <input type="hidden" class="form-control" name="from" value="{{$patient->doctor}}">
+                                       <input type="hidden" class="form-control" name="from_email" value="{{$patient->doc_email}}">
+                                       @if($doctor->count())
+                                       <select class="form-control" name="doctor" required>
+                                        <option value="N/A" selected>-Transfer Patient To-</option>
+                                           @foreach ($doctor as $doctor)
+                                               <option value="{!! $doctor->name!!}">{!! $doctor->name !!}</option>
                                
-                               <tr>
-                                  <th>MedicPin</th>
-                                  <th>Name</th>
-                                  <th>Contact</th>
-                                  <th>Email</th>
-                                  <th>Address</th>
-                                  <th>Status</th>
-                                  <th>Action</th>
-                               </tr>
-                           </thead>
-
-
-                           <tbody>
-                            @foreach ($users as $user)
-                               <tr>
-                                  <td class="text-center">{{$user->pin}}</td>
-                                  <td>{{$user->username}}</td>
-                                  <td><a href="tel:{{$user->phone}}">{{$user->phone}}</a></td>
-                                  <td><a href="mailto:{{$user->email}}" class="__cf_email__" data-cfemail="80e1eeeee1f3f4e8e5f3e9e1c0e7ede1e9ecaee3efed">{{$user->email}}</a></td>
-                                  <td>{{$user->address}}</td>
-                                  <td>
-                                      @if (!empty(App\User::where('email', $user->email)->first()))
-                                      <span class="badge iq-bg-primary">Active</span>
-                                      @else
-                                      <span class="badge iq-bg-danger">Inactive</span>
-                                      @endif
-                                   </td>
-                                  <td>
-                                    {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
-                                    {{Form::hidden('pin', $user->pin)}}
-                                    <button type="submit" class ="btn btn-info btn-sm" >Add Medical Record</button>
-                                   
-                                    {!!Form::close()!!}
-                                    {!!Form::open(['action' => 'RecordsController@index', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
-                                    {{Form::hidden('pin', $user->pin)}}
-                                    {{Form::hidden('username', $user->username)}}
-                                    <button type="submit" class ="btn btn-info btn-sm" >Check Medical Records</button>
-                                   
-                                    {!!Form::close()!!}
-                                    {!!Form::open(['action' => 'PatientsController@transfer', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
-                                    {{Form::hidden('pin', $user->pin)}}
-                                    <button type="submit" class ="btn btn-info btn-sm" >Transfer Patient</button>
-                                   
-                                    {!!Form::close()!!}
-                                     <div class="flex align-items-center list-user-action">
-                                        {!!Form::open(['action' => ['PatientsController@destroy', $user->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
-                                        {{Form::hidden('email', $user->email)}}
-                                        {{Form::hidden('_method', 'DELETE')}}
-                                        <button type="submit" class ="btn btn-info btn-sm" ><i class="ri-delete-bin-line"></i></button>
-                                       
-                                        {!!Form::close()!!}
-                                     </div>
-                                  </td>
-                               </tr> 
-                               @endforeach                      
-                           </tbody>
-                         </table>
-                      </div>
-                            <div class="col-md-6">
-                                <div style="text-align:right;">
-                                        <!-----The pagination link----->
-                                        {{$users->links()}}
-                                </div>
-                                @else
-                                <p>No Record Found</p>    
-                                @endif
-                            </div>
-                         </div>
-                   </div>
-                </div>
-          </div>
-       </div>
-    </div>
- </div>
- </div>
- <!-- Wrapper END -->
-  <!-- Footer -->
-    <footer class="bg-white iq-footer">
-       <div class="container-fluid">
-          <div class="row">
-             <div class="col-lg-6">
-                <ul class="list-inline mb-0">
-                   <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
-                   <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
-                </ul>
-             </div>
-             <div class="col-lg-6 text-right">
-                Copyright 2020 <a href="./">Medicpin</a> All Rights Reserved.
-             </div>
-          </div>
-       </div>
-    </footer>
-    <!-- Footer END -->
-  <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Appear JavaScript -->
-    <script src="js/jquery.appear.js"></script>
-    <!-- Countdown JavaScript -->
-    <script src="js/countdown.min.js"></script>
-    <!-- Counterup JavaScript -->
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <!-- Wow JavaScript -->
-    <script src="js/wow.min.js"></script>
-    <!-- Apexcharts JavaScript -->
-    <script src="js/apexcharts.js"></script>
-    <!-- Slick JavaScript -->
-    <script src="js/slick.min.js"></script>
-    <!-- Select2 JavaScript -->
-    <script src="js/select2.min.js"></script>
-    <!-- Owl Carousel JavaScript -->
-    <script src="js/owl.carousel.min.js"></script>
-    <!-- Magnific Popup JavaScript -->
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <!-- Smooth Scrollbar JavaScript -->
-    <script src="js/smooth-scrollbar.js"></script>
-    <!-- lottie JavaScript -->
-    <script src="js/lottie.js"></script>
-    <!-- Chart Custom JavaScript -->
-    <script src="js/chart-custom.js"></script>
-    <!-- Custom JavaScript -->
-    <script src="js/custom.js"></script>
+                                           @endforeach
+                                       </select>
+                                       @endif
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="note">Note To Doctor</label>
+                                       <textarea class="form-control" id="note" name="note" placeholder="Special Message/Instructions To Doctor..." rows="8"></textarea>
+                                    </div>
+                                <button type="submit" class="btn btn-primary">Transfer Patient</button>
+                                {!! Form::close() !!}
+                          </div>
+                       </div>
+                    </div>
+              </div>
+     <!-- Wrapper END -->
+      <!-- Footer -->
+        <footer class="bg-white iq-footer">
+           <div class="container-fluid">
+              <div class="row">
+                 <div class="col-lg-6">
+                    <ul class="list-inline mb-0">
+                       <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
+                       <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
+                    </ul>
+                 </div>
+                 <div class="col-lg-6 text-right">
+                    Copyright 2020 <a href="#">Medicpin</a> All Rights Reserved.
+                 </div>
+              </div>
+           </div>
+        </footer>
+        <!-- Footer END -->
+      <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/popper.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <!-- Appear JavaScript -->
+        <script src="../js/jquery.appear.js"></script>
+        <!-- Countdown JavaScript -->
+        <script src="../js/countdown.min.js"></script>
+        <!-- Counterup JavaScript -->
+        <script src="../js/waypoints.min.js"></script>
+        <script src="../js/jquery.counterup.min.js"></script>
+        <!-- Wow JavaScript -->
+        <script src="../js/wow.min.js"></script>
+        <!-- Apexcharts JavaScript -->
+        <script src="../js/apexcharts.js"></script>
+        <!-- Slick JavaScript -->
+        <script src="../js/slick.min.js"></script>
+        <!-- Select2 JavaScript -->
+        <script src="../js/select2.min.js"></script>
+        <!-- Owl Carousel JavaScript -->
+        <script src="../js/owl.carousel.min.js"></script>
+        <!-- Magnific Popup JavaScript -->
+        <script src="../js/jquery.magnific-popup.min.js"></script>
+        <!-- Smooth Scrollbar JavaScript -->
+        <script src="../js/smooth-scrollbar.js"></script>
+        <!-- lottie JavaScript -->
+        <script src="../js/lottie.js"></script>
+        <!-- Chart Custom JavaScript -->
+        <script src="../js/chart-custom.js"></script>
+        <!-- Custom JavaScript -->
+        <script src="../js/custom.js"></script>
+        
 @endsection

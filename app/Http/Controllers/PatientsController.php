@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Mail\patientMail;
+use App\Mail\TransferMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\patients;
 use App\User;
+use App\Transfers;
 class PatientsController extends Controller
 { 
     
@@ -45,6 +47,25 @@ class PatientsController extends Controller
         return view("patients.create");
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function transfer()
+    {
+        //
+        $pin = $_POST['pin'];
+        $patient = patients::where('pin', $pin)->first();
+        $doctor = User::where('role', 'doctor')->get();
+        $data = array(
+            'patient' => $patient,
+            //'notice' => $notice,
+            'doctor' => $doctor
+        );
+        return view('patients.transfer', $data);
+    }
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -110,6 +131,61 @@ class PatientsController extends Controller
                 Mail::to($request->input('email'))->send(new patientMail($data));
               
              return redirect('/dashboard')->with('success', 'Great!, patient has been added and notified.');//I just set the message for session(success).
+
+    }
+
+    
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store_transfer(Request $request)
+    {
+        //
+        $this->validate($request, [
+            'note' => 'required',
+            'doctor' => 'required',
+             ]);
+            $doc = $request->input('doctor');
+            $new_doc = User::where('name', $doc)->first();
+            $patient = new Transfers;
+            $patient->from_doc_email = $request->input('from_email');
+            $patient->from_doctor = $request->input('from');
+            $patient->patient_name = $request->input('name');
+            $patient->to_doctor = $doc;
+            $patient->note =  $request->input('note');
+            $patient->to_doc_email = $new_doc->email;
+            $patient->pin = $request->input('pin');
+           
+             //Save to db
+             $patient->save(); 
+             $doc = $_POST['doctor'];
+             $new_doc = User::where('name', $doc)->first();
+             
+             $update_patient = patients::where('doctor', $request->input('from'))->where('pin',$request->input('pin'))->first();
+            
+             $update_patient->doc_email = $new_doc->email;
+             $update_patient->doctor = $new_doc->name;
+ 
+             //Save to db
+             $update_patient->save(); 
+             //send mail
+             $data = request()->validate([
+                'name' => 'required',
+                'from_email' => 'required',
+                'from' => 'required',
+                'note' => 'required',
+                'doctor' => 'required',
+                'pin' => 'required',
+            ]);
+        
+            //Send mail
+               
+                Mail::to($request->input('from_email'))->send(new TransferMail($data));
+              
+             return redirect('/patients')->with('success', 'Great!, patient record has been transferred..');//I just set the message for session(success).
 
     }
 

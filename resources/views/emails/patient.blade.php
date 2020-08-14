@@ -8,5 +8,5 @@
  https://shielded-river-00274.herokuapp.com/account_set_up
 <br><br>
 <p>Warm Regards,</p>
-<p><strong>{{config('app.name')}} Team</strong></p>
+<p><strong>The Team at {{config('app.name')}}</strong></p>
 @endcomponent
