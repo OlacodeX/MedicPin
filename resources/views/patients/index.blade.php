@@ -816,12 +816,22 @@
                                                      </div>
                                                  </div>
                                              </div>
-                                             <div class="col-md-12">
+                                             <div class="col-md-6 text-center">
                                                  <div class="iq-card shadow-none mb-0">
                                                      <div class="iq-card-body p-1">
                                                            <span class="font-size-14">General Note</span>
                                                            <h6>
                                                                {{$record->note}}
+                                                           </h6>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <div class="col-md-6 text-center">
+                                                 <div class="iq-card shadow-none mb-0">
+                                                     <div class="iq-card-body p-1">
+                                                           <span class="font-size-14">Prescription</span>
+                                                           <h6>
+                                                               {{$record->prescription}}
                                                            </h6>
                                                      </div>
                                                  </div>

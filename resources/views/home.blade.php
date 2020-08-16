@@ -620,28 +620,71 @@
                             <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden wow fadeInUp" data-wow-delay="0.6s">
                                 <div class="iq-card-header d-flex justify-content-between">
                                     <div class="iq-header-title">
-                                        <h4 class="card-title">Statistics</h4>
+                                        <h4 class="card-title">Your Patients</h4>
                                     </div>
                                     <div class="iq-card-header-toolbar d-flex align-items-center">
-                                        <div class="dropdown">
-                                            <span class="dropdown-toggle text-primary" id="dropdownMenuButton1"
-                                                  data-toggle="dropdown">26 Aug 2019</span>
-                                            <div class="dropdown-menu dropdown-menu-right"
-                                                 aria-labelledby="dropdownMenuButton1">
-                                                <a class="dropdown-item" href="#"><i
-                                                        class="ri-eye-fill mr-2"></i>View</a>
-                                                <a class="dropdown-item" href="#"><i
-                                                        class="ri-delete-bin-6-fill mr-2"></i>Delete</a>
-                                                <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Edit</a>
-                                                <a class="dropdown-item" href="#"><i class="ri-printer-fill mr-2"></i>Print</a>
-                                                <a class="dropdown-item" href="#"><i
-                                                        class="ri-file-download-fill mr-2"></i>Download</a>
-                                            </div>
-                                        </div>
+                                        <a href="patients">See All</a>
                                     </div>
                                 </div>
+                                <style>
+                                    div.panel-body,
+                                    div.panel-default{
+                                        border-radius: 0;
+                                        border-top: none;
+                                    }
+                                    .btn.btn-info.btn-sm{
+                                        background: transparent;
+                                        border: none;
+                                        color: rgb(20, 109, 224);
+                                    }
+                                </style>
                                 <div class="iq-card-body p-0">
-                                    <div id="chart-20"></div>
+                                    @if (count($patients) > 0)
+                                    @foreach ($patients as $patient)
+                                    <a href="javascript:{}" onclick="document.getElementById('my_form_1').submit();">
+                                                            
+                                    {!! Form::open(['action' => 'RecordsController@index', 'method' => 'GET', 'id' => 'my_form_1']) /** The action should be the block of code in the store function in PostsController
+                                    **/ !!}
+                                     {{Form::hidden('pin', $patient->pin)}}
+                                     {{Form::hidden('username', $patient->username)}}
+                                    {!! Form::close() !!}
+                                    <div class="panel panel-default">
+                                    <div class="panel-body">
+                                    <span class="pull-left">{{$patient->name}}</span>
+                                    <span class="user-list-files d-flex float-right">
+                                    
+                                    {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                                    {{Form::hidden('pin', $patient->pin)}}
+                                    <button type="submit" class ="btn btn-info btn-sm" title="Add New Medical Record"><i class="fa fa-edit"></i></button>
+                                   
+                                    {!!Form::close()!!}
+                                    {!!Form::open(['action' => 'RecordsController@index', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
+                                    {{Form::hidden('pin', $patient->pin)}}
+                                    {{Form::hidden('username', $patient->username)}}
+                                    <button type="submit" class ="btn btn-info btn-sm" title="View Medical History"><i class="fa fa-bars"></i></button>
+                                   
+                                    {!!Form::close()!!}
+                                    {!!Form::open(['action' => 'PatientsController@transfer', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                                    {{Form::hidden('pin', $patient->pin)}}
+                                    <button type="submit" class ="btn btn-info btn-sm" title="Transfer Patient"><i class="fa fa-paper-plane-o"></i></button>
+                                   
+                                    {!!Form::close()!!}
+                                        {!!Form::open(['action' => ['PatientsController@destroy', $patient->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                        {{Form::hidden('email', $patient->email)}}
+                                        {{Form::hidden('_method', 'DELETE')}}
+                                        <button type="submit" class ="btn btn-info btn-sm" title="Delete Patient"><i class="fa fa-trash-o"></i></button>
+                                       
+                                        {!!Form::close()!!}
+                                     </span>
+                                    </div>
+                                    </div>
+                                    </a>
+                                    @endforeach
+
+                                    @else
+                                    <p class="text-center">No Patients Yet</p>    
+                                    @endif
+                                    
                                 </div>
                             </div>
                         </div>

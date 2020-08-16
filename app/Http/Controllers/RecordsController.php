@@ -96,6 +96,8 @@ class RecordsController extends Controller
              $patient->glucose = $request->input('glucose');
              $patient->r_rate = $request->input('r_rate');
              $patient->BMI = $request->input('BMI');
+             $patient->note = $request->input('note');
+             $patient->prescription = $request->input('pre');
              $patient->pin = $pin;
              if($request->input('b_group') !== 'select'){
              $patient->b_group = $request->input('b_group');

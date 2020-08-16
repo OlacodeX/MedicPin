@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       
             @section('page_title')
-            {{config('app.name')}} | Users List
+            {{config('app.name')}} | Search Result 
             @endsection
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -376,33 +376,12 @@
                 <div class="iq-card">
                    <div class="iq-card-header d-flex justify-content-between">
                       <div class="iq-header-title">
-                         <h4 class="card-title">Your Patients List</h4>
+                         <h4 class="card-title">Your Search Result</h4>
                       </div>
                    </div>
                    <div class="iq-card-body">
                       <div class="table-responsive">
-                         <div class="row justify-content-between">
-                            <div class="col-sm-12 col-md-6">
                               @include('inc.messages')
-                               <div id="user_list_datatable_info" class="dataTables_filter">
-                                 {!! Form::open(['action' => 'PatientsController@search', 'method' => 'POST', 'class' => 'mr-3 position-relative']) !!}
-                                     <div class="form-group mb-0">
-                                        <input type="search" class="form-control" id="exampleInputSearch" name="pin" placeholder="Enter MedicPin" aria-controls="user-list-table">
-                                       
-                                       <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Search</button>
-                                     </div>
-                                     {!! Form::close() !!}
-                               </div>
-                            </div>
-                            @if (count($users) > 0)
-                            <div class="col-sm-12 col-md-6">
-                               <div class="user-list-files d-flex float-right">
-                                   <a href="javascript:void();" class="chat-icon-delete">
-                                     Pdf
-                                   </a>
-                                 </div>
-                            </div>
-                         </div>
                          <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
                            <thead>
                                
@@ -419,7 +398,6 @@
 
 
                            <tbody>
-                            @foreach ($users as $user)
                                <tr>
                                   <td class="text-center">{{$user->pin}}</td>
                                   <td>{{$user->username}}</td>
@@ -459,21 +437,11 @@
                                         {!!Form::close()!!}
                                      </div>
                                   </td>
-                               </tr> 
-                               @endforeach                      
+                               </tr>                      
                            </tbody>
                          </table>
                       </div>
-                            <div class="col-md-6">
-                                <div style="text-align:right;">
-                                        <!-----The pagination link----->
-                                        {{$users->links()}}
-                                </div>
-                                @else
-                                <p>No Record Found</p>    
-                                @endif
-                            </div>
-                         </div>
+                     </div>
                    </div>
                 </div>
           </div>

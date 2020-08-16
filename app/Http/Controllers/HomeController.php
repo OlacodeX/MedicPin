@@ -27,8 +27,10 @@ class HomeController extends Controller
         $notices = Notifications::where('to',auth()->user()->id)->paginate(5);
         $notice_sents = Notifications::where('from',auth()->user()->id)->paginate(5);
         $patient = patients::where('email',auth()->user()->email)->first();
+        $patients = patients::where('doc_email',auth()->user()->email)->paginate(10);
         $data = array(
             'patient' => $patient,
+            'patients' => $patients,
             'notice_sents' => $notice_sents,
             'notices' => $notices
         );

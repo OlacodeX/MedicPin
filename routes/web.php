@@ -18,6 +18,7 @@ Auth::routes();
 Route::get('/account_set_up', 'PagesController@reg_patient');
 Route::POST('/store_transfer', 'PatientsController@store_transfer');
 Route::resource('/patients', 'PatientsController');
+Route::post('/search_result', 'PatientsController@search');
 Route::post('/reg_patient', 'PatientsController@reg_patient');
 Route::post('/transfer_patient', 'PatientsController@transfer');
 Route::post('/add_record', 'PatientsController@add_record');

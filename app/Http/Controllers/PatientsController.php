@@ -35,7 +35,17 @@ class PatientsController extends Controller
         $users = patients::where('doc_email', auth()->user()->email)->paginate(100);
         return view("patients.list")->with('users', $users);
     }
-
+    /**
+         * Display a listing of the resource.
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function search()
+        {
+            $pin = $_POST['pin'];
+            $user = patients::where('doc_email', auth()->user()->email)->where('pin', $pin)->first();
+            return view("patients.search_result")->with('user', $user);
+        }
     /**
      * Show the form for creating a new resource.
      *

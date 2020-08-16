@@ -511,6 +511,10 @@
                                      <label for="temprature">Note</label>
                                      <textarea class="form-control" id="note" name="note" placeholder="General note on patient medical status"></textarea>
                                   </div>
+                                  <div class="form-group col-md-6">
+                                     <label for="temprature">Drug Prescription</label>
+                                     <textarea class="form-control" id="pre" name="pre" placeholder="Drug prescriptions..."></textarea>
+                                  </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Create Record</button>
                                 {!! Form::close() !!}
@@ -539,7 +543,11 @@
               </div>
            </div>
         </footer>
-        <!-- Footer END -->
+        <!-- Footer END --> 
+         <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+         <script>
+            CKEDITOR.replace( 'pre' );
+         </script> 
       <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="../js/jquery.min.js"></script>
