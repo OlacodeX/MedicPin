@@ -15,7 +15,7 @@ class AddColumnToRecordsTable extends Migration
     {
         Schema::table('records', function (Blueprint $table) {
             //
-            $table->text('prescription');
+            $table->text('prescription')->nullable();
         });
     }
 
