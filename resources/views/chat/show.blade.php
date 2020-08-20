@@ -344,6 +344,7 @@
        <div class="form-group">
          {{Form::textarea('message', '', ['class' => 'form-control', 'id' =>'pre'], 'required')}}
        </div>
+       {{Form::hidden('receiver_pin', $message->sender_id)}}
        {{Form::hidden('receiver_id', $message->sender_id)}}
        {{Form::hidden('receiver_email', $message->sender_email)}}
        {{Form::hidden('receiver_name', $message->sender_name)}}
