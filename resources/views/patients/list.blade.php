@@ -415,11 +415,16 @@
                                     <button type="submit" class ="btn btn-info btn-sm" >Transfer Patient</button>
                                    
                                     {!!Form::close()!!}
+                                    {!!Form::open(['action' => 'MessagingController@create', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
+                                    {{Form::hidden('pin', $user->pin)}}
+                                    <button type="submit" class ="btn btn-info btn-sm" title="Message Patient">Message Patient</button>
+                                   
+                                    {!!Form::close()!!}
                                      <div class="flex align-items-center list-user-action">
                                         {!!Form::open(['action' => ['PatientsController@destroy', $user->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
                                         {{Form::hidden('email', $user->email)}}
                                         {{Form::hidden('_method', 'DELETE')}}
-                                        <button type="submit" class ="btn btn-info btn-sm" ><i class="ri-delete-bin-line"></i></button>
+                                        <button type="submit" class ="btn btn-info btn-sm" >Delete Patient</button>
                                        
                                         {!!Form::close()!!}
                                      </div>
