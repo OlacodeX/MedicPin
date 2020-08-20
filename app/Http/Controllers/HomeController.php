@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\patients;
 use  App\Notifications;
+use App\Messages;
 class HomeController extends Controller
 {
     /**
@@ -28,11 +29,14 @@ class HomeController extends Controller
         $notice_sents = Notifications::where('from',auth()->user()->id)->paginate(5);
         $patient = patients::where('email',auth()->user()->email)->first();
         $patients = patients::where('doc_email',auth()->user()->email)->paginate(10);
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+       
         $data = array(
             'patient' => $patient,
             'patients' => $patients,
             'notice_sents' => $notice_sents,
-            'notices' => $notices
+            'notices' => $notices,
+            'new_messages' => $new_messages
         );
         return view('home', $data);
     }

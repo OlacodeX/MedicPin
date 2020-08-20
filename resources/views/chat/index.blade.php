@@ -46,7 +46,7 @@
                          <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
                          @if (auth()->user()->role == 'Doctor')
                          <li>
-                            <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                            <a href="./dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                            
                          </li>
                          <li class="active">
@@ -269,11 +269,11 @@
                </div>
             </div>
                <div class="navbar-breadcrumb">
-                  <h5 class="mb-0">Notifications</h5>
+                  <h5 class="mb-0">Your Inbox</h5>
                   <nav aria-label="breadcrumb">
                      <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="./">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Notifications</li>
+                        <li class="breadcrumb-item active" aria-current="page">Inbox</li>
                      </ul>
                   </nav>
                </div>
@@ -326,20 +326,20 @@
                            </div>
                         </li>
                      </ul>
-                  </div>
-                  <ul class="navbar-list">
-                     <li>
-                        <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="../images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
-                        <div class="iq-sub-dropdown iq-user-dropdown">
-                           <div class="iq-card shadow-none m-0">
-                                 <div class="d-inline-block w-100 text-center p-3">
-                                    <a class="iq-bg-danger iq-sign-btn" href="{{ route('logout') }}" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
+                     <ul class="navbar-list">
+                        <li>
+                           <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="../images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
+                           <div class="iq-sub-dropdown iq-user-dropdown">
+                              <div class="iq-card shadow-none m-0">
+                                    <div class="d-inline-block w-100 text-center p-3">
+                                       <a class="iq-bg-danger iq-sign-btn" href="{{ route('logout') }}" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
+                                    </div>
                                  </div>
                               </div>
                            </div>
-                        </div>
-                     </li>
-                  </ul>
+                        </li>
+                     </ul>
+                  </div>
                </nav>
             </div>
          </div>
@@ -350,62 +350,34 @@
                <div class="row">
                   <div class="col-sm-12">
                      <div class="iq-card">
-                        <div class="iq-card-body chat-page p-0">
-                           <div class="chat-data-block">
-                           <div class="row" style="padding-left: 10px;">
-                              <div class="col-lg-12 p-0">
-                                @if (auth()->user()->role == 'Patient')
-                                 @if (count($notices) > 0)
-
-                                 <div class="scroller mt-4 pl-3">
-                                    <h5 class="">Your Notifications</h5>
-                                    <ul class="iq-chat-ui nav flex-column nav-pills">
-                                        @foreach ($notices as $notice)
-                                       <li>
-                                       	<a href="notifications/{{$notice->id}}">
-                                          <div class="d-flex align-items-center">
-                                             <div class="chat-sidebar-name">
-                                                <h6 class="mb-0">Dr. {!!Str::words( $notice->from_name,2)!!}</h6>
-                                                <span>{!!Str::words( $notice->content,50)!!}</span>
-                                             </div>
-                                          </div>
-                                      </a>
-                                       </li>
-                                       @endforeach
-                                    </ul>
-                                </div>
-                                @else
-                                <p class="text-center">No Notifications Yet</p>    
-                                @endif
-                                
-                                @endif
-                                @if (auth()->user()->role == 'Doctor')
-                                 @if (count($notice) > 0)
-
-                                 <div class="scroller mt-4 pl-3">
-                                    <h5 class="">Your Notifications</h5>
-                                    <ul class="iq-chat-ui nav flex-column nav-pills">
-                                        @foreach ($notice as $notice)
-                                       <li>
-                                       	<a href="notifications/{{$notice->id}}">
-                                          <div class="d-flex align-items-center">
-                                             <div class="chat-sidebar-name">
-                                                <h6 class="mb-0">{!!Str::words( $notice->to_name,2)!!}</h6>
-                                                <span>{!!Str::words( $notice->content,50)!!}</span>
-                                             </div>
-                                          </div>
-                                      </a>
-                                       </li>
-                                       @endforeach
-                                    </ul>
-                                </div>
-                                @else
-                                <p class="text-center">No Notifications Yet</p>    
-                                @endif
-                                
-                                @endif
-                                 </div>
-                              </div>
+                        <h3 class="title">Your <span>Inbox</span></h3>
+                    </div>
+    
+                    @if (
+                        //if there is data in the db
+                    count($messages) > 0
+                    )
+                
+            @foreach (
+                // Loop through them
+                $messages as $message
+                )
+    
+    <h4 class="title">{{$message->sender_name}}</h4>
+    <a href="chat/{{$message->id}}" style="text-decoration: none;">
+    <div class="panel-body">
+    <p><strong>{!!Str::words($message->message,8)!!}</strong></p>
+    <small><i class="fa fa-calendar"></i>{!!$message->created_at!!}</small>
+    </div>
+    </a>
+     @endforeach
+     <div class="pull-right">
+             <!-----The pagination link----->
+             {{$messages->links()}}
+     </div>
+         @else
+         <p class="text-center">No message found</p>
+         @endif
                      <!----
                               <div class="col-lg-12 chat-data p-0 chat-data-right">
                                  <div class="tab-content">

@@ -25,5 +25,6 @@ Route::post('/add_record', 'PatientsController@add_record');
 Route::post('/store_record', 'PatientsController@store_record');
 Route::resource('/notifications', 'NotificationsController');
 Route::resource('/records', 'RecordsController');
+Route::resource('/chat', 'MessagingController');
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 //Route::get('/dashboard', 'PagesController@index')->name('dashboard');

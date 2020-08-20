@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Messages;
 //use App\Contact;
 
 class PagesController extends Controller
@@ -44,7 +45,12 @@ class PagesController extends Controller
     }
     public function pro(){
         $pro = User::find(auth()->user()->id);
-        return view("pro")->with('pro',$pro);
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = array(
+            'pro' => $pro,
+            'new_messages' => $new_messages
+   );
+        return view("pro",$data);
     }
     /**
      * Show the form for editing the specified resource.
@@ -56,8 +62,13 @@ class PagesController extends Controller
     {
         //
         $user = User::find($id);
-
-        return view('edituser')->with('user', $user);
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+       
+        $data = array(
+            'user' => $user,
+            'new_messages' => $new_messages
+   );
+        return view('edituser', $data);
     }
     
     /**

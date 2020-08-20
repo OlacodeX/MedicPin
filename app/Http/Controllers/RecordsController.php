@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\patients;
 use App\Records;
+use App\Messages;
 
 class RecordsController extends Controller
 {
@@ -27,12 +28,15 @@ class RecordsController extends Controller
     public function index()
     {
         //
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+       
         $pin = $_GET['pin'];
         $username = $_GET['username'];
         $record = Records::where('pin', $pin)->orderBy('created_at', 'desc')->first();
         $records = Records::where('pin', $pin)->orderBy('created_at', 'desc')->paginate(50);
         $data = array(
             'username' => $username,
+            'new_messages' => $new_messages,
             'records' => $records,
             'record' => $record
         );

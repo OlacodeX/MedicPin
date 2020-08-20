@@ -57,6 +57,7 @@
                           <li><a href="../../patients">Patients List</a></li>
                        </ul>
                     </li>
+                    <li><a href="../../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                     <li>
                        <a href="../../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                       
@@ -89,6 +90,7 @@
                          <li><a href="">My Appointments</a></li>
                       </ul>
                    </li>
+                   <li><a href="../../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                    <li>
                       <a href="../../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                      
@@ -272,106 +274,70 @@
                     </div>
                 </div>
             </div>
-             <nav class="navbar navbar-expand-lg navbar-light p-0">
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <i class="ri-menu-3-line"></i>
-                  </button>
-                  <div class="iq-menu-bt align-self-center">
-                     <div class="wrapper-menu">
-                        <div class="line-menu half start"></div>
-                        <div class="line-menu"></div>
-                        <div class="line-menu half end"></div>
-                     </div>
-                  </div>
-                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                     <ul class="navbar-nav ml-auto navbar-list">
-                        <li class="nav-item dropdown">
-                           <a href="#" class="search-toggle iq-waves-effect">
-                              <i class="ri-mail-line"></i>
-                              <span class="badge badge-pill badge-primary badge-up count-mail">3</span>
-                           </a>
-                           <!----recent m here--->
-                           <div class="iq-sub-dropdown">
-                              <div class="iq-card shadow-none m-0">
-                                 <div class="iq-card-body p-0 ">
-                                    <div class="bg-primary p-3">
-                                       <h5 class="mb-0 text-white">All Messages<small class="badge  badge-light float-right pt-1">5</small></h5>
-                                    </div>
-                                    <a href="#" class="iq-sub-card" >
-                                       <div class="media align-items-center">
-                                          <div class="">
-                                             <img class="avatar-40 rounded" src="../images/user/01.jpg" alt="">
-                                          </div>
-                                          <div class="media-body ml-3">
-                                             <h6 class="mb-0 ">Nik Emma Watson</h6>
-                                             <small class="float-left font-size-12">13 Jun</small>
-                                          </div>
-                                       </div>
-                                    </a>
-                                    <a href="#" class="iq-sub-card" >
-                                       <div class="media align-items-center">
-                                          <div class="">
-                                             <img class="avatar-40 rounded" src="../images/user/02.jpg" alt="">
-                                          </div>
-                                          <div class="media-body ml-3">
-                                             <h6 class="mb-0 ">Lorem Ipsum Watson</h6>
-                                             <small class="float-left font-size-12">20 Apr</small>
-                                          </div>
-                                       </div>
-                                    </a>
-                                    <a href="#" class="iq-sub-card" >
-                                       <div class="media align-items-center">
-                                          <div class="">
-                                             <img class="avatar-40 rounded" src="../images/user/03.jpg" alt="">
-                                          </div>
-                                          <div class="media-body ml-3">
-                                             <h6 class="mb-0 ">Why do we use it?</h6>
-                                             <small class="float-left font-size-12">30 Jun</small>
-                                          </div>
-                                       </div>
-                                    </a>
-                                    <a href="#" class="iq-sub-card" >
-                                       <div class="media align-items-center">
-                                          <div class="">
-                                             <img class="avatar-40 rounded" src="../images/user/04.jpg" alt="">
-                                          </div>
-                                          <div class="media-body ml-3">
-                                             <h6 class="mb-0 ">Variations Passages</h6>
-                                             <small class="float-left font-size-12">12 Sep</small>
-                                          </div>
-                                       </div>
-                                    </a>
-                                    <a href="#" class="iq-sub-card" >
-                                       <div class="media align-items-center">
-                                          <div class="">
-                                             <img class="avatar-40 rounded" src="images/user/05.jpg" alt="">
-                                          </div>
-                                          <div class="media-body ml-3">
-                                             <h6 class="mb-0 ">Lorem Ipsum generators</h6>
-                                             <small class="float-left font-size-12">5 Dec</small>
-                                          </div>
-                                       </div>
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </li>
-                     </ul>
-                  </div>
-                  <ul class="navbar-list">
-                     <li>
-                        <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="../images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
-                        <div class="iq-sub-dropdown iq-user-dropdown">
-                           <div class="iq-card shadow-none m-0">
-                                 <div class="d-inline-block w-100 text-center p-3">
-                                    <a class="iq-bg-danger iq-sign-btn" href="{{ route('logout') }}" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </li>
-                  </ul>
-               </nav>
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="ri-menu-3-line"></i>
+              </button>
+              <div class="iq-menu-bt align-self-center">
+                 <div class="wrapper-menu">
+                    <div class="line-menu half start"></div>
+                    <div class="line-menu"></div>
+                    <div class="line-menu half end"></div>
+                 </div>
+              </div>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                 <ul class="navbar-nav ml-auto navbar-list pull-right">
+                    <li class="nav-item dropdown">
+                       <a href="#" class="search-toggle iq-waves-effect">
+                          <i class="ri-mail-line"></i>
+                          <span class="badge badge-pill badge-primary badge-up count-mail">{{App\Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->count()}}</span>
+                       </a>
+                       <!----recent m here--->
+                       <div class="iq-sub-dropdown">
+                          <div class="iq-card shadow-none m-0">
+                             <div class="iq-card-body p-0 ">
+                                <div class="bg-primary p-3">
+                                   <h5 class="mb-0 text-white">Unread Messages<small class="badge  badge-light float-right pt-1">{{App\Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->count()}}</small></h5>
+                                </div>
+                                
+                                @if (count($new_messages) > 0)
+                                @foreach ($new_messages as $message)
+                                <a href="../../{{$message->id}}" class="iq-sub-card" >
+                                   <div class="media align-items-center">
+                                      <div class="media-body ml-3">
+                                         <h6 class="mb-0 ">{{$message->sender_name}}</h6>
+                                         <small class="float-left font-size-12">{{$message->created_at}}</small>
+                                      </div>
+                                   </div>
+                                </a>
+                                @endforeach
+                                @else <br>
+                                <p class="text-center">You Have No Unread Messages</p>    
+
+                                @endif
+                                <div class="text-center">
+                                <a href="../../chat" class="btn btn-primary" style="margin-bottom: 20px;">See All Messages</a>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </li>
+                 </ul>
+              </div>
+              <ul class="navbar-list">
+                 <li>
+                    <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="../images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
+                    <div class="iq-sub-dropdown iq-user-dropdown">
+                       <div class="iq-card shadow-none m-0">
+                             <div class="d-inline-block w-100 text-center p-3">
+                                <a class="iq-bg-danger iq-sign-btn" href="{{ route('logout') }}" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </li>
+              </ul>
+           </nav>
         </div>
     </div>
     <!-- TOP Nav Bar END -->

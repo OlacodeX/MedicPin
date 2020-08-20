@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\patients;
 use App\User;
+use App\Messages;
 use  App\Notifications;
 
 class NotificationsController extends Controller
@@ -28,9 +29,12 @@ class NotificationsController extends Controller
         $notices = Notifications::where('to',auth()->user()->id)->paginate(5);
         $notice = Notifications::where('from',auth()->user()->id)->paginate(5);
         $patient = patients::where('email',auth()->user()->email)->first();
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+       
         $data = array(
             'patient' => $patient,
             'notice' => $notice,
+            'new_messages' => $new_messages,
             'notices' => $notices
         );
         return view('notifications.index', $data);
@@ -47,10 +51,12 @@ class NotificationsController extends Controller
         
        $patient = patients::where('doc_email',auth()->user()->email)->get();
         $notices = patients::where('doc_email',auth()->user()->email)->get();
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+       
         //$notice = Notifications::where('from',auth()->user()->id)->paginate(5);
         $data = array(
             'patient' => $patient,
-            //'notice' => $notice,
+            'new_messages' => $new_messages,
             'notices' => $notices
         );
         return view('notifications.create', $data);
@@ -99,7 +105,12 @@ class NotificationsController extends Controller
         //
         
         $notice = Notifications::find($id);
-        return view('notifications.show')->with('notice',$notice);
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = array(
+            'new_messages' => $new_messages,
+            'notice' => $notice
+        );
+        return view('notifications.show',$data);
     }
 
     /**

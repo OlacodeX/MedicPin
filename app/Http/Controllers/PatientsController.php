@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\patients;
 use App\User;
+use App\Messages;
 use App\Transfers;
 class PatientsController extends Controller
 { 
@@ -33,7 +34,12 @@ class PatientsController extends Controller
     public function index()
     {
         $users = patients::where('doc_email', auth()->user()->email)->paginate(100);
-        return view("patients.list")->with('users', $users);
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = array(
+            'users' => $users,
+            'new_messages' => $new_messages
+   );
+        return view("patients.list", $data);
     }
     /**
          * Display a listing of the resource.
@@ -44,7 +50,12 @@ class PatientsController extends Controller
         {
             $pin = $_POST['pin'];
             $user = patients::where('doc_email', auth()->user()->email)->where('pin', $pin)->first();
-            return view("patients.search_result")->with('user', $user);
+            $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+            $data = array(
+                'pin' => $pin,
+                'new_messages' => $new_messages
+       );
+            return view("patients.search_result", $data);
         }
     /**
      * Show the form for creating a new resource.
@@ -54,7 +65,9 @@ class PatientsController extends Controller
     public function create()
     {
         //
-        return view("patients.create");
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+       
+        return view("patients.create")->with('new_messages', $new_messages);
     }
 
     /**
@@ -68,9 +81,11 @@ class PatientsController extends Controller
         $pin = $_POST['pin'];
         $patient = patients::where('pin', $pin)->first();
         $doctor = User::where('role', 'doctor')->get();
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+       
         $data = array(
             'patient' => $patient,
-            //'notice' => $notice,
+            'new_messages' => $new_messages,
             'doctor' => $doctor
         );
         return view('patients.transfer', $data);
@@ -242,7 +257,12 @@ class PatientsController extends Controller
     {
         //
         $pin = $_POST['pin'];
-        return view('patients.add')->with('pin',$pin);
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = array(
+            'pin' => $pin,
+            'new_messages' => $new_messages
+   );
+        return view('patients.add',$data);
     }
     /**
      * Update the specified resource in storage.
@@ -313,8 +333,13 @@ class PatientsController extends Controller
     {
         
         $user = User::find($id);
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+       $data = array(
+                'user' => $user,
+                'new_messages' => $new_messages
+       );
 
-        return view('edituser')->with('user', $user);
+        return view('edituser', $data);
     }
 
     /**

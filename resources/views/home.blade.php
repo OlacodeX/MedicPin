@@ -64,6 +64,7 @@
                            <li><a href="./patients">Patients List</a></li>
                         </ul>
                      </li>
+                     <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                      <li>
                         <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                        
@@ -96,6 +97,7 @@
                           <li><a href="">My Appointments</a></li>
                        </ul>
                     </li>
+                    <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                     <li>
                        <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                       
@@ -637,6 +639,11 @@
                                         border: none;
                                         color: rgb(20, 109, 224);
                                     }
+                                    
+                                    .btn.btn-info.btn-sm i.fa{
+                                        font-size: 12px;
+                                        margin: 0;
+                                    }
                                 </style>
                                 <div class="iq-card-body p-0">
                                     @if (count($patients) > 0)
@@ -655,7 +662,7 @@
                                     
                                     {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
                                     {{Form::hidden('pin', $patient->pin)}}
-                                    <button type="submit" class ="btn btn-info btn-sm" title="Add New Medical Record"><i class="fa fa-edit"></i></button>
+                                    <button type="submit" class ="btn btn-info btn-sm" title="Add New Medical Record"><i class="fa fa-plus"></i></button>
                                    
                                     {!!Form::close()!!}
                                     {!!Form::open(['action' => 'RecordsController@index', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
@@ -669,6 +676,13 @@
                                     <button type="submit" class ="btn btn-info btn-sm" title="Transfer Patient"><i class="fa fa-paper-plane-o"></i></button>
                                    
                                     {!!Form::close()!!}
+                                    {!!Form::open(['action' => 'MessagingController@create', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
+                                    {{Form::hidden('pin', $patient->pin)}}
+                                    <button type="submit" class ="btn btn-info btn-sm" title="Message Patient"><i class="fa fa-envelope"></i></button>
+                                   
+                                    {!!Form::close()!!}
+
+
                                         {!!Form::open(['action' => ['PatientsController@destroy', $patient->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
                                         {{Form::hidden('email', $patient->email)}}
                                         {{Form::hidden('_method', 'DELETE')}}
