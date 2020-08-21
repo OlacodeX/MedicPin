@@ -436,7 +436,7 @@
                                        
                                        <div id="demo" class="collapse">
                                        <select class="form-control" id="selectbg" name="b_group">
-                                          <option>Select</option>
+                                          <option value="N/A">Select</option>
                                           <option value="O+">O+</option>
                                           <option value="AB+">AB+</option>
                                           <option value="AB+">AB+</option>
@@ -463,7 +463,7 @@
                                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo3"><label for="genotype"><i class="fa fa-plus"></i>Genotype</label></button>
                                        <div id="demo3" class="collapse">
                                        <select class="form-control" id="selectgenotype" name="genotype">
-                                          <option>Select</option>
+                                          <option value="N/A">Select</option>
                                           <option value="AA">AA</option>
                                           <option value="AS">AS</option>
                                           <option value="SS">SS</option>

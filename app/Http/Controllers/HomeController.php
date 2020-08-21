@@ -28,7 +28,7 @@ class HomeController extends Controller
         $notices = Notifications::where('to',auth()->user()->id)->paginate(5);
         $notice_sents = Notifications::where('from',auth()->user()->id)->paginate(5);
         $patient = patients::where('email',auth()->user()->email)->first();
-        $patients = patients::where('doc_email',auth()->user()->email)->paginate(10);
+        $patients = patients::where('doc_email',auth()->user()->email)->whereNotNull('username')->paginate(10);
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
        
         $data = array(

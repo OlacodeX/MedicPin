@@ -520,9 +520,9 @@
                                                     <div class="col-md-4">
                                                         <div class="iq-card shadow-none mb-0">
                                                             <div class="iq-card-body p-1">
-                                                                <span class="font-size-14">Total Patients</span>
+                                                                <span class="font-size-14">Total Active Patients</span>
                                                                 <h2>
-                                                                    {{App\patients::where('doc_email', auth()->user()->email)->count()}}
+                                                                    {{App\patients::where('doc_email', auth()->user()->email)->whereNotNull('username')->count()}}
                                                                     </h2>
                                                                 <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
                                                                     <div class="iq-progress-bar">
@@ -534,13 +534,13 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="iq-card shadow-none mb-0">
-                                                            <div class="iq-card-body p-1">
-                                                                <span class="font-size-14">Upcoming Appointments</span>
-                                                                <h2>12</h2>
-                                                                <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
-                                                                    <div class="iq-progress-bar">
-                                                                        <span class="bg-success" data-percent="2"></span>
-                                                                    </div>
+                                                            <span class="font-size-14">Total Inactive Patients</span>
+                                                            <h2>
+                                                                {{App\patients::where('doc_email', auth()->user()->email)->whereNull('username')->count()}}
+                                                                </h2>
+                                                            <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                                <div class="iq-progress-bar">
+                                                                    <span class="bg-primary" data-percent= {{App\patients::where('doc_email', auth()->user()->email)->count()}}></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -589,10 +589,33 @@
                                         color: rgb(20, 109, 224);
                                     }
                                     
+                                    
                                     .btn.btn-info.btn-sm i.fa{
                                         font-size: 12px;
                                         margin: 0;
                                     }
+                                  @media only screen and (max-width: 768px) {
+                                    .btn.btn-info.btn-sm{
+                                        background: transparent;
+                                        border: none;
+                                        color: rgb(20, 109, 224);
+                                        float: right;
+                                        display: inline;
+                                    }
+                                    
+                                    .btn.btn-info.btn-sm i.fa{
+                                        font-size: 12px;
+                                        margin: 0;
+                                        padding: 0;
+                                    }
+                                    div.panel-body span.pull-left{
+                                        font-size: 12px;
+                                        margin-bottom: 0;
+                                    }
+                                    div.panel-body span.user-list-files.d-flex.float-right{
+                                       margin-top: 0;
+                                    }
+                                  }
                                 </style>
                                 <div class="iq-card-body p-0">
                                     @if (count($patients) > 0)
