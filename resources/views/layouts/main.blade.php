@@ -130,9 +130,7 @@
     
             </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-         
-        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-        <script>
+          <script>
             function openNavOne() {
               document.getElementById("myNav").style.width = "250px";
               document.getElementById("main").style.marginLeft = "250px";

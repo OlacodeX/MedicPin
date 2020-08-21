@@ -1,7 +1,7 @@
 @component('mail::message')
 #Dear {{ $data['receiver_name']}}, You've got a new message.
 
-<p>{{ auth()->user()->u_name}} sent you the following message:</p>
+<p>{{ auth()->user()->username}} sent you the following message:</p>
 <p>{!! $data['message']!!}</p>
 <p>Kindly head to your inbox to reply.</p>
 <br><br>

@@ -307,7 +307,7 @@
                                 
                                 @if (count($new_messages) > 0)
                                 @foreach ($new_messages as $message)
-                                <a href="./{{$message->id}}" class="iq-sub-card" >
+                                <a href="./chat/{{$message->id}}" class="iq-sub-card" >
                                    <div class="media align-items-center">
                                       <div class="media-body ml-3">
                                          <h6 class="mb-0 ">{{$message->sender_name}}</h6>

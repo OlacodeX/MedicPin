@@ -41,7 +41,7 @@
                       <ul id="iq-sidebar-toggle" class="iq-menu">
                          <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
                          @if (auth()->user()->role == 'Doctor')
-                         <li class="active">
+                         <li>
                             <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                            
                          </li>
@@ -311,7 +311,7 @@
                                    
                                    @if (count($new_messages) > 0)
                                    @foreach ($new_messages as $message)
-                                   <a href="../{{$message->id}}" class="iq-sub-card" >
+                                   <a href="../chat/{{$message->id}}" class="iq-sub-card" >
                                       <div class="media align-items-center">
                                          <div class="media-body ml-3">
                                             <h6 class="mb-0 ">{{$message->sender_name}}</h6>

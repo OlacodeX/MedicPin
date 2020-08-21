@@ -265,7 +265,7 @@
                                 
                                 @if (count($new_messages) > 0)
                                 @foreach ($new_messages as $message)
-                                <a href="../{{$message->id}}" class="iq-sub-card" >
+                                <a href="./chat/{{$message->id}}" class="iq-sub-card" >
                                    <div class="media align-items-center">
                                       <div class="media-body ml-3">
                                          <h6 class="mb-0 ">{{$message->sender_name}}</h6>
@@ -279,7 +279,7 @@
 
                                 @endif
                                 <div class="text-center">
-                                <a href="../chat" class="btn btn-primary" style="margin-bottom: 20px;">See All Messages</a>
+                                <a href="./chat" class="btn btn-primary" style="margin-bottom: 20px;">See All Messages</a>
                                 </div>
                              </div>
                           </div>
@@ -415,9 +415,26 @@
                                 <div class="row">
                                    
                                  <input type="hidden" class="form-control" id="pin" name="pin" value="{{$pin}}">
-                                   
+                                   <style>
+                                      button.btn.btn-info{
+                                         background: transparent;
+                                         border-radius: 0;
+                                         font-size: 15px;
+                                         margin-bottom: 15px;
+                                         padding: 0px 20px;
+                                      }
+                                      button.btn.btn-info label{
+                                         font-size: 15px;
+                                         color: #0084ff;
+                                      }
+                                      input.form-control{
+                                         border-radius: 0;
+                                      }
+                                   </style>
                                     <div class="form-group col-md-6">
-                                       <label for="Blood Group">Blood Group</label>
+                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo"><label for="Blood Group"><i class="fa fa-plus"></i> Blood Group</label></button>
+                                       
+                                       <div id="demo" class="collapse">
                                        <select class="form-control" id="selectbg" name="b_group">
                                           <option>Select</option>
                                           <option value="O+">O+</option>
@@ -426,60 +443,87 @@
                                           <option value="AB+">AB+</option>
                                           <option value="AB+">AB+</option>
                                        </select>
+                                       </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                       <label for="bp">Blood Pressure</label>
+                                       
+                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo1"><label for="bp"><i class="fa fa-plus"></i>Blood Pressure</label></button>
+                                       
+                                       <div id="demo1" class="collapse">
                                        <input type="text" class="form-control" id="bp" name="bp" placeholder="Blood Pressure">
                                     </div>
-                                    <div class="form-group col-md-6">
-                                       <label for="h_rate">Heart Rate</label>
-                                       <input type="text" class="form-control" id="h_rate" name="h_rate" placeholder="Heart Rate in %">
                                     </div>
                                     <div class="form-group col-md-6">
-                                       <label for="genotype">Genotype</label>
+                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo2"><label for="h_rate"><i class="fa fa-plus"></i>Heart Rate</label></button>
+                                          <div id="demo2" class="collapse">
+                                          <input type="text" class="form-control" id="h_rate" name="h_rate" placeholder="Heart Rate in %">
+                                          </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo3"><label for="genotype"><i class="fa fa-plus"></i>Genotype</label></button>
+                                       <div id="demo3" class="collapse">
                                        <select class="form-control" id="selectgenotype" name="genotype">
                                           <option>Select</option>
                                           <option value="AA">AA</option>
                                           <option value="AS">AS</option>
                                           <option value="SS">SS</option>
                                        </select>
+                                       </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                       <label for="weight">Weight</label>
+                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo4"><label for="weight"><i class="fa fa-plus"></i>Weight</label></button>
+                                       <div id="demo4" class="collapse">
                                        <input type="text" class="form-control" id="weight" name="weight" placeholder="Weight in kg">
+                                       </div>
                                     </div>
                                      <div class="form-group col-md-6">
-                                       <label for="height">Height</label>
+                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo5"><label for="height"><i class="fa fa-plus"></i>Height</label></button>
+                                       <div id="demo5" class="collapse">
                                        <input type="text" class="form-control" id="height" name="height" placeholder="Height in cm">
+                                       </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                       <label for="temprature">Temperature</label>
+                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo6"><label for="temprature"><i class="fa fa-plus"></i>Temperature</label></button>
+                                       <div id="demo6" class="collapse">
                                        <input type="text" class="form-control" id="temprature" name="temprature" placeholder="Temprature in Celsius">
+                                       </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                      <label for="height">Oxygen Saturation</label>
+                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo7"><label for="height"><i class="fa fa-plus"></i>Oxygen Saturation</label></button>
+                                      <div id="demo7" class="collapse">
                                       <input type="text" class="form-control" id="oxygen" name="oxygen" placeholder="Oxygen Saturation in %">
-                                   </div>
+                                      </div>
+                                    </div>
                                    <div class="form-group col-md-6">
-                                      <label for="temprature">Glucose Level</label>
+                                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo8"><label for="temprature"><i class="fa fa-plus"></i>Glucose Level</label></button>
+                                      <div id="demo8" class="collapse">
                                       <input type="text" class="form-control" id="glucose" name="glucose" placeholder="Glucose level in %">
-                                   </div>
+                                      </div>
+                                    </div>
                                    <div class="form-group col-md-6">
-                                     <label for="height">Respiratory Rate</label>
+                                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo9"><label for="height"><i class="fa fa-plus"></i>Respiratory Rate</label></button>
+                                     <div id="demo9" class="collapse">
                                      <input type="text" class="form-control" id="r_rate" name="r_rate" placeholder="Respiratory rate in %">
-                                  </div>
+                                     </div>
+                                    </div>
                                   <div class="form-group col-md-6">
-                                     <label for="temprature">BMI</label>
+                                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo10"><label for="temprature"><i class="fa fa-plus"></i>BMI</label></button>
+                                     <div id="demo10" class="collapse">
                                      <input type="text" class="form-control" id="bmi" name="bmi" placeholder="BMI">
+                                     </div>
                                   </div>
                                   <div class="form-group col-md-6">
-                                     <label for="temprature">Note</label>
+                                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo11"><label for="temprature"><i class="fa fa-plus"></i>Note</label></button>
+                                     <div id="demo11" class="collapse">
                                      <textarea class="form-control" id="note" name="note" placeholder="General note on patient medical status"></textarea>
-                                  </div>
+                                     </div>
+                                    </div>
                                   <div class="form-group col-md-6">
-                                     <label for="temprature">Drug Prescription</label>
+                                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo12"><label for="temprature"><i class="fa fa-plus"></i>Drug Prescription</label></button>
+                                     <div id="demo12" class="collapse">
                                      <textarea class="form-control" id="pre" name="pre" placeholder="Drug prescriptions..."></textarea>
-                                  </div>
+                                     </div>
+                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Create Record</button>
                                 {!! Form::close() !!}
@@ -512,38 +556,39 @@
          <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
          <script>
             CKEDITOR.replace( 'pre' );
+            CKEDITOR.replace( 'note' );
          </script> 
       <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="../js/jquery.min.js"></script>
-        <script src="../js/popper.min.js"></script>
-        <script src="../js/bootstrap.min.js"></script>
+        <script src="./js/jquery.min.js"></script>
+        <script src="./js/popper.min.js"></script>
+        <script src="./js/bootstrap.min.js"></script>
         <!-- Appear JavaScript -->
-        <script src="../js/jquery.appear.js"></script>
+        <script src="./js/jquery.appear.js"></script>
         <!-- Countdown JavaScript -->
-        <script src="../js/countdown.min.js"></script>
+        <script src="./js/countdown.min.js"></script>
         <!-- Counterup JavaScript -->
-        <script src="../js/waypoints.min.js"></script>
-        <script src="../js/jquery.counterup.min.js"></script>
+        <script src="./js/waypoints.min.js"></script>
+        <script src="./js/jquery.counterup.min.js"></script>
         <!-- Wow JavaScript -->
-        <script src="../js/wow.min.js"></script>
+        <script src="./js/wow.min.js"></script>
         <!-- Apexcharts JavaScript -->
-        <script src="../js/apexcharts.js"></script>
+        <script src="./js/apexcharts.js"></script>
         <!-- Slick JavaScript -->
-        <script src="../js/slick.min.js"></script>
+        <script src="./js/slick.min.js"></script>
         <!-- Select2 JavaScript -->
-        <script src="../js/select2.min.js"></script>
+        <script src="./js/select2.min.js"></script>
         <!-- Owl Carousel JavaScript -->
-        <script src="../js/owl.carousel.min.js"></script>
+        <script src="./js/owl.carousel.min.js"></script>
         <!-- Magnific Popup JavaScript -->
-        <script src="../js/jquery.magnific-popup.min.js"></script>
+        <script src="./js/jquery.magnific-popup.min.js"></script>
         <!-- Smooth Scrollbar JavaScript -->
-        <script src="../js/smooth-scrollbar.js"></script>
+        <script src="./js/smooth-scrollbar.js"></script>
         <!-- lottie JavaScript -->
-        <script src="../js/lottie.js"></script>
+        <script src="./js/lottie.js"></script>
         <!-- Chart Custom JavaScript -->
-        <script src="../js/chart-custom.js"></script>
+        <script src="./js/chart-custom.js"></script>
         <!-- Custom JavaScript -->
-        <script src="../js/custom.js"></script>
+        <script src="./js/custom.js"></script>
         
 @endsection

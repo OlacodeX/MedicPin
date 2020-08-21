@@ -305,7 +305,7 @@
                                    
                                    @if (count($new_messages) > 0)
                                    @foreach ($new_messages as $message)
-                                   <a href="./{{$message->id}}" class="iq-sub-card" >
+                                   <a href="./chat/{{$message->id}}" class="iq-sub-card" >
                                       <div class="media align-items-center">
                                          <div class="media-body ml-3">
                                             <h6 class="mb-0 ">{{$message->sender_name}}</h6>
@@ -397,13 +397,24 @@
                                                     <div class="iq-card shadow-none mb-0">
                                                         <div class="iq-card-body p-1">
                                                             <span class="font-size-14">Heart Rate</span>
-                                                            <h2>{{$record->h_rate}}%
+                                                            @if (empty($record->h_rate))
+                                                            <h2>N/A
                                                             <img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
                                                             <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
                                                                 <div class="iq-progress-bar">
-                                                                    <span class="bg-danger" data-percent={{$record->h_rate}}></span>
+                                                                    <span class="bg-danger" data-percent='0'></span>
                                                                 </div>
                                                             </div>
+                                                            @else
+                                                            
+                                                            <h2>{{$record->h_rate}}%
+                                                               <img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
+                                                               <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                                   <div class="iq-progress-bar">
+                                                                       <span class="bg-danger" data-percent={{$record->h_rate}}></span>
+                                                                   </div>
+                                                               </div>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>

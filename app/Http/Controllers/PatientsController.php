@@ -52,7 +52,7 @@ class PatientsController extends Controller
             $user = patients::where('doc_email', auth()->user()->email)->where('pin', $pin)->first();
             $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
             $data = array(
-                'pin' => $pin,
+                'user' => $user,
                 'new_messages' => $new_messages
        );
             return view("patients.search_result", $data);

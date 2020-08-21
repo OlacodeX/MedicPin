@@ -6,4 +6,5 @@
 <br><br>
 <p>Warm Regards,</p>
 <p><strong>The Team at {{config('app.name')}}</strong></p>
+<small>Have any complaint regarding our service or activities on our platform? Contact us on <a href="mailto:support@medicpin.com?Subject=Hello MedicPin, I Have an Enquiry">support@medicpin.com</a></small>
 @endcomponent

@@ -266,7 +266,7 @@
                                 
                                 @if (count($new_messages) > 0)
                                 @foreach ($new_messages as $message)
-                                <a href="./{{$message->id}}" class="iq-sub-card" >
+                                <a href="./chat/{{$message->id}}" class="iq-sub-card" >
                                    <div class="media align-items-center">
                                       <div class="media-body ml-3">
                                          <h6 class="mb-0 ">{{$message->sender_name}}</h6>
@@ -385,6 +385,10 @@
            </div>
         </footer>
         <!-- Footer END -->
+         <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+         <script>
+            CKEDITOR.replace( 'note' );
+         </script> 
       <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="../js/jquery.min.js"></script>
