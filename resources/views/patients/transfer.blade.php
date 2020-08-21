@@ -347,7 +347,7 @@
                                        <input type="hidden" class="form-control" name="name" value="{{$patient->name}}">
                                        <input type="hidden" class="form-control" name="from" value="{{$patient->doctor}}">
                                        <input type="hidden" class="form-control" name="from_email" value="{{$patient->doc_email}}">
-                                       @if($doctor->count())
+                                       @if($doctor->count() > 0)
                                        <select class="form-control" name="doctor" required>
                                         <option value="N/A" selected>-Transfer Patient To-</option>
                                            @foreach ($doctor as $doctor)
