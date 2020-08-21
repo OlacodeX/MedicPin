@@ -132,7 +132,15 @@ class PatientsController extends Controller
             ///}
             $pin = 'MP'.mt_rand(99999, 100000);
             $patient = new patients;
-            $patient->email = $request->input('email');
+            $user = patients::where('email',$request->input('email'))->first();
+            if (!empty($user)) {
+                return redirect('/patients/create')->with('error', 'Patient Email Already Exist.');//I just set the message for session(success).
+   
+            }
+            else{
+                $patient->email = $request->input('email');
+            }
+          
             $patient->name = $request->input('name');
            //This will get the user input for title
             $patient->phone = $request->input('number');

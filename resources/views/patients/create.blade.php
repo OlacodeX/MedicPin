@@ -338,9 +338,9 @@
                           </div>
                        </div>
                        <div class="iq-card-body">
+                        @include('inc.messages')
                         {!! Form::open(['action' => 'PatientsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
                         **/ !!}
-                        @include('inc.messages')
                         <!-- 
                           <div class="form-group">
                                 <div class="add-img-user profile-img-edit">

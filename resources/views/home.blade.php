@@ -83,17 +83,6 @@
                     
                          
                     @endif
-                     
-                    <li>
-                       
-                       <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
-                       
-                         
-
-                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                           @csrf
-                       </form> 
-                   </li>
                     @if (auth()->user()->role == 'Patient')
                     <li class="active">
                        <a href="./dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
