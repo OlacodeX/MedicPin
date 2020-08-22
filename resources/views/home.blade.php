@@ -396,7 +396,7 @@
                                      class="img-fluid mb-3 avatar-120 rounded-circle" alt="">
                                 @endif
                                 <h4 class="mb-0">{{ Auth::user()->name }}</h4>
-                                <a href="#" class="d-inline-block w-100"><span class="__cf_email__" data-cfemail="b4dadddff4c7dbd2d6dbccd5d0d9ddda9ad7dbd9" style="font-size: 13px;">{{ Auth::user()->email}}</span></a>
+                                <a href="#" class="d-inline-block w-100"><span class="__cf_email__" data-cfemail="b4dadddff4c7dbd2d6dbccd5d0d9ddda9ad7dbd9" style="font-size: 13px;">{{ Auth::user()->pin}}</span></a>
                                 
                                 <hr>
                                 

@@ -67,10 +67,12 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
       
+        $pin = 'MP'.mt_rand(99999, 100000);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'role' => $data['role'],
+            'pin' => $pin,
             'password' => Hash::make($data['password']),
             //patients::where('email', $data['email'])->get('status') => $data['status'],
         ]);

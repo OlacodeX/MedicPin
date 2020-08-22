@@ -179,23 +179,25 @@ class PatientsController extends Controller
         //
         $this->validate($request, [
             'note' => 'required',
-            'doctor' => 'required',
+            'pin' => 'required',
              ]);
-            $doc = $request->input('doctor');
-            $new_doc = User::where('name', $doc)->first();
+             
+            $doc = $request->input('doc_pin');
+            $new_doc = User::where('pin', $doc)->first();
             $patient = new Transfers;
             $patient->from_doc_email = $request->input('from_email');
             $patient->from_doctor = $request->input('from');
             $patient->patient_name = $request->input('name');
-            $patient->to_doctor = $doc;
+            $patient->to_doctor = $new_doc->name;
             $patient->note =  $request->input('note');
             $patient->to_doc_email = $new_doc->email;
             $patient->pin = $request->input('pin');
+            $patient->doc_pin = $doc;
            
              //Save to db
              $patient->save(); 
-             $doc = $_POST['doctor'];
-             $new_doc = User::where('name', $doc)->first();
+             $doc = $request->input('doc_pin');
+             $new_doc = User::where('pin', $doc)->first();
              
              $update_patient = patients::where('doctor', $request->input('from'))->where('pin',$request->input('pin'))->first();
             
@@ -210,7 +212,7 @@ class PatientsController extends Controller
                 'from_email' => 'required',
                 'from' => 'required',
                 'note' => 'required',
-                'doctor' => 'required',
+                'doc_pin' => 'required',
                 'pin' => 'required',
             ]);
         
@@ -238,19 +240,28 @@ class PatientsController extends Controller
             'password' => 'required|min:8',
             'role' => 'required',
         ]);
-        $user = new User;
+        $update_patient = patients::where('email', $email)->first();
+        if (empty($update_patient->email)) {
+            return redirect('/account_set_up')->with('error', 'No patient with this email in our records. Kindly confirm you are using the same details you were registered with by your doctor or ask them to send you a new invite with this email.');//I just set the message for session(success).
 
+        }
+        else{
+            $update_patient->username = $username;
+            //Save to db
+            $update_patient->save();
+
+        }
+        $user = new User;
+        //$patient = patients::where('email', $email)->first();
+        //$update_patient->pin = $pin;
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->role = $request->input('role');
+        $user->pin = $update_patient->pin;
         $user->password =  Hash::make($request->input('password'));
         
         //Save to db
         $user->save();
-        $update_patient = patients::where('email', $email)->first();
-        $update_patient->username = $username;
-        //Save to db
-        $update_patient->save();
         //print success message and redirect
         return redirect('./login');//I just set the message for session(success).
 

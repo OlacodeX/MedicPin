@@ -162,6 +162,7 @@ p.text-center{
                     {!! Form::open(['action' => 'PatientsController@reg_patient', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
                     **/ !!}
                         @csrf
+                        @include('inc.messages')
                         <input type="hidden" name="role" value="Patient">
                         <div class="form-group row">
                             <label for="name" class="col-form-label text-md-right">{{ __('Name') }}</label>

@@ -347,15 +347,9 @@
                                        <input type="hidden" class="form-control" name="name" value="{{$patient->name}}">
                                        <input type="hidden" class="form-control" name="from" value="{{$patient->doctor}}">
                                        <input type="hidden" class="form-control" name="from_email" value="{{$patient->doc_email}}">
-                                       @if($doctor->count() > 0)
-                                       <select class="form-control" name="doctor" required>
-                                        <option value="N/A" selected>-Transfer Patient To-</option>
-                                           @foreach ($doctor as $doctor)
-                                               <option value="{!! $doctor->name!!}">{!! $doctor->name !!}</option>
-                               
-                                           @endforeach
-                                       </select>
-                                       @endif
+                                      
+                                       <input type="text" class="form-control" name="doc_pin" placeholder="Enter Doctor's MedicPin ">
+                                      
                                     </div>
                                     <div class="form-group">
                                        <label for="note">Note To Doctor</label>
@@ -391,35 +385,35 @@
          </script> 
       <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="../js/jquery.min.js"></script>
-        <script src="../js/popper.min.js"></script>
-        <script src="../js/bootstrap.min.js"></script>
+        <script src="./js/jquery.min.js"></script>
+        <script src="./js/popper.min.js"></script>
+        <script src="./js/bootstrap.min.js"></script>
         <!-- Appear JavaScript -->
-        <script src="../js/jquery.appear.js"></script>
+        <script src="./js/jquery.appear.js"></script>
         <!-- Countdown JavaScript -->
-        <script src="../js/countdown.min.js"></script>
+        <script src="./js/countdown.min.js"></script>
         <!-- Counterup JavaScript -->
-        <script src="../js/waypoints.min.js"></script>
-        <script src="../js/jquery.counterup.min.js"></script>
+        <script src="./js/waypoints.min.js"></script>
+        <script src="./js/jquery.counterup.min.js"></script>
         <!-- Wow JavaScript -->
-        <script src="../js/wow.min.js"></script>
+        <script src="./js/wow.min.js"></script>
         <!-- Apexcharts JavaScript -->
-        <script src="../js/apexcharts.js"></script>
+        <script src="./js/apexcharts.js"></script>
         <!-- Slick JavaScript -->
-        <script src="../js/slick.min.js"></script>
+        <script src="./js/slick.min.js"></script>
         <!-- Select2 JavaScript -->
-        <script src="../js/select2.min.js"></script>
+        <script src="./js/select2.min.js"></script>
         <!-- Owl Carousel JavaScript -->
-        <script src="../js/owl.carousel.min.js"></script>
+        <script src="./js/owl.carousel.min.js"></script>
         <!-- Magnific Popup JavaScript -->
-        <script src="../js/jquery.magnific-popup.min.js"></script>
+        <script src="./js/jquery.magnific-popup.min.js"></script>
         <!-- Smooth Scrollbar JavaScript -->
-        <script src="../js/smooth-scrollbar.js"></script>
+        <script src="./js/smooth-scrollbar.js"></script>
         <!-- lottie JavaScript -->
-        <script src="../js/lottie.js"></script>
+        <script src="./js/lottie.js"></script>
         <!-- Chart Custom JavaScript -->
-        <script src="../js/chart-custom.js"></script>
+        <script src="./js/chart-custom.js"></script>
         <!-- Custom JavaScript -->
-        <script src="../js/custom.js"></script>
+        <script src="./js/custom.js"></script>
         
 @endsection
