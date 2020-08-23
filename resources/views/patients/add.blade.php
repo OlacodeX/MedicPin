@@ -329,7 +329,7 @@
   <!-- Responsive Breadcrumb End-->
      <!-- Page Content  -->
      <div id="content-page" class="content-page">
-        <div class="container-fluid">
+        <div class="container c">
            <div class="row">
               <!---
               <div class="col-lg-3">
@@ -424,12 +424,21 @@
                                          margin-bottom: 15px;
                                          padding: 0px 20px;
                                       }
+                                      .container.c{
+                                         width: 80%;
+                                      }
                                       button.btn.btn-info label{
                                          font-size: 15px;
                                          color: #0084ff;
                                       }
-                                      input.form-control{
+                                      input.form-control,
+                                      select.form-control{
                                          border-radius: 0;
+                                         width: 200px;
+                                      }
+                                      textarea.form-control{
+                                         border-radius: 0;
+                                         width: 200px;
                                       }
                                    </style>
                                     <div class="form-group col-md-6">

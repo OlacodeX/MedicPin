@@ -716,7 +716,7 @@
                             <h4 class="card-title">Sent Notifications</h4>
                         </div>
                         <div class="iq-card-header-toolbar d-flex align-items-center">
-                            <a href="#" class="./notifications">See all</a>
+                            <a href="./notifications" class="">See all</a>
                         </div>
                     </div>
                         @if (count($notice_sents) > 0)
