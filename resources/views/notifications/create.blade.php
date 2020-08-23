@@ -53,6 +53,7 @@
                            <!---<li><a href="profile-edit.html">User Edit</a></li>--->
                            <li><a href="../patients/create">Add Patient</a></li>
                            <li><a href="../patients">Patients List</a></li>
+                           <li><a href="../transfered_patients">Transferred Patients</a></li>
                            <li><a href="../notifications">Sent Notifications</a></li>
                            <li><a href="../notifications/create">Send Notification</a></li>
                         </ul>

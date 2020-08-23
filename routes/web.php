@@ -21,6 +21,7 @@ Route::resource('/patients', 'PatientsController');
 Route::post('/search_result', 'PatientsController@search');
 Route::post('/reg_patient', 'PatientsController@reg_patient');
 Route::post('/transfer_patient', 'PatientsController@transfer');
+Route::get('/transfered_patients', 'PatientsController@transfered');
 Route::post('/add_record', 'PatientsController@add_record');
 Route::post('/store_record', 'PatientsController@store_record');
 Route::resource('/notifications', 'NotificationsController');

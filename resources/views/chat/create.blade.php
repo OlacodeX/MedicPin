@@ -53,6 +53,7 @@
                            <!---<li><a href="profile-edit.html">User Edit</a></li>--->
                            <li><a href="../patients/create">Add Patient</a></li>
                            <li><a href="../patients">Patients List</a></li>
+                           <li><a href="../transfered_patients">Transferred Patients</a></li>
                            <li><a href="../notifications">Sent Notifications</a></li>
                            <li><a href="../notifications/create">Send Notification</a></li>
                         </ul>
@@ -334,7 +335,7 @@
                 <div class="iq-card">
                        <div class="iq-card-header d-flex justify-content-between">
                           <div class="iq-header-title">
-                             <h4 class="card-title">Send <span>Message {{$patient->username}}</span></h4>
+                             <h4 class="card-title">Send <span>Message to {{$patient->username}} with Medicpin {{$patient->pin}}</span></h4>
                           </div>
                        </div>
                        <div class="iq-card-body">

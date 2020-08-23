@@ -62,6 +62,7 @@
                            <!---<li><a href="profile-edit.html">User Edit</a></li>--->
                            <li><a href="./patients/create">Add Patient</a></li>
                            <li><a href="./patients">Patients List</a></li>
+                           <li><a href="./transfered_patients">Transferred Patients</a></li>
                         </ul>
                      </li>
                      <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>

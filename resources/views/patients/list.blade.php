@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       
             @section('page_title')
-            {{config('app.name')}} | Users List
+            {{config('app.name')}} | Patient List
             @endsection
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -61,6 +61,7 @@
                            <!---<li><a href="profile-edit.html">User Edit</a></li>--->
                            <li><a href="./patients/create">Add Patient</a></li>
                            <li><a href="./patients">Patients List</a></li>
+                           <li><a href="./transfered_patients">Transferred Patients</a></li>
                         </ul>
                      </li>
                      <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
@@ -368,71 +369,105 @@
                                  </div>
                             </div>
                          </div>
-                         <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
-                           <thead>
+                         
+                         <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden fadeInUp" data-wow-delay="0.6s">
+                           
+                           <style>
+                               div.panel-body,
+                               div.panel-default{
+                                   border-radius: 0;
+                                   border-top: none;
+                               }
+                               .btn.btn-info.btn-sm{
+                                   background: transparent;
+                                   border: none;
+                                   color: rgb(20, 109, 224);
+                               }
                                
-                               <tr>
-                                  <th>MedicPin</th>
-                                  <th>Name</th>
-                                  <th>Contact</th>
-                                  <th>Email</th>
-                                  <th>Address</th>
-                                  <th>Status</th>
-                                  <th>Action</th>
-                               </tr>
-                           </thead>
+                               
+                               .btn.btn-info.btn-sm i.fa{
+                                   font-size: 12px;
+                                   margin: 0;
+                               }
+                             @media only screen and (max-width: 768px) {
+                               .btn.btn-info.btn-sm{
+                                   background: transparent;
+                                   border: none;
+                                   color: rgb(20, 109, 224);
+                                   float: right;
+                                   display: inline;
+                               }
+                               
+                               .btn.btn-info.btn-sm i.fa{
+                                   font-size: 12px;
+                                   margin: 0;
+                                   padding: 0;
+                               }
+                               div.panel-body span.pull-left{
+                                   font-size: 12px;
+                                   margin-bottom: 0;
+                               }
+                               div.panel-body span.user-list-files.d-flex.float-right{
+                                  margin-top: 0;
+                               }
+                             }
+                           </style>
+                           <div class="iq-card-body p-0">
+                               @if (count($users) > 0)
+                               @foreach ($users as $user)
+                               <a href="javascript:{}" onclick="document.getElementById('my_form_1').submit();">
+                                                       
+                               {!! Form::open(['action' => 'RecordsController@index', 'method' => 'GET', 'id' => 'my_form_1']) /** The action should be the block of code in the store function in PostsController
+                               **/ !!}
+                                {{Form::hidden('pin', $user->pin)}}
+                                {{Form::hidden('username', $user->username)}}
+                               {!! Form::close() !!}
+                               <div class="panel panel-default">
+                               <div class="panel-body">
+                               <span class="pull-left">{{$user->name}}</span>
+                               <span class="user-list-files d-flex float-right">
+                               
+                               {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                               {{Form::hidden('pin', $user->pin)}}
+                               <button type="submit" class ="btn btn-info btn-sm" title="Add New Medical Record"><i class="fa fa-plus"></i></button>
+                              
+                               {!!Form::close()!!}
+                               {!!Form::open(['action' => 'RecordsController@index', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
+                               {{Form::hidden('pin', $user->pin)}}
+                               {{Form::hidden('username', $user->username)}}
+                               <button type="submit" class ="btn btn-info btn-sm" title="View Medical History"><i class="fa fa-bars"></i></button>
+                              
+                               {!!Form::close()!!}
+                               {!!Form::open(['action' => 'PatientsController@transfer', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                               {{Form::hidden('pin', $user->pin)}}
+                               <button type="submit" class ="btn btn-info btn-sm" title="Transfer Patient"><i class="fa fa-paper-plane-o"></i></button>
+                              
+                               {!!Form::close()!!}
+                               {!!Form::open(['action' => 'MessagingController@create', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
+                               {{Form::hidden('pin', $user->pin)}}
+                               <button type="submit" class ="btn btn-info btn-sm" title="Message Patient"><i class="fa fa-envelope"></i></button>
+                              
+                               {!!Form::close()!!}
 
 
-                           <tbody>
-                            @foreach ($users as $user)
-                               <tr>
-                                  <td class="text-center">{{$user->pin}}</td>
-                                  <td>{{$user->username}}</td>
-                                  <td><a href="tel:{{$user->phone}}">{{$user->phone}}</a></td>
-                                  <td><a href="mailto:{{$user->email}}" class="__cf_email__" data-cfemail="80e1eeeee1f3f4e8e5f3e9e1c0e7ede1e9ecaee3efed">{{$user->email}}</a></td>
-                                  <td>{{$user->address}}</td>
-                                  <td>
-                                      @if (!empty(App\User::where('email', $user->email)->first()))
-                                      <span class="badge iq-bg-primary">Active</span>
-                                      @else
-                                      <span class="badge iq-bg-danger">Inactive</span>
-                                      @endif
-                                   </td>
-                                  <td>
-                                    {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
-                                    {{Form::hidden('pin', $user->pin)}}
-                                    <button type="submit" class ="btn btn-info btn-sm" >Add Medical Record</button>
-                                   
-                                    {!!Form::close()!!}
-                                    {!!Form::open(['action' => 'RecordsController@index', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
-                                    {{Form::hidden('pin', $user->pin)}}
-                                    {{Form::hidden('username', $user->username)}}
-                                    <button type="submit" class ="btn btn-info btn-sm" >Check Medical Records</button>
-                                   
-                                    {!!Form::close()!!}
-                                    {!!Form::open(['action' => 'PatientsController@transfer', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
-                                    {{Form::hidden('pin', $user->pin)}}
-                                    <button type="submit" class ="btn btn-info btn-sm" >Transfer Patient</button>
-                                   
-                                    {!!Form::close()!!}
-                                    {!!Form::open(['action' => 'MessagingController@create', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
-                                    {{Form::hidden('pin', $user->pin)}}
-                                    <button type="submit" class ="btn btn-info btn-sm" title="Message Patient">Message Patient</button>
-                                   
-                                    {!!Form::close()!!}
-                                     <div class="flex align-items-center list-user-action">
-                                        {!!Form::open(['action' => ['PatientsController@destroy', $user->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
-                                        {{Form::hidden('email', $user->email)}}
-                                        {{Form::hidden('_method', 'DELETE')}}
-                                        <button type="submit" class ="btn btn-info btn-sm" >Delete Patient</button>
-                                       
-                                        {!!Form::close()!!}
-                                     </div>
-                                  </td>
-                               </tr> 
-                               @endforeach                      
-                           </tbody>
-                         </table>
+                                   {!!Form::open(['action' => ['PatientsController@destroy', $user->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                   {{Form::hidden('email', $user->email)}}
+                                   {{Form::hidden('_method', 'DELETE')}}
+                                   <button type="submit" class ="btn btn-info btn-sm" title="Delete Patient"><i class="fa fa-trash-o"></i></button>
+                                  
+                                   {!!Form::close()!!}
+                                </span>
+                               </div>
+                               </div>
+                               </a>
+                               @endforeach
+
+                               @else
+                               <p class="text-center">No Patients Yet</p>    
+                               @endif
+                               
+                           </div>
+                       </div>
                       </div>
                             <div class="col-md-6">
                                 <div style="text-align:right;">

@@ -34,13 +34,20 @@ class RecordsController extends Controller
         $username = $_GET['username'];
         $record = Records::where('pin', $pin)->orderBy('created_at', 'desc')->first();
         $records = Records::where('pin', $pin)->orderBy('created_at', 'desc')->paginate(50);
-        $data = array(
-            'username' => $username,
-            'new_messages' => $new_messages,
-            'records' => $records,
-            'record' => $record
-        );
-        return view('patients.index', $data);
+        if (empty($record)) {
+            return redirect('/patients')->with('error', 'No record found for user with pin '.$pin.' kindly add a new record.');//I just set the message for session(success).
+
+        }
+        else{
+            $data = array(
+                'username' => $username,
+                'new_messages' => $new_messages,
+                'records' => $records,
+                'record' => $record
+            );
+            return view('patients.index', $data);
+
+        }
     }
 
     /**
