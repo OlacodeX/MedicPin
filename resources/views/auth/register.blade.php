@@ -41,6 +41,15 @@ Input
 div.col-sm-6 div.card input.form-control { height: 45px; line-height: 45px; background: #e9edf4; border: 0px solid #d7dbda; font-size: 14px; color: #777D74; }
 div.col-sm-6 div.card input.form-control:focus { color: #374948; background-color: #e5f2ff; box-shadow: none; }
 
+    /* style glyph */
+    div.inner-addon .fa {
+      position: absolute;
+      padding: 10px;
+      pointer-events: none;
+      color: #ffa500;
+      font-weight: 100;
+      margin-top: 5px;
+    }
     div.col-sm-6 div.card form{
         padding-left: 12px;
     }
@@ -119,6 +128,14 @@ p.pull-right a{
         padding-top: 100px;
         background: transparent;
     }
+    div.jumbotron img{
+        width: 100px;
+        height: 100px;
+        margin-left: 250px;
+        margin-top: 50px;
+        transform: rotate(-20deg);
+        box-shadow: 0 10px 12px 0 rgba(0, 0, 0, 0.2);
+    }
 a.btn.btn-success.pull-left{
     margin-left: 50px;
 
@@ -164,8 +181,8 @@ p.text-center{
                         <input type="hidden" name="role" value="Doctor">
                         <div class="form-group row">
                             <label for="name" class="col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="">
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-user"></i>
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Your full name" autofocus>
 
                                 @error('name')
@@ -178,8 +195,8 @@ p.text-center{
 
                         <div class="form-group row">
                             <label for="email" class="col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="">
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-envelope"></i>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Your email" required autocomplete="email">
 
                                 @error('email')
@@ -192,8 +209,8 @@ p.text-center{
 
                         <div class="form-group row">
                             <label for="password" class="col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="">
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-expeditedssl"></i>
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="password" required autocomplete="new-password">
 
                                 @error('password')
@@ -206,8 +223,8 @@ p.text-center{
 
                         <div class="form-group row">
                             <label for="password-confirm" class="col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="">
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-expeditedssl"></i>
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm password" required autocomplete="new-password">
                             </div>
                         </div>

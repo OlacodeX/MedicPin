@@ -21,6 +21,27 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
+            /* enable absolute positioning */
+    .inner-addon {
+      position: relative;
+    }
+    
+    /* style glyph */
+    .inner-addon .fa {
+      position: absolute;
+      padding: 10px;
+      pointer-events: none;
+      color: #0084ff;
+      font-weight: 900;
+    }
+    
+    /* align glyph 
+    .left-addon .fa  { left:  0px;}*/
+    .right-addon .fa { right: 0px;}
+    
+    /* add padding 
+    .left-addon input  { padding-left:  30px; } */
+    .right-addon input { padding-right: 30px; }
         body{
                 margin: 0;
                 padding: 0;

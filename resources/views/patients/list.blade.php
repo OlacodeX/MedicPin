@@ -62,8 +62,11 @@
                            <li><a href="./patients/create">Add Patient</a></li>
                            <li><a href="./patients">Patients List</a></li>
                            <li><a href="./transfered_patients">Transferred Patients</a></li>
+                           <li><a href="./add_drug">Add Drug</a></li>
+                           <li><a href="./myshop">My Shop</a></li>
                         </ul>
                      </li>
+                     <li><a href="./pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
                      <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                      <li>
                         <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
@@ -353,8 +356,10 @@
                                <div id="user_list_datatable_info" class="dataTables_filter">
                                  {!! Form::open(['action' => 'PatientsController@search', 'method' => 'POST', 'class' => 'mr-3 position-relative']) !!}
                                      <div class="form-group mb-0">
+                                       <div class="inner-addon right-addon">
+                                           <i class="fa fa-search"></i>
                                         <input type="search" class="form-control" id="exampleInputSearch" name="pin" placeholder="Enter MedicPin" aria-controls="user-list-table">
-                                       
+                                       </div>
                                        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Search</button>
                                      </div>
                                      {!! Form::close() !!}
@@ -373,6 +378,27 @@
                          <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden fadeInUp" data-wow-delay="0.6s">
                            
                            <style>
+                              /* enable absolute positioning */
+                      .inner-addon {
+                        position: relative;
+                      }
+                      
+                      /* style glyph */
+                      .inner-addon .fa {
+                        position: absolute;
+                        padding: 10px;
+                        pointer-events: none;
+                        color: #0178ff7b;
+                        font-weight: 900;
+                      }
+                      
+                      /* align glyph 
+                      .left-addon .fa  { left:  0px;}*/
+                      .right-addon .fa { right: 260px;}
+                      
+                      /* add padding 
+                      .left-addon input  { padding-left:  30px; } */
+                      .right-addon input { padding-right: 30px; }
                                div.panel-body,
                                div.panel-default{
                                    border-radius: 0;
@@ -390,6 +416,11 @@
                                    margin: 0;
                                }
                              @media only screen and (max-width: 768px) {
+                      /* align glyph 
+                      .left-addon .fa  { left:  0px;}*/
+                      .right-addon .fa { right: 20px;}
+                      
+                                
                                .btn.btn-info.btn-sm{
                                    background: transparent;
                                    border: none;

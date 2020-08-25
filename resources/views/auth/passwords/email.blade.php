@@ -38,6 +38,15 @@ div.col-sm-6 div.card input.form-control:focus { color: #374948; background-colo
         line-height: 2em;
         
     }
+    /* style glyph */
+    div.inner-addon .fa {
+      position: absolute;
+      padding: 10px;
+      pointer-events: none;
+      color: #ffa500;
+      font-weight: 100;
+      margin-top: 5px;
+    }
     button.btn.btn-info{
     background: #eee1e1;
     padding: 10px 30px;
@@ -157,8 +166,8 @@ p.text-center{
 
                         <div class="form-group row">
                             <label for="email" class="col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="">
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-envelope"></i>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')

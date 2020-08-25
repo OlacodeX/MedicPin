@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\patients;
+use App\pharmacy;
 use App\User;
 use App\Messages;
 use App\Transfers;
@@ -41,6 +42,22 @@ class PatientsController extends Controller
    );
         return view("patients.list", $data);
     }
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function add_drug()
+    {
+        $users = patients::where('doc_email', auth()->user()->email)->paginate(100);
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = array(
+            'users' => $users,
+            'new_messages' => $new_messages
+   );
+        return view("patients.add_drug", $data);
+    }
     public function transfered()
     {
         $users = Transfers::where('from_doc_email', auth()->user()->email)->paginate(100);
@@ -50,6 +67,26 @@ class PatientsController extends Controller
             'new_messages' => $new_messages
    );
         return view("patients.transfer_list", $data);
+    }
+    public function pharmacy()
+    {
+        $drugs = pharmacy::orderBy('created_at', 'desc')->paginate(3);
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = array(
+            'drugs' => $drugs,
+            'new_messages' => $new_messages
+   );
+        return view("patients.drugs", $data);
+    }
+    public function myshop()
+    {
+        $drugs = pharmacy::where('doc_pin', auth()->user()->pin)->orderBy('created_at', 'desc')->paginate(3);
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = array(
+            'drugs' => $drugs,
+            'new_messages' => $new_messages
+   );
+        return view("patients.mydrugs", $data);
     }
     /**
          * Display a listing of the resource.
@@ -178,6 +215,46 @@ class PatientsController extends Controller
     }
 
     
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store_drug(Request $request)
+    {
+        //
+        $this->validate($request, [
+            'name' => 'required',
+            'price' => 'required',
+             //image means it must be in image format|nullable means the field is optional, then max size is 1999
+             'img' => 'image|nullable|max:2000'
+             ]);
+            //Handle file upload
+            if($request->hasFile('img')){
+              $filenameWithExt = $request->file('img')->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $request->file('img')->getClientOriginalExtension();
+                $fileNameTostore = $request->input('name').'_'.time().'.'.$extension;
+                $path = $request->file('img')->move('img/drugs', $fileNameTostore);
+                  }
+            else{
+                  $fileNameTostoreone = 'yy.jpg';
+            }
+            $drug = new pharmacy;
+          
+            $drug->name = $request->input('name');
+           //This will get the user input for title
+            $drug->img = $fileNameTostore;
+            $drug->price = $request->input('price');
+            $drug->doc_pin = auth()->user()->pin;
+            $drug->status = 'In Stock';
+            $drug->save();
+            //$patient->status = 'pending';
+             return redirect('/dashboard')->with('success', 'Great!, drug has been added to our database.');//I just set the message for session(success).
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -372,6 +449,37 @@ class PatientsController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit_drug()
+    {
+        $id = $_POST['id'];
+        $drug = pharmacy::find($id);
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+       $data = array(
+                'drug' => $drug,
+                'new_messages' => $new_messages
+       );
+
+        return view('patients.editdrug', $data);
+    }
+
+    
+    public function status_change()
+    {
+    $id = $_POST['id'];
+      $drug = pharmacy::find($id);
+      $drug->status = 'Out Of Stock';
+      $drug->save();
+      //$patient->status = 'pending';
+       return redirect('/dashboard')->with('success', 'Great!, drug details updated.');//I just set the message for session(success).
+
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -380,8 +488,48 @@ class PatientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'price' => 'required',
+        ]);
+      //Handle file upload
+      if($request->hasFile('img')){
+        $filenameWithExt = $request->file('img')->getClientOriginalName();
+          $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+          $extension = $request->file('img')->getClientOriginalExtension();
+          $fileNameTostore = $request->input('name').'_'.time().'.'.$extension;
+          $path = $request->file('img')->move('img/drugs', $fileNameTostore);
+            }
+      else{
+            $fileNameTostoreone = 'yy.jpg';
+      }
+      $drug = pharmacy::find($id);
+    
+      $drug->name = $request->input('name');
+     //This will get the user input for title
+    if($request->hasFile('img')){
+      $drug->img = $fileNameTostore;
     }
+      $drug->price = $request->input('price');
+      $drug->save();
+      //$patient->status = 'pending';
+       return redirect('/dashboard')->with('success', 'Great!, drug details updated.');//I just set the message for session(success).
+
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy_drug()
+    {
+                $id = $_POST['id'];
+               $drug = pharmacy::find($id);
+              $drug->delete();
+              return redirect('/myshop')->with('success', 'Drug Deleted From Our Records.');
+        
+   }
 
     /**
      * Remove the specified resource from storage.

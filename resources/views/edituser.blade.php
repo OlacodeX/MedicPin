@@ -56,8 +56,11 @@
                           <li><a href="../../patients/create">Add Patient</a></li>
                           <li><a href="../../patients">Patients List</a></li>
                           <li><a href="../../transfered_patients">Transferred Patients</a></li>
+                          <li><a href="../../add_drug">Add Drug</a></li>
+                          <li><a href="../../myshop">My Shop</a></li>
                        </ul>
                     </li>
+                    <li><a href="../../pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
                     <li><a href="../../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                     <li>
                        <a href="../../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
@@ -384,12 +387,18 @@
                                 <div class="row">
                                    <div class="form-group col-md-6">
                                       <label for="name">Name:</label>
+                                      <div class="inner-addon right-addon">
+                                          <i class="fa fa-user"></i>
                                       <input type="text" class="form-control" id="name" name="name" value="{{$user->name}}" placeholder="First Name">
-                                   </div>
+                                      </div>
+                                    </div>
                                    <div class="form-group col-md-6">
                                       <label for="email">Email:</label>
+                                      <div class="inner-addon right-addon">
+                                          <i class="fa fa-envelope"></i>
                                       <input type="email" class="form-control" id="email" placeholder="Email" value="{{$user->email}}" name="email">
-                                   </div>
+                                      </div>
+                                    </div>
                                 </div>
                                 <hr>
                           </div>

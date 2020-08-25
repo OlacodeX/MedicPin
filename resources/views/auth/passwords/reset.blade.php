@@ -29,7 +29,16 @@ Input
 ------------------------------------------------*/
 div.col-sm-6 div.card input.form-control { height: 45px; line-height: 45px; background: #e9edf4; border: 0px solid #d7dbda; font-size: 14px; color: #777D74; }
 div.col-sm-6 div.card input.form-control:focus { color: #374948; background-color: #e5f2ff; box-shadow: none; }
-
+ 
+    /* style glyph */
+    div.inner-addon .fa {
+      position: absolute;
+      padding: 10px;
+      pointer-events: none;
+      color: #ffa500;
+      font-weight: 100;
+      margin-top: 5px;
+    }
     div.col-sm-6 div.card form{
         padding-left: 12px;
     }
@@ -155,8 +164,8 @@ p.text-center{
 
                         <div class="form-group row">
                             <label for="email" class="col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="">
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-envelope"></i>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
@@ -169,8 +178,8 @@ p.text-center{
 
                         <div class="form-group row">
                             <label for="password" class="col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="">
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-expeditedssl"></i>
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                 @error('password')
@@ -183,8 +192,8 @@ p.text-center{
 
                         <div class="form-group row">
                             <label for="password-confirm" class="col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="">
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-expeditedssl"></i>
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>

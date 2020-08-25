@@ -56,8 +56,11 @@
                            <li><a href="./transfered_patients">Transferred Patients</a></li>
                            <li><a href="./notifications">Sent Notifications</a></li>
                            <li><a href="./notifications/create">Send Notification</a></li>
+                           <li><a href="./add_drug">Add Drug</a></li>
+                           <li><a href="./myshop">My Shop</a></li>
                         </ul>
                      </li>
+                     <li><a href="./pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
                      <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                      <li>
                         <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
@@ -348,9 +351,11 @@
                                        <input type="hidden" class="form-control" name="name" value="{{$patient->name}}">
                                        <input type="hidden" class="form-control" name="from" value="{{$patient->doctor}}">
                                        <input type="hidden" class="form-control" name="from_email" value="{{$patient->doc_email}}">
+                                       <div class="inner-addon right-addon">
+                                           <i class="fa fa-paperclip"></i>
                                       
                                        <input type="text" class="form-control" name="doc_pin" placeholder="Enter Doctor's MedicPin ">
-                                      
+                                       </div>
                                     </div>
                                     <div class="form-group">
                                        <label for="note">Note To Doctor</label>

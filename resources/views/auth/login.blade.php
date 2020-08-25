@@ -1,5 +1,25 @@
 @extends('layouts.main')
 <style>
+        /* enable absolute positioning */
+.inner-addon {
+  position: relative;
+}
+
+/* style glyph */
+.inner-addon .fa {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+  color: #0178ff78;
+}
+
+/* align glyph 
+.left-addon .fa  { left:  0px;}*/
+.right-addon .fa { right: 0px;}
+
+/* add padding 
+.left-addon input  { padding-left:  30px; } */
+.right-addon input { padding-right: 30px; }
     div.col-sm-6.one{
                 background:linear-gradient(rgba(11, 15, 236, 0.781),rgba(10, 10, 190, 0.76)), url('img/yy.jpg') no-repeat;
                 background-size: cover;
@@ -42,6 +62,15 @@ Input
 div.col-sm-6 div.card input.form-control { height: 45px; line-height: 45px; background: #e9edf4; border: 0px solid #d7dbda; font-size: 14px; color: #777D74; }
 div.col-sm-6 div.card input.form-control:focus { color: #374948; background-color: #e5f2ff; box-shadow: none; }
 
+    /* style glyph */
+    div.inner-addon .fa {
+      position: absolute;
+      padding: 10px;
+      pointer-events: none;
+      color: #ffa500;
+      font-weight: 100;
+      margin-top: 5px;
+    }
     div.col-sm-6 div.card form{
         padding-left: 12px;
     }
@@ -179,8 +208,8 @@ p.text-center{
                         <div class="form-group row">
                             
                             <label for="email" class="col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="">
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-envelope"></i>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email" autofocus>
 
                                 @error('email')
@@ -200,7 +229,8 @@ p.text-center{
                                 {{ __('Forgot Your Password?') }}
                             </a>
                             @endif
-                            <div class="">
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-expeditedssl"></i>
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
 
                                 @error('password')
