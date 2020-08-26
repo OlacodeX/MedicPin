@@ -36,3 +36,20 @@ Route::post('/mark_as_sold_out', 'PatientsController@status_change');
 Route::post('/edit_drug', 'PatientsController@edit_drug');
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 //Route::get('/dashboard', 'PagesController@index')->name('dashboard');
+
+//shopping cart
+
+Route::get('/add-to-cart/{drug}', 'CartController@add')->name('cart.add');
+Route::get('/cart', 'CartController@index')->name('cart.index');
+Route::get('/cart/checkout', 'CartController@checkout')->name('cart.checkout');
+Route::get('/delete', 'CartController@delete');
+
+//calender & events manager
+Route::resource('/events', 'EventsController');
+
+//todo
+Route::resource('/schedule', 'TodoController');
+Route::post('/done', 'TodoController@done');
+Route::get('/schedule_yesterday', 'TodoController@yesterday');
+Route::get('/schedule_tomorrow', 'TodoController@tomorrow');
+

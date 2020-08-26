@@ -8,7 +8,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       
       @section('page_title')
-      {{config('app.name')}} | Notifications
+      {{config('app.name')}} | Records
       @endsection
       <link rel="icon" href="{{asset('img/yy.jpg')}}">
       <!-- Bootstrap CSS -->
@@ -274,311 +274,240 @@
                </div>
             </div>
                <div class="navbar-breadcrumb">
-                  <h5 class="mb-0">Your Inbox</h5>
+                  <h5 class="mb-0">My Schedule</h5>
                   <nav aria-label="breadcrumb">
                      <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="./">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Inbox</li>
+                        <li class="breadcrumb-item active" aria-current="page">To Do List</li>
                      </ul>
                   </nav>
                </div>
-                <nav class="navbar navbar-expand-lg navbar-light p-0">
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <i class="ri-menu-3-line"></i>
-                  </button>
-                  <div class="iq-menu-bt align-self-center">
-                     <div class="wrapper-menu">
-                        <div class="line-menu half start"></div>
-                        <div class="line-menu"></div>
-                        <div class="line-menu half end"></div>
-                     </div>
-                  </div>
-                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                     <ul class="navbar-nav ml-auto navbar-list pull-right">
-                        <li class="nav-item dropdown">
-                           <a href="#" class="search-toggle iq-waves-effect">
-                              <i class="ri-mail-line"></i>
-                              <span class="badge badge-pill badge-primary badge-up count-mail">{{App\Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->count()}}</span>
-                           </a>
-                           <!----recent m here--->
-                           <div class="iq-sub-dropdown">
-                              <div class="iq-card shadow-none m-0">
-                                 <div class="iq-card-body p-0 ">
-                                    <div class="bg-primary p-3">
-                                       <h5 class="mb-0 text-white">Unread Messages<small class="badge  badge-light float-right pt-1">{{App\Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->count()}}</small></h5>
-                                    </div>
-                                    
-                                    @if (count($new_messages) > 0)
-                                    @foreach ($new_messages as $message)
-                                    <a href="./{{$message->id}}" class="iq-sub-card" >
-                                       <div class="media align-items-center">
-                                          <div class="media-body ml-3">
-                                             <h6 class="mb-0 ">{{$message->sender_name}}</h6>
-                                             <small class="float-left font-size-12">{{$message->created_at}}</small>
-                                          </div>
-                                       </div>
-                                    </a>
-                                    @endforeach
-                                    @else <br>
-                                    <p class="text-center">You Have No Unread Messages</p>    
+               <nav class="navbar navbar-expand-lg navbar-light p-0">
+                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                 <i class="ri-menu-3-line"></i>
+                 </button>
+                 <div class="iq-menu-bt align-self-center">
+                    <div class="wrapper-menu">
+                       <div class="line-menu half start"></div>
+                       <div class="line-menu"></div>
+                       <div class="line-menu half end"></div>
+                    </div>
+                 </div>
+                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto navbar-list pull-right">
+                       <li class="nav-item dropdown">
+                          <a href="#" class="search-toggle iq-waves-effect">
+                             <i class="ri-mail-line"></i>
+                             <span class="badge badge-pill badge-primary badge-up count-mail">{{App\Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->count()}}</span>
+                          </a>
+                          <!----recent m here--->
+                          <div class="iq-sub-dropdown">
+                             <div class="iq-card shadow-none m-0">
+                                <div class="iq-card-body p-0 ">
+                                   <div class="bg-primary p-3">
+                                      <h5 class="mb-0 text-white">Unread Messages<small class="badge  badge-light float-right pt-1">{{App\Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->count()}}</small></h5>
+                                   </div>
+                                   
+                                   @if (count($new_messages) > 0)
+                                   @foreach ($new_messages as $message)
+                                   <a href="./chat/{{$message->id}}" class="iq-sub-card" >
+                                      <div class="media align-items-center">
+                                         <div class="media-body ml-3">
+                                            <h6 class="mb-0 ">{{$message->sender_name}}</h6>
+                                            <small class="float-left font-size-12">{{$message->created_at}}</small>
+                                         </div>
+                                      </div>
+                                   </a>
+                                   @endforeach
+                                   @else <br>
+                                   <p class="text-center">You Have No Unread Messages</p>    
 
-                                    @endif
-                                    <div class="text-center">
-                                    <a href="./chat" class="btn btn-primary" style="margin-bottom: 20px;">See All Messages</a>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </li>
+                                   @endif
+                                   <div class="text-center">
+                                   <a href="./chat" class="btn btn-primary" style="margin-bottom: 20px;">See All Messages</a>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </li>
                     
-                        <li class="nav-item">
-                            <a href="./cart" class="iq-waves-effect" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="My Shopping Cart"><i class="ri-shopping-cart-2-line"></i></a>
-                            <span class="badge badge-primary badge-up count-mail">{{App\StoreCart::where('user_id', auth()->user()->id)->orderBy('id', 'ASC')->count() }}</span>
-                         </li>
-                     </ul>
-                     <ul class="navbar-list">
-                        <li>
-                           <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="../images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
-                           <div class="iq-sub-dropdown iq-user-dropdown">
-                              <div class="iq-card shadow-none m-0">
-                                    <div class="d-inline-block w-100 text-center p-3">
-                                       <a class="iq-bg-danger iq-sign-btn" href="{{ route('logout') }}" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
+                       <li class="nav-item">
+                           <a href="./cart" class="iq-waves-effect" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="My Shopping Cart"><i class="ri-shopping-cart-2-line"></i></a>
+                           <span class="badge badge-primary badge-up count-mail">{{App\StoreCart::where('user_id', auth()->user()->id)->orderBy('id', 'ASC')->count() }}</span>
                         </li>
-                     </ul>
-                  </div>
-               </nav>
+                    </ul>
+                 </div>
+                 <ul class="navbar-list">
+                    <li>
+                       <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="../images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
+                       <div class="iq-sub-dropdown iq-user-dropdown">
+                          <div class="iq-card shadow-none m-0">
+                                <div class="d-inline-block w-100 text-center p-3">
+                                   <a class="iq-bg-danger iq-sign-btn" href="{{ route('logout') }}" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </li>
+                 </ul>
+              </nav>
             </div>
          </div>
-         <!-- TOP Nav Bar END -->
-         <!-- Page Content  -->
-         <div id="content-page" class="content-page">
-            <div class="container-fluid">
-               <div class="row">
-                  <div class="col-sm-12">
-                     <div class="iq-card">
-                        <h3 class="title">Your <span>Inbox</span></h3>
-                    </div>
-    
-                    @if (
-                        //if there is data in the db
-                    count($messages) > 0
-                    )
-                
-            @foreach (
-                // Loop through them
-                $messages as $message
-                )
-    
-    <h4 class="title">{{$message->sender_name}}</h4>
-    <a href="chat/{{$message->id}}" style="text-decoration: none;">
-    <div class="panel-body">
-    <p><strong>{!!Str::words($message->message,8)!!}</strong></p>
-    <small><i class="fa fa-calendar"></i>{!!$message->created_at!!}</small>
-    </div>
-    </a>
-     @endforeach
-     <div class="pull-right">
-             <!-----The pagination link----->
-             {{$messages->links()}}
-     </div>
-         @else
-         <p class="text-center">No message found</p>
-         @endif
-                     <!----
-                              <div class="col-lg-12 chat-data p-0 chat-data-right">
-                                 <div class="tab-content">
-                                    <div class="tab-pane fade" id="chatbox10" role="tabpanel">
-                                       <div class="chat-head">
-                                          <header class="d-flex justify-content-between align-items-center bg-white pt-3 pl-3 pr-3 pb-3">
-                                            <div class="d-flex align-items-center">
-                                             <div id="sidebar-toggle" class="sidebar-toggle">
-                                                <i class="ri-menu-3-line"></i>
-                                             </div>
-                                              <div class="avatar chat-user-profile m-0 mr-3">
-                                                <img src="images/user/08.jpg" alt="avatar" class="avatar-50 ">
-                                                <span class="avatar-status"><i class="ri-checkbox-blank-circle-fill text-success"></i></span>
-                                              </div>
-                                              <h5 class="mb-0">Monty Carlo</h5>
-                                            </div>
-                                            <div id="chat-user-detail-popup" class="scroller">
-                                                <div class="user-profile text-center">
-                                                   <button type="submit" class="close-popup p-3"><i class="ri-close-fill"></i></button>
-                                                   <div class="user mb-4">
-                                                    <a class="avatar m-0">
-                                                      <img src="images/user/08.jpg" alt="avatar">
-                                                    </a>
-                                                  <div class="user-name mt-4"><h4>Monty Carlo</h4></div>
-                                                  <div class="user-desc"><p>Cape Town, RSA</p></div>
-                                                  </div>
-                                                  <hr>
-                                                  <div class="chatuser-detail text-left mt-4">
-                                                      <div class="row">
-                                                         <div class="col-6 col-md-6 title">Nik Name:</div>
-                                                         <div class="col-6 col-md-6 text-right">Babe</div>
-                                                      </div><hr>
-                                                      <div class="row">
-                                                         <div class="col-6 col-md-6 title">Tel:</div>
-                                                         <div class="col-6 col-md-6 text-right">072 143 9920</div>
-                                                      </div><hr>
-                                                      <div class="row">
-                                                         <div class="col-6 col-md-6 title">Date Of Birth:</div>
-                                                         <div class="col-6 col-md-6 text-right">July 12, 1989</div>
-                                                      </div><hr>
-                                                      <div class="row">
-                                                         <div class="col-6 col-md-6 title">Gender:</div>
-                                                         <div class="col-6 col-md-6 text-right">Female</div>
-                                                      </div><hr>
-                                                      <div class="row">
-                                                         <div class="col-6 col-md-6 title">Language:</div>
-                                                         <div class="col-6 col-md-6 text-right">Engliah</div>
-                                                      </div>
-                                                  </div>
-                                               </div>
-                                            </div>
-                                            <div class="chat-header-icons d-flex">
-                                              <a href="javascript:void();" class="chat-icon-phone">
-                                                <i class="ri-phone-line"></i>
-                                              </a>
-                                             <a href="javascript:void();" class="chat-icon-video">
-                                                <i class="ri-vidicon-line"></i>
-                                              </a>
-                                              <a href="javascript:void();" class="chat-icon-delete">
-                                                <i class="ri-delete-bin-line"></i>
-                                              </a>
-                                              <span class="dropdown">
-                                                <i class="ri-more-2-line cursor-pointer dropdown-toggle nav-hide-arrow cursor-pointer" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu"></i>
-                                                <span class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                                  <a class="dropdown-item" href="JavaScript:void(0);"><i class="fa fa-thumb-tack" aria-hidden="true"></i> Pin to top</a>
-                                                  <a class="dropdown-item" href="JavaScript:void(0);"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete chat</a>
-                                                  <a class="dropdown-item" href="JavaScript:void(0);"><i class="fa fa-ban" aria-hidden="true"></i> Block</a>
-                                                </span>
-                                              </span>
-                                            </div>
-                                          </header>
-                                        </div>
-                                       <div class="chat-content scroller">
-                                          <div class="chat">
-                                            <div class="chat-user">
-                                              <a class="avatar m-0">
-                                                <img src="images/user/1.jpg" alt="avatar" class="avatar-35 ">
-                                              </a>
-                                                <span class="chat-time mt-1">6:45</span>
-                                            </div>
-                                            <div class="chat-detail">
-                                              <div class="chat-message">
-                                                <p>How can we help? We're here for you! 😄</p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="chat chat-left">
-                                            <div class="chat-user">
-                                              <a class="avatar m-0">
-                                                <img src="images/user/08.jpg" alt="avatar" class="avatar-35 ">
-                                              </a>
-                                                <span class="chat-time mt-1">6:48</span>
-                                            </div>
-                                            <div class="chat-detail">
-                                              <div class="chat-message">
-                                                <p>Hey John, I am looking for the best admin template.</p>
-                                                <p>Could you please help me to find it out? 🤔</p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="chat">
-                                            <div class="chat-user">
-                                              <a class="avatar m-0">
-                                                <img src="images/user/1.jpg" alt="avatar" class="avatar-35 ">
-                                              </a>
-                                                <span class="chat-time mt-1">6:49</span>
-                                            </div>
-                                            <div class="chat-detail">
-                                              <div class="chat-message">
-                                                <p>Absolutely!</p>
-                                                <p>Sofbox Dashboard is the responsive bootstrap 4 admin template.</p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="chat chat-left">
-                                            <div class="chat-user">
-                                              <a class="avatar m-0">
-                                                <img src="images/user/08.jpg" alt="avatar" class="avatar-35 ">
-                                              </a>
-                                                <span class="chat-time mt-1">6:52</span>
-                                            </div>
-                                            <div class="chat-detail">
-                                              <div class="chat-message">
-                                                <p>Looks clean and fresh UI.</p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="chat">
-                                            <div class="chat-user">
-                                              <a class="avatar m-0">
-                                                <img src="images/user/1.jpg" alt="avatar" class="avatar-35 ">
-                                              </a>
-                                                <span class="chat-time mt-1">6:53</span>
-                                            </div>
-                                            <div class="chat-detail">
-                                              <div class="chat-message">
-                                                <p>Thanks, from ThemeForest.</p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="chat chat-left">
-                                            <div class="chat-user">
-                                              <a class="avatar m-0">
-                                                <img src="images/user/08.jpg" alt="avatar" class="avatar-35 ">
-                                              </a>
-                                                <span class="chat-time mt-1">6:54</span>
-                                            </div>
-                                            <div class="chat-detail">
-                                              <div class="chat-message">
-                                                <p>I will purchase it for sure. 👍</p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="chat">
-                                            <div class="chat-user">
-                                              <a class="avatar m-0">
-                                                <img src="images/user/1.jpg" alt="avatar" class="avatar-35 ">
-                                              </a>
-                                                <span class="chat-time mt-1">6:56</span>
-                                            </div>
-                                            <div class="chat-detail">
-                                              <div class="chat-message">
-                                                <p>Okay Thanks..</p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                       </div>
-                                       <div class="chat-footer p-3 bg-white">
-                                          <form class="d-flex align-items-center"  action="javascript:void(0);">
-                                           <div class="chat-attagement d-flex">
-                                              <a href="javascript:void();"><i class="fa fa-smile-o pr-3" aria-hidden="true"></i></a>
-                                              <a href="javascript:void();"><i class="fa fa-paperclip pr-3" aria-hidden="true"></i></a>
-                                             </div>
-                                           <input type="text" class="form-control mr-3" placeholder="Type your message">
-                                           <button type="submit" class="btn btn-primary d-flex align-items-center p-2"><i class="fa fa-paper-plane-o" aria-hidden="true"></i><span class="d-none d-lg-block ml-1">Send</span></button>
-                                         </form>
-                                       </div>
-                                    </div>
-                                    --------------
-                                 </div>
-                              </div>--->
-                           </div>
+         <!-- TOP Nav Bar END --> 
+   <!-- Page Content  -->
+   <div id="content-page" class="content-page">
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-sm-12">
+                  <div class="iq-card">
+                     <div class="iq-card-header d-flex justify-content-between">
+                        <div class="iq-header-title">
+                           <h4 class="card-title">Your Schedule for Today</h4>
                         </div>
+                        <div class="col-sm-12 col-md-6">
+                           <div class="user-list-files d-flex float-right">
+                            <a href="./schedule/create" class="chat-icon-delete" style="text-decoration: none;">
+                             Add To Do 
+                            </a>
+                            <a href="./schedule_yesterday" class="chat-icon-delete" style="text-decoration: none;">
+                             Yesterday's Schedule
+                            </a>
+                            <a href="./schedule_tomorrow" class="chat-icon-delete" style="text-decoration: none;">
+                             Tomorrow's Schedule 
+                            </a>
+                             </div>
                         </div>
                      </div>
+                     <div class="iq-card-body">
+                        <div class="table-responsive">
+                           <div class="row justify-content-between">
+                              <div class="col-sm-12 col-md-6">
+                                @include('inc.messages')
+                              </div>
+                              <div class="col-sm-12 col-md-6">
+                              </div>
+                           </div>
+                           
+                           <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden fadeInUp" data-wow-delay="0.6s">
+                             
+                             <style>
+                                /* enable absolute positioning */
+                        .inner-addon {
+                          position: relative;
+                        }
+                        
+                        /* style glyph */
+                        .inner-addon .fa {
+                          position: absolute;
+                          padding: 10px;
+                          pointer-events: none;
+                          color: #0178ff7b;
+                          font-weight: 900;
+                        }
+                        
+                        /* align glyph 
+                        .left-addon .fa  { left:  0px;}*/
+                        .right-addon .fa { right: 260px;}
+                        
+                        /* add padding 
+                        .left-addon input  { padding-left:  30px; } */
+                        .right-addon input { padding-right: 30px; }
+                                 div.panel-body,
+                                 div.panel-default{
+                                     border-radius: 0;
+                                     border-top: none;
+                                 }
+                                 .btn.btn-info.btn-sm{
+                                     background: transparent;
+                                     border: none;
+                                     color: rgb(20, 109, 224);
+                                 }
+                                 
+                                 
+                                 .btn.btn-info.btn-sm i.fa{
+                                     font-size: 12px;
+                                     margin: 0;
+                                 }
+                               @media only screen and (max-width: 768px) {
+                        /* align glyph 
+                        .left-addon .fa  { left:  0px;}*/
+                        .right-addon .fa { right: 20px;}
+                        
+                                  
+                                 .btn.btn-info.btn-sm{
+                                     background: transparent;
+                                     border: none;
+                                     color: rgb(20, 109, 224);
+                                     float: right;
+                                     display: inline;
+                                 }
+                                 
+                                 .btn.btn-info.btn-sm i.fa{
+                                     font-size: 12px;
+                                     margin: 0;
+                                     padding: 0;
+                                 }
+                                 div.panel-body span.pull-left{
+                                     font-size: 12px;
+                                     margin-bottom: 0;
+                                 }
+                                 div.panel-body span.user-list-files.d-flex.float-right{
+                                    margin-top: 0;
+                                 }
+                               }
+                             </style>
+                             <div class="iq-card-body p-0">
+                                 @if (count($todos) > 0)
+                                 @foreach ($todos as $todo)
+                                 <a href="" onclick="document.getElementById('my_form_1').submit();">
+                                 <!----                        
+                                 {!! Form::open(['action' => 'RecordsController@index', 'method' => 'GET', 'id' => 'my_form_1']) /** The action should be the block of code in the store function in PostsController
+                                 **/ !!}
+                                  {{Form::hidden('pin', $todo->pin)}}
+                                 {!! Form::close() !!}---->
+                                 <div class="panel panel-default">
+                                 <div class="panel-body">
+                                    <span class="pull-left"><i class="fa fa-calendar" style="margin-right:5px;"></i> {{ $todo->date}} <i class="fa fa-clock-o" style="margin-right:5px;margin-left: 10px;"></i>  {{ $todo->time}}</span><br>
+                                   
+                                 <span class="pull-left">{{$todo->title}}</span>
+                                 <span class="user-list-files d-flex float-right">
+                                    <!---
+                                 {!!Form::open(['action' => 'TodoController@done', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
+                                 {{Form::hidden('id', $todo->id)}}
+                                 <button type="submit" class ="btn btn-info btn-sm" title="Mark Schedule As Done"><i class="fa fa-envelope"></i></button>
+                                
+                                 {!!Form::close()!!}---->
+  
+  
+                                     {!!Form::open(['action' => ['TodoController@destroy', $todo->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                    
+                                     {{Form::hidden('_method', 'DELETE')}}
+                                     <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete schedule"><i class="fa fa-trash-o"></i></button>
+                                    
+                                     {!!Form::close()!!}
+                                     <button class ="btn btn-info btn-sm"><a href="schedule/{{$todo->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit/Move Schedule"><i class="fa fa-edit"></i></a></button>
+                                  </span>
+                                 </div>
+                                 </div><br>
+                                 </a>
+                                 @endforeach
+  
+                                 @else
+                                 <p class="text-center">No activity on your schedule today, check back tomorrow.</p>    
+                                 @endif
+                                 
+                             </div>
+                         </div>
+                        </div>
+                           </div>
+                     </div>
                   </div>
-               </div>
             </div>
          </div>
       </div>
-      <!-- Wrapper END -->
+   </div>
+   </div>
+   <!-- Wrapper END -->
       <!-- Footer -->
         <footer class="bg-white iq-footer">
             <div class="container-fluid">

@@ -163,7 +163,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Unisharp\Ckeditor\ServiceProvider::class,
-
+        Darryldecode\Cart\CartServiceProvider::class,
+        MaddHatter\LaravelFullcalendar\ServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -229,7 +230,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' =>Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
+        'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
     ],
 
 ];

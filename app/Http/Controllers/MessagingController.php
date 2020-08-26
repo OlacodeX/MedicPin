@@ -23,7 +23,7 @@ class MessagingController extends Controller
     public function index()
     {
         //
-        $messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->paginate(1);
+        $messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->paginate(10);
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         //$omessages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'read')->get();
         
@@ -68,29 +68,6 @@ class MessagingController extends Controller
           
         return view("chat.unread", $data);
     }
-    public function indexadmin()
-    {
-        //
-        $latests = Listings::orderBy('created_at', 'desc')->where('type','paid')->where('status','approved')->paginate(6);
-        $posts = Posts::orderBy('created_at', 'desc')->paginate(2);
-        $messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
-        $allmessages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->get();
-        $omessages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'read')->get();
-        
-        
-        $data = array(
-            'messages' => $messages,
-            'omessages' => $omessages,
-            'allmessages' => $allmessages,
-            'latests' => $latests,
-            'posts' => $posts
-  
-        );
-          
-        return view("chat.indexadmin", $data);
-    }
-
-
     /**
      * Show the form for creating a new resource.
      *@param  int  $id

@@ -58,6 +58,7 @@
                           <li><a href="../../transfered_patients">Transferred Patients</a></li>
                           <li><a href="../../add_drug">Add Drug</a></li>
                           <li><a href="../../myshop">My Shop</a></li>
+                          <li><a href="../../schedule">To Do List</a></li>
                        </ul>
                     </li>
                     <li><a href="../../pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
@@ -326,6 +327,11 @@
                           </div>
                        </div>
                     </li>
+                    
+                    <li class="nav-item">
+                        <a href="../../cart" class="iq-waves-effect" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="My Shopping Cart"><i class="ri-shopping-cart-2-line"></i></a>
+                        <span class="badge badge-primary badge-up count-mail">{{App\StoreCart::where('user_id', auth()->user()->id)->orderBy('id', 'ASC')->count() }}</span>
+                     </li>
                  </ul>
               </div>
               <ul class="navbar-list">

@@ -6,16 +6,16 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       
             @section('page_title')
-            {{config('app.name')}} | Add Drug
+            {{config('app.name')}} | Add Record
             @endsection
       <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="./css/bootstrap.min.css">
+      <link rel="stylesheet" href="../css/bootstrap.min.css">
       <!-- Typography CSS -->
-      <link rel="stylesheet" href="./css/typography.css">
+      <link rel="stylesheet" href="../css/typography.css">
       <!-- Style CSS -->
-      <link rel="stylesheet" href="./css/style.css">
+      <link rel="stylesheet" href="../css/style.css">
       <!-- Responsive CSS -->
-      <link rel="stylesheet" href="./css/responsive.css">
+      <link rel="stylesheet" href="../css/responsive.css">
    </head>
 @section('content')
 <!-- Wrapper Start -->
@@ -23,8 +23,8 @@
     <!-- Sidebar  -->
     <div class="iq-sidebar">
             <div class="iq-sidebar-logo d-flex justify-content-between">
-               <a href="./">
-               <img src="./img/yy.jpg" class="img-fluid" alt="">
+               <a href="../">
+               <img src="../img/yy.jpg" class="img-fluid" alt="">
                <span>
                 {{config('app.name')}}
                </span>
@@ -42,28 +42,28 @@
                   <ul id="iq-sidebar-toggle" class="iq-menu">
                      <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
                      <li>
-                        <a href="./dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                        <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                        
                      </li>
                      <li class="active">
                         <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Doctor's Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                         <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="./myprofile">My Profile</a></li>
+                           <li><a href="../myprofile">My Profile</a></li>
                            <!---<li><a href="profile-edit.html">User Edit</a></li>--->
-                           <li><a href="./patients/create">Add Patient</a></li>
-                           <li><a href="./patients">Patients List</a></li>
-                           <li><a href="./transfered_patients">Transferred Patients</a></li>
-                           <li><a href="./notifications">Sent Notifications</a></li>
-                           <li><a href="./notifications/create">Send Notification</a></li>
-                           <li><a href="./add_drug">Add Drug</a></li>
-                           <li><a href="./myshop">My Shop</a></li>
-                           <li><a href="./schedule">To Do List</a></li>
+                           <li><a href="../patients/create">Add Patient</a></li>
+                           <li><a href="../patients">Patients List</a></li>
+                           <li><a href="../transfered_patients">Transferred Patients</a></li>
+                           <li><a href="../notifications">Sent Notifications</a></li>
+                           <li><a href="../notifications/create">Send Notification</a></li>
+                           <li><a href="../add_drug">Add Drug</a></li>
+                           <li><a href="../myshop">My Shop</a></li>
+                           <li><a href="../schedule">To Do List</a></li>
                         </ul>
                      </li>
-                     <li><a href="./pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
-                     <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                     <li><a href="../pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
+                     <li><a href="../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                      <li>
-                        <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
+                        <a href="../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                        
                      </li>
                      
@@ -227,8 +227,8 @@
         <div class="iq-navbar-custom">
             <div class="iq-sidebar-logo">
                 <div class="top-logo">
-                    <a href="./">
-                    <img src="./img/yy.jpg" class="img-fluid" alt="">
+                    <a href="../">
+                    <img src="../img/yy.jpg" class="img-fluid" alt="">
                     <span>
                      {{config('app.name')}}
                     </span>
@@ -270,7 +270,7 @@
                                 
                                 @if (count($new_messages) > 0)
                                 @foreach ($new_messages as $message)
-                                <a href="./chat/{{$message->id}}" class="iq-sub-card" >
+                                <a href="../chat/{{$message->id}}" class="iq-sub-card" >
                                    <div class="media align-items-center">
                                       <div class="media-body ml-3">
                                          <h6 class="mb-0 ">{{$message->sender_name}}</h6>
@@ -284,7 +284,7 @@
 
                                 @endif
                                 <div class="text-center">
-                                <a href="./chat" class="btn btn-primary" style="margin-bottom: 20px;">See All Messages</a>
+                                <a href="../chat" class="btn btn-primary" style="margin-bottom: 20px;">See All Messages</a>
                                 </div>
                              </div>
                           </div>
@@ -292,14 +292,14 @@
                     </li>
                     
                     <li class="nav-item">
-                        <a href="./cart" class="iq-waves-effect" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="My Shopping Cart"><i class="ri-shopping-cart-2-line"></i></a>
+                        <a href="../cart" class="iq-waves-effect" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="My Shopping Cart"><i class="ri-shopping-cart-2-line"></i></a>
                         <span class="badge badge-primary badge-up count-mail">{{App\StoreCart::where('user_id', auth()->user()->id)->orderBy('id', 'ASC')->count() }}</span>
                      </li>
                  </ul>
               </div>
               <ul class="navbar-list">
                  <li>
-                    <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="./images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
+                    <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="../images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
                     <div class="iq-sub-dropdown iq-user-dropdown">
                        <div class="iq-card shadow-none m-0">
                              <div class="d-inline-block w-100 text-center p-3">
@@ -336,142 +336,246 @@
               </div>
         </div>
   <!-- Responsive Breadcrumb End-->
-     <!-- Page Content  -->
-     <div id="content-page" class="content-page">
-        <div class="container-fluid">
-           <div class="row">
-              <div class="col-lg-3">
-                    <div class="iq-card">
-                       <div class="iq-card-header d-flex justify-content-between">
-                          <div class="iq-header-title">
-                             <h4 class="card-title">Drug Cover Image</h4>
-                          </div>
-                       </div>
-                       <div class="iq-card-body">
-                        @include('inc.messages')
-                        {!! Form::open(['action' => 'PatientsController@store_drug', 'method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
-                        **/ !!}
-                       
-                          <div class="form-group">
-                                <div class="add-img-user profile-img-edit">
-                                   <div class="p-image">
-                                      <h5 class="upload-button">Image upload</h5> 
-                                     <br><input class="iq-bg-primary" type="file" accept="image/*" name="img">
-                                  </div>
-                                </div>
-                               <div class="img-extension mt-3">
-                                  <div class="d-inline-block align-items-center">
-                                      <span>Only</span>
-                                     <a href="javascript:void();">.jpg</a>
-                                     <a href="javascript:void();">.png</a>
-                                     <a href="javascript:void();">.jpeg</a>
-                                     <span>allowed</span>
-                                  </div>
-                               </div>
-                             </div>
-                             <!----
-                             <div class="form-group">
-                                <label>User Role:</label>
-                                <select class="form-control" id="selectuserrole">
-                                   <option>Select</option>
-                                   <option>Doctor</option>
-                                   <option>Patient</option>
-                                </select>
-                             </div>---->
-                              <!-- 
-                             <div class="form-group">
-                                <label>Gender</label>
-                                <select class="form-control" id="selectuserrole" name="gender">
-                                   <option>Select</option>
-                                   <option value="Male">Male</option>
-                                   <option value="Female">Female</option>
-                                </select>
-                             </div> -->
-                       </div>
-                    </div>
-              </div>
-              <div class="col-lg-9">
-                    <div class="iq-card">
-                       <div class="iq-card-header d-flex justify-content-between">
-                          <div class="iq-header-title">
-                             <h4 class="card-title">New Drug Information</h4>
-                          </div>
-                       </div>
-                       <div class="iq-card-body">
-                          <div class="new-user-info">
-                                <div class="row">
-                                   <div class="form-group col-md-6">
-                                      <label for="name">Name:</label>
-                                      <div class="inner-addon right-addon">
-                                          <i class="fa fa-user"></i>
-                                      <input type="text" class="form-control" id="name" name="name" placeholder="Drug Name">
-                                      </div>
-                                   </div>
-                                   <div class="form-group col-md-6">
-                                      <label for="price">Price:</label>
-                                      <small> Specify in Naira</small>
-                                      <div class="inner-addon right-addon">
-                                          <i class="fa fa-dollar"></i>
-                                      <input type="text" class="form-control" id="price" placeholder="How much do you sell?" name="price">
-                                      </div>
-                                   </div>
-                                </div>
-                                <hr>
-                                <!----
-                                <h5 class="mb-3">Medical Records</h5>
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                       <label for="Blood Group">Blood Group</label>
-                                       <select class="form-control" id="selectbg" name="b_group">
-                                          <option>Select</option>
-                                          <option value="O+">O+</option>
-                                          <option value="AB+">AB+</option>
-                                          <option value="AB+">AB+</option>
-                                          <option value="AB+">AB+</option>
-                                          <option value="AB+">AB+</option>
-                                       </select>
+      <!-- Page Content  -->
+         <div id="content-page" class="content-page">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-sm-12">
+                     <ul id="progressbar" class="text-center">
+                         <li class="active step0" id="step1">Cart</li>
+                         <li class="step0" id="step2">Address</li>
+                         <li class="step0" id="step3">Payment</li>
+                     </ul>
+                     <div id="cart" class="card-block show b-0">
+                         <div class="row">
+                            @if (count($cartItems) > 0)
+                           <div class="col-lg-8">
+                              <div class="iq-card">
+                                 <div class="iq-card-body">
+                                    @foreach ($cartItems as $cartItem)
+                                    <div class="ckeckout-product-lists">
+                                       <div class="d-flex align-items-center justify-content-between">
+                                          <div class="d-flex align-items-center">
+                                          <div class="ckeckout-product">
+                                             <img src="https://dummyimage.com/180x180/000/fff">
+                                          </div>
+                                          <div class=" ml-3 checkout-product-details">
+                                             <h5>{{$cartItem->drug_name}}</h5>
+                                             <p class="mb-0"><b>{{$cartItem->quantity}}</b></p>
+                                             <div class="input-box">
+                                                <input type="number" min="1" max="10" value="1" class="increment">
+                                             </div>
+                                          </div>
+                                       </div>
+                                          <div class="checkout-amount-data text-center">
+                                             <div class="price">
+                                                <h5>&#8358;{{$cartItem->price}}</h5>
+                                             </div>
+                                             <div class="checkout-button">
+                                                {!!Form::open(['action' => 'CartController@delete','id' => 'my_form_1','method' => 'GET', 'class' => 'pull-left', 'style' => 'margin-right:20px;'])!!}
+                                                {{Form::hidden('id', $cartItem->id)}}
+                                                {!!Form::close()!!}
+                                                <a href="javascript:{}" onclick="document.getElementById('my_form_1').submit();"class="btn btn-light d-block"><i class="ri-close-line mr-1"></i>Remove</a>
+                                            </div>
+                                          </div>
+                                       </div>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                       <label for="bp">Blood Pressure</label>
-                                       <input type="text" class="form-control" id="bp" name="bp" placeholder="Blood Pressure">
+                                    @endforeach 
+                                 </div>
+                              </div>
+                           </div>
+                           
+                           <div class="col-lg-4">
+                              <div class="iq-card">
+                                 <div class="iq-card-body">
+                                    <hr>
+                                    <p><b>Price Details</b></p>
+                                    <hr>
+                                    <div class="d-flex justify-content-between">
+                                       <span class="text-dark"><strong>Total</strong></span>
+                                       <span class="text-dark"><strong>&#8358;{{App\StoreCart::where('user_id', auth()->user()->id)->sum('price')}}</strong></span>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                       <label for="h_rate">Heart Rate</label>
-                                       <input type="text" class="form-control" id="h_rate" name="h_rate" placeholder="Heart Rate">
+                                    <a id="place-order" href="javascript:void();" type="button" class="btn btn-primary d-block mt-1 next">Place order</a>
+
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        @else
+                        <p>You have no items in your cart yet</p>    
+                        @endif
+                     </div>
+                     <div id="address" class="card-block b-0">
+                         <div class="row">
+                           <div class="col-lg-8">
+                              <div class="iq-card">
+                                 <div class="iq-card-header d-flex justify-content-between">
+                                    <div class="iq-header-title">
+                                       <h4 class="card-title">Add New Address</h4>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                       <label for="genotype">Genotype</label>
-                                       <select class="form-control" id="selectgenotype" name="genotype">
-                                          <option>Select</option>
-                                          <option value="AA">AA</option>
-                                          <option value="AS">AS</option>
-                                          <option value="SS">SS</option>
-                                       </select>
+                                 </div>
+                                 <div class="iq-card-body">
+                                    <form onsubmit="required()">
+                                    <div class="row mt-3">
+                                       <div class="col-md-6">
+                                           <div class="form-group">
+                                              <label for="fname">Full Name: *</label> 
+                                              <input type="text" class="form-control" name="fname" required="">
+                                            </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                            <div class="form-group"> 
+                                              <label for="mno">Mobile Number: *</label> 
+                                              <input type="text" class="form-control" name="mno" required="">
+                                             </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                             <div class="form-group"> 
+                                              <label for="houseno">Flat, House No: *</label> 
+                                              <input type="text" class="form-control" name="houseno" required="">
+                                             </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                             <div class="form-group"> 
+                                              <label for="landmark">Landmark e.g. near apollo hospital:: *</label> 
+                                              <input type="text" class="form-control" name="landmark" required="">
+                                             </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                             <div class="form-group"> 
+                                              <label for="city">Town/City: *</label> 
+                                              <input type="text" class="form-control" name="city" required="">
+                                             </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                             <div class="form-group"> 
+                                              <label for="pincode">Pincode: *</label> 
+                                              <input type="text" class="form-control" name="pincode" required="">
+                                             </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                             <div class="form-group"> 
+                                              <label for="state">State: *</label> 
+                                              <input type="text" class="form-control" name="state" required="">
+                                             </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                             <div class="form-group">
+                                                <label for="addtype">Address Type</label>
+                                                <select class="form-control" id="addtype" required="">
+                                                   <option>Home</option>
+                                                   <option>Office</option>
+                                                </select>
+                                             </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                             <button id="savenddeliver" type="submit" class="btn btn-primary">Save And Deliver Here</button>
+                                          </div>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                       <label for="weight">Weight</label>
-                                       <input type="text" class="form-control" id="weight" name="weight" placeholder="Weight">
+                                 </form>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-lg-4">
+                              <div class="iq-card">
+                                 <div class="iq-card-body">
+                                    <h4 class="mb-2">Nik John</h4>
+                                    <div class="shipping-address">
+                                       <p class="mb-0">9447 Glen Eagles Drive</p>
+                                       <p>Lewis Center, OH 43035</p>
+                                       <p>UTC-5: Eastern Standard Time (EST)</p>
+                                       <p>202-555-0140</p>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                       <label for="height">Height</label>
-                                       <input type="text" class="form-control" id="height" name="height" placeholder="Height">
+                                    <hr>
+                                    <a id="deliver-address" href="javascript:void();" type="button" class="btn btn-primary d-block mt-1 next">Deliver To this Address</a>
+
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                      <div id="payment" class="card-block b-0">
+                         <div class="row">
+                           <div class="col-lg-8">
+                              <div class="iq-card">
+                                 <div class="iq-card-header d-flex justify-content-between">
+                                    <div class="iq-header-title">
+                                       <h4 class="card-title">Payment Options</h4>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                       <label for="temprature">Temperature</label>
-                                       <input type="text" class="form-control" id="temprature" name="temprature" placeholder="Temprature">
+                                 </div>
+                                 <div class="iq-card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                       <div class="d-flex justify-content-between align-items-center">
+                                          <img src="images/booking/cart.png" alt="" height="40" width="50">
+                                          <span>US Unlocked Debit Card 12XX XXXX XXXX 0000</span>
+                                       </div>
+                                       <div>
+                                       <span>Nik John</span>
+                                       <span>28/2020</span>
                                     </div>
-                                </div>
-                                ----->
-                                <button type="submit" class="btn btn-primary">Add Drug</button>
-                                {!! Form::close() !!}
-                          </div>
-                       </div>
-                    </div>
-              </div>
-           </div>
-        </div>
-     </div>
-     </div>
+                                    </div>
+                                    <form class="mt-3">
+                                       <div class="d-flex align-items-center">
+                                          <span>Enter CVV: </span>
+                                          <div class="cvv-input ml-3 mr-3">
+                                             <input type="text" class="form-control" required=""> 
+                                          </div>
+                                          <button type="submit" class="btn btn-primary">Continue</button>
+                                       </div>
+                                    </form>
+                                    <hr>
+                                    <div class="card-lists">
+                                       <div class="form-group">
+                                             <div class="custom-control custom-radio">
+                                                <input type="radio" id="credit" name="customRadio" class="custom-control-input">
+                                                <label class="custom-control-label" for="credit"> Credit / Debit / ATM Card</label>
+                                             </div>
+                                             <div class="custom-control custom-radio">
+                                                <input type="radio" id="netbaking" name="customRadio" class="custom-control-input">
+                                                <label class="custom-control-label" for="netbaking"> Net Banking</label>
+                                             </div>
+                                             <div class="custom-control custom-radio">
+                                                <input type="radio" id="emi" name="emi" class="custom-control-input">
+                                                <label class="custom-control-label" for="emi"> EMI (Easy Installment)</label>
+                                             </div>
+                                             <div class="custom-control custom-radio">
+                                                <input type="radio" id="cod" name="cod" class="custom-control-input" >
+                                                <label class="custom-control-label" for="cod"> Cash On Delivery</label>
+                                             </div>
+                                       </div>
+                                    </div>
+                                    <hr>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-lg-4">
+                              <div class="iq-card">
+                                 <div class="iq-card-body">
+                                    <h4 class="mb-2">Price Details</h4>
+                                    <div class="d-flex justify-content-between">
+                                       <span>Price For {{App\StoreCart::where('user_id', auth()->user()->id)->orderBy('id', 'ASC')->count() }} Item(s)</span>
+                                       <span><strong>&#8358;{{App\StoreCart::where('user_id', auth()->user()->id)->sum('price')}}</strong></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                       <span>Delivery Charges</span>
+                                       <span class="text-success">Free</span>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-between">
+                                       <span>Amount Payable</span>
+                                       <span><strong>&#8358;{{App\StoreCart::where('user_id', auth()->user()->id)->sum('price')}}</strong></span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+              
+            </div>
+         </div>
+      </div>
      <!-- Wrapper END -->
       <!-- Footer -->
         <footer class="bg-white iq-footer">
@@ -489,38 +593,43 @@
               </div>
            </div>
         </footer>
-        <!-- Footer END -->
+        <!-- Footer END --> 
+         <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+         <script>
+            CKEDITOR.replace( 'pre' );
+            CKEDITOR.replace( 'note' );
+         </script> 
       <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="./js/jquery.min.js"></script>
-        <script src="./js/popper.min.js"></script>
-        <script src="./js/bootstrap.min.js"></script>
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/popper.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
         <!-- Appear JavaScript -->
-        <script src="./js/jquery.appear.js"></script>
+        <script src="../js/jquery.appear.js"></script>
         <!-- Countdown JavaScript -->
-        <script src="./js/countdown.min.js"></script>
+        <script src="../js/countdown.min.js"></script>
         <!-- Counterup JavaScript -->
-        <script src="./js/waypoints.min.js"></script>
-        <script src="./js/jquery.counterup.min.js"></script>
+        <script src="../js/waypoints.min.js"></script>
+        <script src="../js/jquery.counterup.min.js"></script>
         <!-- Wow JavaScript -->
-        <script src="./js/wow.min.js"></script>
+        <script src="../js/wow.min.js"></script>
         <!-- Apexcharts JavaScript -->
-        <script src="./js/apexcharts.js"></script>
+        <script src="../js/apexcharts.js"></script>
         <!-- Slick JavaScript -->
-        <script src="./js/slick.min.js"></script>
+        <script src="../js/slick.min.js"></script>
         <!-- Select2 JavaScript -->
-        <script src="./js/select2.min.js"></script>
+        <script src="../js/select2.min.js"></script>
         <!-- Owl Carousel JavaScript -->
-        <script src="./js/owl.carousel.min.js"></script>
+        <script src="../js/owl.carousel.min.js"></script>
         <!-- Magnific Popup JavaScript -->
-        <script src="./js/jquery.magnific-popup.min.js"></script>
+        <script src="../js/jquery.magnific-popup.min.js"></script>
         <!-- Smooth Scrollbar JavaScript -->
-        <script src="./js/smooth-scrollbar.js"></script>
+        <script src="../js/smooth-scrollbar.js"></script>
         <!-- lottie JavaScript -->
-        <script src="./js/lottie.js"></script>
+        <script src="../js/lottie.js"></script>
         <!-- Chart Custom JavaScript -->
-        <script src="./js/chart-custom.js"></script>
+        <script src="../js/chart-custom.js"></script>
         <!-- Custom JavaScript -->
-        <script src="./js/custom.js"></script>
+        <script src="../js/custom.js"></script>
         
 @endsection
