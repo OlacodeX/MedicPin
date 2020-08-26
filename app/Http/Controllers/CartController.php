@@ -32,8 +32,8 @@ class CartController extends Controller
             'attributes' => array(),
             'associatedModel' => $drug
         ));
-$check = StoreCart::where('drug_id',$drug->id)->first();
-if (!empty($check->drug_id)) {
+$check = StoreCart::where('drug_id',$drug->id)->where('user_id',auth()->user()->id)->first();
+if (!empty($check)) {
     $check->quantity = $check->quantity + '1';
     $check->price = ($check->quantity) * $drug->price;
     $check->save();
@@ -58,7 +58,7 @@ else{
     public function index()
     {
 
-        $cartItems = StoreCart::orderBy('created_at', 'desc')->paginate(8);
+        $cartItems = StoreCart::orderBy('created_at', 'desc')->where('user_id',auth()->user()->id)->paginate(8);
         $cartsum = StoreCart::where('user_id', auth()->user()->id)->sum('price_sum', 'double precision');
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = array(
@@ -73,7 +73,7 @@ else{
     {
         
 
-        $cartItems = StoreCart::orderBy('created_at', 'desc')->paginate(8);
+        $cartItems = StoreCart::orderBy('created_at', 'desc')->where('user_id',auth()->user()->id)->paginate(8);
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = array(
             'cartItems' => $cartItems,

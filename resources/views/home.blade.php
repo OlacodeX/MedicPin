@@ -105,6 +105,7 @@
                           <li><a href="">My Appointments</a></li>
                        </ul>
                     </li>
+                    <li><a href="./pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
                     <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                     <li>
                        <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
@@ -580,9 +581,50 @@
                         </div>
                     </div>
                     <div class="row">
+                                    
+                        @if (auth()->user()->role == 'Patient')
+                        <div class="col-md-12">
+                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden wow fadeInUp" data-wow-delay="0.6s">
+                            <div class="iq-card-header d-flex justify-content-between">
+                        
+                                
+                        <div class="iq-header-title">
+                            <h4 class="card-title">Notifications</h4>
+                        </div>
+                        <div class="iq-card-header-toolbar d-flex align-items-center">
+                            <a href="./notifications" class="">See all</a>
+                        </div>
+                    </div>
+                        @if (count($notices) > 0)
+                        <div class="iq-card-body">
+                            @foreach ($notices as $notice)
+                            <a href="notifications/{{$notice->id}}" style="text-decoration: none;">
+                            <div class="media">
+                                <img class="mr-3 rounded-circle" src="images/user/01.jpg"
+                                    alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="mt-0 mb-0">Dr.{!!Str::words( $notice->from_name,1)!!} <br><small
+                                            class="text-muted font-size-12">{!!Str::words( $notice->created_at,2)!!}</small></h5>
+                                    <i class="ri-close-line float-right"></i>
+                                    <p>{!!Str::words( $notice->content,5)!!}</p>
+                                </div>
+                            </div>
+                        </a>
+                            <hr>
+                            @endforeach
+                        </div>
+                        @else
+                        <p class="text-center">No Notifications Yet</p>    
+                        @endif
+                             </div>
+                            </div>
+                        </div>
+                        @endif
+                        @if (auth()->user()->role == 'Doctor')
                         <div class="col-lg-8 col-md-12">
                             <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden wow fadeInUp" data-wow-delay="0.6s">
                                 <div class="iq-card-header d-flex justify-content-between">
+                        
                                     <div class="iq-header-title">
                                         <h4 class="card-title">Your Patients</h4>
                                     </div>
@@ -690,39 +732,6 @@
                         <div class="col-lg-4 col-md-12">
                             <div class="iq-card iq-card-block iq-card-stretch iq-card-height wow fadeInUp" data-wow-delay="0.6s">
                                 <div class="iq-card-header d-flex justify-content-between">
-                        
-                        @if (auth()->user()->role == 'Patient')
-                                
-                        <div class="iq-header-title">
-                            <h4 class="card-title">Notifications</h4>
-                        </div>
-                        <div class="iq-card-header-toolbar d-flex align-items-center">
-                            <a href="./notifications" class="">See all</a>
-                        </div>
-                    </div>
-                        @if (count($notices) > 0)
-                        <div class="iq-card-body">
-                            @foreach ($notices as $notice)
-                            <a href="notifications/{{$notice->id}}" style="text-decoration: none;">
-                            <div class="media">
-                                <img class="mr-3 rounded-circle" src="images/user/01.jpg"
-                                     alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="mt-0 mb-0">Dr.{!!Str::words( $notice->from_name,1)!!} <br><small
-                                            class="text-muted font-size-12">{!!Str::words( $notice->created_at,2)!!}</small></h5>
-                                    <i class="ri-close-line float-right"></i>
-                                    <p>{!!Str::words( $notice->content,5)!!}</p>
-                                </div>
-                            </div>
-                         </a>
-                            <hr>
-                            @endforeach
-                        </div>
-                        @else
-                        <p class="text-center">No Notifications Yet</p>    
-                        @endif
-                        @endif
-                        @if (auth()->user()->role == 'Doctor')
                                 
                         <div class="iq-header-title">
                             <h4 class="card-title">Sent Notifications</h4>

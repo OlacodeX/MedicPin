@@ -94,6 +94,7 @@
                               <li><a href="">My Appointments</a></li>
                            </ul>
                         </li>
+                        <li><a href="../pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
                         <li><a href="../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                         <li>
                            <a href="../"><i class="ri-home-4-line"></i><span>Homepage</span></a>

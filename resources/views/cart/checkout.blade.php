@@ -41,6 +41,41 @@
                <nav class="iq-sidebar-menu">
                   <ul id="iq-sidebar-toggle" class="iq-menu">
                      <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
+                     @if (auth()->user()->role == 'Patient')
+                     <li>
+                        <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                       
+                     </li>
+                     <li class="active">
+                        <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                        <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                           <li><a href="../myprofile">My Profile</a></li>
+                           <li><a href="../notifications">My Notifications</a></li>
+                           <!---<li><a href="profile-edit.html">User Edit</a></li>--->
+                           <li><a href="">My Appointments</a></li>
+                        </ul>
+                     </li>
+                     <li><a href="../pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
+                     <li><a href="../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                     <li>
+                        <a href="../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
+                       
+                     </li>
+                     
+                     <li>
+                        
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+                        
+                          
+ 
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form> 
+                    </li>
+                         
+                     @endif
+                     @if (auth()->user()->role == 'Doctor')
+                     
                      <li>
                         <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                        
@@ -76,6 +111,7 @@
                             @csrf
                         </form>
                     </li>
+                    @endif
                      <!----
                      <li><a href="calendar.html" class="iq-waves-effect"><i class="ri-calendar-2-line"></i><span>Calendar</span></a></li>
                      <li><a href="chat.html" class="iq-waves-effect"><i class="ri-message-line"></i><span>Chat</span></a></li>
@@ -356,15 +392,9 @@
                                     <div class="ckeckout-product-lists">
                                        <div class="d-flex align-items-center justify-content-between">
                                           <div class="d-flex align-items-center">
-                                          <div class="ckeckout-product">
-                                             <img src="https://dummyimage.com/180x180/000/fff">
-                                          </div>
                                           <div class=" ml-3 checkout-product-details">
                                              <h5>{{$cartItem->drug_name}}</h5>
                                              <p class="mb-0"><b>{{$cartItem->quantity}}</b></p>
-                                             <div class="input-box">
-                                                <input type="number" min="1" max="10" value="1" class="increment">
-                                             </div>
                                           </div>
                                        </div>
                                           <div class="checkout-amount-data text-center">
@@ -379,7 +409,7 @@
                                             </div>
                                           </div>
                                        </div>
-                                    </div>
+                                    </div><br>
                                     @endforeach 
                                  </div>
                               </div>
