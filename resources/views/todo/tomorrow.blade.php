@@ -373,6 +373,9 @@
                             <a href="./schedule_yesterday" class="chat-icon-delete" style="text-decoration: none;">
                              Yesterday's Schedule
                             </a>
+                            <a href="./schedule" class="chat-icon-delete" style="text-decoration: none;">
+                             Today's Schedule
+                            </a>
                             <a href="./schedule_tomorrow" class="chat-icon-delete" style="text-decoration: none;">
                              Tomorrow's Schedule 
                             </a>
