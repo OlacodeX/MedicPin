@@ -100,6 +100,7 @@
                            <li><a href="./add_drug">Add Drug</a></li>
                            <li><a href="./myshop">My Shop</a></li>
                            <li><a href="./schedule">To Do List</a></li>
+                           <li><a href="./blood_bank">Blood Bank</a></li>
                         </ul>
                      </li>
                      <li><a href="./pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>

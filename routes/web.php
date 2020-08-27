@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'PagesController@index');
+Route::get('/blood_bank', 'PagesController@blood_bank');
+Route::post('/send_request_mail', 'PagesController@send_request_mail');
 Route::get('/myprofile', 'PagesController@pro');
 Route::post('/update', 'PagesController@update');
 Auth::routes();

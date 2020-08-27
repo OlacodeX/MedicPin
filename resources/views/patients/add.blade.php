@@ -58,6 +58,7 @@
                            <li><a href="./add_drug">Add Drug</a></li>
                            <li><a href="./myshop">My Shop</a></li>
                            <li><a href="./schedule">To Do List</a></li>
+                           <li><a href="./blood_bank">Blood Bank</a></li>
                         </ul>
                      </li>
                      <li><a href="./pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
@@ -456,11 +457,12 @@
                                        <div id="demo" class="collapse">
                                        <select class="form-control" id="selectbg" name="b_group">
                                           <option value="N/A">Select</option>
-                                          <option value="O+">O+</option>
-                                          <option value="AB+">AB+</option>
-                                          <option value="AB+">AB+</option>
-                                          <option value="AB+">AB+</option>
-                                          <option value="AB+">AB+</option>
+                                             <option value="O+">O+</option>
+                                             <option value="O-">O-</option>
+                                             <option value="A+">A+</option>
+                                             <option value="A-">A-</option>
+                                             <option value="AB+">AB+</option>
+                                             <option value="AB-">AB-</option>
                                        </select>
                                        </div>
                                     </div>

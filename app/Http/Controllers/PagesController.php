@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Messages;
+use App\Mail\BloodRequestMail;
+use Illuminate\Support\Facades\Mail;
 //use App\Contact;
 
 class PagesController extends Controller
@@ -37,11 +39,29 @@ class PagesController extends Controller
         return view("auth.registerpatient");
     }
 
-    public function reachout(){
-        return view("pages.contact");
+    public function send_request_mail(Request $request){
+        $data = request()->validate([
+            'b_group' => 'required',
+            'qty' => 'required',
+            'result' => 'required',
+            'name' => 'required',
+            'h_name' => 'required',
+            'add' => 'required',
+            'number' => 'required',
+            'email' => 'required',
+            //'sender' => auth()->user()->u_name,
+        ]);
+            
+     Mail::to($request->input('email'))->send(new BloodRequestMail($data));
+     return redirect()->back()->with('success', 'Request sent');
     }
-    public function hireus(){
-        return view("pages.hireform");
+    public function blood_bank(){
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = array(
+           // 'pro' => $pro,
+            'new_messages' => $new_messages
+   );
+        return view("pages.bank",$data);
     }
     public function pro(){
         $pro = User::find(auth()->user()->id);

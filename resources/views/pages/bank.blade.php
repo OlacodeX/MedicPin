@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       
             @section('page_title')
-            {{config('app.name')}} | Patient List
+            {{config('app.name')}} | Blood Bank
             @endsection
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -16,13 +16,6 @@
       <link rel="stylesheet" href="./css/style.css">
       <!-- Responsive CSS -->
       <link rel="stylesheet" href="./css/responsive.css">
-      <style>
-         button.btn.btn-info{
-            border: none;
-            background: transparent;
-            color: rgb(20, 109, 224);
-         }
-      </style>
    </head>
 @section('content')
 <!-- Wrapper Start -->
@@ -56,12 +49,12 @@
                         <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Doctor's Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                         <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                            <li><a href="./myprofile">My Profile</a></li>
-                           <li><a href="./notifications">Sent Notifications</a></li>
-                           <li><a href="./notifications/create">Send Notification</a></li>
                            <!---<li><a href="profile-edit.html">User Edit</a></li>--->
                            <li><a href="./patients/create">Add Patient</a></li>
                            <li><a href="./patients">Patients List</a></li>
                            <li><a href="./transfered_patients">Transferred Patients</a></li>
+                           <li><a href="./notifications">Sent Notifications</a></li>
+                           <li><a href="./notifications/create">Send Notification</a></li>
                            <li><a href="./add_drug">Add Drug</a></li>
                            <li><a href="./myshop">My Shop</a></li>
                            <li><a href="./schedule">To Do List</a></li>
@@ -307,7 +300,7 @@
               </div>
               <ul class="navbar-list">
                  <li>
-                    <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="../images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
+                    <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="./images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
                     <div class="iq-sub-dropdown iq-user-dropdown">
                        <div class="iq-card shadow-none m-0">
                              <div class="d-inline-block w-100 text-center p-3">
@@ -332,7 +325,7 @@
                               <h5 class="mb-0">Dashboard</h5>
                                 <nav aria-label="breadcrumb">
                                    <ul class="breadcrumb">
-                                      <li class="breadcrumb-item"><a href="./">Home</a></li>
+                                      <li class="breadcrumb-item"><a href="">Home</a></li>
                                       <li class="breadcrumb-item active" aria-current="page">Patient Dashboard</li>
                                       <li class="breadcrumb-item"><a href="{{ route('logout') }}">Sign out<i class="ri-login-box-line ml-2"></i></a></li>
                                    </ul>
@@ -343,235 +336,298 @@
                  </div>
               </div>
         </div>
-  <!-- Responsive Breadcrumb End-->  
-   <!-- Page Content  -->
-   <div id="content-page" class="content-page">
-    <div class="container-fluid">
-       <div class="row">
-          <div class="col-sm-12">
-                <div class="iq-card">
-                   <div class="iq-card-header d-flex justify-content-between">
-                      <div class="iq-header-title">
-                         <h4 class="card-title">Your Patients List</h4>
-                      </div>
-                   </div>
-                   <div class="iq-card-body">
-                      <div class="table-responsive">
-                         <div class="row justify-content-between">
-                            <div class="col-sm-12 col-md-6">
-                              @include('inc.messages')
-                               <div id="user_list_datatable_info" class="dataTables_filter">
-                                 {!! Form::open(['action' => 'PatientsController@search', 'method' => 'POST', 'class' => 'mr-3 position-relative']) !!}
-                                     <div class="form-group mb-0">
-                                       <div class="inner-addon right-addon">
-                                           <i class="fa fa-search"></i>
-                                        <input type="search" class="form-control" id="exampleInputSearch" name="pin" placeholder="Enter MedicPin" aria-controls="user-list-table">
-                                       </div>
-                                       <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Search</button>
-                                     </div>
-                                     {!! Form::close() !!}
-                               </div>
-                            </div>
-                            @if (count($users) > 0)
-                            <div class="col-sm-12 col-md-6">
-                               <div class="user-list-files d-flex float-right">
-                                   <a href="javascript:void();" class="chat-icon-delete">
-                                     Pdf
-                                   </a>
-                                 </div>
-                            </div>
-                         </div>
-                         
-                         <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden fadeInUp" data-wow-delay="0.6s">
-                           
-                           <style>
-                              /* enable absolute positioning */
-                      .inner-addon {
-                        position: relative;
-                      }
-                      
-                      /* style glyph */
-                      .inner-addon .fa {
-                        position: absolute;
-                        padding: 10px;
-                        pointer-events: none;
-                        color: #0178ff7b;
-                        font-weight: 900;
-                      }
-                      
-                      /* align glyph 
-                      .left-addon .fa  { left:  0px;}*/
-                      .right-addon .fa { right: 260px;}
-                      
-                      /* add padding 
-                      .left-addon input  { padding-left:  30px; } */
-                      .right-addon input { padding-right: 30px; }
-                               div.panel-body,
-                               div.panel-default{
-                                   border-radius: 0;
-                                   border-top: none;
-                               }
-                               .btn.btn-info.btn-sm{
-                                   background: transparent;
-                                   border: none;
-                                   color: rgb(20, 109, 224);
-                               }
-                               
-                               
-                               .btn.btn-info.btn-sm i.fa{
-                                   font-size: 12px;
-                                   margin: 0;
-                               }
-                             @media only screen and (max-width: 768px) {
-                      /* align glyph 
-                      .left-addon .fa  { left:  0px;}*/
-                      .right-addon .fa { right: 20px;}
-                      
-                                
-                               .btn.btn-info.btn-sm{
-                                   background: transparent;
-                                   border: none;
-                                   color: rgb(20, 109, 224);
-                                   float: right;
-                                   display: inline;
-                               }
-                               
-                               .btn.btn-info.btn-sm i.fa{
-                                   font-size: 12px;
-                                   margin: 0;
-                                   padding: 0;
-                               }
-                               div.panel-body span.pull-left{
-                                   font-size: 12px;
-                                   margin-bottom: 0;
-                               }
-                               div.panel-body span.user-list-files.d-flex.float-right{
-                                  margin-top: 0;
-                               }
-                             }
-                           </style>
-                           <div class="iq-card-body p-0">
-                               @if (count($users) > 0)
-                               @foreach ($users as $user)
-                               <a href="javascript:{}" onclick="document.getElementById('my_form_1').submit();">
-                                                       
-                               {!! Form::open(['action' => 'RecordsController@index', 'method' => 'GET', 'id' => 'my_form_1']) /** The action should be the block of code in the store function in PostsController
-                               **/ !!}
-                                {{Form::hidden('pin', $user->pin)}}
-                                {{Form::hidden('username', $user->username)}}
-                               {!! Form::close() !!}
-                               <div class="panel panel-default">
-                               <div class="panel-body">
-                               <span class="pull-left">{{$user->name}}</span>
-                               <span class="user-list-files d-flex float-right">
-                               
-                               {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
-                               {{Form::hidden('pin', $user->pin)}}
-                               <button type="submit" class ="btn btn-info btn-sm" title="Add New Medical Record"><i class="fa fa-plus"></i></button>
-                              
-                               {!!Form::close()!!}
-                               {!!Form::open(['action' => 'RecordsController@index', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
-                               {{Form::hidden('pin', $user->pin)}}
-                               {{Form::hidden('username', $user->username)}}
-                               <button type="submit" class ="btn btn-info btn-sm" title="View Medical History"><i class="fa fa-bars"></i></button>
-                              
-                               {!!Form::close()!!}
-                               {!!Form::open(['action' => 'PatientsController@transfer', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
-                               {{Form::hidden('pin', $user->pin)}}
-                               <button type="submit" class ="btn btn-info btn-sm" title="Transfer Patient"><i class="fa fa-paper-plane-o"></i></button>
-                              
-                               {!!Form::close()!!}
-                               {!!Form::open(['action' => 'MessagingController@create', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
-                               {{Form::hidden('pin', $user->pin)}}
-                               <button type="submit" class ="btn btn-info btn-sm" title="Message Patient"><i class="fa fa-envelope"></i></button>
-                              
-                               {!!Form::close()!!}
-
-
-                                   {!!Form::open(['action' => ['PatientsController@destroy', $user->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
-                                   {{Form::hidden('email', $user->email)}}
-                                   {{Form::hidden('_method', 'DELETE')}}
-                                   <button type="submit" class ="btn btn-info btn-sm" title="Delete Patient"><i class="fa fa-trash-o"></i></button>
-                                  
-                                   {!!Form::close()!!}
-                                </span>
-                               </div>
-                               </div>
-                               </a>
-                               @endforeach
-
-                               @else
-                               <p class="text-center">No Patients Yet</p>    
-                               @endif
-                               
-                           </div>
+  <!-- Responsive Breadcrumb End-->
+     <!-- Page Content  -->
+     <div id="content-page" class="content-page">
+         <style>
+             
+div.jumbotron-fluid{
+                background:linear-gradient(rgba(1, 0, 2, 0.714),rgba(0, 0, 2, 0.829)), url('img/bg2.jpg') no-repeat;
+                background-size: cover;
+                background-position: top;
+                background-attachment:fixed;
+                padding-top: 100px;
+                padding-bottom: 200px;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 40px;
+                color: #fff;
+}
+div.jumbotron-fluid h4.card-title{
+    color: #fff;
+    font-size: 35px;
+    top: 20px;
+}
+h4.card-title{
+    font-size: 15px;
+}
+output{
+    border: 1.5px solid rgba(214, 209, 209, 0.748);
+    padding: 6px;
+    border-radius: 5px;
+}
+         </style>
+         <div class="jumbotron-fluid">
+            <h4 class="card-title">MedicPin Blood Bank</h4>
+            <small>Efficient, Reliable, Affordable.....</small>
+         </div>
+        <div class="container-fluid">
+           <div class="row">
+              <div class="col-lg-3">
+                    <div class="iq-card">
+                       <div class="iq-card-header d-flex justify-content-between">
+                          <div class="iq-header-title">
+                             <h4 class="card-title">Price Estimate Calculator</h4>
+                          </div>
                        </div>
-                      </div>
-                            <div class="col-md-6">
-                                <div style="text-align:right;">
-                                        <!-----The pagination link----->
-                                        {{$users->links()}}
+                       <div class="iq-card-body">
+                        @include('inc.messages')
+                        {!! Form::open(['action' => 'PagesController@send_request_mail', 'method' => 'POST', 'oninput' => 'result.value=parseInt(b.value)*parseInt(c.value)']) /** The action should be the block of code in the store function in PostsController
+                        **/ !!}
+                        
+                        <!-- 
+                          <div class="form-group">
+                                <div class="add-img-user profile-img-edit">
+                                   <div class="p-image"> -->
+                                     <!-- <h5 class="upload-button">file upload</h5> -->
+                                     <!--<a href="javascript:void();" class="upload-button btn iq-bg-primary">File Upload</a>
+                                     <input class="file-upload" type="file" accept="image/*" name="pp">
+                                  </div>
                                 </div>
-                                @else
-                                <p>No Record Found</p>    
-                                @endif
-                            </div>
-                         </div>
-                   </div>
-                </div>
-          </div>
-       </div>
-    </div>
- </div>
- </div>
- <!-- Wrapper END -->
-  <!-- Footer -->
-    <footer class="bg-white iq-footer">
-       <div class="container-fluid">
-          <div class="row">
-             <div class="col-lg-6">
-                <ul class="list-inline mb-0">
-                   <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
-                   <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
-                </ul>
-             </div>
-             <div class="col-lg-6 text-right">
-                Copyright 2020 <a href="./">Medicpin</a> All Rights Reserved.
-             </div>
-          </div>
-       </div>
-    </footer>
-    <!-- Footer END -->
-  <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Appear JavaScript -->
-    <script src="js/jquery.appear.js"></script>
-    <!-- Countdown JavaScript -->
-    <script src="js/countdown.min.js"></script>
-    <!-- Counterup JavaScript -->
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <!-- Wow JavaScript -->
-    <script src="js/wow.min.js"></script>
-    <!-- Apexcharts JavaScript -->
-    <script src="js/apexcharts.js"></script>
-    <!-- Slick JavaScript -->
-    <script src="js/slick.min.js"></script>
-    <!-- Select2 JavaScript -->
-    <script src="js/select2.min.js"></script>
-    <!-- Owl Carousel JavaScript -->
-    <script src="js/owl.carousel.min.js"></script>
-    <!-- Magnific Popup JavaScript -->
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <!-- Smooth Scrollbar JavaScript -->
-    <script src="js/smooth-scrollbar.js"></script>
-    <!-- lottie JavaScript -->
-    <script src="js/lottie.js"></script>
-    <!-- Chart Custom JavaScript -->
-    <script src="js/chart-custom.js"></script>
-    <!-- Custom JavaScript -->
-    <script src="js/custom.js"></script>
+                               <div class="img-extension mt-3">
+                                  <div class="d-inline-block align-items-center">
+                                      <span>Only</span>
+                                     <a href="javascript:void();">.jpg</a>
+                                     <a href="javascript:void();">.png</a>
+                                     <a href="javascript:void();">.jpeg</a>
+                                     <span>allowed</span>
+                                  </div>
+                               </div>
+                             </div> -->
+                             <!----
+                             <div class="form-group">
+                                <label>User Role:</label>
+                                <select class="form-control" id="selectuserrole">
+                                   <option>Select</option>
+                                   <option>Doctor</option>
+                                   <option>Patient</option>
+                                </select>
+                             </div>---->
+                             <div class="form-group select select-div">
+                                <label for="Blood Group">Blood Group</label>
+                                <select class="form-control" id="b" name="b_group">
+                                   <option>Select</option>
+                                   <option value="1500">O+</option>
+                                   <option value="1600">O-</option>
+                                   <option value="2000">A+</option>
+                                   <option value="2500">A-</option>
+                                   <option value="2100">AB+</option>
+                                   <option value="5000">AB-</option>
+                                </select>
+                             </div>
+                             <div class="form-group">
+                                <label for="name">Quantity</label>
+                                <div class="inner-addon right-addon">
+                                <input type="number" class="form-control" id="c" name="qty" placeholder="Enter quantity here..">
+                                </div>
+                             </div>
+                             <div class="form-group">
+                                <label for="name">Estimated Cost</label>
+                                <div class="inner-addon right-addon">
+                                    <input name="result" for="b c" placeholder="All prices are in &#8358;"/>
+                                </div>
+                             </div>
+                       </div>
+                    </div>
+              </div>
+              <div class="col-lg-9">
+                    <div class="iq-card">
+                       <div class="iq-card-header d-flex justify-content-between">
+                          <div class="iq-header-title">
+                             <h4 class="card-title">Request For Blood</h4>
+                             <p class="text-justify">Submit Your Quote and Request, We Will Get Back To ASAP To You Confirm Your Order.</p>
+                          </div>
+                       </div>
+                       <div class="iq-card-body">
+                          <div class="new-user-info">
+                                <div class="row">
+                                   <div class="form-group col-md-6">
+                                      <label for="name">Name</label>
+                                      <div class="inner-addon right-addon">
+                                          <i class="fa fa-user"></i>
+                                      <input type="text" class="form-control" id="name" name="name" placeholder="Your Name">
+                                      </div>
+                                   </div>
+                                   <div class="form-group col-md-6">
+                                      <label for="h_name">Hospital Name</label>
+                                      <div class="inner-addon right-addon">
+                                          <i class="fa fa-ils"></i>
+                                      <input type="text" class="form-control" id="h_name" name="h_name" placeholder="Hospital Name">
+                                      </div>
+                                   </div>
+                                   <div class="form-group col-md-6">
+                                      <label for="add">Address</label>
+                                      <div class="inner-addon right-addon">
+                                          <i class="fa fa-address-book-o"></i>
+                                      <input type="text" class="form-control" name="add" id="add" placeholder="Hospital Address">
+                                      </div>
+                                   </div>
+                                   <div class="form-group col-md-6">
+                                      <label for="mobno">Mobile Number</label>
+                                      <div class="inner-addon right-addon">
+                                          <i class="fa fa-phone"></i>
+                                      <input type="text" class="form-control" id="number" name="number" placeholder="Mobile Number">
+                                      </div>
+                                   </div>
+                                   <div class="form-group col-md-6">
+                                      <label for="email">Email</label>
+                                      <div class="inner-addon right-addon">
+                                          <i class="fa fa-envelope"></i>
+                                      <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                                      </div>
+                                   </div>
+                                </div>
+                                <hr>
+                                <!----
+                                <h5 class="mb-3">Medical Records</h5>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                       <label for="Blood Group">Blood Group</label>
+                                       <select class="form-control" id="selectbg" name="b_group">
+                                          <option>Select</option>
+                                          <option value="O+">O+</option>
+                                          <option value="AB+">AB+</option>
+                                          <option value="AB+">AB+</option>
+                                          <option value="AB+">AB+</option>
+                                          <option value="AB+">AB+</option>
+                                       </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                       <label for="bp">Blood Pressure</label>
+                                       <input type="text" class="form-control" id="bp" name="bp" placeholder="Blood Pressure">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                       <label for="h_rate">Heart Rate</label>
+                                       <input type="text" class="form-control" id="h_rate" name="h_rate" placeholder="Heart Rate">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                       <label for="genotype">Genotype</label>
+                                       <select class="form-control" id="selectgenotype" name="genotype">
+                                          <option>Select</option>
+                                          <option value="AA">AA</option>
+                                          <option value="AS">AS</option>
+                                          <option value="SS">SS</option>
+                                       </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                       <label for="weight">Weight</label>
+                                       <input type="text" class="form-control" id="weight" name="weight" placeholder="Weight">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                       <label for="height">Height</label>
+                                       <input type="text" class="form-control" id="height" name="height" placeholder="Height">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                       <label for="temprature">Temperature</label>
+                                       <input type="text" class="form-control" id="temprature" name="temprature" placeholder="Temprature">
+                                    </div>
+                                </div>
+                                ----->
+                                <button type="submit" class="btn btn-primary">Send Request</button>
+                                {!! Form::close() !!}
+                          </div>
+                       </div>
+                    </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     </div>
+     <!-- Wrapper END -->
+      <!-- Footer -->
+        <footer class="bg-white iq-footer">
+           <div class="container-fluid">
+              <div class="row">
+                 <div class="col-lg-6">
+                    <ul class="list-inline mb-0">
+                       <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
+                       <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
+                    </ul>
+                 </div>
+                 <div class="col-lg-6 text-right">
+                    Copyright 2020 <a href="#">Medicpin</a> All Rights Reserved.
+                 </div>
+              </div>
+           </div>
+        </footer>
+        <!-- Footer END -->
+      <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="./js/jquery.min.js"></script>
+        <script src="./js/popper.min.js"></script>
+        
+<script>
+    $(function () {
+       $('.select-div').on('change', 'select', function (e) {
+         var v = $(e.target).val(), 
+         t = $(e.target).find(':selected').text(),
+          p = $(e.target).closest('.select-div');
+         if (v) {
+           var c = (function (t) {
+             switch(t) {
+  
+               case 'O-' : return '₦1,500';
+  
+               case 'Catfish(1kg)' : return '₦2,000';
+  
+               case 'Catfish(1.5kg)' : return '₦2,500';
+  
+               case 'Croakerfish(0.8kg)' : return '₦1,800';
+  
+               case 'Croakerfish(1kg)' : return '₦2,300';
+  
+               case 'Croakerfish(1.5kg)' : return '₦2,800';
+  
+               case 'PEPPERED SNAIL' : return '₦5,000';
+  
+               case 'GOAT HEAD PEPPER SOUP' : return '₦15,000';
+             }
+             
+           })(t);
+  
+           p.find('[name="price"]').val(c);
+         }
+         
+       });
+    });
+  </script>
+        <script src="./js/bootstrap.min.js"></script>
+        <!-- Appear JavaScript -->
+        <script src="./js/jquery.appear.js"></script>
+        <!-- Countdown JavaScript -->
+        <script src="./js/countdown.min.js"></script>
+        <!-- Counterup JavaScript -->
+        <script src="./js/waypoints.min.js"></script>
+        <script src="./js/jquery.counterup.min.js"></script>
+        <!-- Wow JavaScript -->
+        <script src="./js/wow.min.js"></script>
+        <!-- Apexcharts JavaScript -->
+        <script src="./js/apexcharts.js"></script>
+        <!-- Slick JavaScript -->
+        <script src="./js/slick.min.js"></script>
+        <!-- Select2 JavaScript -->
+        <script src="./js/select2.min.js"></script>
+        <!-- Owl Carousel JavaScript -->
+        <script src="./js/owl.carousel.min.js"></script>
+        <!-- Magnific Popup JavaScript -->
+        <script src="./js/jquery.magnific-popup.min.js"></script>
+        <!-- Smooth Scrollbar JavaScript -->
+        <script src="./js/smooth-scrollbar.js"></script>
+        <!-- lottie JavaScript -->
+        <script src="./js/lottie.js"></script>
+        <!-- Chart Custom JavaScript -->
+        <script src="./js/chart-custom.js"></script>
+        <!-- Custom JavaScript -->
+        <script src="./js/custom.js"></script>
+        
 @endsection
