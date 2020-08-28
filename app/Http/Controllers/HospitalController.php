@@ -29,6 +29,7 @@ class HospitalController extends Controller
     public function index()
     {
         //
+        if (auth()->user()->role == 'Doctor') {
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $hospitals = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->get();
         $data = array(
@@ -36,7 +37,11 @@ class HospitalController extends Controller
             'hospitals' => $hospitals
         );
         return view('hospitals.index', $data);
-
+     
+    }
+    else{
+        return view('pages-error');
+    }
     }
 
     /**
@@ -47,8 +52,14 @@ class HospitalController extends Controller
     public function create()
     {
         //
+        if (auth()->user()->role == 'Doctor') {
         $messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         return view("hospitals.create")->with('messages', $messages);
+        
+    }
+    else{
+        return view('pages-error');
+    }
     }
 
     /**
@@ -60,6 +71,7 @@ class HospitalController extends Controller
     public function store(Request $request)
     {
         //
+        if (auth()->user()->role == 'Doctor') {
         $this->validate($request, [
             'h_name' => 'required',
             'h_email' => 'required',
@@ -80,7 +92,11 @@ class HospitalController extends Controller
             
               
             return redirect('/hospitals')->with('success', 'Great!, hospital created.');//I just set the message for session(success).
-
+     
+        }
+        else{
+            return view('pages-error');
+        }
     }
 
     /**
@@ -96,6 +112,7 @@ class HospitalController extends Controller
     public function add_doc()
     {
         //
+        if (auth()->user()->role == 'Doctor') {
         $id = $_POST['id'];
         $messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $hospital = hospitals::orderBy('created_at', 'desc')->where('id', $id)->first();
@@ -104,11 +121,16 @@ class HospitalController extends Controller
             'hospital' => $hospital
         );
         return view('hospitals.add_doc', $data);
-
+     
+    }
+    else{
+        return view('pages-error');
+    }
     }
     public function doctors()
     {
         //
+        if (auth()->user()->role == 'Doctor') {
         $id = $_POST['id'];
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $doctors = HospitalDoctors::orderBy('created_at', 'desc')->where('h_id', $id)->get();
@@ -117,7 +139,11 @@ class HospitalController extends Controller
             'doctors' => $doctors
         );
         return view('hospitals.list', $data);
-
+     
+    }
+    else{
+        return view('pages-error');
+    }
     }
     public function search()
     {
@@ -140,6 +166,7 @@ class HospitalController extends Controller
     public function store_doc(Request $request)
     {
         //
+        if (auth()->user()->role == 'Doctor') {
         $this->validate($request, [
             'pin' => 'required',
              ]);
@@ -164,6 +191,11 @@ class HospitalController extends Controller
               $doctor->save();
             return redirect('/hospitals')->with('success', 'Great!, doctor added.');//I just set the message for session(success).
             }
+                 
+    }
+    else{
+        return view('pages-error');
+    }
     }
 
     /**

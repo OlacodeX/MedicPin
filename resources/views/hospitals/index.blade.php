@@ -59,6 +59,8 @@
                                <li><a href="./transfered_patients">Transferred Patients</a></li>
                                <li><a href="./notifications">Sent Notifications</a></li>
                                <li><a href="./notifications/create">Send Notification</a></li>
+                              </ul>
+                         </li>
                                <li>
                                   <a href="#user-info1" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ion-medkit"></i><span>Pharmacy</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                                   
@@ -78,7 +80,7 @@
                          
                          <li>
                             
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+                            <a href="{{ route('logout') }}" class="iq-waves-effect" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
                             
                               
     
@@ -499,6 +501,7 @@
   
                                  @else
                                  <p class="text-center">No Record Found.</p>    
+                                 <a href="hospitals/create" class="btn btn-info">Add An Hospital Here</a>
                                  @endif
                                  
                              </div>
