@@ -4,19 +4,25 @@
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                      
-      @section('page_title')
-      {{config('app.name')}} | {!!Str::words($message->message,8)!!}
-      @endsection
-            <link rel="icon" href="{{asset('img/yy.jpg')}}">
+      
+            @section('page_title')
+            {{config('app.name')}} | Search Result 
+            @endsection
       <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="../css/bootstrap.min.css">
+      <link rel="stylesheet" href="./css/bootstrap.min.css">
       <!-- Typography CSS -->
-      <link rel="stylesheet" href="../css/typography.css">
+      <link rel="stylesheet" href="./css/typography.css">
       <!-- Style CSS -->
-      <link rel="stylesheet" href="../css/style.css">
+      <link rel="stylesheet" href="./css/style.css">
       <!-- Responsive CSS -->
-      <link rel="stylesheet" href="../css/responsive.css">
+      <link rel="stylesheet" href="./css/responsive.css">
+      <style>
+         button.btn.btn-info{
+            border: none;
+            background: transparent;
+            color: rgb(20, 109, 224);
+         }
+      </style>
    </head>
 @section('content')
 <!-- Wrapper Start -->
@@ -24,8 +30,8 @@
     <!-- Sidebar  -->
     <div class="iq-sidebar">
             <div class="iq-sidebar-logo d-flex justify-content-between">
-               <a href="../">
-               <img src="../img/yy.jpg" class="img-fluid" alt="">
+               <a href="./">
+               <img src="./img/yy.jpg" class="img-fluid" alt="">
                <span>
                 {{config('app.name')}}
                </span>
@@ -42,66 +48,30 @@
                <nav class="iq-sidebar-menu">
                   <ul id="iq-sidebar-toggle" class="iq-menu">
                      <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
-                     
-                     @if (auth()->user()->role == 'Patient')
                      <li>
-                        <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
-                       
-                     </li>
-                     <li class="active">
-                        <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="../myprofile">My Profile</a></li>
-                           <li><a href="../notifications">My Notifications</a></li>
-                           <!---<li><a href="profile-edit.html">User Edit</a></li>--->
-                           <li><a href="">My Appointments</a></li>
-                        </ul>
-                     </li>
-                     <li><a href="../pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
-                     <li><a href="../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
-                     <li>
-                        <a href="../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
-                       
-                     </li>
-                     
-                     <li>
-                        
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
-                        
-                          
- 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form> 
-                    </li>
-                         
-                     @endif
-                     
-                     @if (auth()->user()->role == 'Doctor')
-                     <li>
-                        <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                        <a href="./dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                        
                      </li>
                      <li class="active">
                         <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Doctor's Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                         <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="../myprofile">My Profile</a></li>
+                           <li><a href="./myprofile">My Profile</a></li>
+                           <li><a href="./notifications">Sent Notifications</a></li>
+                           <li><a href="./notifications/create">Send Notification</a></li>
                            <!---<li><a href="profile-edit.html">User Edit</a></li>--->
-                           <li><a href="../patients/create">Add Patient</a></li>
-                           <li><a href="../patients">Patients List</a></li>
-                           <li><a href="../transfered_patients">Transferred Patients</a></li>
-                           <li><a href="../notifications">Sent Notifications</a></li>
-                           <li><a href="../notifications/create">Send Notification</a></li>
-                           <li><a href="../add_drug">Add Drug</a></li>
-                           <li><a href="../myshop">My Shop</a></li>
-                           <li><a href="../schedule">To Do List</a></li>
-                           <li><a href="../blood_bank">Blood Bank</a></li>
+                           <li><a href="./patients/create">Add Patient</a></li>
+                           <li><a href="./patients">Patients List</a></li>
+                           <li><a href="./transfered_patients">Transferred Patients</a></li>
+                           <li><a href="./add_drug">Add Drug</a></li>
+                           <li><a href="./myshop">My Shop</a></li>
+                           <li><a href="./schedule">To Do List</a></li>
+                           <li><a href="./blood_bank">Blood Bank</a></li>
                         </ul>
                      </li>
-                     <li><a href="../pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
-                     <li><a href="../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                     <li><a href="./pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
+                     <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                      <li>
-                        <a href="../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
+                        <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                        
                      </li>
                      
@@ -114,8 +84,6 @@
                             @csrf
                         </form>
                     </li>
-                    
-                    @endif
                      <!----
                      <li><a href="calendar.html" class="iq-waves-effect"><i class="ri-calendar-2-line"></i><span>Calendar</span></a></li>
                      <li><a href="chat.html" class="iq-waves-effect"><i class="ri-message-line"></i><span>Chat</span></a></li>
@@ -267,8 +235,8 @@
         <div class="iq-navbar-custom">
             <div class="iq-sidebar-logo">
                 <div class="top-logo">
-                    <a href="../">
-                    <img src="../img/yy.jpg" class="img-fluid" alt="">
+                    <a href="./">
+                    <img src="./img/yy.jpg" class="img-fluid" alt="">
                     <span>
                      {{config('app.name')}}
                     </span>
@@ -282,76 +250,75 @@
                     </div>
                 </div>
             </div>
-             <nav class="navbar navbar-expand-lg navbar-light p-0">
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <i class="ri-menu-3-line"></i>
-                  </button>
-                  <div class="iq-menu-bt align-self-center">
-                     <div class="wrapper-menu">
-                        <div class="line-menu half start"></div>
-                        <div class="line-menu"></div>
-                        <div class="line-menu half end"></div>
-                     </div>
-                  </div>
-                  
-                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                     <ul class="navbar-nav ml-auto navbar-list pull-right">
-                        <li class="nav-item dropdown">
-                           <a href="#" class="search-toggle iq-waves-effect">
-                              <i class="ri-mail-line"></i>
-                              <span class="badge badge-pill badge-primary badge-up count-mail">{{App\Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->count()}}</span>
-                           </a>
-                           <!----recent m here--->
-                           <div class="iq-sub-dropdown">
-                              <div class="iq-card shadow-none m-0">
-                                 <div class="iq-card-body p-0 ">
-                                    <div class="bg-primary p-3">
-                                       <h5 class="mb-0 text-white">Unread Messages<small class="badge  badge-light float-right pt-1">{{App\Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->count()}}</small></h5>
-                                    </div>
-                                    
-                                    @if (count($messages) > 0)
-                                    @foreach ($messages as $messages)
-                                    <a href="../{{$messages->id}}" class="iq-sub-card" >
-                                       <div class="media align-items-center">
-                                          <div class="media-body ml-3">
-                                             <h6 class="mb-0 ">{{$messages->sender_name}}</h6>
-                                             <small class="float-left font-size-12">{{$messages->created_at}}</small>
-                                          </div>
-                                       </div>
-                                    </a>
-                                    @endforeach
-                                    @else <br>
-                                    <p class="text-center">You Have No Messages Yet</p>    
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="ri-menu-3-line"></i>
+              </button>
+              <div class="iq-menu-bt align-self-center">
+                 <div class="wrapper-menu">
+                    <div class="line-menu half start"></div>
+                    <div class="line-menu"></div>
+                    <div class="line-menu half end"></div>
+                 </div>
+              </div>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                 <ul class="navbar-nav ml-auto navbar-list pull-right">
+                    <li class="nav-item dropdown">
+                       <a href="#" class="search-toggle iq-waves-effect">
+                          <i class="ri-mail-line"></i>
+                          <span class="badge badge-pill badge-primary badge-up count-mail">{{App\Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->count()}}</span>
+                       </a>
+                       <!----recent m here--->
+                       <div class="iq-sub-dropdown">
+                          <div class="iq-card shadow-none m-0">
+                             <div class="iq-card-body p-0 ">
+                                <div class="bg-primary p-3">
+                                   <h5 class="mb-0 text-white">Unread Messages<small class="badge  badge-light float-right pt-1">{{App\Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->count()}}</small></h5>
+                                </div>
+                                
+                                @if (count($new_messages) > 0)
+                                @foreach ($new_messages as $message)
+                                <a href="./chat/{{$message->id}}" class="iq-sub-card" >
+                                   <div class="media align-items-center">
+                                      <div class="media-body ml-3">
+                                         <h6 class="mb-0 ">{{$message->sender_name}}</h6>
+                                         <small class="float-left font-size-12">{{$message->created_at}}</small>
+                                      </div>
+                                   </div>
+                                </a>
+                                @endforeach
+                                @else <br>
+                                <p class="text-center">You Have No Unread Messages</p>    
 
-                                    @endif
-                                    <div class="text-center">
-                                    <a href="../chat" class="btn btn-primary" style="margin-bottom: 20px;">See All Messages</a>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </li>
+                                @endif
+                                <div class="text-center">
+                                <a href="./chat" class="btn btn-primary" style="margin-bottom: 20px;">See All Messages</a>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </li>
                     
-                        <li class="nav-item">
-                            <a href="../cart" class="iq-waves-effect" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="My Shopping Cart"><i class="ri-shopping-cart-2-line"></i></a>
-                            <span class="badge badge-primary badge-up count-mail">{{App\StoreCart::where('user_id', auth()->user()->id)->orderBy('id', 'ASC')->count() }}</span>
-                         </li>
-                     </ul>
-                  </div>
-                  <ul class="navbar-list">
-                     <li>
-                        <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="../images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
-                        <div class="iq-sub-dropdown iq-user-dropdown">
-                           <div class="iq-card shadow-none m-0">
-                                 <div class="d-inline-block w-100 text-center p-3">
-                                    <a class="iq-bg-danger iq-sign-btn" href="{{ route('logout') }}" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
+                    <li class="nav-item">
+                        <a href="./cart" class="iq-waves-effect" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="My Shopping Cart"><i class="ri-shopping-cart-2-line"></i></a>
+                        <span class="badge badge-primary badge-up count-mail">{{App\StoreCart::where('user_id', auth()->user()->id)->orderBy('id', 'ASC')->count() }}</span>
                      </li>
-                  </ul>
-               </nav>
+                 </ul>
+              </div>
+              <ul class="navbar-list">
+                 <li>
+                    <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="../images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
+                    <div class="iq-sub-dropdown iq-user-dropdown">
+                       <div class="iq-card shadow-none m-0">
+                             <div class="d-inline-block w-100 text-center p-3">
+                                <a class="iq-bg-danger iq-sign-btn" href="{{ route('logout') }}" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </li>
+              </ul>
+           </nav>
         </div>
     </div>
     <!-- TOP Nav Bar END -->
@@ -376,98 +343,168 @@
                  </div>
               </div>
         </div>
-  <!-- Responsive Breadcrumb End-->
-         <div id="content-page" class="content-page">
-          <div class="container-fluid">
-    <div class="row">
-    <div class="col-sm-9" style="text-align:justify;">
-      <h3 class="title"><span>{{$message->sender_name}}</span></h3>
-      <small><i class="fa fa-calendar"></i>{!!$message->created_at!!}</small>
-      <hr>
-      <p>{!!$message->message!!}</p>
-      
-      <h3 class="title">Reply <span>{{$message->sender_name}}</span></h3>
-      {!! Form::open(['action' => 'MessagingController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
-      **/ !!}
-      @include('inc.messages')
-       <div class="form-group">
-         {{Form::textarea('message', '', ['class' => 'form-control', 'id' =>'pre'], 'required')}}
-       </div>
-       @php
-           $sender = App\User::where('id', $message->sender_id)->first();
-       @endphp
-       {{Form::hidden('receiver_pin', $sender->pin)}}
-       {{Form::hidden('receiver_id', $message->sender_id)}}
-       {{Form::hidden('receiver_email', $message->sender_email)}}
-       {{Form::hidden('receiver_name', $message->sender_name)}}
-       {{Form::hidden('message_id', $message->id)}}
-       {{Form::submit('Reply', ['class' => 'btn btn-primary btn-md pull-left', 'style' => 'text-transform:uppercase;'])}}
-      {!! Form::close() !!}
-      <a href="../chat" class="btn btn-primary btn-md pull-right">Back</a><br>
-    </div>
-</div>
-</div>
-
-</div>
-
-          <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
-          <script>
-              CKEDITOR.replace( 'pre' );
-          </script> 
-                      <hr>
-                </div>
-              </div>
-          </div>
-    </div>
-     <!-- Wrapper END -->
-      <!-- Footer -->
-        <footer class="bg-white iq-footer">
-           <div class="container-fluid">
-              <div class="row">
-                 <div class="col-lg-6">
-                    <ul class="list-inline mb-0">
-                       <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
-                       <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
-                    </ul>
-                 </div>
-                 <div class="col-lg-6 text-right">
-                    Copyright 2020 <a href="#">Medicpin</a> All Rights Reserved.
-                 </div>
-              </div>
-           </div>
-        </footer>
-        <!-- Footer END -->
-      <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="../js/jquery.min.js"></script>
-        <script src="../js/popper.min.js"></script>
-        <script src="../js/bootstrap.min.js"></script>
-        <!-- Appear JavaScript -->
-        <script src="../js/jquery.appear.js"></script>
-        <!-- Countdown JavaScript -->
-        <script src="../js/countdown.min.js"></script>
-        <!-- Counterup JavaScript -->
-        <script src="../js/waypoints.min.js"></script>
-        <script src="../js/jquery.counterup.min.js"></script>
-        <!-- Wow JavaScript -->
-        <script src="../js/wow.min.js"></script>
-        <!-- Apexcharts JavaScript -->
-        <script src="../js/apexcharts.js"></script>
-        <!-- Slick JavaScript -->
-        <script src="../js/slick.min.js"></script>
-        <!-- Select2 JavaScript -->
-        <script src="../js/select2.min.js"></script>
-        <!-- Owl Carousel JavaScript -->
-        <script src="../js/owl.carousel.min.js"></script>
-        <!-- Magnific Popup JavaScript -->
-        <script src="../js/jquery.magnific-popup.min.js"></script>
-        <!-- Smooth Scrollbar JavaScript -->
-        <script src="../js/smooth-scrollbar.js"></script>
-        <!-- lottie JavaScript -->
-        <script src="../js/lottie.js"></script>
-        <!-- Chart Custom JavaScript -->
-        <script src="../js/chart-custom.js"></script>
-        <!-- Custom JavaScript -->
-        <script src="../js/custom.js"></script>
+  <!-- Responsive Breadcrumb End-->  
+   <!-- Page Content  -->
+   <div id="content-page" class="content-page">
+    <div class="container-fluid">
+       <div class="row">
+          <div class="col-sm-12">
+                <div class="iq-card">
+                   <div class="iq-card-header d-flex justify-content-between">
+                      <div class="iq-header-title">
+                         <h4 class="card-title">Your Search Result</h4>
+                      </div>
+                   </div>
+                              @include('inc.messages')
+                                <style>
+                                   /* enable absolute positioning */
+                           .inner-addon {
+                             position: relative;
+                           }
+                           
+                           /* style glyph */
+                           .inner-addon .fa {
+                             position: absolute;
+                             padding: 10px;
+                             pointer-events: none;
+                             color: #0178ff7b;
+                             font-weight: 900;
+                           }
+                           
+                           /* align glyph 
+                           .left-addon .fa  { left:  0px;}*/
+                           .right-addon .fa { right: 260px;}
+                           
+                           /* add padding 
+                           .left-addon input  { padding-left:  30px; } */
+                           .right-addon input { padding-right: 30px; }
+                                    div.panel-body,
+                                    div.panel-default{
+                                        border-radius: 0;
+                                        border-top: none;
+                                    }
+                                    .btn.btn-info.btn-sm{
+                                        background: transparent;
+                                        border: none;
+                                        color: rgb(20, 109, 224);
+                                    }
+                                    
+                                    
+                                    .btn.btn-info.btn-sm i.fa{
+                                        font-size: 12px;
+                                        margin: 0;
+                                    }
+                                  @media only screen and (max-width: 768px) {
+                           /* align glyph 
+                           .left-addon .fa  { left:  0px;}*/
+                           .right-addon .fa { right: 20px;}
+                           
+                                     
+                                    .btn.btn-info.btn-sm{
+                                        background: transparent;
+                                        border: none;
+                                        color: rgb(20, 109, 224);
+                                        float: right;
+                                        display: inline;
+                                    }
+                                    
+                                    .btn.btn-info.btn-sm i.fa{
+                                        font-size: 12px;
+                                        margin: 0;
+                                        padding: 0;
+                                    }
+                                    div.panel-body span.pull-left{
+                                        font-size: 12px;
+                                        margin-bottom: 0;
+                                    }
+                                    div.panel-body span.user-list-files.d-flex.float-right{
+                                       margin-top: 0;
+                                    }
+                                  }
+                                </style>
+                                <div class="iq-card-body p-0">
+                                    <a href="javascript:{}" onclick="document.getElementById('my_form_1').submit();">
+                                    <div class="panel panel-default">
+                                    <div class="panel-body">
+                                    <span class="pull-left">{{$doctor->doctor_name}}</span>
+                                    <span class="user-list-files d-flex float-right">
+                                       {!!Form::open(['action' => 'HospitalController@message', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
+                                       {{Form::hidden('pin', $doctor->doctor_pin)}}
+                                       {{Form::hidden('username', $doctor->doctor_name)}}
+                                       <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Message Doctor"><i class="fa fa-envelope"></i></button>
+                                      
+                                       {!!Form::close()!!}
         
+        
+                                           {!!Form::open(['action' => ['HospitalController@destroy', $doctor->id], 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                                           {{Form::hidden('pin', $doctor->doctor_pin)}}
+                                           {{Form::hidden('_method', 'DELETE')}}
+                                           <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Remove Doctor from Your Hospital"><i class="fa fa-trash-o"></i></button>
+                                          
+                                           {!!Form::close()!!}
+                                     </span>
+                                    </div>
+                                    </div>
+                                    </a>
+                                </div>
+                            </div>
+                           </div>
+                              </div>
+                        </div>
+                     </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+ <!-- Wrapper END -->
+  <!-- Footer -->
+    <footer class="bg-white iq-footer">
+       <div class="container-fluid">
+          <div class="row">
+             <div class="col-lg-6">
+                <ul class="list-inline mb-0">
+                   <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
+                   <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
+                </ul>
+             </div>
+             <div class="col-lg-6 text-right">
+                Copyright 2020 <a href="./">Medicpin</a> All Rights Reserved.
+             </div>
+          </div>
+       </div>
+    </footer>
+    <!-- Footer END -->
+  <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Appear JavaScript -->
+    <script src="js/jquery.appear.js"></script>
+    <!-- Countdown JavaScript -->
+    <script src="js/countdown.min.js"></script>
+    <!-- Counterup JavaScript -->
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <!-- Wow JavaScript -->
+    <script src="js/wow.min.js"></script>
+    <!-- Apexcharts JavaScript -->
+    <script src="js/apexcharts.js"></script>
+    <!-- Slick JavaScript -->
+    <script src="js/slick.min.js"></script>
+    <!-- Select2 JavaScript -->
+    <script src="js/select2.min.js"></script>
+    <!-- Owl Carousel JavaScript -->
+    <script src="js/owl.carousel.min.js"></script>
+    <!-- Magnific Popup JavaScript -->
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <!-- Smooth Scrollbar JavaScript -->
+    <script src="js/smooth-scrollbar.js"></script>
+    <!-- lottie JavaScript -->
+    <script src="js/lottie.js"></script>
+    <!-- Chart Custom JavaScript -->
+    <script src="js/chart-custom.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="js/custom.js"></script>
 @endsection

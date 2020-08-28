@@ -55,3 +55,17 @@ Route::post('/done', 'TodoController@done');
 Route::get('/schedule_yesterday', 'TodoController@yesterday');
 Route::get('/schedule_tomorrow', 'TodoController@tomorrow');
 
+//Hospitals
+Route::resource('/hospitals', 'HospitalController');
+Route::post('/add_doc', 'HospitalController@add_doc');
+Route::post('/store_doc', 'HospitalController@store_doc');
+Route::post('/store_message', 'HospitalController@store_message');
+Route::post('/doctors', 'HospitalController@doctors');
+Route::post('/search', 'HospitalController@search');
+Route::get('/send_message', 'HospitalController@message');
+Route::post('/remove', 'HospitalController@destroyy');
+
+//Q&S
+
+Route::resource('/questions', 'QuestionsController');
+Route::post('/answer', 'QuestionsController@store_answer');

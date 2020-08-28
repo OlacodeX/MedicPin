@@ -4,10 +4,10 @@
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                      
-      @section('page_title')
-      {{config('app.name')}} | {!!Str::words($message->message,8)!!}
-      @endsection
+      
+            @section('page_title')
+            {{config('app.name')}} | Ask Question
+            @endsection
             <link rel="icon" href="{{asset('img/yy.jpg')}}">
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -42,42 +42,6 @@
                <nav class="iq-sidebar-menu">
                   <ul id="iq-sidebar-toggle" class="iq-menu">
                      <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
-                     
-                     @if (auth()->user()->role == 'Patient')
-                     <li>
-                        <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
-                       
-                     </li>
-                     <li class="active">
-                        <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="../myprofile">My Profile</a></li>
-                           <li><a href="../notifications">My Notifications</a></li>
-                           <!---<li><a href="profile-edit.html">User Edit</a></li>--->
-                           <li><a href="">My Appointments</a></li>
-                        </ul>
-                     </li>
-                     <li><a href="../pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
-                     <li><a href="../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
-                     <li>
-                        <a href="../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
-                       
-                     </li>
-                     
-                     <li>
-                        
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
-                        
-                          
- 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form> 
-                    </li>
-                         
-                     @endif
-                     
-                     @if (auth()->user()->role == 'Doctor')
                      <li>
                         <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                        
@@ -114,8 +78,6 @@
                             @csrf
                         </form>
                     </li>
-                    
-                    @endif
                      <!----
                      <li><a href="calendar.html" class="iq-waves-effect"><i class="ri-calendar-2-line"></i><span>Calendar</span></a></li>
                      <li><a href="chat.html" class="iq-waves-effect"><i class="ri-message-line"></i><span>Chat</span></a></li>
@@ -282,76 +244,76 @@
                     </div>
                 </div>
             </div>
-             <nav class="navbar navbar-expand-lg navbar-light p-0">
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <i class="ri-menu-3-line"></i>
-                  </button>
-                  <div class="iq-menu-bt align-self-center">
-                     <div class="wrapper-menu">
-                        <div class="line-menu half start"></div>
-                        <div class="line-menu"></div>
-                        <div class="line-menu half end"></div>
-                     </div>
-                  </div>
-                  
-                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                     <ul class="navbar-nav ml-auto navbar-list pull-right">
-                        <li class="nav-item dropdown">
-                           <a href="#" class="search-toggle iq-waves-effect">
-                              <i class="ri-mail-line"></i>
-                              <span class="badge badge-pill badge-primary badge-up count-mail">{{App\Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->count()}}</span>
-                           </a>
-                           <!----recent m here--->
-                           <div class="iq-sub-dropdown">
-                              <div class="iq-card shadow-none m-0">
-                                 <div class="iq-card-body p-0 ">
-                                    <div class="bg-primary p-3">
-                                       <h5 class="mb-0 text-white">Unread Messages<small class="badge  badge-light float-right pt-1">{{App\Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->count()}}</small></h5>
-                                    </div>
-                                    
-                                    @if (count($messages) > 0)
-                                    @foreach ($messages as $messages)
-                                    <a href="../{{$messages->id}}" class="iq-sub-card" >
-                                       <div class="media align-items-center">
-                                          <div class="media-body ml-3">
-                                             <h6 class="mb-0 ">{{$messages->sender_name}}</h6>
-                                             <small class="float-left font-size-12">{{$messages->created_at}}</small>
-                                          </div>
-                                       </div>
-                                    </a>
-                                    @endforeach
-                                    @else <br>
-                                    <p class="text-center">You Have No Messages Yet</p>    
 
-                                    @endif
-                                    <div class="text-center">
-                                    <a href="../chat" class="btn btn-primary" style="margin-bottom: 20px;">See All Messages</a>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </li>
-                    
-                        <li class="nav-item">
-                            <a href="../cart" class="iq-waves-effect" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="My Shopping Cart"><i class="ri-shopping-cart-2-line"></i></a>
-                            <span class="badge badge-primary badge-up count-mail">{{App\StoreCart::where('user_id', auth()->user()->id)->orderBy('id', 'ASC')->count() }}</span>
-                         </li>
-                     </ul>
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+               <i class="ri-menu-3-line"></i>
+               </button>
+               <div class="iq-menu-bt align-self-center">
+                  <div class="wrapper-menu">
+                     <div class="line-menu half start"></div>
+                     <div class="line-menu"></div>
+                     <div class="line-menu half end"></div>
                   </div>
-                  <ul class="navbar-list">
-                     <li>
-                        <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="../images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
-                        <div class="iq-sub-dropdown iq-user-dropdown">
+               </div>
+               <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav ml-auto navbar-list pull-right">
+                     <li class="nav-item dropdown">
+                        <a href="#" class="search-toggle iq-waves-effect">
+                           <i class="ri-mail-line"></i>
+                           <span class="badge badge-pill badge-primary badge-up count-mail">{{App\Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->count()}}</span>
+                        </a>
+                        <!----recent m here--->
+                        <div class="iq-sub-dropdown">
                            <div class="iq-card shadow-none m-0">
-                                 <div class="d-inline-block w-100 text-center p-3">
-                                    <a class="iq-bg-danger iq-sign-btn" href="{{ route('logout') }}" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
+                              <div class="iq-card-body p-0 ">
+                                 <div class="bg-primary p-3">
+                                    <h5 class="mb-0 text-white">Unread Messages<small class="badge  badge-light float-right pt-1">{{App\Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->count()}}</small></h5>
+                                 </div>
+                                 
+                                 @if (count($new_messages) > 0)
+                                 @foreach ($new_messages as $message)
+                                 <a href="../chat/{{$message->id}}" class="iq-sub-card" >
+                                    <div class="media align-items-center">
+                                       <div class="media-body ml-3">
+                                          <h6 class="mb-0 ">{{$message->sender_name}}</h6>
+                                          <small class="float-left font-size-12">{{$message->created_at}}</small>
+                                       </div>
+                                    </div>
+                                 </a>
+                                 @endforeach
+                                 @else <br>
+                                 <p class="text-center">You Have No Unread Messages</p>    
+
+                                 @endif
+                                 <div class="text-center">
+                                 <a href="../chat" class="btn btn-primary" style="margin-bottom: 20px;">See All Messages</a>
                                  </div>
                               </div>
                            </div>
                         </div>
                      </li>
+                    
+                     <li class="nav-item">
+                         <a href="../cart" class="iq-waves-effect" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="My Shopping Cart"><i class="ri-shopping-cart-2-line"></i></a>
+                         <span class="badge badge-primary badge-up count-mail">{{App\StoreCart::where('user_id', auth()->user()->id)->orderBy('id', 'ASC')->count() }}</span>
+                      </li>
                   </ul>
-               </nav>
+               </div>
+               <ul class="navbar-list">
+                  <li>
+                     <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="../images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
+                     <div class="iq-sub-dropdown iq-user-dropdown">
+                        <div class="iq-card shadow-none m-0">
+                              <div class="d-inline-block w-100 text-center p-3">
+                                 <a class="iq-bg-danger iq-sign-btn" href="{{ route('logout') }}" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </li>
+               </ul>
+            </nav>
         </div>
     </div>
     <!-- TOP Nav Bar END -->
@@ -377,48 +339,30 @@
               </div>
         </div>
   <!-- Responsive Breadcrumb End-->
-         <div id="content-page" class="content-page">
-          <div class="container-fluid">
-    <div class="row">
-    <div class="col-sm-9" style="text-align:justify;">
-      <h3 class="title"><span>{{$message->sender_name}}</span></h3>
-      <small><i class="fa fa-calendar"></i>{!!$message->created_at!!}</small>
-      <hr>
-      <p>{!!$message->message!!}</p>
-      
-      <h3 class="title">Reply <span>{{$message->sender_name}}</span></h3>
-      {!! Form::open(['action' => 'MessagingController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
-      **/ !!}
-      @include('inc.messages')
-       <div class="form-group">
-         {{Form::textarea('message', '', ['class' => 'form-control', 'id' =>'pre'], 'required')}}
-       </div>
-       @php
-           $sender = App\User::where('id', $message->sender_id)->first();
-       @endphp
-       {{Form::hidden('receiver_pin', $sender->pin)}}
-       {{Form::hidden('receiver_id', $message->sender_id)}}
-       {{Form::hidden('receiver_email', $message->sender_email)}}
-       {{Form::hidden('receiver_name', $message->sender_name)}}
-       {{Form::hidden('message_id', $message->id)}}
-       {{Form::submit('Reply', ['class' => 'btn btn-primary btn-md pull-left', 'style' => 'text-transform:uppercase;'])}}
-      {!! Form::close() !!}
-      <a href="../chat" class="btn btn-primary btn-md pull-right">Back</a><br>
-    </div>
-</div>
-</div>
-
-</div>
-
-          <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
-          <script>
-              CKEDITOR.replace( 'pre' );
-          </script> 
-                      <hr>
-                </div>
+     <!-- Page Content  -->
+     <div id="content-page" class="content-page">
+        <div class="container-fluid">
+                <div class="iq-card">
+                        {!! Form::open(['action' => 'QuestionsController@store', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
+                        **/ !!}
+                       <div class="iq-card-header d-flex justify-content-between">
+                          <div class="iq-header-title">
+                             <h4 class="card-title">Have A Question?</h4>
+                          </div>
+                       </div>
+                       <div class="iq-card-body">
+                                <hr>
+                                <div class="">
+                                    <div class="form-group">
+                                       <label for="question">Your Question</label>
+                                       <textarea class="form-control" id="question" name="question" placeholder="Your question here..."></textarea>
+                                    </div>
+                                <button type="submit" class="btn btn-primary">Ask Question</button>
+                                {!! Form::close() !!}
+                          </div>
+                       </div>
+                    </div>
               </div>
-          </div>
-    </div>
      <!-- Wrapper END -->
       <!-- Footer -->
         <footer class="bg-white iq-footer">
@@ -437,6 +381,10 @@
            </div>
         </footer>
         <!-- Footer END -->
+         <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+         <script>
+            CKEDITOR.replace( 'question' );
+         </script> 
       <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="../js/jquery.min.js"></script>

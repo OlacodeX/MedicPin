@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
                       
       @section('page_title')
-      {{config('app.name')}} | {!!Str::words($message->message,8)!!}
+      {{config('app.name')}} | {!!Str::words($question->question,8)!!}
       @endsection
             <link rel="icon" href="{{asset('img/yy.jpg')}}">
       <!-- Bootstrap CSS -->
@@ -381,33 +381,45 @@
           <div class="container-fluid">
     <div class="row">
     <div class="col-sm-9" style="text-align:justify;">
-      <h3 class="title"><span>{{$message->sender_name}}</span></h3>
-      <small><i class="fa fa-calendar"></i>{!!$message->created_at!!}</small>
+      <h3 class="title"><span>{{$question->asker_name}}</span></h3>
+      <small><i class="fa fa-calendar"></i>{!!$question->created_at!!}</small>
       <hr>
-      <p>{!!$message->message!!}</p>
-      
-      <h3 class="title">Reply <span>{{$message->sender_name}}</span></h3>
-      {!! Form::open(['action' => 'MessagingController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
+      <p>{!!$question->question!!}</p>
+      <hr>
+                         
+      <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden fadeInUp" data-wow-delay="0.6s">
+                     
+         @if (count($answers) > 0)
+         @foreach ($answers as $answer)
+         <div class="iq-card-body p-0">
+            <h3 class="title"><span>{{$answer->asker_name}}</span></h3>
+            <small><i class="fa fa-calendar"></i>{!!$answer->created_at!!}</small>
+            <hr>
+            <p>{!!$answer->answer!!}</p>
+
+         </div>
+             
+       @endforeach
+      </div>
+
+       @else
+       <p class="text-center">No answers Yet</p>        
+       @endif
+      <h3 class="title">Answer <span>{{$question->asker_name}}</span></h3>
+      {!! Form::open(['action' => 'QuestionsController@store_answer', 'method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
       **/ !!}
       @include('inc.messages')
        <div class="form-group">
          {{Form::textarea('message', '', ['class' => 'form-control', 'id' =>'pre'], 'required')}}
        </div>
-       @php
-           $sender = App\User::where('id', $message->sender_id)->first();
-       @endphp
-       {{Form::hidden('receiver_pin', $sender->pin)}}
-       {{Form::hidden('receiver_id', $message->sender_id)}}
-       {{Form::hidden('receiver_email', $message->sender_email)}}
-       {{Form::hidden('receiver_name', $message->sender_name)}}
-       {{Form::hidden('message_id', $message->id)}}
-       {{Form::submit('Reply', ['class' => 'btn btn-primary btn-md pull-left', 'style' => 'text-transform:uppercase;'])}}
+       {{Form::submit('Answer', ['class' => 'btn btn-primary btn-md pull-left', 'style' => 'text-transform:uppercase;'])}}
       {!! Form::close() !!}
-      <a href="../chat" class="btn btn-primary btn-md pull-right">Back</a><br>
     </div>
 </div>
 </div>
 
+</div>
+</div>
 </div>
 
           <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
@@ -416,7 +428,7 @@
           </script> 
                       <hr>
                 </div>
-              </div>
+                
           </div>
     </div>
      <!-- Wrapper END -->

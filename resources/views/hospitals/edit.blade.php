@@ -4,19 +4,19 @@
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                      
-      @section('page_title')
-      {{config('app.name')}} | {!!Str::words($message->message,8)!!}
-      @endsection
+                
+            @section('page_title')
+            {{config('app.name')}} |Change Plan
+            @endsection
             <link rel="icon" href="{{asset('img/yy.jpg')}}">
-      <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="../css/bootstrap.min.css">
-      <!-- Typography CSS -->
-      <link rel="stylesheet" href="../css/typography.css">
-      <!-- Style CSS -->
-      <link rel="stylesheet" href="../css/style.css">
-      <!-- Responsive CSS -->
-      <link rel="stylesheet" href="../css/responsive.css">
+            <!-- Bootstrap CSS -->
+            <link rel="stylesheet" href="../../css/bootstrap.min.css">
+            <!-- Typography CSS -->
+            <link rel="stylesheet" href="../../css/typography.css">
+            <!-- Style CSS -->
+            <link rel="stylesheet" href="../../css/style.css">
+            <!-- Responsive CSS -->
+            <link rel="stylesheet" href="../../css/responsive.css">
    </head>
 @section('content')
 <!-- Wrapper Start -->
@@ -24,8 +24,8 @@
     <!-- Sidebar  -->
     <div class="iq-sidebar">
             <div class="iq-sidebar-logo d-flex justify-content-between">
-               <a href="../">
-               <img src="../img/yy.jpg" class="img-fluid" alt="">
+               <a href="../../">
+               <img src="../../img/yy.jpg" class="img-fluid" alt="">
                <span>
                 {{config('app.name')}}
                </span>
@@ -42,66 +42,30 @@
                <nav class="iq-sidebar-menu">
                   <ul id="iq-sidebar-toggle" class="iq-menu">
                      <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
-                     
-                     @if (auth()->user()->role == 'Patient')
                      <li>
-                        <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
-                       
-                     </li>
-                     <li class="active">
-                        <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="../myprofile">My Profile</a></li>
-                           <li><a href="../notifications">My Notifications</a></li>
-                           <!---<li><a href="profile-edit.html">User Edit</a></li>--->
-                           <li><a href="">My Appointments</a></li>
-                        </ul>
-                     </li>
-                     <li><a href="../pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
-                     <li><a href="../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
-                     <li>
-                        <a href="../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
-                       
-                     </li>
-                     
-                     <li>
-                        
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
-                        
-                          
- 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form> 
-                    </li>
-                         
-                     @endif
-                     
-                     @if (auth()->user()->role == 'Doctor')
-                     <li>
-                        <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                        <a href="../../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                        
                      </li>
                      <li class="active">
                         <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Doctor's Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                         <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="../myprofile">My Profile</a></li>
+                           <li><a href="../../myprofile">My Profile</a></li>
                            <!---<li><a href="profile-edit.html">User Edit</a></li>--->
-                           <li><a href="../patients/create">Add Patient</a></li>
-                           <li><a href="../patients">Patients List</a></li>
-                           <li><a href="../transfered_patients">Transferred Patients</a></li>
-                           <li><a href="../notifications">Sent Notifications</a></li>
-                           <li><a href="../notifications/create">Send Notification</a></li>
-                           <li><a href="../add_drug">Add Drug</a></li>
-                           <li><a href="../myshop">My Shop</a></li>
-                           <li><a href="../schedule">To Do List</a></li>
-                           <li><a href="../blood_bank">Blood Bank</a></li>
+                           <li><a href="../../patients/create">Add Patient</a></li>
+                           <li><a href="../../patients">Patients List</a></li>
+                           <li><a href="../../transfered_patients">Transferred Patients</a></li>
+                           <li><a href="../../notifications">Sent Notifications</a></li>
+                           <li><a href="../../notifications/create">Send Notification</a></li>
+                           <li><a href="../../add_drug">Add Drug</a></li>
+                           <li><a href="../../myshop">My Shop</a></li>
+                           <li><a href="../../schedule">To Do List</a></li>
+                           <li><a href="../../blood_bank">Blood Bank</a></li>
                         </ul>
                      </li>
-                     <li><a href="../pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
-                     <li><a href="../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                     <li><a href="../../pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
+                     <li><a href="../../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                      <li>
-                        <a href="../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
+                        <a href="../../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                        
                      </li>
                      
@@ -114,8 +78,6 @@
                             @csrf
                         </form>
                     </li>
-                    
-                    @endif
                      <!----
                      <li><a href="calendar.html" class="iq-waves-effect"><i class="ri-calendar-2-line"></i><span>Calendar</span></a></li>
                      <li><a href="chat.html" class="iq-waves-effect"><i class="ri-message-line"></i><span>Chat</span></a></li>
@@ -267,8 +229,8 @@
         <div class="iq-navbar-custom">
             <div class="iq-sidebar-logo">
                 <div class="top-logo">
-                    <a href="../">
-                    <img src="../img/yy.jpg" class="img-fluid" alt="">
+                    <a href="../../">
+                    <img src="../../img/yy.jpg" class="img-fluid" alt="">
                     <span>
                      {{config('app.name')}}
                     </span>
@@ -310,12 +272,12 @@
                                     </div>
                                     
                                     @if (count($messages) > 0)
-                                    @foreach ($messages as $messages)
-                                    <a href="../{{$messages->id}}" class="iq-sub-card" >
+                                    @foreach ($messages as $message)
+                                    <a href="../../{{$message->id}}" class="iq-sub-card" >
                                        <div class="media align-items-center">
                                           <div class="media-body ml-3">
-                                             <h6 class="mb-0 ">{{$messages->sender_name}}</h6>
-                                             <small class="float-left font-size-12">{{$messages->created_at}}</small>
+                                             <h6 class="mb-0 ">{{$message->sender_name}}</h6>
+                                             <small class="float-left font-size-12">{{$message->created_at}}</small>
                                           </div>
                                        </div>
                                     </a>
@@ -325,7 +287,7 @@
 
                                     @endif
                                     <div class="text-center">
-                                    <a href="../chat" class="btn btn-primary" style="margin-bottom: 20px;">See All Messages</a>
+                                    <a href="../../chat" class="btn btn-primary" style="margin-bottom: 20px;">See All Messages</a>
                                     </div>
                                  </div>
                               </div>
@@ -333,7 +295,7 @@
                         </li>
                     
                         <li class="nav-item">
-                            <a href="../cart" class="iq-waves-effect" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="My Shopping Cart"><i class="ri-shopping-cart-2-line"></i></a>
+                            <a href="../../cart" class="iq-waves-effect" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="My Shopping Cart"><i class="ri-shopping-cart-2-line"></i></a>
                             <span class="badge badge-primary badge-up count-mail">{{App\StoreCart::where('user_id', auth()->user()->id)->orderBy('id', 'ASC')->count() }}</span>
                          </li>
                      </ul>
@@ -377,48 +339,77 @@
               </div>
         </div>
   <!-- Responsive Breadcrumb End-->
-         <div id="content-page" class="content-page">
-          <div class="container-fluid">
-    <div class="row">
-    <div class="col-sm-9" style="text-align:justify;">
-      <h3 class="title"><span>{{$message->sender_name}}</span></h3>
-      <small><i class="fa fa-calendar"></i>{!!$message->created_at!!}</small>
-      <hr>
-      <p>{!!$message->message!!}</p>
-      
-      <h3 class="title">Reply <span>{{$message->sender_name}}</span></h3>
-      {!! Form::open(['action' => 'MessagingController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
-      **/ !!}
-      @include('inc.messages')
-       <div class="form-group">
-         {{Form::textarea('message', '', ['class' => 'form-control', 'id' =>'pre'], 'required')}}
-       </div>
-       @php
-           $sender = App\User::where('id', $message->sender_id)->first();
-       @endphp
-       {{Form::hidden('receiver_pin', $sender->pin)}}
-       {{Form::hidden('receiver_id', $message->sender_id)}}
-       {{Form::hidden('receiver_email', $message->sender_email)}}
-       {{Form::hidden('receiver_name', $message->sender_name)}}
-       {{Form::hidden('message_id', $message->id)}}
-       {{Form::submit('Reply', ['class' => 'btn btn-primary btn-md pull-left', 'style' => 'text-transform:uppercase;'])}}
-      {!! Form::close() !!}
-      <a href="../chat" class="btn btn-primary btn-md pull-right">Back</a><br>
-    </div>
-</div>
-</div>
+     <!-- Page Content  -->
+     <div id="content-page" class="content-page">
+        <div class="container-fluid">
+                <div class="iq-card">
+                       <div class="iq-card-header d-flex justify-content-between">
+                          <div class="iq-header-title">
+                             <h4 class="card-title">Edit Hospital Details.</span></h4>
+                          </div>
+                       </div>
+                       <div class="iq-card-body">
+                        @include('inc.messages')
+                        <!---If file upload is involved always add enctype to your opening
+                            form tag and set it to multipart/form-data--->
+                       {!! Form::open(['action' => ['HospitalController@update', $hospital->id],'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
+                       **/ !!}
+                                <div class="row">
+                                 <div class="form-group col-md-6">
+                                    <label for="h_name">Hospital Name </label>
+                                    <div class="inner-addon right-addon">
+                                        <i class="fa fa-user"></i>
+                                    <input type="text" class="form-control" id="h_name" name="h_name" value="{{$hospital->h_name}}">
+                                    </div>
+                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="h_add">Hospital Address</label>
+                                    <div class="inner-addon right-addon">
+                                        <i class="fa fa-address-book-o"></i>
+                                    <input type="text" class="form-control" name="h_add" id="h_add" value="{{$hospital->h_add}}">
+                                    </div>
+                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="mobno">Hospital Contact Number</label>
+                                    <div class="inner-addon right-addon">
+                                        <i class="fa fa-phone"></i>
+                                    <input type="text" class="form-control" id="h_number" name="h_number" value="{{$hospital->h_number}}">
+                                    </div>
+                                 </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="email">Hospital Email</label>
+                                    <div class="inner-addon right-addon">
+                                        <i class="fa fa-envelope"></i>
+                                    <input type="email" class="form-control" id="h_email" value="{{$hospital->h_email}}" name="h_email">
+                                    </div>
+                                 </div>
 
-</div>
-
-          <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
-          <script>
-              CKEDITOR.replace( 'pre' );
-          </script> 
-                      <hr>
-                </div>
+                                 <div class="form-group col-md-6">
+                                    <label for="Blood Group">Hospital Type</label>
+                                    <select class="form-control" id="selecthtype" name="h_type">
+                                       <option value="{{$hospital->h_type}}">{{$hospital->h_type}}</option>
+                                       <option value="General">General Hospital</option>
+                                       <option value="District">District</option>
+                                       <option value="Specialized">Specialized</option>
+                                       <option value="Teaching">Teaching</option>
+                                       <option value="Clinic">Clinic</option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <hr>
+                              {{Form::hidden('_method', 'PUT')}}
+                        {{Form::submit('Update', ['class' => 'btn btn-primary btn-md pull-left', 'style' => 'text-transform:uppercase;'])}}
+                       {!! Form::close() !!}
+                    </div>
+                    <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+                    <script>
+                       CKEDITOR.replace( 'pre' );
+                    </script> 
+                                <hr>
+                          </div>
+                       </div>
+                    </div>
               </div>
-          </div>
-    </div>
      <!-- Wrapper END -->
       <!-- Footer -->
         <footer class="bg-white iq-footer">
@@ -439,35 +430,35 @@
         <!-- Footer END -->
       <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="../js/jquery.min.js"></script>
-        <script src="../js/popper.min.js"></script>
-        <script src="../js/bootstrap.min.js"></script>
+        <script src="../../js/jquery.min.js"></script>
+        <script src="../../js/popper.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
         <!-- Appear JavaScript -->
-        <script src="../js/jquery.appear.js"></script>
+        <script src="../../js/jquery.appear.js"></script>
         <!-- Countdown JavaScript -->
-        <script src="../js/countdown.min.js"></script>
+        <script src="../../js/countdown.min.js"></script>
         <!-- Counterup JavaScript -->
-        <script src="../js/waypoints.min.js"></script>
-        <script src="../js/jquery.counterup.min.js"></script>
+        <script src="../../js/waypoints.min.js"></script>
+        <script src="../../js/jquery.counterup.min.js"></script>
         <!-- Wow JavaScript -->
-        <script src="../js/wow.min.js"></script>
+        <script src="../../js/wow.min.js"></script>
         <!-- Apexcharts JavaScript -->
-        <script src="../js/apexcharts.js"></script>
+        <script src="../../js/apexcharts.js"></script>
         <!-- Slick JavaScript -->
-        <script src="../js/slick.min.js"></script>
+        <script src="../../js/slick.min.js"></script>
         <!-- Select2 JavaScript -->
-        <script src="../js/select2.min.js"></script>
+        <script src="../../js/select2.min.js"></script>
         <!-- Owl Carousel JavaScript -->
-        <script src="../js/owl.carousel.min.js"></script>
+        <script src="../../js/owl.carousel.min.js"></script>
         <!-- Magnific Popup JavaScript -->
-        <script src="../js/jquery.magnific-popup.min.js"></script>
+        <script src="../../js/jquery.magnific-popup.min.js"></script>
         <!-- Smooth Scrollbar JavaScript -->
-        <script src="../js/smooth-scrollbar.js"></script>
+        <script src="../../js/smooth-scrollbar.js"></script>
         <!-- lottie JavaScript -->
-        <script src="../js/lottie.js"></script>
+        <script src="../../js/lottie.js"></script>
         <!-- Chart Custom JavaScript -->
-        <script src="../js/chart-custom.js"></script>
+        <script src="../../js/chart-custom.js"></script>
         <!-- Custom JavaScript -->
-        <script src="../js/custom.js"></script>
+        <script src="../../js/custom.js"></script>
         
 @endsection
