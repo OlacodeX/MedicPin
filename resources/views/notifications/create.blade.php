@@ -56,6 +56,8 @@
                            <li><a href="../transfered_patients">Transferred Patients</a></li>
                            <li><a href="../notifications">Sent Notifications</a></li>
                            <li><a href="../notifications/create">Send Notification</a></li>
+                        </ul>
+                     </li>
                            <li>
                               <a href="#user-info1" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ion-medkit"></i><span>Pharmacy</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                               

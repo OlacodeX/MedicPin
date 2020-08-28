@@ -56,6 +56,8 @@
                            <li><a href="./transfered_patients">Transferred Patients</a></li>
                            <li><a href="./notifications">Sent Notifications</a></li>
                            <li><a href="./notifications/create">Send Notification</a></li>
+                        </ul>
+                     </li>
 
                      
                            <li>
