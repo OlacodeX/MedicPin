@@ -66,7 +66,6 @@
                            <li><a href="./patients/create">Add Patient</a></li>
                            <li><a href="./patients">Patients List</a></li>
                            <li><a href="./transfered_patients">Transferred Patients</a></li>
-                           <li><a href="./add_drug">Add Drug</a></li>
                            <li><a href="./myshop">My Shop</a></li>
                            <li><a href="./schedule">To Do List</a></li>
                            <li><a href="./blood_bank">Blood Bank</a></li>

@@ -74,7 +74,6 @@
                         <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                        
                      </li>
-                     
                      <li>
                          <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
                         

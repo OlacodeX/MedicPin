@@ -61,10 +61,17 @@
                            <li><a href="patients/create">Add Patient</a></li>
                            <li><a href="./patients">Patients List</a></li>
                            <li><a href="./transfered_patients">Transferred Patients</a></li>
-                           <li><a href="./add_drug">Add Drug</a></li>
                            <li><a href="./myshop">My Shop</a></li>
                            <li><a href="./schedule">To Do List</a></li>
                            <li><a href="./blood_bank">Blood Bank</a></li>
+                        </ul>
+                     </li>
+                     <li><a href="./pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
+                     <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                     <li>
+                        <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
+                       
+                     </li>
                         </ul>
                      </li>
                      <li><a href="./pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
