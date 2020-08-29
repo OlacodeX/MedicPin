@@ -80,6 +80,7 @@
                      <li><a href="./blood_bank" class="iq-waves-effect"><i class="ion-medkit"></i><span>Blood Bank</span></a></li>
                      <li><a href="./hospitals" class="iq-waves-effect"><i class="ion-medkit"></i><span>My Hospital</span></a></li>
                      <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                     <li><a href="./questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
                      <li>
                         <a href="./" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                        
@@ -114,6 +115,7 @@
                     </li>
                     <li><a href="./pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
                     <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                    <li><a href="./questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
                     <li>
                        <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                       
@@ -625,7 +627,149 @@
                         @endif
                              </div>
                             </div>
+                            <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden wow fadeInUp" data-wow-delay="0.6s">
+                                <div class="iq-card-header d-flex justify-content-between">
+                            
+                                    
+                            <div class="iq-header-title">
+                                <h4 class="card-title">Questions From Our Forum</h4>
+                            </div>
+                            <div class="iq-card-header-toolbar d-flex align-items-center">
+                                <a href="./questions" class="">Check Forum</a>
+                            </div>
                         </div>
+                        
+                 <style>
+                    div.panel-body{
+                       margin-left: 20px;
+                    }
+                    h4.title{
+                       margin-left: 20px;
+                       margin-top: 20px;
+                    }
+                      /* enable absolute positioning */
+              .inner-addon {
+                position: relative;
+              }
+              
+              /* style glyph */
+              .inner-addon .fa {
+                position: absolute;
+                padding: 10px;
+                pointer-events: none;
+                color: #0178ff7b;
+                font-weight: 900;
+              }
+              
+              /* align glyph 
+              .left-addon .fa  { left:  0px;}*/
+              .right-addon .fa { right: 260px;}
+              
+              /* add padding 
+              .left-addon input  { padding-left:  30px; } */
+              .right-addon input { padding-right: 30px; }
+                       div.panel-body,
+                       div.panel-default{
+                           border-radius: 0;
+                           border-top: none;
+                       }
+                       .btn.btn-info.btn-sm{
+                           background: transparent;
+                           border: none;
+                           color: rgb(20, 109, 224);
+                       }
+                       
+                       
+                       .btn.btn-info.btn-sm i.fa{
+                           font-size: 12px;
+                           margin: 0;
+                       }
+                     @media only screen and (max-width: 768px) {
+              /* align glyph 
+              .left-addon .fa  { left:  0px;}*/
+              .right-addon .fa { right: 20px;}
+              
+                        
+                       .btn.btn-info.btn-sm{
+                           background: transparent;
+                           border: none;
+                           color: rgb(20, 109, 224);
+                           float: right;
+                           display: inline;
+                       }
+                       
+                       .btn.btn-info.btn-sm i.fa{
+                           font-size: 12px;
+                           margin: 0;
+                           padding: 0;
+                       }
+                       div.panel-body span.pull-left{
+                           font-size: 12px;
+                           margin-bottom: 0;
+                       }
+                       div.panel-body span.user-list-files.d-flex.float-right{
+                          margin-top: 0;
+                       }
+                     }
+                   </style>
+                        @if (count($questions_all) > 0)
+                        <div class="iq-card-body">
+                        @foreach ($questions_all as $question_all)
+                           <br><a href="questions/{{$question_all->id}}">
+                            <div class="media-body">
+                           <div class="">
+                              <small>{!!$question_all->created_at!!} </small><br>
+                              <span class="pull-left">
+                                 
+                                 {!!$question_all->question!!} 
+                              @if (auth()->user()->id == $question_all->asker_id)
+                                 <button class ="btn btn-info btn-sm pull-right"><a href="questions/{{$question_all->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Question"><i class="fa fa-edit"></i></a></button>
+                                     {!!Form::open(['action' => ['QuestionsController@destroy', $question_all->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                     {{Form::hidden('_method', 'DELETE')}}
+                                    <button type="submit" class ="btn btn-info btn-sm pull-right" data-toggle="tooltip" data-placement="top" data-original-title="Delete Question"><i class="fa fa-trash-o"></i></button>
+                                   
+                                    {!!Form::close()!!}
+                              @endif
+                              <a href="questions/{{$question_all->id}}" class="pull-right" data-toggle="tooltip" data-placement="top" title="" data-original-title="View answers"> <i class="fa fa-comments"></i>({{App\Answers::where('question_id', $question_all->id)->count()}})</a>
+                           </span>
+                           </div>
+                           </div>
+                           </a>
+                           @endforeach
+      
+                           @else
+                           <p class="text-center">No Questions in Forum Yet</p>    
+                           @endif
+                                 </div>
+                                </div>
+
+
+                                <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden wow fadeInUp" data-wow-delay="0.6s">
+                                    <div class="iq-card-header d-flex justify-content-between">
+                                
+                                        
+                                <div class="iq-header-title">
+                                    <h4 class="card-title">Have A Question?</h4>
+                                </div>
+                                <div class="iq-card-header-toolbar d-flex align-items-center">
+                                    <a href="./questions" class="">Check Forum</a>
+                                </div>
+                            </div>
+                                <div class="iq-card-body">
+                                        <div class="media-body">
+                                            {!! Form::open(['action' => 'QuestionsController@store', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
+                                            **/ !!}
+                                                        <div class="form-group">
+                                                            <p>Ask whatever is it on your mind and a doctor will answer you ASAP</p>
+                                                           <textarea class="form-control" id="question" name="question" placeholder="Your question here..."></textarea>
+                                                        </div>
+                                                    <button type="submit" class="btn btn-primary">Ask Question</button>
+                                                    {!! Form::close() !!}
+                                        </div>
+                                    <hr>
+                                </div>
+                             </div>
+                            </div>
                         @endif
                         @if (auth()->user()->role == 'Doctor')
                         <div class="col-lg-8 col-md-12">
@@ -768,8 +912,54 @@
                         @else
                         <p class="text-center">No Sent Notifications Yet</p>    
                         @endif
+                            </div>
+                        </div>
+                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden wow fadeInUp" data-wow-delay="0.6s">
+                            <div class="iq-card-header d-flex justify-content-between">
+                        
+                                
+                        <div class="iq-header-title">
+                            <h4 class="card-title">Questions From Our Forum</h4>
+                        </div>
+                        <div class="iq-card-header-toolbar d-flex align-items-center">
+                            <a href="./questions" class="">See all questions </a>
+                        </div>
+                    </div>
+                        @if (count($questions_all) > 0)
+                        <div class="iq-card-body">
+                        @foreach ($questions_all as $question_all)
+                           <br><a href="questions/{{$question_all->id}}">
+                            <div class="media-body">
+                           <div class="">
+                              <small>{!!$question_all->created_at!!} </small><br>
+                              <span class="pull-left">
+                                 
+                                 {!!$question_all->question!!} 
+                              @if (auth()->user()->id == $question_all->asker_id)
+                                 <button class ="btn btn-info btn-sm pull-right"><a href="questions/{{$question_all->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Question"><i class="fa fa-edit"></i></a></button>
+                                     {!!Form::open(['action' => ['QuestionsController@destroy', $question_all->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                     {{Form::hidden('_method', 'DELETE')}}
+                                    <button type="submit" class ="btn btn-info btn-sm pull-right" data-toggle="tooltip" data-placement="top" data-original-title="Delete Question"><i class="fa fa-trash-o"></i></button>
+                                   
+                                    {!!Form::close()!!}
+                              @endif
+                              <a href="questions/{{$question_all->id}}" class="pull-right" data-toggle="tooltip" data-placement="top" title="" data-original-title="View answers"> <i class="fa fa-comments"></i>({{App\Answers::where('question_id', $question_all->id)->count()}})</a>
+                           </span>
+                           </div>
+                           </div>
+                           </a>
+                           @endforeach
+      
+                           @else
+                           <p class="text-center">No Questions in Forum Yet</p>    
+                           @endif
+
+                        </div>
+                    </div>
                         @endif
                         </div>
+
+
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -814,6 +1004,10 @@
 </footer>
 <!-- Footer END -->
 <!-- Optional JavaScript -->
+         <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+         <script>
+            CKEDITOR.replace( 'question' );
+         </script> 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/jquery.min.js"></script>
 
@@ -999,31 +1193,31 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="./js/popper.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
 <!-- Appear JavaScript -->
-<script src="js/jquery.appear.js"></script>
+<script src="./js/jquery.appear.js"></script>
 <!-- Countdown JavaScript -->
-<script src="js/countdown.min.js"></script>
+<script src="./js/countdown.min.js"></script>
 <!-- Counterup JavaScript -->
-<script src="js/waypoints.min.js"></script>
-<script src="js/jquery.counterup.min.js"></script>
+<script src="./js/waypoints.min.js"></script>
+<script src="./js/jquery.counterup.min.js"></script>
 <!-- Wow JavaScript -->
-<script src="js/wow.min.js"></script>
+<script src="./js/wow.min.js"></script>
 <!-- Apexcharts JavaScript -->
-<script src="js/apexcharts.js"></script>
+<script src="./js/apexcharts.js"></script>
 <!-- Slick JavaScript -->
-<script src="js/slick.min.js"></script>
+<script src="./js/slick.min.js"></script>
 <!-- Select2 JavaScript -->
-<script src="js/select2.min.js"></script>
+<script src="./js/select2.min.js"></script>
 <!-- Owl Carousel JavaScript -->
-<script src="js/owl.carousel.min.js"></script>
+<script src="./js/owl.carousel.min.js"></script>
 <!-- Magnific Popup JavaScript -->
-<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="./js/jquery.magnific-popup.min.js"></script>
 <!-- Smooth Scrollbar JavaScript -->
-<script src="js/smooth-scrollbar.js"></script>
+<script src="./js/smooth-scrollbar.js"></script>
 <!-- lottie JavaScript -->
-<script src="js/lottie.js"></script>
+<script src="./js/lottie.js"></script>
 
 <!-- Full calendar -->
 <script src='fullcalendar/core/main.js'></script>

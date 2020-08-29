@@ -59,6 +59,7 @@
                      </li>
                      <li><a href="../pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
                      <li><a href="../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                     <li><a href="../questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
                      <li>
                         <a href="../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                        
@@ -106,6 +107,7 @@
                            <li><a href="../blood_bank" class="iq-waves-effect"><i class="ion-medkit"></i><span>Blood Bank</span></a></li>
                            <li><a href="../hospitals" class="iq-waves-effect"><i class="ion-medkit"></i><span>My Hospital</span></a></li>
                            <li><a href="../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                           <li><a href="../questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
                            <li>
                               <a href="../" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                              
@@ -317,7 +319,7 @@
                                     
                                     @if (count($messages) > 0)
                                     @foreach ($messages as $messages)
-                                    <a href="../{{$messages->id}}" class="iq-sub-card" >
+                                    <a href="../chat/{{$messages->id}}" class="iq-sub-card" >
                                        <div class="media align-items-center">
                                           <div class="media-body ml-3">
                                              <h6 class="mb-0 ">{{$messages->sender_name}}</h6>
@@ -386,40 +388,143 @@
          <div id="content-page" class="content-page">
           <div class="container-fluid">
     <div class="row">
-    <div class="col-sm-9" style="text-align:justify;">
-      <h3 class="title"><span>{{$question->asker_name}}</span></h3>
+    <div class="col-sm-9" style="text-align:justify; margin-top:30px;">
+      @if (auth()->user()->name == $question->asker_name)
+          
+      <h5 class="title"><span>Your Question:</span></h5>
+      @else
+      <h5 class="title"><span>{{$question->asker_name}} Says:</span></h5>
+      @endif
       <small><i class="fa fa-calendar"></i>{!!$question->created_at!!}</small>
       <hr>
       <p>{!!$question->question!!}</p>
       <hr>
                          
       <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden fadeInUp" data-wow-delay="0.6s">
+         @include('inc.messages')
                      
          @if (count($answers) > 0)
+         <h4 class="title"><span>Answers</span></h4><br>
          @foreach ($answers as $answer)
          <div class="iq-card-body p-0">
-            <h3 class="title"><span>{{$answer->asker_name}}</span></h3>
+            <style>
+               div.iq-card-body.p-0,
+               h4.title,
+               h5.title{
+                  margin-left: 15px;
+               }
+               /* enable absolute positioning */
+       .inner-addon {
+         position: relative;
+       }
+       
+       /* style glyph */
+       .inner-addon .fa {
+         position: absolute;
+         padding: 10px;
+         pointer-events: none;
+         color: #0178ff7b;
+         font-weight: 900;
+       }
+       
+       /* align glyph 
+       .left-addon .fa  { left:  0px;}*/
+       .right-addon .fa { right: 260px;}
+       
+       /* add padding 
+       .left-addon input  { padding-left:  30px; } */
+       .right-addon input { padding-right: 30px; }
+                div.panel-body,
+                div.panel-default{
+                    border-radius: 0;
+                    border-top: none;
+                }
+                .btn.btn-info.btn-sm{
+                    background: transparent;
+                    border: none;
+                    color: rgb(20, 109, 224);
+                }
+                
+                
+                .btn.btn-info.btn-sm i.fa{
+                    font-size: 12px;
+                    margin: 0;
+                }
+              @media only screen and (max-width: 768px) {
+       /* align glyph 
+       .left-addon .fa  { left:  0px;}*/
+       .right-addon .fa { right: 20px;}
+       
+                 
+                .btn.btn-info.btn-sm{
+                    background: transparent;
+                    border: none;
+                    color: rgb(20, 109, 224);
+                    float: right;
+                    display: inline;
+                }
+                
+                .btn.btn-info.btn-sm i.fa{
+                    font-size: 12px;
+                    margin: 0;
+                    padding: 0;
+                }
+                div.panel-body span.pull-left{
+                    font-size: 12px;
+                    margin-bottom: 0;
+                }
+                div.panel-body span.user-list-files.d-flex.float-right{
+                   margin-top: 0;
+                }
+              }
+            </style>
+            @php
+                $name = App\User::where('id', $answer->user_id)->first();
+            @endphp
+            <h5 class="title"><span>{{$name->name}}</span></h5>
             <small><i class="fa fa-calendar"></i>{!!$answer->created_at!!}</small>
-            <hr>
-            <p>{!!$answer->answer!!}</p>
+            <p>{!!$answer->answer!!}
+            @if (auth()->user()->id == $answer->user_id)
+            <span class="user-list-files d-flex float-left">
+            {!!Form::open(['action' => 'QuestionsController@edit_answer', 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+            {{Form::hidden('id', $answer->id)}}
+            <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Edit Answer"><i class="fa fa-edit"></i></button>
+           
+               {!!Form::close()!!}
+                   {!!Form::open(['action' => 'QuestionsController@destroyy', 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                  {{Form::hidden('id', $answer->id)}}
+                  <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete Answer"><i class="fa fa-trash-o"></i></button>
+                 
+                  {!!Form::close()!!}
+            </span>
+            @endif
+         </p>
 
          </div>
              
        @endforeach
-      </div>
 
        @else
-       <p class="text-center">No answers Yet</p>        
+       @if (auth()->user()->role == 'Doctor')
+       <p class="text-center">No answers yet, be the first to answer...</p> 
+       @else
+       <p class="text-center">No answers Yet, Kindly Check Back Later.</p>    
+           
+       @endif    
        @endif
-      <h3 class="title">Answer <span>{{$question->asker_name}}</span></h3>
-      {!! Form::open(['action' => 'QuestionsController@store_answer', 'method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
-      **/ !!}
-      @include('inc.messages')
-       <div class="form-group">
-         {{Form::textarea('message', '', ['class' => 'form-control', 'id' =>'pre'], 'required')}}
-       </div>
-       {{Form::submit('Answer', ['class' => 'btn btn-primary btn-md pull-left', 'style' => 'text-transform:uppercase;'])}}
-      {!! Form::close() !!}
+       @if (auth()->user()->role == 'Doctor')
+       <h5 class="title">Answer Question</h5>
+       {!! Form::open(['action' => 'QuestionsController@store_answer', 'method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
+       **/ !!}
+       {{Form::hidden('question_id', $question->id)}}
+        <div class="form-group">
+          {{Form::textarea('answer', '', ['class' => 'form-control', 'id' =>'pre'], 'required')}}
+        </div>
+        {{Form::submit('Answer', ['class' => 'btn btn-primary btn-md pull-left', 'style' => 'text-transform:uppercase;'])}}
+       {!! Form::close() !!}
+           
+       @endif
+      </div>
     </div>
 </div>
 </div>

@@ -602,6 +602,7 @@ Index Of Script
                 jQuery('#step2').addClass('done');
                 jQuery('#step3').addClass('active');
             });
+            
         });
 
         /*---------------------------------------------------------------------

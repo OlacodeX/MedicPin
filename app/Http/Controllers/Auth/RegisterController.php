@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\patients;
 use App\User;
+use Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -54,7 +55,9 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role' => ['required', 'string', 'max:255'],
-            //'status' => ['nullable', 'string', 'max:255'],
+            'pp' => ['nullable', 'max:2000'],
+            'gender' => ['nullable', 'string', 'max:255'],
+            'expertise' => ['nullable', 'string', 'max:255'],
         ]);
     }
 
@@ -66,12 +69,37 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-      
-        $pin = 'MP'.mt_rand(99999, 100000);
+        $pin1 = mt_rand(9, 10) + time();
+        
+            $pin = 'MP'.($pin1 + 73);
+        
+            if(!empty($data['pp'])){
+                //Get file name with the extension
+               $filenameWithExt = $data['pp']->getClientOriginalName();
+                //get just file name
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+    
+                // Get just Ext
+                $extension = $data['pp']->getClientOriginalExtension();
+    
+                // File name to store
+                $fileNameTostore = $filename.'_'.time().'.'.$extension;
+    
+                // Upload Image
+                $path = $data['pp']->move('img/profile', $fileNameTostore);
+    
+            }
+           else{
+                //default image for post if none was choosed
+              $fileNameTostore = '1.jpg';
+           }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'role' => $data['role'],
+            'img' =>  $fileNameTostore,
+            'gender' => $data['gender'],
+            'expertise' => $data['expertise'],
             'pin' => $pin,
             'password' => Hash::make($data['password']),
             //patients::where('email', $data['email'])->get('status') => $data['status'],

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\patients;
 use  App\Notifications;
 use App\Messages;
+use App\Questions;
 use Redirect,Response;
 use Calendar;
 use App\Event;
@@ -55,13 +56,14 @@ class HomeController extends Controller
     $patient = patients::where('email',auth()->user()->email)->first();
     $patients = patients::where('doc_email',auth()->user()->email)->whereNotNull('username')->paginate(10);
     $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
-   
+    $questions_all = Questions::orderBy('created_at', 'desc')->paginate(5);
     $data = array(
         //'calendar' => $calendar,
         'patient' => $patient,
         'patients' => $patients,
         'notice_sents' => $notice_sents,
         'notices' => $notices,
+        'questions_all' => $questions_all,
         'new_messages' => $new_messages
     );
         return view('home', $data);

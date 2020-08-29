@@ -76,6 +76,7 @@
                          <li><a href="./blood_bank" class="iq-waves-effect"><i class="ion-medkit"></i><span>Blood Bank</span></a></li>
                          <li><a href="./hospitals" class="iq-waves-effect"><i class="ion-medkit"></i><span>My Hospital</span></a></li>
                          <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                         <li><a href="./questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
                          <li>
                             <a href="./" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                            

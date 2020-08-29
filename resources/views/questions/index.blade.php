@@ -73,11 +73,12 @@
                                <li><a href="./blood_bank" class="iq-waves-effect"><i class="ion-medkit"></i><span>Blood Bank</span></a></li>
                                <li><a href="./hospitals" class="iq-waves-effect"><i class="ion-medkit"></i><span>My Hospital</span></a></li>
                                <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                               <li><a href="./questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
                                <li>
                                   <a href="./" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                                  
                                </li>
-                         
+                              <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
                             
                               
@@ -105,6 +106,7 @@
                         </li>
                         <li><a href="./pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
                         <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                        <li><a href="./questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
                         <li>
                            <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                           
@@ -280,7 +282,7 @@
                </div>
             </div>
                <div class="navbar-breadcrumb">
-                  <h5 class="mb-0">Questions</h5>
+                  <h5 class="mb-0">Forum</h5>
                   <nav aria-label="breadcrumb">
                      <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="./">Home</a></li>
@@ -363,109 +365,192 @@
          <!-- Page Content  -->
          <div id="content-page" class="content-page">
             <div class="container-fluid">
-               <div class="row">
-                         
-                  <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden fadeInUp" data-wow-delay="0.6s">
-                    
-                    <style>
-                       /* enable absolute positioning */
-               .inner-addon {
-                 position: relative;
-               }
+               <div class="">
                
-               /* style glyph */
-               .inner-addon .fa {
-                 position: absolute;
-                 padding: 10px;
-                 pointer-events: none;
-                 color: #0178ff7b;
-                 font-weight: 900;
-               }
-               
-               /* align glyph 
-               .left-addon .fa  { left:  0px;}*/
-               .right-addon .fa { right: 260px;}
-               
-               /* add padding 
-               .left-addon input  { padding-left:  30px; } */
-               .right-addon input { padding-right: 30px; }
-                        div.panel-body,
-                        div.panel-default{
-                            border-radius: 0;
-                            border-top: none;
-                        }
-                        .btn.btn-info.btn-sm{
-                            background: transparent;
-                            border: none;
-                            color: rgb(20, 109, 224);
-                        }
+               <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden fadeInUp" data-wow-delay="0.6s">
+                 
+                @include('inc.messages')
+                 <style>
+                  div.panel-body{
+                     margin-left: 20px;
+                     margin-bottom: 50px;
+                     margin-right: 20px;
+                  }
+                  h4.title{
+                     margin-left: 20px;
+                     margin-top: 20px;
+                  }
+                  span.pull-left{
+                  }
+                    /* enable absolute positioning */
+            .inner-addon {
+              position: relative;
+            }
+            
+            /* style glyph */
+            .inner-addon .fa {
+              position: absolute;
+              padding: 10px;
+              pointer-events: none;
+              color: #0178ff7b;
+              font-weight: 900;
+            }
+            
+            /* align glyph 
+            .left-addon .fa  { left:  0px;}*/
+            .right-addon .fa { right: 260px;}
+            
+            /* add padding 
+            .left-addon input  { padding-left:  30px; } */
+            .right-addon input { padding-right: 30px; }
+                     div.panel-body,
+                     div.panel-default{
+                         border-radius: 0;
+                         border-top: none;
+                     }
+                     .btn.btn-info.btn-sm{
+                         background: transparent;
+                         border: none;
+                         color: rgb(20, 109, 224);
+                     }
+                     
+                     
+                     .btn.btn-info.btn-sm i.fa{
+                         font-size: 12px;
+                         margin: 0;
+                     }
+                   @media only screen and (max-width: 768px) {
+            /* align glyph 
+            .left-addon .fa  { left:  0px;}*/
+            .right-addon .fa { right: 20px;}
+            
+                      
+                     .btn.btn-info.btn-sm{
+                         background: transparent;
+                         border: none;
+                         color: rgb(20, 109, 224);
+                         float: right;
+                         display: inline;
+                     }
+                     
+                     .btn.btn-info.btn-sm i.fa{
+                         font-size: 12px;
+                         margin: 0;
+                         padding: 0;
+                     }
+                     div.panel-body span.pull-left{
+                         font-size: 12px;
+                         margin-bottom: 0;
+                     }
+                     div.panel-body span.user-list-files.d-flex.float-right{
+                        margin-top: 0;
+                     }
+                   }
+                 </style>
+                 <div class="iq-card-body p-0">
+                    @if (auth()->user()->role == 'Doctor')
+                    @if (count($questions_all) > 0)
+                    @foreach ($questions_all as $question_all)
+                       <br><a href="questions/{{$question_all->id}}"data-toggle="tooltip" data-placement="top" title="" data-original-title="Click to read answers">
+                       <div class="panel panel-default">
+                       <div class="panel-body">
+                          <small>{!!$question_all->created_at!!} </small><br>
+                             
+                           {!!$question_all->asker_name!!} <br>
+                          <span class="pull-left">
+                           
+                             {!!Str::words( $question_all->question,6)!!} 
+                          @if (auth()->user()->id == $question_all->asker_id)
+                             <button class ="btn btn-info btn-sm pull-right"><a href="questions/{{$question_all->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Question"><i class="fa fa-edit"></i></a></button>
+                                 {!!Form::open(['action' => ['QuestionsController@destroy', $question_all->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                 {{Form::hidden('_method', 'DELETE')}}
+                                <button type="submit" class ="btn btn-info btn-sm pull-right" data-toggle="tooltip" data-placement="top" data-original-title="Delete Question"><i class="fa fa-trash-o"></i></button>
+                               
+                                {!!Form::close()!!}
+                          @endif
+                          <a href="questions/{{$question_all->id}}" class="pull-right" data-toggle="tooltip" data-placement="top" title="" data-original-title="View answers"> <i class="fa fa-comments"></i>({{App\Answers::where('question_id', $question_all->id)->count()}})</a>
+                       </span>
+                       </div>
+                       </div>
+                       </a><br>
+                       @endforeach
+                       <div class="pull-right">
+                               <!-----The pagination link----->
+                               {{$questions_all->links()}}
+                       </div>
+  
+                       @else
+                       <p class="text-center">No Questions in Forum Yet</p>    
+                       @endif
                         
-                        
-                        .btn.btn-info.btn-sm i.fa{
-                            font-size: 12px;
-                            margin: 0;
-                        }
-                      @media only screen and (max-width: 768px) {
-               /* align glyph 
-               .left-addon .fa  { left:  0px;}*/
-               .right-addon .fa { right: 20px;}
-               
-                         
-                        .btn.btn-info.btn-sm{
-                            background: transparent;
-                            border: none;
-                            color: rgb(20, 109, 224);
-                            float: right;
-                            display: inline;
-                        }
-                        
-                        .btn.btn-info.btn-sm i.fa{
-                            font-size: 12px;
-                            margin: 0;
-                            padding: 0;
-                        }
-                        div.panel-body span.pull-left{
-                            font-size: 12px;
-                            margin-bottom: 0;
-                        }
-                        div.panel-body span.user-list-files.d-flex.float-right{
-                           margin-top: 0;
-                        }
-                      }
-                    </style>
-                                 @if (count($questions) > 0)
-                                 @foreach ($questions as $question)
-                              <a href="questions/{{$question->id}}">
-                                 <div class="iq-card-body p-0">
-                                 <div class="panel panel-default">
-                                 <div class="panel-body">
-                                 <span class="pull-left">{!!$question->question!!}</span>
-                                 <span class="user-list-files d-flex float-right">
-                                 
-                                 {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
-                                 {{Form::hidden('pin', $question->pin)}}
-                                 <button type="submit" class ="btn btn-info btn-sm" title="Add New Medical Record"><i class="fa fa-plus"></i></button>
+                    @endif
+                    @if (auth()->user()->role == 'Patient')
+                  @if (count($questions) > 0)
+                  <h4 class="title">Questions Asked by You.</h4>
+                  @foreach ($questions as $question)
+                     <br><a href="questions/{{$question->id}}">
+                     <div class="panel panel-default">
+                     <div class="panel-body">
+                        <small>{!!$question->created_at!!} </small><br>
+                        <span class="pull-left">
+                           
+                           {!!$question->question!!} 
+                        @if (auth()->user()->id == $question->asker_id)
+                           <button class ="btn btn-info btn-sm pull-right"><a href="questions/{{$question->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Question"><i class="fa fa-edit"></i></a></button>
+                               {!!Form::open(['action' => ['QuestionsController@destroy', $question->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                               {{Form::hidden('_method', 'DELETE')}}
+                              <button type="submit" class ="btn btn-info btn-sm pull-right" data-toggle="tooltip" data-placement="top" data-original-title="Delete Question"><i class="fa fa-trash-o"></i></button>
+                             
+                              {!!Form::close()!!}
+                        @endif
+                        <a href="questions/{{$question->id}}" class="pull-right" data-toggle="tooltip" data-placement="top" title="" data-original-title="View answers"> <i class="fa fa-comments"></i>({{App\Answers::where('question_id', $question->id)->count()}})</a>
+                     </span>
+                     </div>
+                     </div>
+                     </a><br>
+                     @endforeach
+
+                     @else
+                     <p class="text-justify" style="margin-left: 20px">You Have No Questions Yet</p>    
+                     @endif
+                     <br><h4 class="title">Other Questions in Forum.</h4>
+                     @if (count($questions_al) > 0)
+                     @foreach ($questions_al as $question_al)
+                        <br><a href="questions/{{$question_al->id}}">
+                        <div class="panel panel-default">
+                        <div class="panel-body">
+                           <small>{!!$question_al->created_at!!} </small><br>
+                           <span class="pull-left">
+                              
+                              {!!$question_al->question!!} 
+                           @if (auth()->user()->id == $question_al->asker_id)
+                              <button class ="btn btn-info btn-sm pull-right"><a href="questions/{{$question_al->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Question"><i class="fa fa-edit"></i></a></button>
+                                  {!!Form::open(['action' => ['QuestionsController@destroy', $question_al->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                  {{Form::hidden('_method', 'DELETE')}}
+                                 <button type="submit" class ="btn btn-info btn-sm pull-right" data-toggle="tooltip" data-placement="top" data-original-title="Delete Question"><i class="fa fa-trash-o"></i></button>
                                 
-                                 
-  
-  
-                                     {!!Form::open(['action' => ['PatientsController@destroy', $question->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
-                                     {{Form::hidden('email', $question->email)}}
-                                     {{Form::hidden('_method', 'DELETE')}}
-                                     <button type="submit" class ="btn btn-info btn-sm" title="Delete Patient"><i class="fa fa-trash-o"></i></button>
-                                    
-                                     {!!Form::close()!!}
-                                  </span>
-                                 </div>
-                                 </div>
-                                 </a>
-                                 @endforeach
-  
-                                 @else
-                                 <p class="text-center">No Patients Yet</p>    
-                                 @endif
-                                 </div>
-                              </div>
+                                 {!!Form::close()!!}
+                           @endif
+                           <a href="questions/{{$question_al->id}}" class="pull-right" data-toggle="tooltip" data-placement="top" title="" data-original-title="View answers"> <i class="fa fa-comments"></i>({{App\Answers::where('question_id', $question_al->id)->count()}})</a>
+                        </span>
+                        </div>
+                        </div>
+                        </a><br>
+                        @endforeach
+                        <div class="pull-right">
+                                <!-----The pagination link----->
+                                {{$questions->links()}}
+                        </div>
+   
+                        @else
+                        <p class="text-justify" style="margin-left: 20px">No Questions in Forum Yet</p> 
+                     @endif
+                     @endif
+                 </div>
+             </div>
+            </div>
+         
+                   
                      <!----
                               <div class="col-lg-12 chat-data p-0 chat-data-right">
                                  <div class="tab-content">

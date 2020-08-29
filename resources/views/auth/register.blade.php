@@ -6,7 +6,7 @@
                 background-position: top;
                 color: #ffa500;
                 height: 100%;
-               padding-bottom: 800px;
+               padding-bottom: 1200px;
                 margin: 0;
     }
     div.jumbotron{
@@ -38,8 +38,10 @@ h1.spot a:hover{
        /*----------------------------------------------
 Input
 ------------------------------------------------*/
-div.col-sm-6 div.card input.form-control { height: 45px; line-height: 45px; background: #e9edf4; border: 0px solid #d7dbda; font-size: 14px; color: #777D74; }
-div.col-sm-6 div.card input.form-control:focus { color: #374948; background-color: #e5f2ff; box-shadow: none; }
+div.col-sm-6 div.card input.form-control,
+div.col-sm-6 div.card select.form-control { height: 45px; line-height: 45px; background: #e9edf4; border: 0px solid #d7dbda; font-size: 14px; color: #777D74; }
+div.col-sm-6 div.card input.form-control:focus,
+div.col-sm-6 div.card select.form-control:focus { color: #374948; background-color: #e5f2ff; box-shadow: none; }
 
     /* style glyph */
     div.inner-addon .fa {
@@ -110,7 +112,46 @@ p.pull-right a{
     background:rgba(241, 237, 237, 0.726);
     padding: 8px 5px;
 }
+  
+input.form-control.fie{
+            padding-top: 90px;
+            padding-bottom: 90px;
+            text-align: center;
+            background: #aaaaaa;
+            border:#ffa500 2px dashed;
+            border-radius: 0;
+        }
+        input.fie[type="file"]{
+   -webkit-appearance: none;
+   text-align: left;
+   -webkit-rtl-ordering:  left;
+}
+input.fie[type="file"]::-webkit-file-upload-button{
+   -webkit-appearance: none;
+   margin: 0 0 0 300px;
+   border: 1px solid #ffa500;
+   border-radius: 4px;
+   padding: 10px 30px;
+   background: transparent;
+   color: #ffa500;
+   font-weight: bold;
+}
+input.fie[type="file"]::-webkit-file-upload-text{
+   -webkit-appearance: none;
+   display: none;
+}
+
 @media only screen and (max-width: 768px) {
+input.fie[type="file"]::-webkit-file-upload-button{
+   -webkit-appearance: none;
+   margin: 0 0 20px 50px;
+   border: 1px solid #ffa500;
+   border-radius: 4px;
+   padding: 10px 10px;
+   background: transparent;
+   color: #ffa500;
+   font-weight: bold;
+}
 
     div.col-sm-6.one{
                 background:linear-gradient(rgba(11, 15, 236, 0.781),rgba(10, 10, 190, 0.76)), url('img/yy.jpg') no-repeat;
@@ -176,7 +217,7 @@ p.text-center{
                     <p>Enter your details and let's get you an account.</p>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="role" value="Doctor">
                         <div class="form-group row">
@@ -205,6 +246,68 @@ p.text-center{
                                     </span>
                                 @enderror
                             </div>
+                        </div>
+                        <div class="form-group row">
+                           <label for="Expertise">Expertise</label>
+                           <select class="form-control" id="selectex" name="expertise">
+                              <option>Select</option>
+                              <option value="Allergists/Immunologist">Allergists/Immunologist</option>
+                              <option value="Anesthesiologist">Anesthesiologist</option>
+                              <option value="Cardiologist">Cardiologist</option>
+                              <option value="Colon and Rectal Surgeon">Colon and Rectal Surgeon</option>
+                              <option value="Critical Care Medicine Specialist">Critical Care Medicine Specialist</option>
+                              <option value="Dermatologist">Dermatologist</option>
+                              <option value="Endocrinologist">Endocrinologist</option>
+                              <option value="Emergency Medicine Specialist">Emergency Medicine Specialist</option>
+                              <option value="Family Physician">Family Physician</option>
+                              <option value="Gastroenterologist">Gastroenterologist</option>
+                              <option value="Geriatric Medicine Specialist">Geriatric Medicine Specialist</option>
+                              <option value="Hematologist">Hematologist</option>
+                              <option value="Hospice and Palliative Medicine Specialist">Hospice and Palliative Medicine Specialist</option>
+                              <option value="Infectious Disease Specialist">Infectious Disease Specialist</option>
+                              <option value="Internist">Internist</option>
+                              <option value="Medical Geneticist">Medical Geneticist</option>
+                              <option value="Nephrologist">Nephrologist</option>
+                              <option value="Neurologist">Neurologist</option>
+                              <option value="Obstetricians and Gynecologist">Obstetricians and Gynecologist</option>
+                              <option value="Oncologist">Oncologist</option>
+                              <option value="Ophthalmologist">Ophthalmologist</option>
+                              <option value="Osteopath">Osteopath</option>
+                              <option value="Otolaryngologist">Otolaryngologist</option>
+                              <option value="Pathologist">Pathologist</option>
+                              <option value="Pediatrician">Pediatrician</option>
+                              <option value="Physiatrist">Physiatrist</option>
+                              <option value="Plastic Surgeon">Plastic Surgeon</option>
+                              <option value="Podiatrist">Podiatrist</option>
+                              <option value="Preventive Medicine Specialist">Preventive Medicine Specialist</option>
+                              <option value="Psychiatrist">Psychiatrist</option>
+                              <option value="Pulmonologist">Pulmonologist</option>
+                              <option value="Radiologist">Radiologist</option>
+                              <option value="Rheumatologist">Rheumatologist</option>
+                              <option value="Sleep Medicine Specialist">Sleep Medicine Specialist</option>
+                              <option value="Sports Medicine Specialist">Sports Medicine Specialist</option>
+                              <option value="General Surgeon">General Surgeon</option>
+                              <option value="Urologist">Urologist</option>
+                           </select>
+                        </div>
+                        <div class="form-group row">
+                           <label for="gender">Gender</label>
+                           <select class="form-control" id="selectge" name="gender">
+                              <option>Select</option>
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                           </select>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="image" class="col-form-label text-md-right">{{ __('Profile Picture') }}</label>
+                                <input id="pp" class="form-control fie" type="file" class="form-control @error('pp') is-invalid @enderror" name="pp">
+
+                                @error('pp')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         </div>
 
                         <div class="form-group row">

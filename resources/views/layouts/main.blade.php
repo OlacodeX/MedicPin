@@ -98,6 +98,7 @@
     </head>
     <body>
         @yield('content')
+        @include('inc.messages')
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script>
             // When the user scrolls down 20px from the top of the document, show the button

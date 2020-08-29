@@ -69,3 +69,6 @@ Route::post('/remove', 'HospitalController@destroyy');
 
 Route::resource('/questions', 'QuestionsController');
 Route::post('/answer', 'QuestionsController@store_answer');
+Route::post('/edit_answer', 'QuestionsController@edit_answer');
+Route::post('/update_answer', 'QuestionsController@update_answer');
+Route::post('/delete', 'QuestionsController@destroyy');

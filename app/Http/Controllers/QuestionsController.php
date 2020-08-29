@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Messages;
 use App\Questions;
 use App\Answers;
+use App\User;
+use App\Mail\QuestionNotificationMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
@@ -27,12 +30,14 @@ class QuestionsController extends Controller
     {
         //
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
-        $questions = Questions::orderBy('created_at', 'desc')->where('asker_id', auth()->user()->id)->get();
-        $questions_all = Questions::orderBy('created_at', 'desc')->get();
+        $questions = Questions::orderBy('created_at', 'desc')->where('asker_id', auth()->user()->id)->paginate(10);
+        $questions_al = Questions::orderBy('created_at', 'desc')->where('asker_id', !auth()->user()->id)->paginate(10);
+        $questions_all = Questions::orderBy('created_at', 'desc')->paginate(10);
         $data = array(
             'new_messages' => $new_messages,
             'questions' => $questions,
-            'questions_all' => $questions_all
+            'questions_all' => $questions_all,
+            'questions_al' => $questions_al
         );
         return view('questions.index', $data);
 
@@ -60,7 +65,7 @@ class QuestionsController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request, [
+        $data = request()->validate([
             'question' => 'required',
         ]); 
         
@@ -72,6 +77,8 @@ class QuestionsController extends Controller
         $question->asker_pin = auth()->user()->pin;
         //Save to db
         $question->save();
+         $doctors = User::where('role', 'Doctor')->select('email')->pluck('email');
+        Mail::to($doctors)->send(new QuestionNotificationMail($data));
         //print success message and redirect
         return redirect('/dashboard')->with('success', 'Question Received!');//I just set the message for session(success).
 
@@ -101,7 +108,7 @@ class QuestionsController extends Controller
         return view('questions.show', $data);
     }
   
-    public function store_answer(){
+    public function store_answer(Request $request){
 
         $this->validate($request, [
             'question_id' => 'nullable',
@@ -110,6 +117,18 @@ class QuestionsController extends Controller
             'user_id' => 'nullable',
             'user_pin' => 'nullable',
             ]);  
+            $answer = new Answers;
+            $answer->answer =  $request->input('answer');
+            $answer->user_id = auth()->user()->id;
+            $answer->user_email = auth()->user()->email;
+            $answer->question_id = $request->input('question_id');
+            $answer->user_pin = auth()->user()->pin;
+            //Save to db
+            $answer->save();
+            //print success message and redirect
+            return redirect()->back()->with('success', 'Answer Received!');//I just set the message for session(success).
+    
+
     }
     /**
      * Show the form for editing the specified resource.
@@ -120,8 +139,29 @@ class QuestionsController extends Controller
     public function edit($id)
     {
         //
+        $question = Questions::find($id);
+        $messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = [
+            'question' => $question,
+            'messages' => $messages
+           // 'replies' => $replies
+        ];
+        return view('questions.edit', $data);
     }
-
+    
+    public function edit_answer()
+    {
+        //
+        $id = $_POST['id'];
+        $answer = Answers::find($id);
+        $messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = [
+            'answer' => $answer,
+            'messages' => $messages
+           // 'replies' => $replies
+        ];
+        return view('questions.editt', $data);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -132,6 +172,30 @@ class QuestionsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'question' => 'nullable',
+            ]);  
+            $question = Questions::find($id);
+            $question->question =  $request->input('question');
+            //Save to db
+            $question->save();
+            //print success message and redirect
+            return redirect('/questions')->with('success', 'Question updated!');//I just set the message for session(success).
+    
+    }
+    public function update_answer(Request $request)
+    {
+        //
+        $this->validate($request, [
+            'answer' => 'nullable',
+            ]);  
+            $answer = Answers::find($request->input('id'));
+            $answer->answer =  $request->input('answer');
+            //Save to db
+            $answer->save();
+            //print success message and redirect
+            return redirect('/questions')->with('success', 'Answer updated!');//I just set the message for session(success).
+    
     }
 
     /**
@@ -143,5 +207,18 @@ class QuestionsController extends Controller
     public function destroy($id)
     {
         //
+        $question = Questions::find($id);
+        $question->delete();
+         return redirect()->back()->with('success', 'Question Deleted.');
+         
+    }
+    public function destroyy()
+    {
+        //
+        $id = $_POST['id'];
+        $answer = Answers::find($id);
+       $answer->delete();
+        return redirect()->back()->with('success', 'Answer Deleted.');
+        
     }
 }
