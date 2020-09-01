@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.mainn')
 @section('page_title')
 {{config('app.name')}}
 @endsection

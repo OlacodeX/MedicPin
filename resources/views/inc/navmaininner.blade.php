@@ -84,7 +84,11 @@
                               </ul>
                          </li>
                           <li><a href="../blood_bank" class="iq-waves-effect"><i class="ri-briefcase-4-fill"></i><span>Blood Bank</span></a></li>
+                          @if (!empty($hospital))
                           <li><a href="../hospitals/{{$hospital->id}}" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>My Hospital</span></a></li>
+                         @else
+                         <li><a href="../hospitals/create" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>Add Hospital</span></a></li>
+                          @endif
                           <li><a href="../add_op" class="iq-waves-effect"><i class="ri-folders-fill"></i><span>Add Operation Record</span></a></li>
                           <li><a href="../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                           <li><a href="../questions" class="iq-waves-effect"><i class="ri-message-fill"></i><span>Forum</span></a></li>
