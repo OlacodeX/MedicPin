@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Messages;
 use App\MessagesView;
 use App\patients;
+use App\hospitals;
 use App\Mail\MessageNotificationMail;
 use Illuminate\Support\Facades\Mail;
 
@@ -24,12 +25,14 @@ class MessagingController extends Controller
     {
         //
         $messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->paginate(10);
+        $hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         //$omessages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'read')->get();
         
         
         $data = array(
             'messages' => $messages,
+            'hospital' => $hospital,
             //'omessages' => $omessages,
             'new_messages' => $new_messages
         );
@@ -78,9 +81,13 @@ class MessagingController extends Controller
         //
         $pin = $_GET['pin'];
         $patient = patients::where('pin', $pin)->first();
+        $hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $messages = Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->orderBy('created_at', 'desc')->get();
         $data = array(
             'patient' => $patient,
+            'hospital' => $hospital,
+            'new_messages' => $new_messages,
             'messages' => $messages
         );
         return view("chat.create", $data);
@@ -155,12 +162,16 @@ class MessagingController extends Controller
     {
         //
         $message = Messages::find($id);
+        $hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $messages = Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->orderBy('created_at', 'desc')->get();
         $replies = Messages::find($id);
         //$post = Posts::find($id);
         $data = [
             'messages' => $messages,
-            'message' => $message,
+            'new_messages' => $new_messages,
+            'hospital' => $hospital,
+            'message' => $message
            // 'replies' => $replies
         ];
         //check if message is read and update db appropriately

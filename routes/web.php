@@ -59,10 +59,12 @@ Route::get('/schedule_tomorrow', 'TodoController@tomorrow');
 Route::resource('/hospitals', 'HospitalController');
 Route::post('/add_doc', 'HospitalController@add_doc');
 Route::post('/store_doc', 'HospitalController@store_doc');
+Route::post('/store_op', 'HospitalController@store_op');
 Route::post('/store_message', 'HospitalController@store_message');
 Route::post('/doctors', 'HospitalController@doctors');
 Route::post('/search', 'HospitalController@search');
 Route::get('/send_message', 'HospitalController@message');
+Route::get('/add_op', 'HospitalController@add_op');
 Route::post('/remove', 'HospitalController@destroyy');
 
 //Q&S

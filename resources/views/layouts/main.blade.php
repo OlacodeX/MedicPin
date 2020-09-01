@@ -10,16 +10,22 @@
         <meta name="author" content="OlacodeX" />
         <title>@yield('page_title', 'Medicpin')</title>
         <link rel="icon" href="{{asset('img/yy.jpg')}}">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./csss/bootstrap.min.css">
+  <!-- Typography CSS -->
+  <link rel="stylesheet" href="./csss/typography.css">
+  <!-- Style CSS -->
+  <link rel="stylesheet" href="./csss/style.css">
+  <!-- Responsive CSS -->
+  <link rel="stylesheet" href="./csss/responsive.css">
+   <!-- Full calendar -->
+  <link href='./fullcalendarr/core/main.css' rel='stylesheet' />
+  <link href='./fullcalendarr/daygrid/main.css' rel='stylesheet' />
+  <link href='./fullcalendarr/timegrid/main.css' rel='stylesheet' />
+  <link href='./fullcalendarr/list/main.css' rel='stylesheet' />
 
-        <!-- Fonts -->
-      <!-- Typography CSS -->
-      <link rel="stylesheet" href="css/typography.css">
-      <!-- Style CSS -->
-      <link rel="stylesheet" href="css/style.css">
-      <!-- Responsive CSS -->
-      <link rel="stylesheet" href="css/responsive.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./csss/flatpickr.min.css">
+
         <style>
             /* enable absolute positioning */
     .inner-addon {
@@ -98,88 +104,135 @@
     </head>
     <body>
         @yield('content')
-        @include('inc.messages')
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <script>
-            // When the user scrolls down 20px from the top of the document, show the button
-            window.onscroll = function() {scrollFunction()};
-            
-            function scrollFunction() {
-                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                document.getElementById("myBtn").style.display = "block";
-                } else {
-                document.getElementById("myBtn").style.display = "none";
-                }
-            }
-            
-            // When the user clicks on the button, scroll to the top of the document
-            function topFunction() {
-                document.body.scrollTop = 0;
-                document.documentElement.scrollTop = 0;
-            }
+      
 
-
-
- 
-    var slideIndex = 1;
-    showSlides(slideIndex);
-    
-    function plusSlides(n) {
-      showSlides(slideIndex += n);
-    }
-    
-    function currentSlide(n) {
-      showSlides(slideIndex = n);
-    }
-    
-    function showSlides(n) {
-      var i;
-      var slides = document.getElementsByClassName("mySlides");
-      var dots = document.getElementsByClassName("demo");
-      var captionText = document.getElementById("caption");
-      if (n > slides.length) {slideIndex = 1}
-      if (n < 1) {slideIndex = slides.length}
-      for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none";
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="./jss/jquery.min.js"></script>
+        <script src="./jss/popper.min.js"></script>
+        <script src="./jss/bootstrap.min.js"></script>
+        <!-- Appear JavaScript -->
+        <script src="./jss/jquery.appear.js"></script>
+        <!-- Countdown JavaScript -->
+        <script src="./jss/countdown.min.js"></script>
+        <!-- Counterup JavaScript -->
+        <script src="./jss/waypoints.min.js"></script>
+        <script src="./jss/jquery.counterup.min.js"></script>
+        <!-- Wow JavaScript -->
+        <script src="./jss/wow.min.js"></script>
+        <!-- Apexcharts JavaScript -->
+        <script src="./jss/apexcharts.js"></script>
+        <!-- Slick JavaScript -->
+        <script src="./jss/slick.min.js"></script>
+        <!-- Select2 JavaScript -->
+        <script src="./jss/select2.min.js"></script>
+        <!-- Owl Carousel JavaScript -->
+        <script src="./jss/owl.carousel.min.js"></script>
+        <!-- Magnific Popup JavaScript -->
+        <script src="./jss/jquery.magnific-popup.min.js"></script>
+        <!-- Smooth Scrollbar JavaScript -->
+        <script src="./jss/smooth-scrollbar.js"></script>
+        <!-- lottie JavaScript -->
+        <script src="./jss/lottie.js"></script>
+        <!-- am core JavaScript -->
+        <script src="./jss/core.js"></script>
+        <!-- am charts JavaScript -->
+        <script src="./jss/charts.js"></script>
+        <!-- am animated JavaScript -->
+        <script src="./jss/animated.js"></script>
+        <!-- am kelly JavaScript -->
+        <script src="./jss/kelly.js"></script>
+        <!-- Flatpicker Js -->
+        <script src="./jss/flatpickr.js"></script>
+        <!-- Chart Custom JavaScript -->
+        <script src="./jss/chart-custom.js"></script>
+        <!-- Custom JavaScript -->
+      <script>  
+    function yesnoCheck(that) {
+      if (that.value == "Breast Surgery") {
+          document.getElementById("Breast").style.display = "block";
+          document.getElementById("Breast").style.paddingTop = "16px";
+      } else {
+          document.getElementById("Breast").style.display = "none";
+          document.getElementById("Breast").style.paddingTop = "0";
       }
-      for (i = 0; i < dots.length; i++) {
-          dots[i].className = dots[i].className.replace(" active", "");
+      if (that.value == "Colon and Rectal Surgery") {
+          document.getElementById("Colon").style.display = "block";
+          document.getElementById("Colon").style.paddingTop = "16px";
+      } else {
+          document.getElementById("Colon").style.display = "none";
+          document.getElementById("Colon").style.paddingTop = "0";
       }
-      slides[slideIndex-1].style.display = "block";
-      dots[slideIndex-1].className += " active";
-      captionText.innerHTML = dots[slideIndex-1].alt;
-    }
+      if (that.value == "Endocrine Surgery") {
+          document.getElementById("Endocrine").style.display = "block";
+          document.getElementById("Endocrine").style.paddingTop = "16px";
+      } else {
+          document.getElementById("Endocrine").style.display = "none";
+          document.getElementById("Endocrine").style.paddingTop = "0";
+      }
+      if (that.value == "Gynecological Surgery") {
+          document.getElementById("Gynecological").style.display = "block";
+          document.getElementById("Gynecological").style.paddingTop = "16px";
+      } else {
+          document.getElementById("Gynecological").style.display = "none";
+          document.getElementById("Gynecological").style.paddingTop = "0";
+      }
+      if (that.value == "Orthopedic Surgery") {
+          document.getElementById("Orthopedic").style.display = "block";
+          document.getElementById("Orthopedic").style.paddingTop = "16px";
+      } else {
+          document.getElementById("Orthopedic").style.display = "none";
+          document.getElementById("Orthopedic").style.paddingTop = "0";
+      }
+      if (that.value == "Outpatient Surgery") {
+          document.getElementById("Out").style.display = "block";
+          document.getElementById("Out").style.paddingTop = "16px";
+      } else {
+          document.getElementById("Out").style.display = "none";
+          document.getElementById("Out").style.paddingTop = "0";
+      }
+      if (that.value == "Robotic Surgery") {
+          document.getElementById("Robotic").style.display = "block";
+          document.getElementById("Robotic").style.paddingTop = "16px";
+      } else {
+          document.getElementById("Robotic").style.display = "none";
+          document.getElementById("Robotic").style.paddingTop = "0";
+      }
+      if (that.value == "Thoracic Surgery") {
+          document.getElementById("Thoracic").style.display = "block";
+          document.getElementById("Thoracic").style.paddingTop = "16px";
+      } else {
+          document.getElementById("Thoracic").style.display = "none";
+          document.getElementById("Thoracic").style.paddingTop = "0";
+      }
+      if (that.value == "Vascular Surgery") {
+          document.getElementById("Vascular").style.display = "block";
+          document.getElementById("Vascular").style.paddingTop = "16px";
+      } else {
+          document.getElementById("Vascular").style.display = "none";
+          document.getElementById("Vascular").style.paddingTop = "0";
+      }
+  }
+  </script>
+<script>
     
-            </script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-          <script>
-            function openNavOne() {
-              document.getElementById("myNav").style.width = "250px";
-              document.getElementById("main").style.marginLeft = "250px";
-            }
-            
-            function closeNavOne() {
-              document.getElementById("myNav").style.width = "0";
-              document.getElementById("main").style.marginLeft= "0";
-            }     
-                
-                        </script>
-        <!-- GetButton.io widget
-        <script type="text/javascript">
-            (function () {
-                var options = {
-                    whatsapp: "+2348123035681", // WhatsApp number
-                    call_to_action: "Live chat", // Call to action
-                    position: "left", // Position may be 'right' or 'left'
-                };
-                var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;
-                var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
-                s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
-                var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
-            })();
-        </script>
-        /GetButton.io widget -->
-        </div>
+  $(function () {
+    $("input.form-control.fie").slice(0, 1).show();
+    $("#loadMoreeinput").on('click', function (e) {
+        e.preventDefault();
+        $("input.form-control.fie:hidden").slice(0, 1).slideDown();
+        if ($("input.form-control.fie:hidden").length == 0) {
+            $("#load").fadeOut('slow');
+        }
+    });
+  });
+  </script>
+        <script src="./jss/custom.js"></script>   
+        <!-- Footer END --> 
+         <script src="{{ URL::asset('./vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+         <script>
+            CKEDITOR.replace( 'pre' );
+            CKEDITOR.replace( 'note' );
+         </script> 
         
     </body>
 </html>

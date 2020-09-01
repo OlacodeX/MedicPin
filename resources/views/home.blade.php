@@ -3,827 +3,455 @@
 {{config('app.name')}} | Dashboard
 @endsection
 @section('content')
-<!-- Mirrored from iqonic.design/themes/sofbox-admin/html/patient-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 Aug 2020 01:39:48 GMT -->
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
+@include('inc.navmain')
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="images/favicon.ico"/>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- Typography CSS -->
-    <link rel="stylesheet" href="css/typography.css">
-    <!-- Style CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Responsive CSS -->
-    <link rel="stylesheet" href="css/responsive.css">
-    <!-- Full calendar -->
-    <link href='fullcalendar/core/main.css' rel='stylesheet' />
-    <link href='fullcalendar/daygrid/main.css' rel='stylesheet' />
-    <link href='fullcalendar/timegrid/main.css' rel='stylesheet' />
-    <link href='fullcalendar/list/main.css' rel='stylesheet' />
-</head>
-<body>
-<!-- Wrapper Start -->
-<div class="wrapper">
-    <!-- Sidebar  -->
-    <div class="iq-sidebar">
-            <div class="iq-sidebar-logo d-flex justify-content-between">
-               <a href="./">
-               <img src="img/yy.jpg" class="img-fluid" alt="">
-               <span>
-                {{config('app.name')}}
-               </span>
-               </a>
-               <div class="iq-menu-bt align-self-center">
-                  <div class="wrapper-menu">
-                     <div class="line-menu half start"></div>
-                     <div class="line-menu"></div>
-                     <div class="line-menu half end"></div>
-                  </div>
-               </div>
-            </div>
-            <div id="sidebar-scrollbar">
-               <nav class="iq-sidebar-menu">
-                  <ul id="iq-sidebar-toggle" class="iq-menu">
-                     <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
-                     @if (auth()->user()->role == 'Doctor')
-                     <li class="active">
-                        <a href="./dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
-                       
-                     </li>
-                     <li>
-                        <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Doctor's Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="./myprofile">My Profile</a></li>
-                           <li><a href="./notifications">Sent Notifications</a></li>
-                           <li><a href="./notifications/create">Send Notification</a></li>
-                           <!---<li><a href="profile-edit.html">User Edit</a></li>--->
-                           <li><a href="./patients/create">Add Patient</a></li>
-                           <li><a href="./patients">Patients List</a></li>
-                           <li><a href="./transfered_patients">Transferred Patients</a></li>
-                        </ul>
-                     </li>
-                     <li>
-                        <a href="#user-info1" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ion-medkit"></i><span>Pharmacy</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        
-                        <ul id="user-info1" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                            <li><a href="./add_drug">Add Drug</a></li>
-                            <li><a href="./myshop">My Shop</a></li>
-                            <li><a href="./pharmacy">Pharmacy Shop</a></li>
-                         </ul>
-                    </li>
-                     <li><a href="./blood_bank" class="iq-waves-effect"><i class="ion-medkit"></i><span>Blood Bank</span></a></li>
-                     <li><a href="./hospitals" class="iq-waves-effect"><i class="ion-medkit"></i><span>My Hospital</span></a></li>
-                     <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
-                     <li><a href="./questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
-                     <li>
-                        <a href="./" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Homepage</span></a>
-                       
-                     </li>
-               
-                     <li>
-                        
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
-                        
-                          
+<!-- Mirrored from iqonic.design/themes/sofbox-admin/html/patient-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 Aug 2020 01:39:53 GMT -->
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form> 
-                    </li>
-                    
-                         
-                    @endif
-                    @if (auth()->user()->role == 'Patient')
-                    <li class="active">
-                       <a href="./dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
-                      
-                    </li>
-                    <li>
-                       <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                       <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                          <li><a href="./myprofile">My Profile</a></li>
-                          <li><a href="./notifications">My Notifications</a></li>
-                          <!---<li><a href="profile-edit.html">User Edit</a></li>--->
-                          <li><a href="">My Appointments</a></li>
-                       </ul>
-                    </li>
-                    <li><a href="./pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
-                    <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
-                    <li><a href="./questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
-                    <li>
-                       <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
-                      
-                    </li>
-                    
-                    <li>
-                       
-                       <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
-                       
-                         
-
-                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                           @csrf
-                       </form> 
-                   </li>
-                        
-                    @endif
-                     <!----
-                     <li><a href="calendar.html" class="iq-waves-effect"><i class="ri-calendar-2-line"></i><span>Calendar</span></a></li>
-                     <li><a href="chat.html" class="iq-waves-effect"><i class="ri-message-line"></i><span>Chat</span></a></li>
-                     <li>
-                        <a href="#ecommerce" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-shopping-cart-line"></i><span>eCommerce</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="ecommerce" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="product.html">Product</a></li>
-                           <li><a href="itemdetails.html">Item Details</a></li>
-                           <li><a href="checkout.html">Checkout</a></li>
-                        </ul>
-                     </li>
-                     <li class="iq-menu-title"><i class="ri-separator"></i><span>Components</span></li>
-                     <li>
-                        <a href="#menu-design" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-menu-3-line"></i><span>Menu Design</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="menu-design" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="sales-dashboard.html">Horizontal menu</a></li>
-                           <li><a href="employee-dashboard.html">Horizontal Top Menu</a></li>
-                           <li><a href="course-dashboard.html">Two Sidebar</a></li>
-                           <li><a href="finance-dashboard.html">Vertical block menu</a></li>
-                        </ul>
-                     </li>
-                     <li>
-                        <a href="#ui-elements" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-pencil-ruler-line"></i><span>UI Elements</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="ui-elements" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="ui-colors.html">colors</a></li>
-                           <li><a href="ui-typography.html">Typography</a></li>
-                           <li><a href="ui-alerts.html">Alerts</a></li>
-                           <li><a href="ui-badges.html">Badges</a></li>
-                           <li><a href="ui-breadcrumb.html">Breadcrumb</a></li>
-                           <li><a href="ui-buttons.html">Buttons</a></li>
-                           <li><a href="ui-cards.html">Cards</a></li>
-                           <li><a href="ui-carousel.html">Carousel</a></li>
-                           <li><a href="ui-embed-video.html">Video</a></li>
-                           <li><a href="ui-grid.html">Grid</a></li>
-                           <li><a href="ui-images.html">Images</a></li>
-                           <li><a href="ui-list-group.html">list Group</a></li>
-                           <li><a href="ui-media-object.html">Media</a></li>
-                           <li><a href="ui-modal.html">Modal</a></li>
-                           <li><a href="ui-notifications.html">Notifications</a></li>
-                           <li><a href="ui-pagination.html">Pagination</a></li>
-                           <li><a href="ui-popovers.html">Popovers</a></li>
-                           <li><a href="ui-progressbars.html">Progressbars</a></li>
-                           <li><a href="ui-tabs.html">Tabs</a></li>
-                           <li><a href="ui-tooltips.html">Tooltips</a></li>
-                        </ul>
-                     </li>
-                     <li>
-                        <a href="#forms" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-profile-line"></i><span>Forms</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="forms" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="form-layout.html">Form Elements</a></li>
-                           <li><a href="form-validation.html">Form Validation</a></li>
-                           <li><a href="form-switch.html">Form Switch</a></li>
-                           <li><a href="form-chechbox.html">Form Checkbox</a></li>
-                           <li><a href="form-radio.html">Form Radio</a></li>
-                        </ul>
-                     </li>
-                     <li>
-                        <a href="#forms-wizard" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-archive-drawer-line"></i><span>Forms Wizard</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="forms-wizard" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="form-wizard.html">Simple Wizard</a></li>
-                           <li><a href="form-wizard-validate.html">Validate Wizard</a></li>
-                           <li><a href="form-wizard-vertical.html">Vertical Wizard</a></li>
-                        </ul>
-                     </li>
-                     <li>
-                        <a href="#tables" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-table-line"></i><span>Table</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="tables" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="tables-basic.html">Basic Tables</a></li>
-                           <li><a href="data-table.html">Data Table</a></li>
-                           <li><a href="table-editable.html">Editable Table</a></li>
-                        </ul>
-                     </li>
-                     <li>
-                        <a href="#charts" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-pie-chart-box-line"></i><span>Charts</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="charts" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="chart-morris.html">Morris Chart</a></li>
-                           <li><a href="chart-high.html">High Charts</a></li>
-                           <li><a href="chart-am.html">Am Charts</a></li>
-                           <li><a href="chart-apex.html">Apex Chart</a></li>
-                        </ul>
-                     </li>
-                     <li>
-                        <a href="#icons" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-list-check"></i><span>Icons</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="icons" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="icon-dripicons.html">Dripicons</a></li>
-                           <li><a href="icon-fontawesome-5.html">Font Awesome 5</a></li>
-                           <li><a href="icon-lineawesome.html">line Awesome</a></li>
-                           <li><a href="icon-remixicon.html">Remixicon</a></li>
-                           <li><a href="icon-unicons.html">unicons</a></li>
-                        </ul>
-                     </li>
-                     <li class="iq-menu-title"><i class="ri-separator"></i><span>Pages</span></li>
-                     <li>
-                        <a href="#authentication" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-pages-line"></i><span>Authentication</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="authentication" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="sign-in.html">Login</a></li>
-                           <li><a href="sign-up.html">Register</a></li>
-                           <li><a href="pages-recoverpw.html">Recover Password</a></li>
-                           <li><a href="pages-confirm-mail.html">Confirm Mail</a></li>
-                           <li><a href="pages-lock-screen.html">Lock Screen</a></li>
-                        </ul>
-                     </li>
-                     <li>
-                        <a href="#map" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-map-pin-user-line"></i><span>Maps</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="map" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="pages-map.html">Google Map</a></li>
-                           <li><a href="#">Vector Map</a></li>
-                        </ul>
-                     </li>
-                     <li>
-                        <a href="#extra-pages" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-pantone-line"></i><span>Extra Pages</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="extra-pages" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="pages-timeline.html">Timeline</a></li>
-                           <li><a href="pages-invoice.html">Invoice</a></li>
-                           <li><a href="blank-page.html">Blank Page</a></li>
-                           <li><a href="pages-error.html">Error 404</a></li>
-                           <li><a href="pages-error-500.html">Error 500</a></li>
-                           <li><a href="pages-pricing.html">Pricing</a></li>
-                           <li><a href="pages-pricing-one.html">Pricing 1</a></li>
-                           <li><a href="pages-maintenance.html">Maintenance</a></li>
-                           <li><a href="pages-comingsoon.html">Coming Soon</a></li>
-                           <li><a href="pages-faq.html">Faq</a></li>
-                        </ul>
-                     </li><li>
-                        <a href="#menu-level" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-record-circle-line"></i><span>Menu Level</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="menu-level" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                           <li><a href="#"><i class="ri-record-circle-line"></i>Menu 1</a></li>
-                           <li><a href="#"><i class="ri-record-circle-line"></i>Menu 2</a>
-                              <li>
-                                 <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-play-circle-line"></i><span>Sub-menu</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                                 <ul id="sub-menu" class="iq-submenu iq-submenu-data collapse">
-                                    <li><a href="#"><i class="ri-record-circle-line"></i>Sub-menu 1</a></li>
-                                    <li><a href="#"><i class="ri-record-circle-line"></i>Sub-menu 2</a></li>
-                                    <li><a href="#"><i class="ri-record-circle-line"></i>Sub-menu 3</a></li>
-                                 </ul>
-                              </li>
-                           </li>
-                           <li><a href="#"><i class="ri-record-circle-line"></i>Menu 3</a></li>
-                           <li><a href="#"><i class="ri-record-circle-line"></i>Menu 4</a></li>---->
-                        </ul>
-                     </li>
-                  </ul>
-               </nav>
-               <div class="p-3"></div>
-            </div>
-         </div>
-    <!-- TOP Nav Bar -->
-    <div class="iq-top-navbar">
-        <div class="iq-navbar-custom">
-            <div class="iq-sidebar-logo">
-                <div class="top-logo">
-                    <a href="./">
-                    <img src="img/yy.jpg" class="img-fluid" alt="">
-                    <span>
-                     {{config('app.name')}}
-                    </span>
-                    </a>
-                    <div class="iq-menu-bt">
-                        <div class="wrapper-menu">
-                            <div class="line-menu half start"></div>
-                            <div class="line-menu"></div>
-                            <div class="line-menu half end"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <nav class="navbar navbar-expand-lg navbar-light p-0">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <i class="ri-menu-3-line"></i>
-              </button>
-              <div class="iq-menu-bt align-self-center">
-                 <div class="wrapper-menu">
-                    <div class="line-menu half start"></div>
-                    <div class="line-menu"></div>
-                    <div class="line-menu half end"></div>
-                 </div>
-              </div>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                 <ul class="navbar-nav ml-auto navbar-list pull-right">
-                    <li class="nav-item dropdown">
-                       <a href="#" class="search-toggle iq-waves-effect">
-                          <i class="ri-mail-line"></i>
-                          <span class="badge badge-pill badge-primary badge-up count-mail">{{App\Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->count()}}</span>
-                       </a>
-                       <!----recent m here--->
-                       <div class="iq-sub-dropdown">
-                          <div class="iq-card shadow-none m-0">
-                             <div class="iq-card-body p-0 ">
-                                <div class="bg-primary p-3">
-                                   <h5 class="mb-0 text-white">Unread Messages<small class="badge  badge-light float-right pt-1">{{App\Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->count()}}</small></h5>
-                                </div>
+           <div class="">
                                 
-                                @if (count($new_messages) > 0)
-                                @foreach ($new_messages as $message)
-                                <a href="./chat/{{$message->id}}" class="iq-sub-card" >
-                                   <div class="media align-items-center">
-                                      <div class="media-body ml-3">
-                                         <h6 class="mb-0 ">{{$message->sender_name}}</h6>
-                                         <small class="float-left font-size-12">{{$message->created_at}}</small>
-                                      </div>
-                                   </div>
-                                </a>
-                                @endforeach
-                                @else <br>
-                                <p class="text-center">You Have No Unread Messages</p>    
-
-                                @endif
-                                <div class="text-center">
-                                <a href="./chat" class="btn btn-primary" style="margin-bottom: 20px;">See All Messages</a>
-                                </div>
-                             </div>
-                          </div>
-                       </div>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a href="./cart" class="iq-waves-effect" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="My Shopping Cart"><i class="ri-shopping-cart-2-line"></i></a>
-                        <span class="badge badge-primary badge-up count-mail">{{App\StoreCart::where('user_id', auth()->user()->id)->orderBy('id', 'ASC')->count() }}</span>
-                     </li>
-                 </ul>
-              </div>
-              <ul class="navbar-list">
-                 <li>
-                    <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="../images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
-                    <div class="iq-sub-dropdown iq-user-dropdown">
-                       <div class="iq-card shadow-none m-0">
-                             <div class="d-inline-block w-100 text-center p-3">
-                                <a class="iq-bg-danger iq-sign-btn" href="{{ route('logout') }}" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
-                             </div>
-                          </div>
-                       </div>
-                    </div>
-                 </li>
-              </ul>
-           </nav>
-        </div>
-    </div>
-    <!-- TOP Nav Bar END -->
-      <!-- Responsive Breadcrumb -->
-        <div class="iq-breadcrumb">
-            <div class="container-fluid">
               <div class="row">
-                 <div class="col-lg-12">
-                      <div class="iq-card overflow-hidden iq-waves-effect">
-                           <div class="navbar-breadcrumb ">
-                              <h5 class="mb-0">Dashboard</h5>
-                                <nav aria-label="breadcrumb">
-                                   <ul class="breadcrumb">
-                                      <li class="breadcrumb-item"><a href="">Home</a></li>
-                                      <li class="breadcrumb-item active" aria-current="page">Patient Dashboard</li>
-                                      <li class="breadcrumb-item">
-                                        <a href="{{ route('logout') }}" class="iq-bg-danger iq-sign-btn" href="{{ route('logout') }}" role="button" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
-                                    
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                    </li>
-                                   </ul>
-                                </nav>
-                             </div>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-        </div>
-  <!-- Responsive Breadcrumb End-->
-    <!-- Page Content  -->
-    <div id="content-page" class="content-page">
-        <div class="container-fluid">
-            <div class="row row-eq-height">
-                <!-- Content Top Banner Start -->
-                <div class="col-lg-3 col-md-12">
-                  <div class="row">
-                  <div class="col-sm-12">
-                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height iq-profile-card text-center">
-                        <div class="iq-card-body">
-                            <div class="iq-team text-center p-0">
+                 <div class="col-lg-4">
+                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height iq-user-profile-block">
+                       <div class="iq-card-body">
+                          <div class="user-details-block">
+                             <div class="user-profile text-center">
                                 @if (auth()->user()->role == 'Patient')
                                     <img src="img/cover_img/{{$patient->img}}"
-                                     class="img-fluid mb-3 avatar-120 rounded-circle" alt="">
+                                    alt="profile-img" class="avatar-130 img-fluid">
                                 @endif
                                 @if (auth()->user()->role == 'Doctor')
-                                    <img src="images/user/1.jpg"
-                                     class="img-fluid mb-3 avatar-120 rounded-circle" alt="">
+                                    <img src="img/profile/{{auth()->user()->img}}"
+                                    alt="profile-img" class="avatar-130 img-fluid rounded-circle">
                                 @endif
-                                <h4 class="mb-0">{{ Auth::user()->name }}</h4>
-                                <a href="#" class="d-inline-block w-100"><span class="__cf_email__" data-cfemail="b4dadddff4c7dbd2d6dbccd5d0d9ddda9ad7dbd9" style="font-size: 13px;">{{ Auth::user()->pin}}</span></a>
-                                
-                                <hr>
-                                
-                                @if (auth()->user()->role == 'Patient')
-                                <ul class="list-inline mb-0 d-flex justify-content-between">
-                                    <li class="list-inline-item">
-                                        <h5>Blood</h5>
-                                        <p class="text-success">{{$patient->b_group}}</p>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <h5>Height</h5>
-                                        <p class="text-success">{{$patient->height}}cm</p>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <h5>Weight</h5>
-                                        <p class="text-success">{{$patient->weight}}kg</p>
-                                    </li>
-                                </ul>
-                            
+                             </div>
+                             <div class="text-center mt-3">
+                                <h4><b>{{auth()->user()->name}}</b></h4>
+                                <p>{{auth()->user()->role}}</p>
+                                @if (auth()->user()->role == 'Doctor')
+                                <a href="#" class="btn btn-primary">Assign</a>
                                 @endif
-                            </div>
-                            <div id="Dash1BarChart"></div>
-                        </div>
+                             </div>
+                             @if (auth()->user()->role == 'Doctor')
+                             <hr>
+                             <ul class="doctoe-sedual d-flex align-items-center justify-content-between p-0">
+                                <li class="text-center">
+                                   <h3 class="counter">4500</h3>
+                                   <span>Operations</span>
+                                 </li>
+                                 <li class="text-center">
+                                   <h3 class="counter">3.9</h3>
+                                   <span>Medical Rating</span>
+                                 </li>
+                             </ul>
+                             @endif
+                          </div>
+                       </div>
                     </div>
-                  </div>
-                  @if (auth()->user()->role == 'Patient')
-                  <div class="col-sm-12">
-                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="iq-card-header d-flex justify-content-between">
-                            <div class="iq-header-title">
-                                <h4 class="card-title">Address</h4>
+                 </div>
+                 @if (auth()->user()->role == 'Doctor')
+                 <div class="col-lg-4">
+                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height iq-user-profile-block">
+                       <div class="iq-card-body">
+                        <h4>Total Patients</h4>
+                        <h3><b>
+                            {{App\patients::where('doc_email', auth()->user()->email)->whereNotNull('username')->count()}}
+                        </b></h3>
+                             <div id="wave-chart-7"></div>
                             </div>
-                        </div>
+                 </div>
+                 </div>
+                 <div class="col-lg-4">
+                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                         <div class="iq-card-body">
-                            <div class="owl-carousel" data-autoplay="true" data-loop="true" data-nav="false"
-                                 data-dots="true" data-items="1" data-items-laptop="1" data-items-tab="1"
-                                 data-items-mobile="1" data-items-mobile-sm="1" data-margin="30">
-                                <div class="item">
-                                    <div class="">
-                                        <p>
-                                            {{$patient->address}}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
+                            <h4>New Notifications</h4>
+                            <h3><b>
+                              {{App\Notifications::where('to_email', auth()->user()->email)->count()}}</b></h3>
+                         </div>
+                              <div id="wave-chart-7"></div>
                     </div>
-                  </div>
-                  @endif
-                </div>
-                </div>
-                <div class="col-lg-9 col-md-12">
-                    @include('inc.messages')
-                    <div class="row">
-                        <div class="col-md-12">
                                 
-                            @if (auth()->user()->role == 'Patient')
-                            <div class="iq-card iq-card-block iq-card-stretch iq-card-height wow fadeInUp" data-wow-delay="0.6s">
-                                <div class="iq-card-header d-flex justify-content-between">
-                                    <div class="iq-header-title">
-                                        <h4 class="card-title">Summary</h4>
-                                    </div>
-                                </div>
-                                <div class="iq-card-body">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="iq-card shadow-none mb-0">
-                                                <div class="iq-card-body p-1">
-                                                    <span class="font-size-14">Blood pressure</span>
-                                                    <h2>{{$patient->bp}}
-                                                        <img class="float-right summary-image-top mt-1" src="images/page-img/04.png" alt="summary-image" /> </h2>
-                                                    <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
-                                                        <div class="iq-progress-bar">
-                                                            <span class="bg-primary" data-percent={{$patient->bp}}></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="iq-card shadow-none mb-0">
-                                                <div class="iq-card-body p-1">
-                                                    <span class="font-size-14">Temperature</span>
-                                                    <h2>{{$patient->temp}}
-                                                    <img class="float-right summary-image-top mt-1" src="images/page-img/06.png" alt="summary-image" /> </h2>
-                                                    <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
-                                                        <div class="iq-progress-bar">
-                                                            <span class="bg-success" data-percent={{$patient->temp}}></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="iq-card shadow-none mb-0">
-                                                <div class="iq-card-body p-1">
-                                                    <span class="font-size-14">Heart Rate</span>
-                                                    <h2>{{$patient->h_rate}}
-                                                    <img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
-                                                    <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
-                                                        <div class="iq-progress-bar">
-                                                            <span class="bg-danger" data-percent={{$patient->h_rate}}></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        @endif
-                                
-                                        @if (auth()->user()->role == 'Doctor')
-                                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height wow fadeInUp" data-wow-delay="0.6s">
-                                            <div class="iq-card-header d-flex justify-content-between">
-                                                <div class="iq-header-title">
-                                                    <h4 class="card-title">Summary</h4>
-                                                </div>
-                                            </div>
-                                            <div class="iq-card-body">
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <div class="iq-card shadow-none mb-0">
-                                                            <div class="iq-card-body p-1">
-                                                                <span class="font-size-14">Total Active Patients</span>
-                                                                <h2>
-                                                                    {{App\patients::where('doc_email', auth()->user()->email)->whereNotNull('username')->count()}}
-                                                                    </h2>
-                                                                <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
-                                                                    <div class="iq-progress-bar">
-                                                                        <span class="bg-primary" data-percent= {{App\patients::where('doc_email', auth()->user()->email)->count()}}></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="iq-card shadow-none mb-0">
-                                                            <span class="font-size-14">Total Inactive Patients</span>
-                                                            <h2>
-                                                                {{App\patients::where('doc_email', auth()->user()->email)->whereNull('username')->count()}}
-                                                                </h2>
-                                                            <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
-                                                                <div class="iq-progress-bar">
-                                                                    <span class="bg-primary" data-percent= {{App\patients::where('doc_email', auth()->user()->email)->count()}}></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="iq-card shadow-none mb-0">
-                                                            <div class="iq-card-body p-1">
-                                                                <span class="font-size-14">Unread Notifications</span>
-                                                                <h2>
-                                                                    {{App\Notifications::where('to_email', auth()->user()->email)->count()}}</h2>
-                                                                <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
-                                                                    <div class="iq-progress-bar">
-                                                                        <span class="bg-danger" data-percent="{{App\Notifications::where('to_email', auth()->user()->email)->count()}}"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+              </div>
+                @endif 
+            </div>
+              <!----
+                 <div class="col-lg-4">
+                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                       <div class="iq-card-header d-flex justify-content-between">
+                          <div class="iq-header-title">
+                             <h4 class="card-title">Health Curve</h4>
+                          </div>
+                       </div>
+                       <div class="iq-card-body">
+                          <div id="home-chart-06" style="height: 350px;"></div>
+                       </div>
                     </div>
-                    <div class="row">
+                 </div>                  
+              ---->  
+              <div class="row">
+                @if (auth()->user()->role == 'Doctor')
+                 <div class="col-lg-4">
+                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                       <div class="iq-card-header d-flex justify-content-between">
+                          <div class="iq-header-title">
+                             <h4 class="card-title">Nearest Treatment</h4>
+                          </div>
+                       </div>
+                       <div class="iq-card-body smaill-calender-home">
+                          <input type="text" class="flatpicker d-none">
+                       </div>
+                    </div>
+                 </div>
+                 <div class="col-lg-4">
+                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height-half">
+                       <div class="iq-card-body">
+                          <h6>APPOINTMENTS</h6>
+                          <h3><b>5075</b></h3>
+                       </div>
+                       <div id="wave-chart-7"></div>
+                    </div>
+                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height-half">
+                       <div class="iq-card-body">
+                          <h6>NEW PATIENTS</h6>
+                          <h3><b>1200</b></h3>
+                       </div>
+                       <div id="wave-chart-8"></div>
+                    </div>
+                 </div>
+                 <div class="col-lg-4">
+                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                       <div class="iq-card-header d-flex justify-content-between">
+                          <div class="iq-header-title">
+                             <h4 class="card-title">Hospital Management</h4>
+                          </div>
+                       </div>
+                       <div class="iq-card-body hospital-mgt">
+                          <div class="progress mb-3" style="height: 30px;">
+                             <div class="progress-bar bg-primary" role="progressbar" style="width: 20%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">OPD</div>
+                             <div class="progress-bar bg-warning" role="progressbar" style="width: 80%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">80%</div>
+                          </div>
+                          <div class="progress mb-3" style="height: 30px;">
+                             <div class="progress-bar bg-primary" role="progressbar" style="width: 30%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">Treatment</div>
+                             <div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">70%</div>
+                          </div>
+                          <div class="progress mb-3" style="height: 30px;">
+                             <div class="progress-bar bg-primary" role="progressbar" style="width: 60%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">Laboratory Test</div>
+                             <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">85%</div>
+                          </div>
+                          <div class="progress mb-3" style="height: 30px;">
+                             <div class="progress-bar bg-primary" role="progressbar" style="width: 40%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">New Patient</div>
+                             <div class="progress-bar bg-warning" role="progressbar" style="width: 60%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">70%</div>
+                          </div>
+                          <div class="progress mb-3" style="height: 30px;">
+                             <div class="progress-bar bg-primary" role="progressbar" style="width: 35%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">Doctors</div>
+                             <div class="progress-bar bg-warning" role="progressbar" style="width: 65%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">95%</div>
+                          </div>
+                          <div class="progress" style="height: 30px;">
+                             <div class="progress-bar bg-primary" role="progressbar" style="width: 28%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">Discharge</div>
+                             <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">35%</div>
+                          </div>
+                       </div>
+                    </div>
+                 @endif
                                     
-                        @if (auth()->user()->role == 'Patient')
-                        <div class="col-md-12">
+                    @if (auth()->user()->role == 'Patient')
+                    <div class="col-md-12">
+                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden wow fadeInUp" data-wow-delay="0.6s">
+                        <div class="iq-card-header d-flex justify-content-between">
+                    
+                            
+                    <div class="iq-header-title">
+                        <h4 class="card-title">Notifications</h4>
+                    </div>
+                    <div class="iq-card-header-toolbar d-flex align-items-center">
+                        <a href="./notifications" class="">See all</a>
+                    </div>
+                </div>
+                    @if (count($notices) > 0)
+                    <div class="iq-card-body">
+                        @foreach ($notices as $notice)
+                        <a href="notifications/{{$notice->id}}" style="text-decoration: none;">
+                        <div class="media">
+                            <img class="mr-3 rounded-circle" src="images/user/01.jpg"
+                                alt="Generic placeholder image">
+                            <div class="media-body">
+                                <h5 class="mt-0 mb-0">Dr.{!!Str::words( $notice->from_name,1)!!} <br><small
+                                        class="text-muted font-size-12">{!!Str::words( $notice->created_at,2)!!}</small></h5>
+                                <i class="ri-close-line float-right"></i>
+                                <p>{!!Str::words( $notice->content,5)!!}</p>
+                            </div>
+                        </div>
+                    </a>
+                        <hr>
+                        @endforeach
+                    </div>
+                    @else
+                    <p class="text-center">No Notifications Yet</p>    
+                    @endif
+                         </div>
+                        </div>
                         <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden wow fadeInUp" data-wow-delay="0.6s">
                             <div class="iq-card-header d-flex justify-content-between">
                         
                                 
                         <div class="iq-header-title">
-                            <h4 class="card-title">Notifications</h4>
+                            <h4 class="card-title">Questions From Our Forum</h4>
                         </div>
                         <div class="iq-card-header-toolbar d-flex align-items-center">
-                            <a href="./notifications" class="">See all</a>
+                            <a href="./questions" class="">Check Forum</a>
                         </div>
                     </div>
-                        @if (count($notices) > 0)
-                        <div class="iq-card-body">
-                            @foreach ($notices as $notice)
-                            <a href="notifications/{{$notice->id}}" style="text-decoration: none;">
-                            <div class="media">
-                                <img class="mr-3 rounded-circle" src="images/user/01.jpg"
-                                    alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="mt-0 mb-0">Dr.{!!Str::words( $notice->from_name,1)!!} <br><small
-                                            class="text-muted font-size-12">{!!Str::words( $notice->created_at,2)!!}</small></h5>
-                                    <i class="ri-close-line float-right"></i>
-                                    <p>{!!Str::words( $notice->content,5)!!}</p>
-                                </div>
-                            </div>
-                        </a>
-                            <hr>
-                            @endforeach
-                        </div>
-                        @else
-                        <p class="text-center">No Notifications Yet</p>    
-                        @endif
+                    
+             <style>
+                div.panel-body{
+                   margin-left: 20px;
+                }
+                h4.title{
+                   margin-left: 20px;
+                   margin-top: 20px;
+                }
+                  /* enable absolute positioning */
+          .inner-addon {
+            position: relative;
+          }
+          
+          /* style glyph */
+          .inner-addon .fa {
+            position: absolute;
+            padding: 10px;
+            pointer-events: none;
+            color: #0178ff7b;
+            font-weight: 900;
+          }
+          
+          /* align glyph 
+          .left-addon .fa  { left:  0px;}*/
+          .right-addon .fa { right: 260px;}
+          
+          /* add padding 
+          .left-addon input  { padding-left:  30px; } */
+          .right-addon input { padding-right: 30px; }
+                   div.panel-body,
+                   div.panel-default{
+                       border-radius: 0;
+                       border-top: none;
+                   }
+                   .btn.btn-info.btn-sm{
+                       background: transparent;
+                       border: none;
+                       color: rgb(20, 109, 224);
+                   }
+                   
+                   
+                   .btn.btn-info.btn-sm i.fa{
+                       font-size: 12px;
+                       margin: 0;
+                   }
+                 @media only screen and (max-width: 768px) {
+          /* align glyph 
+          .left-addon .fa  { left:  0px;}*/
+          .right-addon .fa { right: 20px;}
+          
+                    
+                   .btn.btn-info.btn-sm{
+                       background: transparent;
+                       border: none;
+                       color: rgb(20, 109, 224);
+                       float: right;
+                       display: inline;
+                   }
+                   
+                   .btn.btn-info.btn-sm i.fa{
+                       font-size: 12px;
+                       margin: 0;
+                       padding: 0;
+                   }
+                   div.panel-body span.pull-left{
+                       font-size: 12px;
+                       margin-bottom: 0;
+                   }
+                   div.panel-body span.user-list-files.d-flex.float-right{
+                      margin-top: 0;
+                   }
+                 }
+               </style>
+                    @if (count($questions_all) > 0)
+                    <div class="iq-card-body">
+                    @foreach ($questions_all as $question_all)
+                       <br><a href="questions/{{$question_all->id}}">
+                        <div class="media-body">
+                       <div class="">
+                          <small>{!!$question_all->created_at!!} </small><br>
+                          <span class="pull-left">
+                             
+                             {!!$question_all->question!!} 
+                          @if (auth()->user()->id == $question_all->asker_id)
+                             <button class ="btn btn-info btn-sm pull-right"><a href="questions/{{$question_all->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Question"><i class="fa fa-edit"></i></a></button>
+                                 {!!Form::open(['action' => ['QuestionsController@destroy', $question_all->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                 {{Form::hidden('_method', 'DELETE')}}
+                                <button type="submit" class ="btn btn-info btn-sm pull-right" data-toggle="tooltip" data-placement="top" data-original-title="Delete Question"><i class="fa fa-trash-o"></i></button>
+                               
+                                {!!Form::close()!!}
+                          @endif
+                          <a href="questions/{{$question_all->id}}" class="pull-right" data-toggle="tooltip" data-placement="top" title="" data-original-title="View answers"> <i class="fa fa-comments"></i>({{App\Answers::where('question_id', $question_all->id)->count()}})</a>
+                       </span>
+                       </div>
+                       </div>
+                       </a>
+                       @endforeach
+  
+                       @else
+                       <p class="text-center">No Questions in Forum Yet</p>    
+                       @endif
                              </div>
                             </div>
+
+
                             <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden wow fadeInUp" data-wow-delay="0.6s">
                                 <div class="iq-card-header d-flex justify-content-between">
                             
                                     
                             <div class="iq-header-title">
-                                <h4 class="card-title">Questions From Our Forum</h4>
+                                <h4 class="card-title">Have A Question?</h4>
                             </div>
                             <div class="iq-card-header-toolbar d-flex align-items-center">
                                 <a href="./questions" class="">Check Forum</a>
                             </div>
                         </div>
-                        
-                 <style>
-                    div.panel-body{
-                       margin-left: 20px;
-                    }
-                    h4.title{
-                       margin-left: 20px;
-                       margin-top: 20px;
-                    }
-                      /* enable absolute positioning */
-              .inner-addon {
-                position: relative;
-              }
+                            <div class="iq-card-body">
+                                    <div class="media-body">
+                                        {!! Form::open(['action' => 'QuestionsController@store', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
+                                        **/ !!}
+                                                    <div class="form-group">
+                                                        <p>Ask whatever is it on your mind and a doctor will answer you ASAP</p>
+                                                       <textarea class="form-control" id="question" name="question" placeholder="Your question here..."></textarea>
+                                                    </div>
+                                                <button type="submit" class="btn btn-primary">Ask Question</button>
+                                                {!! Form::close() !!}
+                                    </div>
+                                <hr>
+                            </div>
+                         </div>
+                    </div>
               
-              /* style glyph */
-              .inner-addon .fa {
-                position: absolute;
-                padding: 10px;
-                pointer-events: none;
-                color: #0178ff7b;
-                font-weight: 900;
-              }
+                    @endif
+              </div>
               
-              /* align glyph 
-              .left-addon .fa  { left:  0px;}*/
-              .right-addon .fa { right: 260px;}
+             
               
-              /* add padding 
-              .left-addon input  { padding-left:  30px; } */
-              .right-addon input { padding-right: 30px; }
-                       div.panel-body,
-                       div.panel-default{
-                           border-radius: 0;
-                           border-top: none;
-                       }
-                       .btn.btn-info.btn-sm{
-                           background: transparent;
-                           border: none;
-                           color: rgb(20, 109, 224);
-                       }
-                       
-                       
-                       .btn.btn-info.btn-sm i.fa{
-                           font-size: 12px;
-                           margin: 0;
-                       }
-                     @media only screen and (max-width: 768px) {
-              /* align glyph 
-              .left-addon .fa  { left:  0px;}*/
-              .right-addon .fa { right: 20px;}
-              
-                        
-                       .btn.btn-info.btn-sm{
-                           background: transparent;
-                           border: none;
-                           color: rgb(20, 109, 224);
-                           float: right;
-                           display: inline;
-                       }
-                       
-                       .btn.btn-info.btn-sm i.fa{
-                           font-size: 12px;
-                           margin: 0;
-                           padding: 0;
-                       }
-                       div.panel-body span.pull-left{
-                           font-size: 12px;
-                           margin-bottom: 0;
-                       }
-                       div.panel-body span.user-list-files.d-flex.float-right{
-                          margin-top: 0;
-                       }
-                     }
-                   </style>
-                        @if (count($questions_all) > 0)
+              <style>
+                /* enable absolute positioning */
+        .inner-addon {
+          position: relative;
+        }
+        
+        /* style glyph */
+        .inner-addon .fa {
+          position: absolute;
+          padding: 10px;
+          pointer-events: none;
+          color: #0178ff7b;
+          font-weight: 900;
+        }
+        
+        /* align glyph 
+        .left-addon .fa  { left:  0px;}*/
+        .right-addon .fa { right: 260px;}
+        
+        /* add padding 
+        .left-addon input  { padding-left:  30px; } */
+        .right-addon input { padding-right: 30px; }
+                 div.panel-body,
+                 div.panel-default{
+                     border-radius: 0;
+                     border-top: none;
+                 }
+                 .btn.btn-info.btn-sm{
+                     background: transparent;
+                     border: none;
+                     color: #02818f;
+                 }
+                 
+                 
+                 .btn.btn-info.btn-sm i.fa{
+                     font-size: 12px;
+                     margin: 0;
+                 }
+               @media only screen and (max-width: 768px) {
+        /* align glyph 
+        .left-addon .fa  { left:  0px;}*/
+        .right-addon .fa { right: 20px;}
+        
+                  
+                 .btn.btn-info.btn-sm{
+                     background: transparent;
+                     border: none;
+                     color: #02818f;
+                     float: right;
+                     display: inline;
+                 }
+                 
+                 .btn.btn-info.btn-sm i.fa{
+                     font-size: 12px;
+                     margin: 0;
+                     padding: 0;
+                 }
+                 div.panel-body span.pull-left{
+                     font-size: 12px;
+                     margin-bottom: 0;
+                 }
+                 div.panel-body span.user-list-files.d-flex.float-right{
+                    margin-top: 0;
+                 }
+               }
+             </style>
+              <div class="row">
+                 <div class="col-lg-3">
+                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                       <div class="iq-card-header d-flex justify-content-between">
+                          <div class="iq-header-title">
+                            <h4 class="card-title">Sent Notifications</h4>
+                        </div>
+                        <div class="iq-card-header-toolbar d-flex align-items-center">
+                            <a href="./notifications" class="">See all</a>
+                        </div>
+                       </div>
+                       <div class="iq-card-body pl-0 pr-0">
+                         <!---- <div id="home-chart-03" style="height: 280px;"></div>--->
+                        @if (count($notice_sents) > 0)
                         <div class="iq-card-body">
-                        @foreach ($questions_all as $question_all)
-                           <br><a href="questions/{{$question_all->id}}">
-                            <div class="media-body">
-                           <div class="">
-                              <small>{!!$question_all->created_at!!} </small><br>
-                              <span class="pull-left">
-                                 
-                                 {!!$question_all->question!!} 
-                              @if (auth()->user()->id == $question_all->asker_id)
-                                 <button class ="btn btn-info btn-sm pull-right"><a href="questions/{{$question_all->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Question"><i class="fa fa-edit"></i></a></button>
-                                     {!!Form::open(['action' => ['QuestionsController@destroy', $question_all->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
-                                     {{Form::hidden('_method', 'DELETE')}}
-                                    <button type="submit" class ="btn btn-info btn-sm pull-right" data-toggle="tooltip" data-placement="top" data-original-title="Delete Question"><i class="fa fa-trash-o"></i></button>
-                                   
-                                    {!!Form::close()!!}
-                              @endif
-                              <a href="questions/{{$question_all->id}}" class="pull-right" data-toggle="tooltip" data-placement="top" title="" data-original-title="View answers"> <i class="fa fa-comments"></i>({{App\Answers::where('question_id', $question_all->id)->count()}})</a>
-                           </span>
-                           </div>
-                           </div>
-                           </a>
-                           @endforeach
-      
-                           @else
-                           <p class="text-center">No Questions in Forum Yet</p>    
-                           @endif
-                                 </div>
-                                </div>
-
-
-                                <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden wow fadeInUp" data-wow-delay="0.6s">
-                                    <div class="iq-card-header d-flex justify-content-between">
-                                
-                                        
-                                <div class="iq-header-title">
-                                    <h4 class="card-title">Have A Question?</h4>
-                                </div>
-                                <div class="iq-card-header-toolbar d-flex align-items-center">
-                                    <a href="./questions" class="">Check Forum</a>
+                            @foreach ($notice_sents as $notice_sent)
+                            <a href="notifications/{{$notice_sent->id}}" style="text-decoration: none;">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h5 class="mt-0 mb-0">{!!Str::words( $notice_sent->to_name,1)!!} <small
+                                            class="text-muted font-size-12">{!!Str::words( $notice_sent->created_at,2)!!}</small></h5>
+                                    <i class="ri-close-line float-right"></i>
+                                    <p>{!!Str::words( $notice_sent->content,5)!!}</p>
                                 </div>
                             </div>
-                                <div class="iq-card-body">
-                                        <div class="media-body">
-                                            {!! Form::open(['action' => 'QuestionsController@store', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
-                                            **/ !!}
-                                                        <div class="form-group">
-                                                            <p>Ask whatever is it on your mind and a doctor will answer you ASAP</p>
-                                                           <textarea class="form-control" id="question" name="question" placeholder="Your question here..."></textarea>
-                                                        </div>
-                                                    <button type="submit" class="btn btn-primary">Ask Question</button>
-                                                    {!! Form::close() !!}
-                                        </div>
-                                    <hr>
-                                </div>
-                             </div>
-                            </div>
+                          </a>
+                            <hr>
+                            @endforeach
+                        </div>
+                        @else
+                        <p class="text-center">No Sent Notifications Yet</p>    
                         @endif
-                        @if (auth()->user()->role == 'Doctor')
-                        <div class="col-lg-8 col-md-12">
-                            <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden wow fadeInUp" data-wow-delay="0.6s">
-                                <div class="iq-card-header d-flex justify-content-between">
-                        
-                                    <div class="iq-header-title">
+
+                       </div>
+                    </div>
+                 </div>
+                 <div class="col-lg-6">
+                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                       <div class="iq-card-header d-flex justify-content-between">
+                          <div class="iq-header-title">
                                         <h4 class="card-title">Your Patients</h4>
                                     </div>
                                     <div class="iq-card-header-toolbar d-flex align-items-center">
                                         <a href="patients">See All</a>
-                                    </div>
-                                </div>
-                                <style>
-                                    div.panel-body,
-                                    div.panel-default{
-                                        border-radius: 0;
-                                        border-top: none;
-                                    }
-                                    .btn.btn-info.btn-sm{
-                                        background: transparent;
-                                        border: none;
-                                        color: rgb(20, 109, 224);
-                                    }
-                                    
-                                    
-                                    .btn.btn-info.btn-sm i.fa{
-                                        font-size: 12px;
-                                        margin: 0;
-                                    }
-                                  @media only screen and (max-width: 768px) {
-                                    .btn.btn-info.btn-sm{
-                                        background: transparent;
-                                        border: none;
-                                        color: rgb(20, 109, 224);
-                                        float: right;
-                                        display: inline;
-                                    }
-                                    
-                                    .btn.btn-info.btn-sm i.fa{
-                                        font-size: 12px;
-                                        margin: 0;
-                                        padding: 0;
-                                    }
-                                    div.panel-body span.pull-left{
-                                        font-size: 12px;
-                                        margin-bottom: 0;
-                                    }
-                                    div.panel-body span.user-list-files.d-flex.float-right{
-                                       margin-top: 0;
-                                    }
-                                  }
-                                </style>
-                                <div class="iq-card-body p-0">
+                          </div>
+                       </div>
+                       <div class="iq-card-body">
+                          <ul class="patient-progress m-0 p-0">
                                     @if (count($patients) > 0)
                                     @foreach ($patients as $patient)
                                     <a href="javascript:{}" onclick="document.getElementById('my_form_1').submit();">
@@ -833,9 +461,10 @@
                                      {{Form::hidden('pin', $patient->pin)}}
                                      {{Form::hidden('username', $patient->username)}}
                                     {!! Form::close() !!}
-                                    <div class="panel panel-default">
-                                    <div class="panel-body">
-                                    <span class="pull-left">{{$patient->name}}</span>
+                             <li class="d-flex mb-3 align-items-center">
+                                <div class="media-support-info">
+                                   <h6>{{$patient->name}}</h6>
+                                </div>
                                     <span class="user-list-files d-flex float-right">
                                     
                                     {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
@@ -868,442 +497,453 @@
                                        
                                         {!!Form::close()!!}
                                      </span>
-                                    </div>
-                                    </div>
+                             </li> 
                                     </a>
                                     @endforeach
 
                                     @else
                                     <p class="text-center">No Patients Yet</p>    
                                     @endif
-                                    
+                                     <!---
+                             <li class="d-flex mb-3 align-items-center">
+                                <div class="media-support-info">
+                                   <h6>Barney Cull</h6>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="iq-card iq-card-block iq-card-stretch iq-card-height wow fadeInUp" data-wow-delay="0.6s">
-                                <div class="iq-card-header d-flex justify-content-between">
-                                
-                        <div class="iq-header-title">
-                            <h4 class="card-title">Sent Notifications</h4>
-                        </div>
-                        <div class="iq-card-header-toolbar d-flex align-items-center">
-                            <a href="./notifications" class="">See all</a>
-                        </div>
+                                <span class="badge badge-success">70%</span>
+                             </li>   
+                             <li class="d-flex mb-3 align-items-center">
+                                <div class="media-support-info">
+                                   <h6>Eric Shun</h6>
+                                </div>
+                                <span class="badge badge-danger">15%</span>
+                             </li>   
+                              <li class="d-flex mb-3 align-items-center">
+                                <div class="media-support-info">
+                                   <h6>Rick Shaw</h6>
+                                </div>
+                                <span class="badge badge-warning">55%</span>
+                             </li> 
+                             <li class="d-flex mb-3 align-items-center">
+                                <div class="media-support-info">
+                                   <h6>Ben Effit</h6>
+                                </div>
+                                <span class="badge badge-info">45%</span>
+                             </li>
+                             <li class="d-flex mb-3 align-items-center">
+                                <div class="media-support-info">
+                                   <h6>Rick Shaw</h6>
+                                </div>
+                                <span class="badge badge-warning">55%</span>
+                             </li> 
+                             <li class="d-flex mb-3 align-items-center">
+                                <div class="media-support-info">
+                                   <h6>Marge Arita</h6>
+                                </div>
+                                <span class="badge badge-primary">65%</span>
+                             </li>
+                             <li class="d-flex align-items-center">
+                                <div class="media-support-info">
+                                   <h6>Barry Cudat</h6>
+                                </div>
+                                <span class="badge badge-danger">15%</span>
+                             </li>  -->                     
+                          </ul>
+                       </div>
                     </div>
-                        @if (count($notice_sents) > 0)
-                        <div class="iq-card-body">
-                            @foreach ($notice_sents as $notice_sent)
-                            <a href="notifications/{{$notice_sent->id}}" style="text-decoration: none;">
-                            <div class="media">
-                                <img class="mr-3 rounded-circle" src="images/user/01.jpg"
-                                     alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="mt-0 mb-0">{!!Str::words( $notice_sent->to_name,1)!!} <small
-                                            class="text-muted font-size-12">{!!Str::words( $notice_sent->created_at,2)!!}</small></h5>
-                                    <i class="ri-close-line float-right"></i>
-                                    <p>{!!Str::words( $notice_sent->content,5)!!}</p>
-                                </div>
-                            </div>
-                          </a>
-                            <hr>
-                            @endforeach
-                        </div>
-                        @else
-                        <p class="text-center">No Sent Notifications Yet</p>    
-                        @endif
-                            </div>
-                        </div>
-                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden wow fadeInUp" data-wow-delay="0.6s">
-                            <div class="iq-card-header d-flex justify-content-between">
-                        
-                                
-                        <div class="iq-header-title">
-                            <h4 class="card-title">Questions From Our Forum</h4>
+                 </div>
+                 <div class="col-lg-3">
+                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                       <div class="iq-card-header d-flex justify-content-between">
+                          <div class="iq-header-title">
+                            <h4 class="card-title">Questions</h4>
                         </div>
                         <div class="iq-card-header-toolbar d-flex align-items-center">
                             <a href="./questions" class="">See all questions </a>
                         </div>
-                    </div>
-                        @if (count($questions_all) > 0)
-                        <div class="iq-card-body">
-                        @foreach ($questions_all as $question_all)
-                           <br><a href="questions/{{$question_all->id}}">
-                            <div class="media-body">
-                           <div class="">
-                              <small>{!!$question_all->created_at!!} </small><br>
-                              <span class="pull-left">
-                                 
-                                 {!!$question_all->question!!} 
-                              @if (auth()->user()->id == $question_all->asker_id)
-                                 <button class ="btn btn-info btn-sm pull-right"><a href="questions/{{$question_all->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Question"><i class="fa fa-edit"></i></a></button>
-                                     {!!Form::open(['action' => ['QuestionsController@destroy', $question_all->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
-                                     {{Form::hidden('_method', 'DELETE')}}
-                                    <button type="submit" class ="btn btn-info btn-sm pull-right" data-toggle="tooltip" data-placement="top" data-original-title="Delete Question"><i class="fa fa-trash-o"></i></button>
-                                   
-                                    {!!Form::close()!!}
-                              @endif
-                              <a href="questions/{{$question_all->id}}" class="pull-right" data-toggle="tooltip" data-placement="top" title="" data-original-title="View answers"> <i class="fa fa-comments"></i>({{App\Answers::where('question_id', $question_all->id)->count()}})</a>
-                           </span>
-                           </div>
-                           </div>
-                           </a>
-                           @endforeach
-      
-                           @else
-                           <p class="text-center">No Questions in Forum Yet</p>    
+                       </div>
+                       <div class="iq-card-body">
+                           
+                          <ul class="patient-progress m-0 p-0">
+                            @if (count($questions_all) > 0)
+                            @foreach ($questions_all as $question_all)
+                            <a href="questions/{{$question_all->id}}" >
+                     <li class="d-flex mb-3 align-items-center">
+                        <div class="media-support-info">
+                            <small>{!!$question_all->created_at!!} </small>
+                           <h6>{!!$question_all->question!!} </h6>
+                           @if (auth()->user()->id == $question_all->asker_id)
+                              <button class ="btn btn-info btn-sm pull-right"><a href="questions/{{$question_all->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Question"><i class="fa fa-edit"></i></a></button>
+                                  {!!Form::open(['action' => ['QuestionsController@destroy', $question_all->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                  {{Form::hidden('_method', 'DELETE')}}
+                                 <button type="submit" class ="btn btn-info btn-sm pull-right" data-toggle="tooltip" data-placement="top" data-original-title="Delete Question"><i class="fa fa-trash-o"></i></button>
+                                
+                                 {!!Form::close()!!}
                            @endif
-
                         </div>
-                    </div>
-                        @endif
-                        </div>
-
-
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="iq-card iq-card-block iq-card-stretch iq-card-height wow fadeInUp" data-wow-delay="0.6s">
-                                <div class="iq-card-header d-flex justify-content-between">
-                                    <div class="iq-header-title">
-                                        <h4 class="card-title">Appointments</h4>
-                                    </div>
-                                    <div class="iq-card-header-toolbar d-flex align-items-center">
-                                        <a href="#" class="dropdown-bg"><i class="ri-add-line mr-2"></i>Book Appointment</a>
-                                    </div>
+                            <span class="user-list-files d-flex float-right">
+                                <a href="questions/{{$question_all->id}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View answers"> <i class="fa fa-comments"></i>({{App\Answers::where('question_id', $question_all->id)->count()}})</a>
+                             </span>
+                     </li> 
+                            </a>
+                            @endforeach
+       
+                            @else
+                            <p class="text-center">No Questions in Forum Yet</p>    
+                            @endif
+                          </ul>
+                       <!--
+                       <div class="iq-card-body">
+                          <div class="iq-details">
+                             <span class="title text-dark">United States</span>
+                             <div class="percentage float-right text-primary">95 <span>%</span></div>
+                             <div class="iq-progress-bar-linear d-inline-block w-100">
+                                <div class="iq-progress-bar">
+                                   <span class="bg-primary" data-percent="95"></span>
                                 </div>
-                                <div class="iq-card-body">
-                                    <div class="response"></div>
-
-                                    <div id='calendar'></div>  
+                             </div>
+                          </div>
+                          <div class="iq-details mt-4">
+                             <span class="title text-dark">India</span>
+                             <div class="percentage float-right text-warning">75 <span>%</span></div>
+                             <div class="iq-progress-bar-linear d-inline-block w-100">
+                                <div class="iq-progress-bar">
+                                   <span class="bg-warning" data-percent="75"></span>
                                 </div>
-                            </div>
-                        </div>
+                             </div>
+                          </div>
+                          <div class="iq-details mt-4">
+                             <span class="title text-dark">Australia</span>
+                             <div class="percentage float-right text-success">55 <span>%</span></div>
+                             <div class="iq-progress-bar-linear d-inline-block w-100">
+                                <div class="iq-progress-bar">
+                                   <span class="bg-success" data-percent="55"></span>
+                                </div>
+                             </div>
+                          </div>
+                          <div class="iq-details mt-4">
+                             <span class="title text-dark">Brazil</span>
+                             <div class="percentage float-right text-danger">25 <span>%</span></div>
+                             <div class="iq-progress-bar-linear d-inline-block w-100">
+                                <div class="iq-progress-bar">
+                                   <span class="bg-danger" data-percent="25"></span>
+                                </div>
+                             </div>
+                          </div>
+                       -->
                     </div>
-                </div>
-            </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+           
+              <!-- for both--->
+              <div class="row">
+                 <div class="col-lg-8">
+                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                       <div class="iq-card-header d-flex justify-content-between">
+                          <div class="iq-header-title">
+                             <h4 class="card-title">Your Appointments </h4>
+                          </div>
+                          <div class="iq-card-header-toolbar d-flex align-items-center">
+                             <div class="dropdown">
+                                <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
+                                <i class="ri-more-fill"></i>
+                                </span>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
+                                   <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>View</a>
+                                   <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>Delete</a>
+                                   <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Edit</a>
+                                   <a class="dropdown-item" href="#"><i class="ri-printer-fill mr-2"></i>Print</a>
+                                   <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>Download</a>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                       <div class="iq-card-body">
+                          <div class="table-responsive">
+                             <table class="table mb-0 table-borderless">
+                                <thead>
+                                   <tr>
+                                      <th scope="col">Patient</th>
+                                      <th scope="col">Doctor</th>
+                                      <th scope="col">Date</th>
+                                      <th scope="col">Timing</th>
+                                      <th scope="col">Contact</th>
+
+                                   </tr>
+                                </thead>
+                                <tbody>
+                                   <tr>
+                                      <td>Petey Cruiser</td>
+                                      <td>Dr.Monty Carlo</td>
+                                      <td>20/02/2020</td>
+                                      <td>8:00 AM</td>
+                                      <td>+1-202-555-0146</td>
+                                   </tr>
+                                   <tr>
+                                      <td>Anna Sthesia</td>
+                                      <td>Dr.Pete Sariya</td>
+                                      <td>25/02/2020</td>
+                                      <td>8:30 AM</td>
+                                      <td>+1-202-555-0164</td>
+                                   </tr>
+                                   <tr>
+                                      <td>Paul Molive</td>
+                                      <td>Dr.Brock Lee</td>
+                                      <td>25/02/2020</td>
+                                      <td>9:45 AM</td>
+                                      <td>+1-202-555-0153</td>
+                                   </tr>
+                                   <tr>
+                                      <td>Anna Mull</td>
+                                      <td>Dr.Barb Ackue</td>
+                                      <td>27/02/2020</td>
+                                      <td>11:30 AM</td>
+                                      <td>+1-202-555-0154</td>
+                                   </tr>
+                                   <tr>
+                                      <td>Paige Turner</td>
+                                      <td>Dr.Walter Melon</td>
+                                      <td>28/02/2020</td>
+                                      <td>3:30 PM</td>
+                                      <td>+1-202-555-0101</td>
+                                   </tr>
+                                   <tr>
+                                      <td>Don Stairs</td>
+                                      <td>Dr.Arty Ficial</td>
+                                      <td>28/02/2020</td>
+                                      <td>4:30 PM</td>
+                                      <td>+1-202-555-0176</td>
+                                   </tr>
+                                   <tr>
+                                      <td>Pat Agonia</td>
+                                      <td>Dr.Barb Ackue</td>
+                                      <td>29/02/2020</td>
+                                      <td>5:00 PM</td>
+                                      <td>+1-202-555-0194</td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="col-lg-4">
+                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                       <div class="iq-card-header d-flex justify-content-between">
+                          <div class="iq-header-title">
+                             <h4 class="card-title">Doctors Lists</h4>
+                          </div>
+                       </div>
+                       <div class="iq-card-body">
+                          <ul class="doctors-lists m-0 p-0">
+                             <li class="d-flex mb-4 align-items-center">
+                                <div class="user-img img-fluid"><img src="images/user/01.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
+                                <div class="media-support-info ml-3">
+                                   <h6>Dr. Paul Molive</h6>
+                                   <p class="mb-0 font-size-12">MBBS, MD</p>
+                                </div>
+                                <div class="iq-card-header-toolbar d-flex align-items-center">
+                                   <div class="dropdown show">
+                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton41" data-toggle="dropdown" aria-expanded="true" role="button">
+                                         <i class="ri-more-2-line"></i>
+                                      </span>
+                                      <div class="dropdown-menu dropdown-menu-right">
+                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
+                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
+                                      </div>
+                                   </div>
+                                </div>
+                             </li> 
+                             <li class="d-flex mb-4 align-items-center">
+                                <div class="user-img img-fluid"><img src="images/user/02.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
+                                <div class="media-support-info ml-3">
+                                   <h6>Dr. Barb Dwyer</h6>
+                                   <p class="mb-0 font-size-12">MD</p>
+                                </div>
+                                <div class="iq-card-header-toolbar d-flex align-items-center">
+                                   <div class="dropdown show">
+                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton42" data-toggle="dropdown" aria-expanded="true" role="button">
+                                         <i class="ri-more-2-line"></i>
+                                      </span>
+                                      <div class="dropdown-menu dropdown-menu-right">
+                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
+                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
+                                      </div>
+                                   </div>
+                                </div>
+                             </li>
+                             <li class="d-flex mb-4 align-items-center">
+                                <div class="user-img img-fluid"><img src="images/user/03.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
+                                <div class="media-support-info ml-3">
+                                   <h6>Dr. Terry Aki</h6>
+                                   <p class="mb-0 font-size-12">MBBS</p>
+                                </div>
+                                <div class="iq-card-header-toolbar d-flex align-items-center">
+                                   <div class="dropdown show">
+                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton43" data-toggle="dropdown" aria-expanded="true" role="button">
+                                         <i class="ri-more-2-line"></i>
+                                      </span>
+                                      <div class="dropdown-menu dropdown-menu-right">
+                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
+                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
+                                      </div>
+                                   </div>
+                                </div>
+                             </li>
+                             <li class="d-flex mb-4 align-items-center">
+                                <div class="user-img img-fluid"><img src="images/user/04.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
+                                <div class="media-support-info ml-3">
+                                   <h6>Dr. Robin Banks</h6>
+                                   <p class="mb-0 font-size-12">MBBS, MD</p>
+                                </div>
+                                <div class="iq-card-header-toolbar d-flex align-items-center">
+                                   <div class="dropdown show">
+                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton44" data-toggle="dropdown" aria-expanded="true" role="button">
+                                         <i class="ri-more-2-line"></i>
+                                      </span>
+                                      <div class="dropdown-menu dropdown-menu-right">
+                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
+                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
+                                      </div>
+                                   </div>
+                                </div>
+                             </li>
+                             <li class="d-flex mb-4 align-items-center">
+                                <div class="user-img img-fluid"><img src="images/user/05.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
+                                <div class="media-support-info ml-3">
+                                   <h6>Dr. Barry Wine</h6>
+                                   <p class="mb-0 font-size-12">BAMS</p>
+                                </div>
+                                <div class="iq-card-header-toolbar d-flex align-items-center">
+                                   <div class="dropdown show">
+                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton45" data-toggle="dropdown" aria-expanded="true" role="button">
+                                         <i class="ri-more-2-line"></i>
+                                      </span>
+                                      <div class="dropdown-menu dropdown-menu-right">
+                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
+                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
+                                      </div>
+                                   </div>
+                                </div>
+                             </li>
+                             <li class="d-flex mb-4 align-items-center">
+                                <div class="user-img img-fluid"><img src="images/user/06.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
+                                <div class="media-support-info ml-3">
+                                   <h6>Dr. Zack Lee</h6>
+                                   <p class="mb-0 font-size-12">MS, MD</p>
+                                </div>
+                                <div class="iq-card-header-toolbar d-flex align-items-center">
+                                   <div class="dropdown show">
+                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton46" data-toggle="dropdown" aria-expanded="true" role="button">
+                                         <i class="ri-more-2-line"></i>
+                                      </span>
+                                      <div class="dropdown-menu dropdown-menu-right">
+                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
+                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
+                                      </div>
+                                   </div>
+                                </div>
+                             </li>
+                             <li class="d-flex mb-4 align-items-center">
+                                <div class="user-img img-fluid"><img src="images/user/07.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
+                                <div class="media-support-info ml-3">
+                                   <h6>Dr. Otto Matic</h6>
+                                   <p class="mb-0 font-size-12">MBBS, MD</p>
+                                </div>
+                                <div class="iq-card-header-toolbar d-flex align-items-center">
+                                   <div class="dropdown show">
+                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton47" data-toggle="dropdown" aria-expanded="true" role="button">
+                                         <i class="ri-more-2-line"></i>
+                                      </span>
+                                      <div class="dropdown-menu dropdown-menu-right">
+                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
+                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
+                                      </div>
+                                   </div>
+                                </div>
+                             </li>
+                             <li class="d-flex mb-4 align-items-center">
+                                <div class="user-img img-fluid"><img src="images/user/08.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
+                                <div class="media-support-info ml-3">
+                                   <h6>Dr. Moe Fugga</h6>
+                                   <p class="mb-0 font-size-12">MD</p>
+                                </div>
+                                <div class="iq-card-header-toolbar d-flex align-items-center">
+                                   <div class="dropdown show">
+                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton48" data-toggle="dropdown" aria-expanded="true" role="button">
+                                         <i class="ri-more-2-line"></i>
+                                      </span>
+                                      <div class="dropdown-menu dropdown-menu-right">
+                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
+                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
+                                      </div>
+                                   </div>
+                                </div>
+                             </li>
+                             <li class="d-flex mb-4 align-items-center">
+                                <div class="user-img img-fluid"><img src="images/user/09.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
+                                <div class="media-support-info ml-3">
+                                   <h6>Dr. Bud Wiser</h6>
+                                   <p class="mb-0 font-size-12">MBBS</p>
+                                </div>
+                                <div class="iq-card-header-toolbar d-flex align-items-center">
+                                   <div class="dropdown show">
+                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton49" data-toggle="dropdown" aria-expanded="true" role="button">
+                                         <i class="ri-more-2-line"></i>
+                                      </span>
+                                      <div class="dropdown-menu dropdown-menu-right">
+                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
+                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
+                                      </div>
+                                   </div>
+                                </div>
+                             </li>
+                             <li class="d-flex mb-4 align-items-center">
+                                <div class="user-img img-fluid"><img src="images/user/10.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
+                                <div class="media-support-info ml-3">
+                                   <h6>Dr. Barry Cade</h6>
+                                   <p class="mb-0 font-size-12">MBBS, MD</p>
+                                </div>
+                                <div class="iq-card-header-toolbar d-flex align-items-center">
+                                   <div class="dropdown show">
+                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton50" data-toggle="dropdown" aria-expanded="true" role="button">
+                                         <i class="ri-more-2-line"></i>
+                                      </span>
+                                      <div class="dropdown-menu dropdown-menu-right">
+                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
+                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
+                                      </div>
+                                   </div>
+                                </div>
+                             </li>                             
+                          </ul>
+                          <a href="javascript:void();" class="btn btn-primary d-block mt-3"><i class="ri-add-line"></i> View All Doctors </a>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+              
+           </div>
+           <!-- Footer -->
+     <footer class="bg-white iq-footer">
+        <div class="container-fluid">
+           <div class="row">
+              <div class="col-lg-6">
+                 <ul class="list-inline mb-0">
+                    <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
+                 </ul>
+              </div>
+              <div class="col-lg-6 text-right">
+                 Copyright 2020 <a href="#">XRay</a> All Rights Reserved.
+              </div>
+           </div>
         </div>
-    </div>
-</div>
-<!-- Wrapper END -->
-<!-- Footer -->
-<footer class="bg-white iq-footer">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-6">
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-                    <li class="list-inline-item"><a href="#">Terms of Use</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-6 text-right">
-                Copyright 2020 <a href="./">Medicpin</a> All Rights Reserved.
-            </div>
+     </footer>
+     <!-- Footer END -->
         </div>
-    </div>
-</footer>
-<!-- Footer END -->
-<!-- Optional JavaScript -->
-         <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
-         <script>
-            CKEDITOR.replace( 'question' );
-         </script> 
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/jquery.min.js"></script>
-
-<script>
-
-    $(document).ready(function () {
-  
-  
-  
-          var SITEURL = "{{url('/')}}";
-  
-          $.ajaxSetup({
-  
-            headers: {
-  
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  
-            }
-  
-          });
-  
-  
-  
-          var calendar = $('#calendar').fullCalendar({
-  
-              editable: true,
-  
-              events: SITEURL + "/fullcalendareventmaster",
-  
-              displayEventTime: true,
-  
-              editable: true,
-  
-              eventRender: function (event, element, view) {
-  
-                  if (event.allDay === 'true') {
-  
-                      event.allDay = true;
-  
-                  } else {
-  
-                      event.allDay = false;
-  
-                  }
-  
-              },
-  
-              selectable: true,
-  
-              selectHelper: true,
-  
-              select: function (start, end, allDay) {
-  
-                  var title = prompt('Event Title:');
-  
-  
-  
-                  if (title) {
-  
-                      var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
-  
-                      var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
-  
-  
-  
-                      $.ajax({
-  
-                          url: SITEURL + "/fullcalendareventmaster/create",
-  
-                          data: 'title=' + title + '&start=' + start + '&end=' + end,
-  
-                          type: "POST",
-  
-                          success: function (data) {
-  
-                              displayMessage("Added Successfully");
-  
-                          }
-  
-                      });
-  
-                      calendar.fullCalendar('renderEvent',
-  
-                              {
-  
-                                  title: title,
-  
-                                  start: start,
-  
-                                  end: end,
-  
-                                  allDay: allDay
-  
-                              },
-  
-                      true
-  
-                              );
-  
-                  }
-  
-                  calendar.fullCalendar('unselect');
-  
-              },
-  
-  
-  
-              eventDrop: function (event, delta) {
-  
-                          var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
-  
-                          var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
-  
-                          $.ajax({
-  
-                              url: SITEURL + '/fullcalendareventmaster/update',
-  
-                              data: 'title=' + event.title + '&start=' + start + '&end=' + end + '&id=' + event.id,
-  
-                              type: "POST",
-  
-                              success: function (response) {
-  
-                                  displayMessage("Updated Successfully");
-  
-                              }
-  
-                          });
-  
-                      },
-  
-              eventClick: function (event) {
-  
-                  var deleteMsg = confirm("Do you really want to delete?");
-  
-                  if (deleteMsg) {
-  
-                      $.ajax({
-  
-                          type: "POST",
-  
-                          url: SITEURL + '/fullcalendareventmaster/delete',
-  
-                          data: "&id=" + event.id,
-  
-                          success: function (response) {
-  
-                              if(parseInt(response) > 0) {
-  
-                                  $('#calendar').fullCalendar('removeEvents', event.id);
-  
-                                  displayMessage("Deleted Successfully");
-  
-                              }
-  
-                          }
-  
-                      });
-  
-                  }
-  
-              }
-  
-  
-  
-          });
-  
-    });
-  
-  
-  
-    function displayMessage(message) {
-  
-      $(".response").html("
-  "+message+"
-  ");
-  
-      setInterval(function() { $(".success").fadeOut(); }, 1000);
-  
-    }
-  
-  </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
-<script src="./js/popper.min.js"></script>
-<script src="./js/bootstrap.min.js"></script>
-<!-- Appear JavaScript -->
-<script src="./js/jquery.appear.js"></script>
-<!-- Countdown JavaScript -->
-<script src="./js/countdown.min.js"></script>
-<!-- Counterup JavaScript -->
-<script src="./js/waypoints.min.js"></script>
-<script src="./js/jquery.counterup.min.js"></script>
-<!-- Wow JavaScript -->
-<script src="./js/wow.min.js"></script>
-<!-- Apexcharts JavaScript -->
-<script src="./js/apexcharts.js"></script>
-<!-- Slick JavaScript -->
-<script src="./js/slick.min.js"></script>
-<!-- Select2 JavaScript -->
-<script src="./js/select2.min.js"></script>
-<!-- Owl Carousel JavaScript -->
-<script src="./js/owl.carousel.min.js"></script>
-<!-- Magnific Popup JavaScript -->
-<script src="./js/jquery.magnific-popup.min.js"></script>
-<!-- Smooth Scrollbar JavaScript -->
-<script src="./js/smooth-scrollbar.js"></script>
-<!-- lottie JavaScript -->
-<script src="./js/lottie.js"></script>
-
-<!-- Full calendar -->
-<script src='fullcalendar/core/main.js'></script>
-<script src='fullcalendar/daygrid/main.js'></script>
-<script src='fullcalendar/timegrid/main.js'></script>
-<script src='fullcalendar/list/main.js'></script>
-
-<script>
-   document.addEventListener('DOMContentLoaded', function() {
-       var calendarEl = document.getElementById('eventcalendar');
-
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-         plugins: [ 'timeGrid', 'dayGrid', 'list' ],
-         timeZone: 'UTC',
-         defaultView: 'dayGridMonth',
-         header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-         },
-         events: [
-         {
-            title: 'All Day Event',
-            start: '2019-12-01'
-         },
-         {
-            title: 'Long Event',
-            start: '2019-12-07',
-            end: '2019-12-10',
-            color: 'purple' // override!
-         },
-         {
-            groupId: '999',
-            title: 'Repeating Event',
-            start: '2019-12-09T16:00:00'
-         },
-         {
-            groupId: '999',
-            title: 'Repeating Event',
-            start: '2019-12-16T16:00:00'
-         },
-         {
-            title: 'Conference',
-            start: '2019-12-11',
-            end: '2019-12-13',
-            color: 'purple' // override!
-         },
-         {
-            title: 'Meeting',
-            start: '2019-12-12T10:30:00',
-            end: '2019-12-12T12:30:00',
-            color: 'red'
-         },
-         {
-            title: 'Lunch',
-            start: '2019-12-12T12:00:00',
-            color: 'green'
-         },
-         {
-            title: 'Meeting',
-            start: '2019-12-12T14:30:00'
-         },
-         {
-            title: 'Birthday Party',
-            start: '2020-01-02T07:00:00'
-         },
-         {
-            title: 'Click for Google',
-            url: 'http://google.com/',
-            start: '2020-01-15'
-         }
-      ]
-      });
-      calendar.render();
-   });
-
-</script>
-
-
-<!-- Chart Custom JavaScript -->
-<script src="js/chart-custom.js"></script>
-<!-- Custom JavaScript -->
-<script src="js/custom.js"></script>
-
-<!-- Mirrored from iqonic.design/themes/sofbox-admin/html/patient-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 Aug 2020 01:39:53 GMT -->
-
-
-
+     </div>
+     
+     <!-- Wrapper -->
 @endsection

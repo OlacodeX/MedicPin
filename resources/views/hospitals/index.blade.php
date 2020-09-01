@@ -1,573 +1,696 @@
-<!doctype html>
-<html lang="en">
-   
-<!-- Mirrored from iqonic.design/themes/sofbox-admin/html/chat.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 Aug 2020 01:41:13 GMT -->
-<head>
-      <!-- Required meta tags -->
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      
-      @section('page_title')
-      {{config('app.name')}} | Records
-      @endsection
-      <link rel="icon" href="{{asset('img/yy.jpg')}}">
-      <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="css/bootstrap.min.css">
-      <!-- Typography CSS -->
-      <link rel="stylesheet" href="css/typography.css">
-      <!-- Style CSS -->
-      <link rel="stylesheet" href="css/style.css">
-      <!-- Responsive CSS -->
-      <link rel="stylesheet" href="css/responsive.css">
-   </head>
-      <!-- loader END -->
-      <!-- Wrapper Start -->
-      <div class="wrapper">
-        <!-- Sidebar  -->
-        <div class="iq-sidebar">
-                <div class="iq-sidebar-logo d-flex justify-content-between">
-                   <a href="./">
-                   <img src="img/yy.jpg" class="img-fluid" alt="">
-                   <span>
-                    {{config('app.name')}}
-                   </span>
-                   </a>
-                   <div class="iq-menu-bt align-self-center">
-                      <div class="wrapper-menu">
-                         <div class="line-menu half start"></div>
-                         <div class="line-menu"></div>
-                         <div class="line-menu half end"></div>
-                      </div>
-                   </div>
-                </div>
-                <div id="sidebar-scrollbar">
-                   <nav class="iq-sidebar-menu">
-                      <ul id="iq-sidebar-toggle" class="iq-menu">
-                         <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
-                         @if (auth()->user()->role == 'Doctor')
-                         <li>
-                            <a href="./dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
-                           
-                         </li>
-                         <li class="active">
-                            <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Doctor's Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                               <li><a href="./myprofile">My Profile</a></li>
-                               <!---<li><a href="profile-edit.html">User Edit</a></li>--->
-                               <li><a href="patients/create">Add Patient</a></li>
-                               <li><a href="./patients">Patients List</a></li>
-                               <li><a href="./transfered_patients">Transferred Patients</a></li>
-                               <li><a href="./notifications">Sent Notifications</a></li>
-                               <li><a href="./notifications/create">Send Notification</a></li>
-                              </ul>
-                         </li>
-                               <li>
-                                  <a href="#user-info1" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ion-medkit"></i><span>Pharmacy</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                                  
-                                  <ul id="user-info1" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                      <li><a href="./add_drug">Add Drug</a></li>
-                                      <li><a href="./myshop">My Shop</a></li>
-                                      <li><a href="./pharmacy">Pharmacy Shop</a></li>
-                                   </ul>
-                              </li>
-                               <li><a href="./blood_bank" class="iq-waves-effect"><i class="ion-medkit"></i><span>Blood Bank</span></a></li>
-                               <li><a href="./hospitals" class="iq-waves-effect"><i class="ion-medkit"></i><span>My Hospital</span></a></li>
-                               <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
-                               <li><a href="./questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
-                               <li>
-                                  <a href="./" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Homepage</span></a>
-                                 
-                               </li>
-                         
-                         <li>
-                            
-                            <a href="{{ route('logout') }}" class="iq-waves-effect" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
-                            
-                              
-    
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form> 
-                        </li>
-                        
-                             
-                        @endif
-                        @if (auth()->user()->role == 'Patient')
-                        <li>
-                           <a href="./dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
-                          
-                        </li>
-                        <li class="active">
-                           <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                           <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                              <li><a href="./myprofile">My Profile</a></li>
-                              <li><a href="./notifications">My Notifications</a></li>
-                              <!---<li><a href="profile-edit.html">User Edit</a></li>--->
-                              <li><a href="">My Appointments</a></li>
-                           </ul>
-                        </li>
-                        <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
-                        <li><a href="./questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
-                        <li>
-                           <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
-                          
-                        </li>
-                        
-                        <li>
-                           
-                           <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
-                           
-                             
-    
-                           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                               @csrf
-                           </form> 
-                       </li>
-                            
-                        @endif
-                         <!----
-                         <li><a href="calendar.html" class="iq-waves-effect"><i class="ri-calendar-2-line"></i><span>Calendar</span></a></li>
-                         <li><a href="chat.html" class="iq-waves-effect"><i class="ri-message-line"></i><span>Chat</span></a></li>
-                         <li>
-                            <a href="#ecommerce" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-shopping-cart-line"></i><span>eCommerce</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="ecommerce" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                               <li><a href="product.html">Product</a></li>
-                               <li><a href="itemdetails.html">Item Details</a></li>
-                               <li><a href="checkout.html">Checkout</a></li>
-                            </ul>
-                         </li>
-                         <li class="iq-menu-title"><i class="ri-separator"></i><span>Components</span></li>
-                         <li>
-                            <a href="#menu-design" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-menu-3-line"></i><span>Menu Design</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="menu-design" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                               <li><a href="sales-dashboard.html">Horizontal menu</a></li>
-                               <li><a href="employee-dashboard.html">Horizontal Top Menu</a></li>
-                               <li><a href="course-dashboard.html">Two Sidebar</a></li>
-                               <li><a href="finance-dashboard.html">Vertical block menu</a></li>
-                            </ul>
-                         </li>
-                         <li>
-                            <a href="#ui-elements" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-pencil-ruler-line"></i><span>UI Elements</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="ui-elements" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                               <li><a href="ui-colors.html">colors</a></li>
-                               <li><a href="ui-typography.html">Typography</a></li>
-                               <li><a href="ui-alerts.html">Alerts</a></li>
-                               <li><a href="ui-badges.html">Badges</a></li>
-                               <li><a href="ui-breadcrumb.html">Breadcrumb</a></li>
-                               <li><a href="ui-buttons.html">Buttons</a></li>
-                               <li><a href="ui-cards.html">Cards</a></li>
-                               <li><a href="ui-carousel.html">Carousel</a></li>
-                               <li><a href="ui-embed-video.html">Video</a></li>
-                               <li><a href="ui-grid.html">Grid</a></li>
-                               <li><a href="ui-images.html">Images</a></li>
-                               <li><a href="ui-list-group.html">list Group</a></li>
-                               <li><a href="ui-media-object.html">Media</a></li>
-                               <li><a href="ui-modal.html">Modal</a></li>
-                               <li><a href="ui-notifications.html">Notifications</a></li>
-                               <li><a href="ui-pagination.html">Pagination</a></li>
-                               <li><a href="ui-popovers.html">Popovers</a></li>
-                               <li><a href="ui-progressbars.html">Progressbars</a></li>
-                               <li><a href="ui-tabs.html">Tabs</a></li>
-                               <li><a href="ui-tooltips.html">Tooltips</a></li>
-                            </ul>
-                         </li>
-                         <li>
-                            <a href="#forms" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-profile-line"></i><span>Forms</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="forms" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                               <li><a href="form-layout.html">Form Elements</a></li>
-                               <li><a href="form-validation.html">Form Validation</a></li>
-                               <li><a href="form-switch.html">Form Switch</a></li>
-                               <li><a href="form-chechbox.html">Form Checkbox</a></li>
-                               <li><a href="form-radio.html">Form Radio</a></li>
-                            </ul>
-                         </li>
-                         <li>
-                            <a href="#forms-wizard" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-archive-drawer-line"></i><span>Forms Wizard</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="forms-wizard" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                               <li><a href="form-wizard.html">Simple Wizard</a></li>
-                               <li><a href="form-wizard-validate.html">Validate Wizard</a></li>
-                               <li><a href="form-wizard-vertical.html">Vertical Wizard</a></li>
-                            </ul>
-                         </li>
-                         <li>
-                            <a href="#tables" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-table-line"></i><span>Table</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="tables" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                               <li><a href="tables-basic.html">Basic Tables</a></li>
-                               <li><a href="data-table.html">Data Table</a></li>
-                               <li><a href="table-editable.html">Editable Table</a></li>
-                            </ul>
-                         </li>
-                         <li>
-                            <a href="#charts" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-pie-chart-box-line"></i><span>Charts</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="charts" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                               <li><a href="chart-morris.html">Morris Chart</a></li>
-                               <li><a href="chart-high.html">High Charts</a></li>
-                               <li><a href="chart-am.html">Am Charts</a></li>
-                               <li><a href="chart-apex.html">Apex Chart</a></li>
-                            </ul>
-                         </li>
-                         <li>
-                            <a href="#icons" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-list-check"></i><span>Icons</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="icons" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                               <li><a href="icon-dripicons.html">Dripicons</a></li>
-                               <li><a href="icon-fontawesome-5.html">Font Awesome 5</a></li>
-                               <li><a href="icon-lineawesome.html">line Awesome</a></li>
-                               <li><a href="icon-remixicon.html">Remixicon</a></li>
-                               <li><a href="icon-unicons.html">unicons</a></li>
-                            </ul>
-                         </li>
-                         <li class="iq-menu-title"><i class="ri-separator"></i><span>Pages</span></li>
-                         <li>
-                            <a href="#authentication" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-pages-line"></i><span>Authentication</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="authentication" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                               <li><a href="sign-in.html">Login</a></li>
-                               <li><a href="sign-up.html">Register</a></li>
-                               <li><a href="pages-recoverpw.html">Recover Password</a></li>
-                               <li><a href="pages-confirm-mail.html">Confirm Mail</a></li>
-                               <li><a href="pages-lock-screen.html">Lock Screen</a></li>
-                            </ul>
-                         </li>
-                         <li>
-                            <a href="#map" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-map-pin-user-line"></i><span>Maps</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="map" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                               <li><a href="pages-map.html">Google Map</a></li>
-                               <li><a href="#">Vector Map</a></li>
-                            </ul>
-                         </li>
-                         <li>
-                            <a href="#extra-pages" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-pantone-line"></i><span>Extra Pages</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="extra-pages" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                               <li><a href="pages-timeline.html">Timeline</a></li>
-                               <li><a href="pages-invoice.html">Invoice</a></li>
-                               <li><a href="blank-page.html">Blank Page</a></li>
-                               <li><a href="pages-error.html">Error 404</a></li>
-                               <li><a href="pages-error-500.html">Error 500</a></li>
-                               <li><a href="pages-pricing.html">Pricing</a></li>
-                               <li><a href="pages-pricing-one.html">Pricing 1</a></li>
-                               <li><a href="pages-maintenance.html">Maintenance</a></li>
-                               <li><a href="pages-comingsoon.html">Coming Soon</a></li>
-                               <li><a href="pages-faq.html">Faq</a></li>
-                            </ul>
-                         </li><li>
-                            <a href="#menu-level" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-record-circle-line"></i><span>Menu Level</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                            <ul id="menu-level" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                               <li><a href="#"><i class="ri-record-circle-line"></i>Menu 1</a></li>
-                               <li><a href="#"><i class="ri-record-circle-line"></i>Menu 2</a>
-                                  <li>
-                                     <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-play-circle-line"></i><span>Sub-menu</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                                     <ul id="sub-menu" class="iq-submenu iq-submenu-data collapse">
-                                        <li><a href="#"><i class="ri-record-circle-line"></i>Sub-menu 1</a></li>
-                                        <li><a href="#"><i class="ri-record-circle-line"></i>Sub-menu 2</a></li>
-                                        <li><a href="#"><i class="ri-record-circle-line"></i>Sub-menu 3</a></li>
-                                     </ul>
-                                  </li>
-                               </li>
-                               <li><a href="#"><i class="ri-record-circle-line"></i>Menu 3</a></li>
-                               <li><a href="#"><i class="ri-record-circle-line"></i>Menu 4</a></li>---->
-                            </ul>
-                         </li>
-                      </ul>
-                   </nav>
-                   <div class="p-3"></div>
-                </div>
-             </div>
-         <!-- TOP Nav Bar -->
-         <div class="iq-top-navbar">
-            <div class="iq-navbar-custom">
-               <div class="iq-sidebar-logo">
-               <div class="top-logo">
-                  <a href="./" class="logo">
-                  <img src="img/yy.jpg" class="img-fluid" alt="">
-                  
-                  </a>
-               </div>
-            </div>
-               <div class="navbar-breadcrumb">
-                  <h5 class="mb-0">Hospital</h5>
-                  <nav aria-label="breadcrumb">
-                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="./">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Your Hospital</li>
-                     </ul>
-                  </nav>
-               </div>
-               <nav class="navbar navbar-expand-lg navbar-light p-0">
-                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                 <i class="ri-menu-3-line"></i>
-                 </button>
-                 <div class="iq-menu-bt align-self-center">
-                    <div class="wrapper-menu">
-                       <div class="line-menu half start"></div>
-                       <div class="line-menu"></div>
-                       <div class="line-menu half end"></div>
-                    </div>
-                 </div>
-                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto navbar-list pull-right">
-                       <li class="nav-item dropdown">
-                          <a href="#" class="search-toggle iq-waves-effect">
-                             <i class="ri-mail-line"></i>
-                             <span class="badge badge-pill badge-primary badge-up count-mail">{{App\Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->count()}}</span>
-                          </a>
-                          <!----recent m here--->
-                          <div class="iq-sub-dropdown">
-                             <div class="iq-card shadow-none m-0">
-                                <div class="iq-card-body p-0 ">
-                                   <div class="bg-primary p-3">
-                                      <h5 class="mb-0 text-white">Unread Messages<small class="badge  badge-light float-right pt-1">{{App\Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->count()}}</small></h5>
-                                   </div>
-                                   
-                                   @if (count($new_messages) > 0)
-                                   @foreach ($new_messages as $message)
-                                   <a href="./chat/{{$message->id}}" class="iq-sub-card" >
-                                      <div class="media align-items-center">
-                                         <div class="media-body ml-3">
-                                            <h6 class="mb-0 ">{{$message->sender_name}}</h6>
-                                            <small class="float-left font-size-12">{{$message->created_at}}</small>
-                                         </div>
-                                      </div>
-                                   </a>
-                                   @endforeach
-                                   @else <br>
-                                   <p class="text-center">You Have No Unread Messages</p>    
+@extends('layouts.maininner')
 
-                                   @endif
-                                   <div class="text-center">
-                                   <a href="./chat" class="btn btn-primary" style="margin-bottom: 20px;">See All Messages</a>
-                                   </div>
-                                </div>
-                             </div>
-                          </div>
-                       </li>
-                    
-                       <li class="nav-item">
-                           <a href="./cart" class="iq-waves-effect" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="My Shopping Cart"><i class="ri-shopping-cart-2-line"></i></a>
-                           <span class="badge badge-primary badge-up count-mail">{{App\StoreCart::where('user_id', auth()->user()->id)->orderBy('id', 'ASC')->count() }}</span>
-                        </li>
-                    </ul>
+@section('content')
+@include('inc.navmaininner')
+         <div class="">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="iq-card-header d-flex justify-content-between">
+                     <div class="iq-header-title">
+                        <h4 class="card-title">Your Hospital</h4>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-6 col-lg-3">
+                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                           <div class="iq-card-body iq-bg-primary rounded">
+                              <div class="d-flex align-items-center justify-content-between">
+                                 <div class="rounded-circle iq-card-icon bg-primary"><i class="ri-user-fill"></i></div>
+                                 <div class="text-right">                                 
+                                    <h2 class="mb-0"><span class="counter">{{App\HospitalDoctors::where('h_id', $hospital->id)->count()}}</span></h2>
+                                    <h5 class="">Doctors</h5>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-lg-3">
+                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                           <div class="iq-card-body iq-bg-warning rounded">
+                              <div class="d-flex align-items-center justify-content-between">
+                                 <div class="rounded-circle iq-card-icon bg-warning"><i class="ri-women-fill"></i></div>
+                                 <div class="text-right">                                 
+                                    <h2 class="mb-0"><span class="counter">3450</span></h2>
+                                    <h5 class="">Nurses</h5>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-lg-3">
+                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                           <div class="iq-card-body iq-bg-danger rounded">
+                              <div class="d-flex align-items-center justify-content-between">
+                                 <div class="rounded-circle iq-card-icon bg-danger"><i class="ri-group-fill"></i></div>
+                                 <div class="text-right">  
+                                    @php
+                                        $doc = App\HospitalDoctors::where('h_id', $hospital->id)->pluck('doctor_name');
+                                       
+                                          $patients = App\patients::whereIn('doctor', $doc)->count();
+                                       
+                                        
+                                    @endphp                                
+                                    <h2 class="mb-0"><span class="counter">{{$patients}}</span></h2>
+                                    <h5 class="">Patients</h5>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-lg-3">
+                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                           <div class="iq-card-body iq-bg-info rounded">
+                              <div class="d-flex align-items-center justify-content-between">
+                                 <div class="rounded-circle iq-card-icon bg-info"><i class="ri-hospital-line"></i></div>
+                                 <div class="text-right">                                 
+                                    <h2 class="mb-0"><span class="counter">4500</span></h2>
+                                    <h5 class="">Pharmacists</h5>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+              <div class="col-sm-12">
+                 <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                    <div class="iq-card-body pb-0 mt-3">       
+                     <style>
+                        /* enable absolute positioning */
+                .inner-addon {
+                  position: relative;
+                }
+                
+                /* style glyph */
+                .inner-addon .fa {
+                  position: absolute;
+                  padding: 10px;
+                  pointer-events: none;
+                  color: #0178ff7b;
+                  font-weight: 900;
+                }
+                
+                /* align glyph 
+                .left-addon .fa  { left:  0px;}*/
+                .right-addon .fa { right: 260px;}
+                
+                /* add padding 
+                .left-addon input  { padding-left:  30px; } */
+                .right-addon input { padding-right: 30px; }
+                         div.panel-body,
+                         div.panel-default{
+                             border-radius: 0;
+                             border-top: none;
+                         }
+                         .btn.btn-info.btn-sm{
+                             background: transparent;
+                             border: none;
+                             color: rgb(20, 109, 224);
+                         }
+                         
+                         
+                         .btn.btn-info.btn-sm i.fa{
+                             font-size: 12px;
+                             margin: 0;
+                         }
+                       @media only screen and (max-width: 768px) {
+                /* align glyph 
+                .left-addon .fa  { left:  0px;}*/
+                .right-addon .fa { right: 20px;}
+                
+                          
+                         .btn.btn-info.btn-sm{
+                             background: transparent;
+                             border: none;
+                             color: rgb(20, 109, 224);
+                             float: right;
+                             display: inline;
+                         }
+                         
+                         .btn.btn-info.btn-sm i.fa{
+                             font-size: 12px;
+                             margin: 0;
+                             padding: 0;
+                         }
+                         div.panel-body span.pull-left{
+                             font-size: 12px;
+                             margin-bottom: 0;
+                         }
+                         div.panel-body span.user-list-files.d-flex.float-right{
+                            margin-top: 0;
+                         }
+                       }
+                     </style>
+                        <!--- <a href="hospitals/{{$hospital->id}}">-->
+                         <!----                        
+                         {!! Form::open(['action' => 'HospitalController@index', 'method' => 'GET', 'id' => 'my_form_1']) /** The action should be the block of code in the store function in PostsController
+                         **/ !!}
+                          {{Form::hidden('pin', $hospital->pin)}}
+                         {!! Form::close() !!}---->
+                         <span class="pull-left">{{$hospital->h_name}} {{$hospital->h_type}} Hospital</span>
+                         <span class="user-list-files d-flex float-right">
+
+                            {!!Form::open(['action' => 'HospitalController@doctors', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                           
+                            {{Form::hidden('id', $hospital->id)}}
+                            <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Doctors list"><i class="fa fa-user-o"></i></button>
+                           
+                            {!!Form::close()!!}
+
+                            {!!Form::open(['action' => 'HospitalController@add_doc', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                           
+                            {{Form::hidden('id', $hospital->id)}}
+                            <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add Doctor to Hospital"><i class="fa fa-plus"></i></button>
+                           
+                            {!!Form::close()!!}
+
+                             {!!Form::open(['action' => 'HospitalController@destroyy', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                            
+                             {{Form::hidden('id', $hospital->id)}}
+                             <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete Hospital"><i class="fa fa-trash-o"></i></button>
+                            
+                             {!!Form::close()!!}
+                             <button class ="btn btn-info btn-sm"><a href="hospitals/{{$hospital->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Hospital Details"><i class="fa fa-edit"></i></a></button>
+                          </span>
+                    </div>   
                  </div>
-                 <ul class="navbar-list">
-                    <li>
-                       <a href="#" class="search-toggle iq-waves-effect bg-primary text-white"><img src="../images/user/1.jpg" class="img-fluid rounded" alt="user"></a>
-                       <div class="iq-sub-dropdown iq-user-dropdown">
-                          <div class="iq-card shadow-none m-0">
-                                <div class="d-inline-block w-100 text-center p-3">
-                                   <a class="iq-bg-danger iq-sign-btn" href="{{ route('logout') }}" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
-                                </div>
-                             </div>
-                          </div>
-                       </div>
-                    </li>
-                 </ul>
-              </nav>
-            </div>
-         </div>
-         <!-- TOP Nav Bar END --> 
-   <!-- Page Content  -->
-   <div id="content-page" class="content-page">
-      <div class="container-fluid">
-         <div class="row">
-            <div class="col-sm-12">
+               </div>
+               <div class="col-sm-12">
+                  <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                     <div class="iq-card-header d-flex justify-content-between">
+                        <div class="iq-header-title">
+                           <h4 class="card-title">Hospital Staff</h4>
+                        </div>
+                     </div>
+                     <div class="iq-card-body">
+                        <ul id="doster-list-slide" class="d-flex flex-wrap align-items-center p-0">
+                           @php
+                               
+                               $docs = App\HospitalDoctors::where('h_id', $hospital->id)->get();
+                                       
+                           @endphp
+                           @if (count($docs) > 0)
+                           @foreach ($docs as $doc)
+                           @php
+                               $detail = App\User::where('pin', $doc->doctor_pin)->first();
+                           @endphp
+                           <li class="doctor-list-item col-md-3 text-center p-2">
+                              <div class="doctor-list-item-inner rounded">
+                                 <div class="donter-profile">
+                                    <img src="../img/profile/{{$detail->img}}" class="img-fluid rounded-circle" alt="user-img">
+                                 </div>
+                                 <div class="doctor-detail mt-3">
+                                    <h5>{{$detail->name}}</h5>
+                                    <h6>{{$detail->role}}</h6>
+                                 </div>
+                                 <hr>
+                                 <div class="doctor-description">
+                                    <p class="mb-0 text-center pl-2 pr-2">{{$hospital->h_name}} {{$hospital->h_type}} hospital</p>
+                                 </div>
+                              </div>
+                           </li>
+                               
+                           @endforeach
+                           @else
+                           <p>You have no hospital staff yet</p>   
+                               
+                               
+                           @endif
+                           <li class="doctor-list-item col-md-3 text-center p-2">
+                              <div class="doctor-list-item-inner rounded">
+                                 <div class="donter-profile">
+                                    <img src="images/user/07.jpg" class="img-fluid rounded-circle" alt="user-img">
+                                 </div>
+                                 <div class="doctor-detail mt-3">
+                                    <h5>Dr. Paul Molive</h5>
+                                    <h6>Surgeon</h6>
+                                 </div>
+                                 <hr>
+                                 <div class="doctor-description">
+                                    <p class="mb-0 text-center pl-2 pr-2">California Hospital Medical Center</p>
+                                 </div>
+                              </div>
+                           </li>
+                           <li class="doctor-list-item col-md-3 text-center p-2">
+                              <div class="doctor-list-item-inner rounded">
+                                 <div class="donter-profile">
+                                    <img src="images/user/08.jpg" class="img-fluid rounded-circle" alt="user-img">
+                                 </div>
+                                 <div class="doctor-detail mt-3">
+                                    <h5>Dr. Paul Molive</h5>
+                                    <h6>Doctor</h6>
+                                 </div>
+                                 <hr>
+                                 <div class="doctor-description">
+                                    <p class="mb-0 text-center pl-2 pr-2">California Hospital Medical Center</p>
+                                 </div>
+                              </div>
+                           </li>
+                           <li class="doctor-list-item col-md-3 text-center p-2">
+                              <div class="doctor-list-item-inner rounded">
+                                 <div class="donter-profile">
+                                    <img src="images/user/08.jpg" class="img-fluid rounded-circle" alt="user-img">
+                                 </div>
+                                 <div class="doctor-detail mt-3">
+                                    <h5>Dr. Paul Molive</h5>
+                                    <h6>Doctor</h6>
+                                 </div>
+                                 <hr>
+                                 <div class="doctor-description">
+                                    <p class="mb-0 text-center pl-2 pr-2">California Hospital Medical Center</p>
+                                 </div>
+                              </div>
+                           </li>
+                           <li class="doctor-list-item col-md-3 text-center p-2">
+                              <div class="doctor-list-item-inner rounded">
+                                 <div class="donter-profile">
+                                    <img src="images/user/08.jpg" class="img-fluid rounded-circle" alt="user-img">
+                                 </div>
+                                 <div class="doctor-detail mt-3">
+                                    <h5>Dr. Paul Molive</h5>
+                                    <h6>Doctor</h6>
+                                 </div>
+                                 <hr>
+                                 <div class="doctor-description">
+                                    <p class="mb-0 text-center pl-2 pr-2">California Hospital Medical Center</p>
+                                 </div>
+                              </div>
+                           </li>
+                           <li class="doctor-list-item col-md-3 text-center p-2">
+                              <div class="doctor-list-item-inner rounded">
+                                 <div class="donter-profile">
+                                    <img src="images/user/09.jpg" class="img-fluid rounded-circle" alt="user-img">
+                                 </div>
+                                 <div class="doctor-detail mt-3">
+                                    <h5>Dr. Paul Molive</h5>
+                                    <h6>Surgeon</h6>
+                                 </div>
+                                 <hr>
+                                 <div class="doctor-description">
+                                    <p class="mb-0 text-center pl-2 pr-2">California Hospital Medical Center</p>
+                                 </div>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 col-lg-8">
+                  <div class="row">
+                     <div class="col-sm-12">
+                      <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                        <div class="iq-card-header d-flex justify-content-between">
+                           <div class="iq-header-title">
+                              <h4 class="card-title">Operations</h4>
+                           </div>
+                           <div class="iq-card-header-toolbar d-flex align-items-center">
+                              <div class="dropdown">
+                                 <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
+                                 <i class="ri-more-fill"></i>
+                                 </span>
+                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
+                                    <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>View</a>
+                                    <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>Delete</a>
+                                    <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Edit</a>
+                                    <a class="dropdown-item" href="#"><i class="ri-printer-fill mr-2"></i>Print</a>
+                                    <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>Download</a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="iq-card-body">
+                           <div class="table-responsive">
+                              @if (count($operations) > 0)
+                              <table class="table mb-0 table-borderless">
+                                 <thead>
+                                    <tr>
+                                       <th scope="col">Patient</th>
+                                       <th scope="col">Patient Name </th>
+                                       <th scope="col">Doctors Team</th>
+                                       <th scope="col">Date Of Operation</th>
+                                       <th scope="col"> Report</th>
+                                       <th scope="col">Diseases</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    @foreach ($operations as $operation)
+                                    @php
+                                    $patient = App\User::where('pin', $operation->patient_pin)->first();
+                                    $doc1 = App\User::where('pin', $operation->doc_1)->first();
+                                    $doc2 = App\User::where('pin', $operation->doc_2)->first();
+                                    $doc3 = App\User::where('pin', $operation->doc_3)->first();
+                                    $doc4 = App\User::where('pin', $operation->doc_4)->first();
+                                    $doc5 = App\User::where('pin', $operation->doc_5)->first();
+                                        
+                                    @endphp
+                                    <tr>
+                                       <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="../img/profile/{{$patient->img}}" alt="profile"></td>
+                                       <td>{{$patient->name}}</td>
+                                       <td>
+                                          <div class="iq-media-group">
+                                             @if (!empty($doc1))
+                                             <a href="#" class="iq-media">
+                                             <img class="img-fluid avatar-40 rounded-circle" src="../img/profile/{{$doc1->img}}" alt="">
+                                             </a>
+                                                 
+                                             @endif
+                                             @if (!empty($doc2->img))
+                                             <a href="#" class="iq-media">
+                                             <img class="img-fluid avatar-40 rounded-circle" src="../img/profile/{{$doc2->img}}" alt="">
+                                             </a>
+                                                 
+                                             @endif
+                                             @if (!empty($doc3))
+                                             <a href="#" class="iq-media">
+                                             <img class="img-fluid avatar-40 rounded-circle" src="../img/profile/{{$doc3->img}}" alt="">
+                                             </a>
+                                                 
+                                             @endif
+                                             @if (!empty($doc4))
+                                             <a href="#" class="iq-media">
+                                             <img class="img-fluid avatar-40 rounded-circle" src="../img/profile/{{$doc4->img}}" alt="">
+                                             </a>
+                                                 
+                                             @endif
+                                             @if (!empty($doc5))
+                                             <a href="#" class="iq-media">
+                                             <img class="img-fluid avatar-40 rounded-circle" src="../img/profile/{{$doc5->img}}" alt="">
+                                             </a>
+                                                 
+                                             @endif
+                                          </div>
+                                       </td>
+                                       <td>{{$operation->created_at}}</td>
+                                       <td><a href="../img/reports/{{$operation->report}}" style="text-decoration: none;" download="{{$operation->report}}"><i class="ri-file-pdf-line font-size-16 text-danger"></i></a></td>
+                                       <td>{{$operation->disease}}</td>
+                                    </tr>
+                                        
+                                    @endforeach
+                                    <tr>
+                                       <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="images/user/02.jpg" alt="profile"></td>
+                                       <td>Anna Sthesia</td>
+                                       <td>
+                                          <div class="iq-media-group">
+                                             <a href="#" class="iq-media">
+                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/05.jpg" alt="">
+                                             </a>
+                                             <a href="#" class="iq-media">
+                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/06.jpg" alt="">
+                                             </a>
+                                             <a href="#" class="iq-media">
+                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/07.jpg" alt="">
+                                             </a>
+                                          </div>
+                                       </td>
+                                       <td>14-02-2020</td>
+                                       <td><i class="ri-file-pdf-line font-size-16 text-danger"></i></td>
+                                       <td>Cataract surgery</td>
+                                    </tr>
+                                    <tr>
+                                       <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="images/user/03.jpg" alt="profile"></td>
+                                       <td>Paul Molive</td>
+                                       <td>
+                                          <div class="iq-media-group">
+                                             <a href="#" class="iq-media">
+                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/05.jpg" alt="">
+                                             </a>
+                                             <a href="#" class="iq-media">
+                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/06.jpg" alt="">
+                                             </a>
+                                             <a href="#" class="iq-media">
+                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/07.jpg" alt="">
+                                             </a>
+                                          </div>
+                                       </td>
+                                       <td>14-02-2020</td>
+                                       <td><i class="ri-file-pdf-line font-size-16 text-danger"></i></td>
+                                       <td>Cancer</td>
+                                       
+                                    </tr>
+                                    <tr>
+                                       <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="images/user/04.jpg" alt="profile"></td>
+                                       <td>Anna Mull</td>
+                                       <td>
+                                          <div class="iq-media-group">
+                                             <a href="#" class="iq-media">
+                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/05.jpg" alt="">
+                                             </a>
+                                             <a href="#" class="iq-media">
+                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/06.jpg" alt="">
+                                             </a>
+                                             <a href="#" class="iq-media">
+                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/07.jpg" alt="">
+                                             </a>
+                                          </div>
+                                       </td>
+                                       <td>16-02-2020</td>
+                                       <td><i class="ri-file-pdf-line font-size-16 text-danger"></i></td>
+                                       <td>Hysterectomy</td>
+                                    </tr>
+                                    <tr>
+                                       <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="images/user/05.jpg" alt="profile"></td>
+                                       <td>Ruby saul</td>
+                                       <td>
+                                          <div class="iq-media-group">
+                                             <a href="#" class="iq-media">
+                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/05.jpg" alt="">
+                                             </a>
+                                             <a href="#" class="iq-media">
+                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/06.jpg" alt="">
+                                             </a>
+                                             <a href="#" class="iq-media">
+                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/07.jpg" alt="">
+                                             </a>
+                                          </div>
+                                       </td>
+                                       <td>18-02-2020</td>
+                                       <td><i class="ri-file-pdf-line font-size-16 text-danger"></i></td>
+                                       <td>Cancer</td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                                  
+                              @endif
+                           </div>
+                        </div>
+                      </div> 
+                     </div>                        
+                     <div class="col-md-12 col-lg-6">
+                        <div class="row">
+                           <div class="col-md-6 col-lg-12">
+                              <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                                 <div class="iq-card-body">
+                                    <div class="iq-info-box d-flex align-items-center p-3">
+                                       <div class="info-image mr-3">
+                                          <img src="images/page-img/30.png" class="img-fluid" alt="image-box">
+                                       </div>
+                                       <div class="info-text">
+                                          <h3>120</h3>
+                                          <span>Total Appointments</span>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-md-6 col-lg-12">
+                              <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                                 <div class="iq-card-body">
+                                    <div class="iq-info-box d-flex align-items-center p-3">
+                                       <div class="info-image mr-3">
+                                          <img src="images/page-img/31.png" class="img-fluid" alt="image-box">
+                                       </div>
+                                       <div class="info-text">
+                                          <h3>5000</h3>
+                                          <span>Completed Appointments</span>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-md-6 col-lg-12">
+                              <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                                 <div class="iq-card-body">
+                                    <div class="iq-info-box d-flex align-items-center p-3">
+                                       <div class="info-image mr-3">
+                                          <img src="images/page-img/32.png" class="img-fluid" alt="image-box">
+                                       </div>
+                                       <div class="info-text">
+                                          <h3>1500</h3>
+                                          <span>Cancelled Appointments</span>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-md-6 col-lg-12">
+                              <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                                 <div class="iq-card-body">
+                                    <div class="iq-info-box d-flex align-items-center p-3">
+                                       <div class="info-image mr-3">
+                                          <img src="images/page-img/33.png" class="img-fluid" alt="image-box">
+                                       </div>
+                                       <div class="info-text">
+                                          <h3>500</h3>
+                                          <span>Followup Appointments</span>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-12 col-lg-6">
+                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                           <div class="iq-card-header d-flex justify-content-between">
+                              <div class="iq-header-title">
+                                 <h4 class="card-title">Recent Activity</h4>
+                              </div>
+                              <div class="iq-card-header-toolbar d-flex align-items-center">
+                                 <div class="dropdown">
+                                    <span class="dropdown-toggle text-primary" id="dropdownMenuButton4" data-toggle="dropdown">
+                                    View All
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton4">
+                                       <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>View</a>
+                                       <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>Delete</a>
+                                       <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Edit</a>
+                                       <a class="dropdown-item" href="#"><i class="ri-printer-fill mr-2"></i>Print</a>
+                                       <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>Download</a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="iq-card-body">
+                              <ul class="iq-timeline">
+                                 <li>
+                                    <div class="timeline-dots-fill"></div>
+                                    <h6 class="float-left mb-2 text-dark"><i class="ri-user-fill"></i> 5 min ago</h6>
+                                    <small class="float-right mt-1">Active</small>
+                                    <div class="d-inline-block w-100">
+                                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque </p>
+                                    </div>
+                                 </li>
+                                 <li>
+                                    <div class="timeline-dots-fill bg-success"></div>
+                                    <h6 class="float-left mb-2 text-dark"><i class="ri-user-fill"></i> 6 min ago</h6>
+                                    <small class="float-right mt-1">Away</small>
+                                    <div class="d-inline-block w-100">
+                                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque</p>
+                                    </div>
+                                 </li>
+                                 <li>
+                                    <div class="timeline-dots-fill bg-info"></div>
+                                    <h6 class="float-left mb-2 text-dark"><i class="ri-user-fill"></i> 10 min ago</h6>
+                                    <small class="float-right mt-1">Active</small>
+                                    <div class="d-inline-block w-100">
+                                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque</p>
+                                    </div>
+                                 </li>
+                                 <li>
+                                    <div class="timeline-dots-fill bg-warning"></div>
+                                    <h6 class="float-left mb-2 text-dark"><i class="ri-user-fill"></i> 15 min ago</h6>
+                                    <small class="float-right mt-1">Offline</small>
+                                    <div class="d-inline-block w-100">
+                                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque</p>
+                                    </div>
+                                 </li>
+                                 <li>
+                                    <div class="timeline-dots-fill bg-danger"></div>
+                                    <h6 class="float-left mb-2 text-dark"><i class="ri-user-fill"></i> 18 min ago</h6>
+                                    <small class="float-right mt-1">Away</small>
+                                    <div class="d-inline-block w-100">
+                                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque</p>
+                                    </div>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>             
+               </div>
+               <div class="col-md-12 col-lg-4">
                   <div class="iq-card">
                      <div class="iq-card-header d-flex justify-content-between">
                         <div class="iq-header-title">
-                           <h4 class="card-title">Your Hospital</h4>
+                           <h4 class="card-title">Total Accident Report</h4>
                         </div>
-                        <!----
-                        <div class="col-sm-12 col-md-6">
-                           <div class="user-list-files d-flex float-right">
-                            <a href="./schedule/create" class="chat-icon-delete" style="text-decoration: none;">
-                             Add To Do 
-                            </a>
-                             </div>
-                        </div>---->
                      </div>
                      <div class="iq-card-body">
-                        <div class="table-responsive">
-                           <div class="row justify-content-between">
-                              <div class="col-sm-12 col-md-6">
-                                @include('inc.messages')
-                              </div>
-                              <div class="col-sm-12 col-md-6">
-                              </div>
+                        <div class="row">
+                           <div class="col-sm-6">
+                              <h3>$40K</h3>
                            </div>
-                           
-                           <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden fadeInUp" data-wow-delay="0.6s">
-                             
-                             <style>
-                                /* enable absolute positioning */
-                        .inner-addon {
-                          position: relative;
-                        }
-                        
-                        /* style glyph */
-                        .inner-addon .fa {
-                          position: absolute;
-                          padding: 10px;
-                          pointer-events: none;
-                          color: #0178ff7b;
-                          font-weight: 900;
-                        }
-                        
-                        /* align glyph 
-                        .left-addon .fa  { left:  0px;}*/
-                        .right-addon .fa { right: 260px;}
-                        
-                        /* add padding 
-                        .left-addon input  { padding-left:  30px; } */
-                        .right-addon input { padding-right: 30px; }
-                                 div.panel-body,
-                                 div.panel-default{
-                                     border-radius: 0;
-                                     border-top: none;
-                                 }
-                                 .btn.btn-info.btn-sm{
-                                     background: transparent;
-                                     border: none;
-                                     color: rgb(20, 109, 224);
-                                 }
-                                 
-                                 
-                                 .btn.btn-info.btn-sm i.fa{
-                                     font-size: 12px;
-                                     margin: 0;
-                                 }
-                               @media only screen and (max-width: 768px) {
-                        /* align glyph 
-                        .left-addon .fa  { left:  0px;}*/
-                        .right-addon .fa { right: 20px;}
-                        
-                                  
-                                 .btn.btn-info.btn-sm{
-                                     background: transparent;
-                                     border: none;
-                                     color: rgb(20, 109, 224);
-                                     float: right;
-                                     display: inline;
-                                 }
-                                 
-                                 .btn.btn-info.btn-sm i.fa{
-                                     font-size: 12px;
-                                     margin: 0;
-                                     padding: 0;
-                                 }
-                                 div.panel-body span.pull-left{
-                                     font-size: 12px;
-                                     margin-bottom: 0;
-                                 }
-                                 div.panel-body span.user-list-files.d-flex.float-right{
-                                    margin-top: 0;
-                                 }
-                               }
-                             </style>
-                             <div class="iq-card-body p-0">
-                                 @if (count($hospitals) > 0)
-                                 @foreach ($hospitals as $hospital)
-                                <!--- <a href="hospitals/{{$hospital->id}}">-->
-                                 <!----                        
-                                 {!! Form::open(['action' => 'HospitalController@index', 'method' => 'GET', 'id' => 'my_form_1']) /** The action should be the block of code in the store function in PostsController
-                                 **/ !!}
-                                  {{Form::hidden('pin', $hospital->pin)}}
-                                 {!! Form::close() !!}---->
-                                 <div class="panel panel-default">
-                                 <div class="panel-body">
-                                 <span class="pull-left">{{$hospital->h_name}} {{$hospital->h_type}} Hospital</span>
-                                 <span class="user-list-files d-flex float-right">
-  
-                                    {!!Form::open(['action' => 'HospitalController@doctors', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
-                                   
-                                    {{Form::hidden('id', $hospital->id)}}
-                                    <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Doctors list"><i class="fa fa-user-o"></i></button>
-                                   
-                                    {!!Form::close()!!}
-  
-                                    {!!Form::open(['action' => 'HospitalController@add_doc', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
-                                   
-                                    {{Form::hidden('id', $hospital->id)}}
-                                    <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add Doctor to Hospital"><i class="fa fa-plus"></i></button>
-                                   
-                                    {!!Form::close()!!}
-  
-                                     {!!Form::open(['action' => 'HospitalController@destroyy', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
-                                    
-                                     {{Form::hidden('id', $hospital->id)}}
-                                     <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete Hospital"><i class="fa fa-trash-o"></i></button>
-                                    
-                                     {!!Form::close()!!}
-                                     <button class ="btn btn-info btn-sm"><a href="hospitals/{{$hospital->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Hospital Details"><i class="fa fa-edit"></i></a></button>
-                                  </span>
-                                 </div>
-                                 </div><br>
-                                 <!---</a>-->
-                                 @endforeach
-  
-                                 @else
-                                 <p class="text-center">No Record Found.</p>    
-                                 <a href="hospitals/create" class="btn btn-info">Add An Hospital Here</a>
-                                 @endif
-                                 
-                             </div>
-                         </div>
                         </div>
-                           </div>
+                        <div id="chart-7"></div>
+                        <div class="row text-center mt-3">
+                            <div class="col-sm-6">
+                                <h6 class="text-truncate d-block">Last Month</h6>
+                                <p class="m-0">358</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <h6 class="text-truncate d-block">Current Month</h6>
+                                <p class="m-0">194</p>
+                            </div>
+                        </div>
                      </div>
                   </div>
-            </div>
-         </div>
-      </div>
-   </div>
-   </div>
-   <!-- Wrapper END -->
-      <!-- Footer -->
-        <footer class="bg-white iq-footer">
-            <div class="container-fluid">
-               <div class="row">
-                  <div class="col-lg-6">
-                     <ul class="list-inline mb-0">
-                        <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
-                        <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
-                     </ul>
+                  <div class="iq-card">
+                     <div class="iq-card-header d-flex justify-content-between">
+                        <div class="iq-header-title">
+                           <h4 class="card-title">Total Death Report</h4>
+                        </div>
+                     </div>
+                     <div class="iq-card-body">
+                        <div class="row">
+                           <div class="col-sm-6">
+                              <h3>$20K</h3>
+                           </div>
+                        </div>
+                        <div id="chart-8"></div>
+                        <div class="row text-center mt-3">
+                            <div class="col-sm-6">
+                                <h6 class="text-truncate d-block">Last Month</h6>
+                                <p class="m-0">220</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <h6 class="text-truncate d-block">Current Month</h6>
+                                <p class="m-0">120</p>
+                            </div>
+                        </div>
+                     </div>
                   </div>
-                  <div class="col-lg-6 text-right">
-                     Copyright 2020 <a href="#">Medicpin</a> All Rights Reserved.
+                  <div class="iq-card">
+                     <div class="iq-card-header d-flex justify-content-between">
+                        <div class="iq-header-title">
+                           <h4 class="card-title">Overall Progress</h4>
+                        </div>
+                     </div>
+                     <div class="iq-card-body">
+                        <div id="apex-radialbar-chart"></div>
+                     </div>
                   </div>
                </div>
             </div>
-         </footer>
-         <!-- Footer END -->
-      <!-- Optional JavaScript -->
-      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-      <script src="js/jquery.min.js"></script>
-      <script src="js/popper.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-      <!-- Appear JavaScript -->
-      <script src="js/jquery.appear.js"></script>
-      <!-- Countdown JavaScript -->
-      <script src="js/countdown.min.js"></script>
-      <!-- Counterup JavaScript -->
-      <script src="js/waypoints.min.js"></script>
-      <script src="js/jquery.counterup.min.js"></script>
-      <!-- Wow JavaScript -->
-      <script src="js/wow.min.js"></script>
-      <!-- Apexcharts JavaScript -->
-      <script src="js/apexcharts.js"></script>
-      <!-- Slick JavaScript -->
-      <script src="js/slick.min.js"></script>
-      <!-- Select2 JavaScript -->
-      <script src="js/select2.min.js"></script>
-      <!-- Owl Carousel JavaScript -->
-      <script src="js/owl.carousel.min.js"></script>
-      <!-- Magnific Popup JavaScript -->
-      <script src="js/jquery.magnific-popup.min.js"></script>
-      <!-- Smooth Scrollbar JavaScript -->
-      <script src="js/smooth-scrollbar.js"></script>
-      <!-- lottie JavaScript -->
-      <script src="js/lottie.js"></script>
-      <!-- Chart Custom JavaScript -->
-      <script src="js/chart-custom.js"></script>
-      <!-- Custom JavaScript -->
-      <script src="js/custom.js"></script>
-   </body>
-
-<!-- Mirrored from iqonic.design/themes/sofbox-admin/html/chat.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 Aug 2020 01:41:14 GMT -->
-</html>
+         </div>
+   <!-- Footer -->
+      <footer class="bg-white iq-footer">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-lg-6">
+                  <ul class="list-inline mb-0">
+                     <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
+                     <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
+                  </ul>
+               </div>
+               <div class="col-lg-6 text-right">
+                  Copyright 2020 <a href="#">XRay</a> All Rights Reserved.
+               </div>
+            </div>
+         </div>
+      </footer>
+   <!-- Footer END -->
+      </div>
+   </div>
+   <!-- Wrapper END -->
+   
+@endsection

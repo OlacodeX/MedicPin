@@ -175,9 +175,11 @@ class PatientsController extends Controller
             ///}
            //// else{
                 //default image for post if none was choosed
-               ///$fileNameTostoreone = 'share3.png';
+               ///$fileNameTostore = 'share3.png';
             ///}
-            $pin = 'MP'.mt_rand(99999, 100000);
+            $pin1 = mt_rand(9, 10) + time();
+        
+            $pin = 'MP'.($pin1 + 73);
             $patient = new patients;
             $user = patients::where('email',$request->input('email'))->first();
             if (!empty($user)) {

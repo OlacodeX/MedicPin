@@ -91,7 +91,7 @@ class RegisterController extends Controller
             }
            else{
                 //default image for post if none was choosed
-              $fileNameTostore = '1.jpg';
+              $fileNameTostore = '1.jpeg';
            }
         return User::create([
             'name' => $data['name'],

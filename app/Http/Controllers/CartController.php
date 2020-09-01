@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use  App\pharmacy;
 use App\StoreCart;
 use App\Messages;
+use App\hospitals;
 use Cart;
 class CartController extends Controller
 {
@@ -60,10 +61,12 @@ else{
 
         $cartItems = StoreCart::orderBy('created_at', 'desc')->where('user_id',auth()->user()->id)->paginate(8);
         $cartsum = StoreCart::where('user_id', auth()->user()->id)->sum('price_sum', 'double precision');
+        $hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = array(
             'cartsum' => $cartsum,
             'cartItems' => $cartItems,
+            'hospital' => $hospital,
             'new_messages' => $new_messages
         );
            //return view("Posts.index"); 
@@ -74,9 +77,11 @@ else{
         
 
         $cartItems = StoreCart::orderBy('created_at', 'desc')->where('user_id',auth()->user()->id)->paginate(8);
+        $hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = array(
             'cartItems' => $cartItems,
+            'hospital' => $hospital,
             'new_messages' => $new_messages
         );
           return view('cart.checkout', $data);

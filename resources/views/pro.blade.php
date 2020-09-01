@@ -424,11 +424,16 @@
                                   <div class="user-detail pl-5">
                                      <div class="d-flex flex-wrap align-items-center">
                                         <div class="profile-img pr-4">
-                                           <img src="images/user/11.png" alt="profile-img" class="avatar-130 img-fluid" />
+                                           @if (!empty($pro->img))
+                                           <img src="img/profile/{{$pro->img}}" alt="profile-img" class="avatar-130 img-fluid" />
+                                           @else
+                                           <img src="img/profile/1.jpeg" alt="profile-img" class="avatar-130 img-fluid" />
+                                               
+                                           @endif
                                         </div>
                                         <div class="profile-detail d-flex align-items-center">
-                                           <h3>{{$pro->name}}</h3>
-                                           <p class="m-0 pl-3"> {{$pro->role}}</p>
+                                           <h3>{{$pro->name}} </h3>
+                                           <p class="m-0 pl-3"> {{$pro->role}}<br><span style="font-size: 12px;">{{$pro->expertise}}</span></p>
                                         </div>
                                      </div>
                                   </div>
@@ -1191,6 +1196,46 @@
                 </div>--->
                 @endif
              </div>
+             <div class="col-sm-6 text-center">
+             <div class="iq-card shadow-none mb-0">
+                 <div class="iq-card-body p-1">
+                       <span class="font-size-14">Gender</span>
+                       <h6>
+                        {{$pro->gender}}
+                       </h6>
+                 </div>
+             </div>
+            </div>
+            <div class="col-sm-6 text-center">
+            <div class="iq-card shadow-none mb-0">
+                <div class="iq-card-body p-1">
+                      <span class="font-size-14">Expertise</span>
+                      <h6>
+                       {{$pro->expertise}}
+                      </h6>
+                </div>
+            </div>
+           </div>
+           <div class="col-sm-12 text-center">
+           <div class="iq-card shadow-none mb-0">
+               <div class="iq-card-body p-1">
+                     <span class="font-size-14">Hospital You Belong To</span>
+                     @if (!empty($pro->h_name))
+                     <h6>
+                      {{$pro->h_name}} Hospital
+                     </h6>
+                         
+                     @else
+                     <h6>
+                      You Do Not Belong To Any Hospital Yet...
+                     </h6>
+                         
+                     @endif
+               </div>
+           </div>
+          </div>
+
+
           </div>
        </div>
     </div>
