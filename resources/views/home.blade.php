@@ -35,7 +35,16 @@
                              <hr>
                              <ul class="doctoe-sedual d-flex align-items-center justify-content-between p-0">
                                 <li class="text-center">
-                                   <h3 class="counter">4500</h3>
+                                   <h3 class="counter">
+                                       @php
+                                           $one = App\Operations::where('doc_1', auth()->user()->pin)->count();
+                                           $two = App\Operations::where('doc_2', auth()->user()->pin)->count();
+                                           $three = App\Operations::where('doc_3', auth()->user()->pin)->count();
+                                           $four = App\Operations::where('doc_4', auth()->user()->pin)->count();
+                                           $five = App\Operations::where('doc_5', auth()->user()->pin)->count();
+                                       @endphp
+                                       {{ $one + $two + $three + $three + $four + $five}}
+                                    </h3>
                                    <span>Operations</span>
                                  </li>
                                  <li class="text-center">
@@ -105,14 +114,14 @@
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height-half">
                        <div class="iq-card-body">
                           <h6>APPOINTMENTS</h6>
-                          <h3><b>5075</b></h3>
+                          <h3><b>{{App\Appointments::where('doctor', auth()->user()->pin)->count()}}</b></h3>
                        </div>
                        <div id="wave-chart-7"></div>
                     </div>
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height-half">
                        <div class="iq-card-body">
                           <h6>NEW PATIENTS</h6>
-                          <h3><b>1200</b></h3>
+                          <h3><b>{{App\patients::where('doc_email', auth()->user()->email)->count()}}</b></h3>
                        </div>
                        <div id="wave-chart-8"></div>
                     </div>
@@ -404,43 +413,7 @@
                  }
                }
              </style>
-              <div class="row">
-                 <div class="col-lg-3">
-                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-                       <div class="iq-card-header d-flex justify-content-between">
-                          <div class="iq-header-title">
-                            <h4 class="card-title">Sent Notifications</h4>
-                        </div>
-                        <div class="iq-card-header-toolbar d-flex align-items-center">
-                            <a href="./notifications" class="">See all</a>
-                        </div>
-                       </div>
-                       <div class="iq-card-body pl-0 pr-0">
-                         <!---- <div id="home-chart-03" style="height: 280px;"></div>--->
-                        @if (count($notice_sents) > 0)
-                        <div class="iq-card-body">
-                            @foreach ($notice_sents as $notice_sent)
-                            <a href="notifications/{{$notice_sent->id}}" style="text-decoration: none;">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-0 mb-0">{!!Str::words( $notice_sent->to_name,1)!!} <small
-                                            class="text-muted font-size-12">{!!Str::words( $notice_sent->created_at,2)!!}</small></h5>
-                                    <i class="ri-close-line float-right"></i>
-                                    <p>{!!Str::words( $notice_sent->content,5)!!}</p>
-                                </div>
-                            </div>
-                          </a>
-                            <hr>
-                            @endforeach
-                        </div>
-                        @else
-                        <p class="text-center">No Sent Notifications Yet</p>    
-                        @endif
-
-                       </div>
-                    </div>
-                 </div>
-                 <div class="col-lg-6">
+                 <div class="col-lg-12">
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                        <div class="iq-card-header d-flex justify-content-between">
                           <div class="iq-header-title">
@@ -551,7 +524,43 @@
                        </div>
                     </div>
                  </div>
-                 <div class="col-lg-3">
+
+                 
+                 <div class="row">
+                    <div class="col-lg-6">
+                       <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                          <div class="iq-card-header d-flex justify-content-between">
+                             <div class="iq-header-title">
+                               <h4 class="card-title">Sent Notifications</h4>
+                           </div>
+                           <div class="iq-card-header-toolbar d-flex align-items-center">
+                               <a href="./notifications" class="">See all</a>
+                           </div>
+                          </div>
+                            <!---- <div id="home-chart-03" style="height: 280px;"></div>--->
+                           @if (count($notice_sents) > 0)
+                           <div class="iq-card-body">
+                               @foreach ($notice_sents as $notice_sent)
+                               <a href="notifications/{{$notice_sent->id}}" style="text-decoration: none;">
+                               <div class="media">
+                                   <div class="media-body">
+                                       <h5 class="mt-0 mb-0">{!!Str::words( $notice_sent->to_name,1)!!} <small
+                                               class="text-muted font-size-12">{!!Str::words( $notice_sent->created_at,2)!!}</small></h5>
+                                       <i class="ri-close-line float-right"></i>
+                                       <p>{!!Str::words( $notice_sent->content,5)!!}</p>
+                                   </div>
+                               </div>
+                             </a>
+                               <hr>
+                               @endforeach
+                           </div>
+                           @else
+                           <p class="text-center">No Sent Notifications Yet</p>    
+                           @endif
+   
+                          </div>
+                       </div>
+                 <div class="col-lg-6">
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                        <div class="iq-card-header d-flex justify-content-between">
                           <div class="iq-header-title">
@@ -636,6 +645,7 @@
               </div>
            </div>
            
+           @if (auth()->user()->role == 'Doctor')
               <!-- for both--->
               <div class="row">
                  <div class="col-lg-8">
@@ -645,85 +655,85 @@
                              <h4 class="card-title">Your Appointments </h4>
                           </div>
                           <div class="iq-card-header-toolbar d-flex align-items-center">
-                             <div class="dropdown">
-                                <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
-                                <i class="ri-more-fill"></i>
-                                </span>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
-                                   <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>View</a>
-                                   <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>Delete</a>
-                                   <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Edit</a>
-                                   <a class="dropdown-item" href="#"><i class="ri-printer-fill mr-2"></i>Print</a>
-                                   <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>Download</a>
-                                </div>
-                             </div>
+                            <div class="dropdown">
+                               <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
+                               <i class="ri-more-fill"></i>
+                               </span>
+                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
+                                  <a class="dropdown-item" href="./appointments"><i class="ri-eye-line mr-2"></i>See All</a>
+                               </div>
+                            </div>
                           </div>
                        </div>
                        <div class="iq-card-body">
                           <div class="table-responsive">
+                              @php
+                                  $appointments = App\Appointments::where('doctor',auth()->user()->pin)->paginate(8);
+                              @endphp
+                              @if (count($appointments) > 0)
                              <table class="table mb-0 table-borderless">
                                 <thead>
                                    <tr>
+                                    <th scope="col">Patient's Pin</th>
                                       <th scope="col">Patient</th>
                                       <th scope="col">Doctor</th>
                                       <th scope="col">Date</th>
-                                      <th scope="col">Timing</th>
+                                      <th scope="col">Time</th>
                                       <th scope="col">Contact</th>
+                                      <th scope="col">Action</th>
 
                                    </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($appointments as $appointment)
                                    <tr>
-                                      <td>Petey Cruiser</td>
-                                      <td>Dr.Monty Carlo</td>
-                                      <td>20/02/2020</td>
-                                      <td>8:00 AM</td>
-                                      <td>+1-202-555-0146</td>
+                                       @php
+                                           $patient = App\patients::where('pin', $appointment->patient)->first();
+                                           $doctor = App\User::where('pin', $appointment->doctor)->first();
+                                       @endphp
+                                      <td>{{$appointment->patient}}</td>
+                                      <td>{{$patient->name}}</td>
+                                      <td>{{$doctor->name}}</td>
+                                      <td>{{$appointment->date}}</td>
+                                      <td>{{$appointment->time}}</td>
+                                      <td><a href="tel:{{$patient->phone}}" style="text-decoration: none;">{{$patient->phone}}</a></td>
+                                      <td>
+                                        <div class="dropdown">
+                                           <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
+                                           <i class="ri-more-fill"></i>
+                                           </span>
+                                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
+                                           <a class="dropdown-item" href="appointments/{{$appointment->id}}/edit">
+                                             <button class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Edit Appointment"><i class="ri-pencil-fill mr-2"></i>Edit</button>
+                                           </a>
+                                           
+                                           <a class="dropdown-item">
+                                              {!!Form::open(['action' => ['PatientsController@destroy', $appointment->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                              {{Form::hidden('id', $appointment->id)}}
+                                              {{Form::hidden('_method', 'DELETE')}}
+                                              <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete Appointment"><i class="ri-delete-bin-6-fill mr-2"></i>Delete</button>
+                                             
+                                              {!!Form::close()!!}
+                                           </a>
+                                           </div>
+                                        </div>
+                                          
+                                      </td>
                                    </tr>
-                                   <tr>
-                                      <td>Anna Sthesia</td>
-                                      <td>Dr.Pete Sariya</td>
-                                      <td>25/02/2020</td>
-                                      <td>8:30 AM</td>
-                                      <td>+1-202-555-0164</td>
-                                   </tr>
-                                   <tr>
-                                      <td>Paul Molive</td>
-                                      <td>Dr.Brock Lee</td>
-                                      <td>25/02/2020</td>
-                                      <td>9:45 AM</td>
-                                      <td>+1-202-555-0153</td>
-                                   </tr>
-                                   <tr>
-                                      <td>Anna Mull</td>
-                                      <td>Dr.Barb Ackue</td>
-                                      <td>27/02/2020</td>
-                                      <td>11:30 AM</td>
-                                      <td>+1-202-555-0154</td>
-                                   </tr>
-                                   <tr>
-                                      <td>Paige Turner</td>
-                                      <td>Dr.Walter Melon</td>
-                                      <td>28/02/2020</td>
-                                      <td>3:30 PM</td>
-                                      <td>+1-202-555-0101</td>
-                                   </tr>
-                                   <tr>
-                                      <td>Don Stairs</td>
-                                      <td>Dr.Arty Ficial</td>
-                                      <td>28/02/2020</td>
-                                      <td>4:30 PM</td>
-                                      <td>+1-202-555-0176</td>
-                                   </tr>
-                                   <tr>
-                                      <td>Pat Agonia</td>
-                                      <td>Dr.Barb Ackue</td>
-                                      <td>29/02/2020</td>
-                                      <td>5:00 PM</td>
-                                      <td>+1-202-555-0194</td>
-                                   </tr>
+                                  
+                                   @endforeach
                                 </tbody>
                              </table>
+                                 
+                           <div class="col-md-6">
+                               <div style="text-align:right;">
+                                       <!-----The pagination link----->
+                                       {{$appointments->links()}}
+                               </div>
+                           </div>
+                               @else
+                               <p>No Record Found</p>   
+                             @endif
                           </div>
                        </div>
                     </div>
@@ -735,13 +745,21 @@
                              <h4 class="card-title">Doctors Lists</h4>
                           </div>
                        </div>
-                       <div class="iq-card-body">
+                       @php
+                           $doctors = App\HospitalDoctors::where('h_id', auth()->user()->h_id)->get();
+                       @endphp
+                        <div class="iq-card-body">
+                            @if (count($doctors) > 0)
                           <ul class="doctors-lists m-0 p-0">
+                            @foreach ($doctors as $doctor)
+                            @php
+                                $detail = App\User::where('pin', $doctor->doctor_pin)->first()
+                            @endphp
                              <li class="d-flex mb-4 align-items-center">
-                                <div class="user-img img-fluid"><img src="images/user/01.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
+                                <div class="user-img img-fluid"><img src="img/profile/{{$detail->img}}" alt="doctor image" class="rounded-circle avatar-40"></div>
                                 <div class="media-support-info ml-3">
-                                   <h6>Dr. Paul Molive</h6>
-                                   <p class="mb-0 font-size-12">MBBS, MD</p>
+                                   <h6>Dr. {{$detail->name}}</h6>
+                                   <p class="mb-0 font-size-12">{{$detail->expertise}}</p>
                                 </div>
                                 <div class="iq-card-header-toolbar d-flex align-items-center">
                                    <div class="dropdown show">
@@ -749,180 +767,31 @@
                                          <i class="ri-more-2-line"></i>
                                       </span>
                                       <div class="dropdown-menu dropdown-menu-right">
-                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
-                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
+                                         <a class="dropdown-item" href="#">
+                                           
+                                            {!!Form::open(['action' => 'MessagingController@create', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
+                                            {{Form::hidden('pin', $detail->pin)}}
+                                            <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Message Doctor"><i class="ri-message-fill"></i> Message</button>
+                                           
+                                            {!!Form::close()!!}
+                                        </a>
                                       </div>
                                    </div>
                                 </div>
                              </li> 
-                             <li class="d-flex mb-4 align-items-center">
-                                <div class="user-img img-fluid"><img src="images/user/02.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
-                                <div class="media-support-info ml-3">
-                                   <h6>Dr. Barb Dwyer</h6>
-                                   <p class="mb-0 font-size-12">MD</p>
-                                </div>
-                                <div class="iq-card-header-toolbar d-flex align-items-center">
-                                   <div class="dropdown show">
-                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton42" data-toggle="dropdown" aria-expanded="true" role="button">
-                                         <i class="ri-more-2-line"></i>
-                                      </span>
-                                      <div class="dropdown-menu dropdown-menu-right">
-                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
-                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
-                                      </div>
-                                   </div>
-                                </div>
-                             </li>
-                             <li class="d-flex mb-4 align-items-center">
-                                <div class="user-img img-fluid"><img src="images/user/03.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
-                                <div class="media-support-info ml-3">
-                                   <h6>Dr. Terry Aki</h6>
-                                   <p class="mb-0 font-size-12">MBBS</p>
-                                </div>
-                                <div class="iq-card-header-toolbar d-flex align-items-center">
-                                   <div class="dropdown show">
-                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton43" data-toggle="dropdown" aria-expanded="true" role="button">
-                                         <i class="ri-more-2-line"></i>
-                                      </span>
-                                      <div class="dropdown-menu dropdown-menu-right">
-                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
-                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
-                                      </div>
-                                   </div>
-                                </div>
-                             </li>
-                             <li class="d-flex mb-4 align-items-center">
-                                <div class="user-img img-fluid"><img src="images/user/04.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
-                                <div class="media-support-info ml-3">
-                                   <h6>Dr. Robin Banks</h6>
-                                   <p class="mb-0 font-size-12">MBBS, MD</p>
-                                </div>
-                                <div class="iq-card-header-toolbar d-flex align-items-center">
-                                   <div class="dropdown show">
-                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton44" data-toggle="dropdown" aria-expanded="true" role="button">
-                                         <i class="ri-more-2-line"></i>
-                                      </span>
-                                      <div class="dropdown-menu dropdown-menu-right">
-                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
-                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
-                                      </div>
-                                   </div>
-                                </div>
-                             </li>
-                             <li class="d-flex mb-4 align-items-center">
-                                <div class="user-img img-fluid"><img src="images/user/05.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
-                                <div class="media-support-info ml-3">
-                                   <h6>Dr. Barry Wine</h6>
-                                   <p class="mb-0 font-size-12">BAMS</p>
-                                </div>
-                                <div class="iq-card-header-toolbar d-flex align-items-center">
-                                   <div class="dropdown show">
-                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton45" data-toggle="dropdown" aria-expanded="true" role="button">
-                                         <i class="ri-more-2-line"></i>
-                                      </span>
-                                      <div class="dropdown-menu dropdown-menu-right">
-                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
-                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
-                                      </div>
-                                   </div>
-                                </div>
-                             </li>
-                             <li class="d-flex mb-4 align-items-center">
-                                <div class="user-img img-fluid"><img src="images/user/06.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
-                                <div class="media-support-info ml-3">
-                                   <h6>Dr. Zack Lee</h6>
-                                   <p class="mb-0 font-size-12">MS, MD</p>
-                                </div>
-                                <div class="iq-card-header-toolbar d-flex align-items-center">
-                                   <div class="dropdown show">
-                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton46" data-toggle="dropdown" aria-expanded="true" role="button">
-                                         <i class="ri-more-2-line"></i>
-                                      </span>
-                                      <div class="dropdown-menu dropdown-menu-right">
-                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
-                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
-                                      </div>
-                                   </div>
-                                </div>
-                             </li>
-                             <li class="d-flex mb-4 align-items-center">
-                                <div class="user-img img-fluid"><img src="images/user/07.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
-                                <div class="media-support-info ml-3">
-                                   <h6>Dr. Otto Matic</h6>
-                                   <p class="mb-0 font-size-12">MBBS, MD</p>
-                                </div>
-                                <div class="iq-card-header-toolbar d-flex align-items-center">
-                                   <div class="dropdown show">
-                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton47" data-toggle="dropdown" aria-expanded="true" role="button">
-                                         <i class="ri-more-2-line"></i>
-                                      </span>
-                                      <div class="dropdown-menu dropdown-menu-right">
-                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
-                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
-                                      </div>
-                                   </div>
-                                </div>
-                             </li>
-                             <li class="d-flex mb-4 align-items-center">
-                                <div class="user-img img-fluid"><img src="images/user/08.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
-                                <div class="media-support-info ml-3">
-                                   <h6>Dr. Moe Fugga</h6>
-                                   <p class="mb-0 font-size-12">MD</p>
-                                </div>
-                                <div class="iq-card-header-toolbar d-flex align-items-center">
-                                   <div class="dropdown show">
-                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton48" data-toggle="dropdown" aria-expanded="true" role="button">
-                                         <i class="ri-more-2-line"></i>
-                                      </span>
-                                      <div class="dropdown-menu dropdown-menu-right">
-                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
-                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
-                                      </div>
-                                   </div>
-                                </div>
-                             </li>
-                             <li class="d-flex mb-4 align-items-center">
-                                <div class="user-img img-fluid"><img src="images/user/09.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
-                                <div class="media-support-info ml-3">
-                                   <h6>Dr. Bud Wiser</h6>
-                                   <p class="mb-0 font-size-12">MBBS</p>
-                                </div>
-                                <div class="iq-card-header-toolbar d-flex align-items-center">
-                                   <div class="dropdown show">
-                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton49" data-toggle="dropdown" aria-expanded="true" role="button">
-                                         <i class="ri-more-2-line"></i>
-                                      </span>
-                                      <div class="dropdown-menu dropdown-menu-right">
-                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
-                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
-                                      </div>
-                                   </div>
-                                </div>
-                             </li>
-                             <li class="d-flex mb-4 align-items-center">
-                                <div class="user-img img-fluid"><img src="images/user/10.jpg" alt="story-img" class="rounded-circle avatar-40"></div>
-                                <div class="media-support-info ml-3">
-                                   <h6>Dr. Barry Cade</h6>
-                                   <p class="mb-0 font-size-12">MBBS, MD</p>
-                                </div>
-                                <div class="iq-card-header-toolbar d-flex align-items-center">
-                                   <div class="dropdown show">
-                                      <span class="dropdown-toggle text-primary" id="dropdownMenuButton50" data-toggle="dropdown" aria-expanded="true" role="button">
-                                         <i class="ri-more-2-line"></i>
-                                      </span>
-                                      <div class="dropdown-menu dropdown-menu-right">
-                                         <a class="dropdown-item" href="#"><i class="ri-eye-line mr-2"></i>View</a>
-                                         <a class="dropdown-item" href="#"><i class="ri-bookmark-line mr-2"></i>Appointment</a>
-                                      </div>
-                                   </div>
-                                </div>
-                             </li>                             
+                              
+                             @endforeach                             
                           </ul>
-                          <a href="javascript:void();" class="btn btn-primary d-block mt-3"><i class="ri-add-line"></i> View All Doctors </a>
+                          @else
+                          <p>No Record Found</p> 
+                          @endif
+                          <a href="./doctors" class="btn btn-primary d-block mt-3"><i class="ri-add-line"></i> View All Doctors </a>
                        </div>
                     </div>
                  </div>
               </div>
+               
+              @endif
               
            </div>
            <!-- Footer -->

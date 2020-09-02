@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\HospitalDoctors;
 use App\Messages;
 use App\Mail\BloodRequestMail;
 use Illuminate\Support\Facades\Mail;
@@ -20,8 +21,7 @@ class PagesController extends Controller
    public function __construct()
    {
        $this->middleware('auth', ['except' => ['index','reg_patient']]);
-   }
-
+   } 
     //
     public function index(){
        // $posts = Post::orderBy('created_at', 'desc')->paginate(2);
@@ -38,6 +38,17 @@ class PagesController extends Controller
        
         return view("auth.registerpatient");
     }
+    public function doctors(){
+       
+        $doctors = HospitalDoctors::where('h_id', auth()->user()->h_id)->get();
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = array(
+            'doctors' => $doctors,
+            'new_messages' => $new_messages
+   );
+        return view("pages.doctors",$data);
+    }
+
 
     public function send_request_mail(Request $request){
         $data = request()->validate([

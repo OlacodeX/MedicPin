@@ -15,6 +15,7 @@ Route::get('/', 'PagesController@index');
 Route::get('/blood_bank', 'PagesController@blood_bank');
 Route::post('/send_request_mail', 'PagesController@send_request_mail');
 Route::get('/myprofile', 'PagesController@pro');
+Route::get('/doctors', 'PagesController@doctors');
 Route::post('/update', 'PagesController@update');
 Auth::routes();
 Route::get('/account_set_up', 'PagesController@reg_patient');
@@ -74,3 +75,6 @@ Route::post('/answer', 'QuestionsController@store_answer');
 Route::post('/edit_answer', 'QuestionsController@edit_answer');
 Route::post('/update_answer', 'QuestionsController@update_answer');
 Route::post('/delete', 'QuestionsController@destroyy');
+
+//appointments
+Route::resource('/appointments', 'AppointmentsController');

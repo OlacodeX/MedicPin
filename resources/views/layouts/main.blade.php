@@ -48,6 +48,18 @@
     /* add padding 
     .left-addon input  { padding-left:  30px; } */
     .right-addon input { padding-right: 30px; }
+    
+    .btn.btn-info.btn-sm{
+                     background: transparent;
+                     border: none;
+                     color: #02818f;
+                 }
+                 
+                 
+                 .btn.btn-info.btn-sm i.fa{
+                     font-size: 12px;
+                     margin: 0;
+                 }
         body{
                 margin: 0;
                 padding: 0;
@@ -100,6 +112,33 @@
             h4 { font-size: 1.400em; }
             h5 { font-size: 1.200em; }
             h6 { font-size: 1.0em; }
+               @media only screen and (max-width: 768px) {
+        /* align glyph 
+        .left-addon .fa  { left:  0px;}*/
+        .right-addon .fa { right: 20px;}
+        
+                  
+                 .btn.btn-info.btn-sm{
+                     background: transparent;
+                     border: none;
+                     color: #02818f;
+                     float: right;
+                     display: inline;
+                 }
+                 
+                 .btn.btn-info.btn-sm i.fa{
+                     font-size: 12px;
+                     margin: 0;
+                     padding: 0;
+                 }
+                 div.panel-body span.pull-left{
+                     font-size: 12px;
+                     margin-bottom: 0;
+                 }
+                 div.panel-body span.user-list-files.d-flex.float-right{
+                    margin-top: 0;
+                 }
+               }
         </style>
     </head>
     <body>

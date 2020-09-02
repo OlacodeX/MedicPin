@@ -221,6 +221,35 @@ p.text-center{
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="twitter" class="col-form-label text-md-right">{{ __('Twitter') }}</label>
+                            <p>Leave Empty If You Don't Have</p>
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-twitter"></i>
+                                <input id="twitter" type="url" class="form-control @error('twitter') is-invalid @enderror" name="twitter" value="{{ old('twitter') }}" autocomplete="twitter" placeholder="Link To Your Twitter Profile" autofocus>
+
+                                @error('twitter')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="facebook" class="col-form-label text-md-right">{{ __('Facebook') }}</label>
+                            <p>Leave Empty If You Don't Have</p>
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-facebook"></i>
+                                
+                                <input id="facebook" type="url" class="form-control @error('facebook') is-invalid @enderror" name="facebook" value="{{ old('facebook') }}" autocomplete="facebook" placeholder="Link To Your Facebook Profile" autofocus>
+
+                                @error('facebook')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="password" class="col-form-label text-md-right">{{ __('Password') }}</label>

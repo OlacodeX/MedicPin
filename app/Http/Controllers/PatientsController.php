@@ -325,6 +325,8 @@ class PatientsController extends Controller
         $username = $_POST['username'];
         $this->validate($request, [
             'name' => 'required',
+            'facebook' => 'nullable',
+            'twitter' => 'nullable',
             'email' => 'required|unique:users',
             'password' => 'required|min:8',
             'role' => 'required',
@@ -345,6 +347,8 @@ class PatientsController extends Controller
         //$update_patient->pin = $pin;
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->facebook = $request->input('facebook');
+        $user->twitter = $request->input('twitter');
         $user->role = $request->input('role');
         $user->pin = $update_patient->pin;
         $user->password =  Hash::make($request->input('password'));

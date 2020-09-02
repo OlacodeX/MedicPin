@@ -58,6 +58,8 @@ class RegisterController extends Controller
             'pp' => ['nullable', 'max:2000'],
             'gender' => ['nullable', 'string', 'max:255'],
             'expertise' => ['nullable', 'string', 'max:255'],
+            'twitter' => ['nullable', 'string', 'max:255'],
+            'facebook' => ['nullable', 'string', 'max:255'],
         ]);
     }
 
@@ -99,6 +101,8 @@ class RegisterController extends Controller
             'role' => $data['role'],
             'img' =>  $fileNameTostore,
             'gender' => $data['gender'],
+            'twitter' => $data['twitter'],
+            'facebook' => $data['facebook'],
             'expertise' => $data['expertise'],
             'pin' => $pin,
             'password' => Hash::make($data['password']),

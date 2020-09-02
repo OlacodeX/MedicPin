@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Messages;
 use App\MessagesView;
 use App\patients;
+use App\User;
 use App\hospitals;
 use App\Mail\MessageNotificationMail;
 use Illuminate\Support\Facades\Mail;
@@ -80,7 +81,14 @@ class MessagingController extends Controller
     {
         //
         $pin = $_GET['pin'];
-        $patient = patients::where('pin', $pin)->first();
+        $find = User::where('pin', $pin)->first();
+        if ($find->role == 'Doctor') {
+           
+        $patient = User::where('pin', $pin)->first();
+        } else {
+            $patient = patients::where('pin', $pin)->first();
+        }
+        
         //$hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $messages = Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->orderBy('created_at', 'desc')->get();
