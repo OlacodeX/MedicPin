@@ -91,6 +91,8 @@
                               <li><a href="../../schedule/create">Add To Do</a></li>
                              </ul>
                         </li>
+                        <li><a href="../../appointments" class="iq-waves-effect"><i class="ri-calendar-event-fill"></i><span>My Appointments</span></a></li>
+                        
                           <li><a href="../../blood_bank" class="iq-waves-effect"><i class="ri-briefcase-4-fill"></i><span>Blood Bank</span></a></li>
                           @php
                                $hospital = App\HospitalDoctors::orderBy('created_at', 'desc')->where('doctor_pin', auth()->user()->pin)->first(); 
