@@ -12,6 +12,16 @@
            <div class="iq-header-title">
               <h4 class="card-title">Your Appointments </h4>
            </div>
+           <div class="iq-card-header-toolbar d-flex align-items-center">
+             <div class="dropdown">
+                <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
+                <i class="ri-more-fill"></i>
+                </span>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
+                   <a class="dropdown-item" href="./appointments/create"><i class="las la-radiation"></i>Add New</a>
+                </div>
+             </div>
+           </div>
         </div>
         <div class="iq-card-body">
            <div class="table-responsive">
