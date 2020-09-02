@@ -83,7 +83,19 @@
                                  <li><a href="./pharmacy">Pharmacy Shop</a></li>
                               </ul>
                          </li>
+                         <li>
+                            <a href="#user-info1" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-calendar-event-fill"></i><span>To Do</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                            
+                            <ul id="user-info1" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                              <li><a href="./schedule">My To Do</a></li>
+                              <li><a href="./schedule/create">Add To Do</a></li>
+                             </ul>
+                        </li>
                           <li><a href="./blood_bank" class="iq-waves-effect"><i class="ri-briefcase-4-fill"></i><span>Blood Bank</span></a></li>
+                          
+                          @php
+                              $hospital = App\HospitalDoctors::orderBy('created_at', 'desc')->where('doctor_pin', auth()->user()->pin)->first(); 
+                          @endphp
                           @if (!empty($hospital))
                           <li><a href="./hospitals/{{$hospital->id}}" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>My Hospital</span></a></li>
                          @else

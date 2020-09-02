@@ -52,7 +52,7 @@ class HomeController extends Controller
        
         return Response::json($dat);
     } 
-    $hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
+   
     $notices = Notifications::where('to',auth()->user()->id)->paginate(5);
     $notice_sents = Notifications::where('from',auth()->user()->id)->paginate(5);
     $patient = patients::where('email',auth()->user()->email)->first();
@@ -65,7 +65,7 @@ class HomeController extends Controller
         'patients' => $patients,
         'notice_sents' => $notice_sents,
         'notices' => $notices,
-        'hospital' => $hospital,
+        //'hospital' => $hospital,
         'questions_all' => $questions_all,
         'new_messages' => $new_messages
     );

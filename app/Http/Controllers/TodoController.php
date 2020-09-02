@@ -68,8 +68,8 @@ class TodoController extends Controller
     public function create()
     {
         //
-        $messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
-        return view("todo.create")->with('messages', $messages);
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        return view("todo.create")->with('new_messages', $new_messages);
     }
 
     /**
@@ -127,10 +127,10 @@ class TodoController extends Controller
     {
         //
         $todo = todo::find($id);
-        $messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
        $data = array(
                 'todo' => $todo,
-                'messages' => $messages
+                'new_messages' => $new_messages
        );
 
         return view('todo.edit', $data);

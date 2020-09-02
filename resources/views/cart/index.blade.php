@@ -36,6 +36,7 @@
                                 <th>Name</th>
                                 <th>Quantity</th>
                                 <th>Total</th>
+                                <th>Status</th>
                                <!--- <th>Total</th>---->
                                </tr>
                            </thead>
@@ -56,6 +57,12 @@
                                   <td><!---{{Form::number('qty', $cartItem->quantity)}}--->{{$cartItem->quantity}}</td>
                                   <td>&#8358;{{$cartItem->price}}</td>
                                  <!--- <td>&#8358;{{$cartItem->price_sum}}</td>-->
+                                 @php
+                                     $drug = App\pharmacy::find($cartItem->drug_id);
+                                 @endphp
+                                 @if (empty($drug))
+                                 <td>{{'Not Available'}}</td>
+                                 @endif
                                </tr> 
                                @endforeach                      
                            </tbody>

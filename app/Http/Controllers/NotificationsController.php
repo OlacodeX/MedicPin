@@ -29,14 +29,14 @@ class NotificationsController extends Controller
     {
         $notices = Notifications::where('to',auth()->user()->id)->paginate(5);
         $notice = Notifications::where('from',auth()->user()->id)->paginate(5);
-        $hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
+        //$hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
         $patient = patients::where('email',auth()->user()->email)->first();
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
        
         $data = array(
             'patient' => $patient,
             'notice' => $notice,
-            'hospital' => $hospital,
+            //'hospital' => $hospital,
             'new_messages' => $new_messages,
             'notices' => $notices
         );
@@ -54,14 +54,14 @@ class NotificationsController extends Controller
         
        $patient = patients::where('doc_email',auth()->user()->email)->get();
         $notices = patients::where('doc_email',auth()->user()->email)->get();
-        $hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
+        //$hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
        
         //$notice = Notifications::where('from',auth()->user()->id)->paginate(5);
         $data = array(
             'patient' => $patient,
             'new_messages' => $new_messages,
-            'hospital' => $hospital,
+            //'hospital' => $hospital,
             'notices' => $notices
         );
         return view('notifications.create', $data);
@@ -110,11 +110,11 @@ class NotificationsController extends Controller
         //
         
         $notice = Notifications::find($id);
-        $hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
+       // $hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = array(
             'new_messages' => $new_messages,
-            'hospital' => $hospital,
+            //'hospital' => $hospital,
             'notice' => $notice
         );
         return view('notifications.show',$data);

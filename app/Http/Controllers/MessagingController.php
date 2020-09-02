@@ -25,14 +25,14 @@ class MessagingController extends Controller
     {
         //
         $messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->paginate(10);
-        $hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
+        //$hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         //$omessages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'read')->get();
         
         
         $data = array(
             'messages' => $messages,
-            'hospital' => $hospital,
+            //'hospital' => $hospital,
             //'omessages' => $omessages,
             'new_messages' => $new_messages
         );
@@ -81,12 +81,12 @@ class MessagingController extends Controller
         //
         $pin = $_GET['pin'];
         $patient = patients::where('pin', $pin)->first();
-        $hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
+        //$hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $messages = Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->orderBy('created_at', 'desc')->get();
         $data = array(
             'patient' => $patient,
-            'hospital' => $hospital,
+            //'hospital' => $hospital,
             'new_messages' => $new_messages,
             'messages' => $messages
         );
@@ -162,7 +162,7 @@ class MessagingController extends Controller
     {
         //
         $message = Messages::find($id);
-        $hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
+        //$hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $messages = Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->orderBy('created_at', 'desc')->get();
         $replies = Messages::find($id);
@@ -170,7 +170,7 @@ class MessagingController extends Controller
         $data = [
             'messages' => $messages,
             'new_messages' => $new_messages,
-            'hospital' => $hospital,
+            //'hospital' => $hospital,
             'message' => $message
            // 'replies' => $replies
         ];

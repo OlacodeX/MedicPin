@@ -477,7 +477,7 @@ class PatientsController extends Controller
       $drug->status = 'Out Of Stock';
       $drug->save();
       //$patient->status = 'pending';
-       return redirect('/dashboard')->with('success', 'Great!, drug details updated.');//I just set the message for session(success).
+       return redirect()->back()->with('success', 'Great!, drug details updated.');//I just set the message for session(success).
 
     }
 
@@ -513,9 +513,10 @@ class PatientsController extends Controller
       $drug->img = $fileNameTostore;
     }
       $drug->price = $request->input('price');
+      $drug->status = $request->input('status');
       $drug->save();
       //$patient->status = 'pending';
-       return redirect('/dashboard')->with('success', 'Great!, drug details updated.');//I just set the message for session(success).
+       return redirect('/myshop')->with('success', 'Great!, drug details updated.');//I just set the message for session(success).
 
     }
     /**

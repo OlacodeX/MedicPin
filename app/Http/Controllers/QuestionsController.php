@@ -96,13 +96,13 @@ class QuestionsController extends Controller
         
         $question = Questions::find($id);
         $answers = Answers::where('question_id',$id)->get();
-        $messages = Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->orderBy('created_at', 'desc')->get();
+        $new_messages = Messages::where('receiver_id', auth()->user()->id)->where('status', 'unread')->orderBy('created_at', 'desc')->get();
         $replies = Messages::find($id);
         //$post = Posts::find($id);
         $data = [
             'question' => $question,
             'answers' => $answers,
-            'messages' => $messages
+            'new_messages' => $new_messages
            // 'replies' => $replies
         ];
         return view('questions.show', $data);
@@ -140,10 +140,10 @@ class QuestionsController extends Controller
     {
         //
         $question = Questions::find($id);
-        $messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = [
             'question' => $question,
-            'messages' => $messages
+            'new_messages' => $new_messages
            // 'replies' => $replies
         ];
         return view('questions.edit', $data);
@@ -154,10 +154,10 @@ class QuestionsController extends Controller
         //
         $id = $_POST['id'];
         $answer = Answers::find($id);
-        $messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = [
             'answer' => $answer,
-            'messages' => $messages
+            'new_messages' => $new_messages
            // 'replies' => $replies
         ];
         return view('questions.editt', $data);
