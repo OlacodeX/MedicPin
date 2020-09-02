@@ -121,7 +121,7 @@
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height-half">
                        <div class="iq-card-body">
                           <h6>NEW PATIENTS</h6>
-                          <h3><b>{{App\patients::where('doc_email', auth()->user()->email)->count()}}</b></h3>
+                          <h3><b>{{App\patients::where('doc_email', auth()->user()->email)->where('created_at', '>=', Carbon\Carbon::today())->count()}}</b></h3>
                        </div>
                        <div id="wave-chart-8"></div>
                     </div>
