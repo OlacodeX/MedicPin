@@ -419,7 +419,7 @@ class HospitalController extends Controller
             return view('pages-error');
         }
     }
-    public function add_doc()
+    public function add_staff()
     {
         //
         if (auth()->user()->role == 'Doctor') {
@@ -477,7 +477,7 @@ class HospitalController extends Controller
         return view('hospitals.search_result', $data);
     }
     }
-    public function store_doc(Request $request)
+    public function store_staff(Request $request)
     {
         //
         if (auth()->user()->role == 'Doctor') {

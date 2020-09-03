@@ -39,14 +39,26 @@ class PagesController extends Controller
         return view("auth.registerpatient");
     }
     public function doctors(){
-       
-        $doctors = HospitalDoctors::where('h_id', auth()->user()->h_id)->get();
+       if (auth()->user()->role == 'Doctor') {
+
+        $doctors = HospitalDoctors::where('h_id', auth()->user()->h_id)->where('role', 'Doctor')->get();
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = array(
             'doctors' => $doctors,
             'new_messages' => $new_messages
    );
         return view("pages.doctors",$data);
+       }
+       if (auth()->user()->role == 'Nurse') {
+
+        $doctors = HospitalDoctors::where('h_id', auth()->user()->h_id)->where('role', 'Nurse')->get();
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = array(
+            'doctors' => $doctors,
+            'new_messages' => $new_messages
+   );
+        return view("pages.doctors",$data);
+       }
     }
 
 

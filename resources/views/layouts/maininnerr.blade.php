@@ -191,6 +191,7 @@
          <script>
             CKEDITOR.replace( 'pre' );
             CKEDITOR.replace( 'note' );
+            CKEDITOR.replace( 'question' );
          </script> 
         
     </body>

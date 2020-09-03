@@ -187,6 +187,14 @@
         <!-- Custom JavaScript -->
       <script>  
     function yesnoCheck(that) {
+      //for reg page
+      if (that.value == "Doctor") {
+          document.getElementById("selectex").style.display = "block";
+      } else {
+          document.getElementById("selectex").style.display = "none";
+      }
+
+
       if (that.value == "Breast Surgery") {
           document.getElementById("Breast").style.display = "block";
           document.getElementById("Breast").style.paddingTop = "16px";
@@ -271,6 +279,7 @@
          <script>
             CKEDITOR.replace( 'pre' );
             CKEDITOR.replace( 'note' );
+            CKEDITOR.replace( 'question' );
          </script> 
         
     </body>

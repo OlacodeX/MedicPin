@@ -28,8 +28,10 @@
                    <img class="rounded-circle img-fluid avatar-80" src="img/profile/{{$detail->img}}" alt="doctor's image">
                 </div>
                 <div class="iq-doc-info mt-3">
-                   <h4>Dr. {{$detail->name}}</h4>
-                   <p class="mb-0" >{{$detail->expertise}}</p>
+                   <h4>
+                    {{$detail->name}}
+                    </h4>
+                   <p class="mb-0" >{{$detail->role}}</p>
                 </div>
                 <div class="iq-doc-social-info mt-3 mb-3">
                    <ul class="m-0 p-0 list-inline">
@@ -43,7 +45,9 @@
        </div>
        @endforeach
        @else
+       <div class="col-lg-12">
        <p class="text-center">No Record Found</p> 
+    </div>
        @endif
        
     </div>

@@ -13,6 +13,21 @@
                                  <h4 class="card-title">Summary</h4>
                                  <small>Most Recent Record Dated {{$record->created_at}}</small>
                              </div>
+                             <div class="dropdown">
+                                <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
+                                <i class="ri-more-fill"></i>
+                                </span>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
+                                <a class="dropdown-item">
+                                 {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                                 {{Form::hidden('pin', $record->pin)}}
+                                 <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add New Medical Record"><i class="fa fa-plus"></i>Add New Record </button>
+                                
+                                 {!!Form::close()!!}
+                                </a>
+                                </div>
+                             </div>
+                               
                          </div>
                               <div class="">
                                 @if (auth()->user()->role == 'Patient')
@@ -69,7 +84,8 @@
                                            </div>
                                        </div>
                                    </div>
-                                      <div class="">
+                                      <a href="#allrecords" data-toggle="collapse" class="btn btn-primary">View Full Record</a>
+                                      <div class="col-md-12 collapse" id="allrecords">
                                       <div class="row">
                                           <div class="col-md-3">
                                               <div class="iq-card shadow-none mb-0">
@@ -328,118 +344,150 @@
                                                </div>
                                            </div>
                                        </div>
-                                          <div class="">
-                                          <div class="row">
-                                              <div class="col-md-3">
-                                                  <div class="iq-card shadow-none mb-0">
-                                                      <div class="iq-card-body p-1">
-                                                            <span class="font-size-14">Genotype</span>
-                                                            <h6>
-                                                                {{$record->genotype}}
-                                                            </h6>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                              <div class="col-md-3">
-                                                  <div class="iq-card shadow-none mb-0">
-                                                      <div class="iq-card-body p-1">
-                                                            <span class="font-size-14">Blood Group</span>
-                                                            <h6>
-                                                                {{$record->b_group}}
-                                                            </h6>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                              <div class="col-md-3">
-                                                  <div class="iq-card shadow-none mb-0">
-                                                      <div class="iq-card-body p-1">
-                                                         <div class="">
-                                                            <span class="font-size-14">Weight</span>
-                                                            <h6>
-                                                                {{$record->weight}}kg
-                                                            </h6>
-            
-                                                         </div>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                              <div class="col-md-3">
-                                                  <div class="iq-card shadow-none mb-0">
-                                                      <div class="iq-card-body p-1">
-                                                         <div class="">
-                                                            <span class="font-size-14">Height</span>
-                                                            <h6>
-                                                                {{$record->height}}cm
-                                                            </h6>
-            
-                                                         </div>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                           
-                                              <div class="col-md-3">
-                                                 <div class="iq-card shadow-none mb-0">
-                                                     <div class="iq-card-body p-1">
-                                                           <span class="font-size-14">Oxygen Saturation</span>
-                                                           <h6>
-                                                               {{$record->oxygen}}%
-                                                           </h6>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                             <div class="col-md-3">
-                                                 <div class="iq-card shadow-none mb-0">
-                                                     <div class="iq-card-body p-1">
-                                                           <span class="font-size-14">Glucose level</span>
-                                                           <h6>
-                                                               {{$record->glucose}}%
-                                                           </h6>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                             <div class="col-md-3">
-                                                 <div class="iq-card shadow-none mb-0">
-                                                     <div class="iq-card-body p-1">
-                                                           <span class="font-size-14">Respiratory rate</span>
-                                                           <h6>
-                                                               {{$record->r_rate}}%
-                                                           </h6>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                             <div class="col-md-3">
-                                                 <div class="iq-card shadow-none mb-0">
-                                                     <div class="iq-card-body p-1">
-                                                           <span class="font-size-14">BMI</span>
-                                                           <h6>
-                                                               {{$record->BMI}}
-                                                           </h6>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                             <div class="col-md-6 text-center">
-                                                 <div class="iq-card shadow-none mb-0">
-                                                     <div class="iq-card-body p-1">
-                                                           <span class="font-size-14">General Note</span>
-                                                           <h6>
-                                                               {{$record->note}}
-                                                           </h6>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                             <div class="col-md-6 text-center">
-                                                 <div class="iq-card shadow-none mb-0">
-                                                     <div class="iq-card-body p-1">
-                                                           <span class="font-size-14">Prescription</span>
-                                                           <h6>
-                                                               {{$record->prescription}}
-                                                           </h6>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                   
-                                          </div><br>
+                                       <p>
+                                          @if (auth()->user()->role == 'Doctor')
+                                          <a href="#allrecords" data-toggle="collapse" class="btn btn-primary">View Full Current Record</a>
                                           <a href="#records" data-toggle="collapse" class="btn btn-primary">See Past Records</a>
+                                          <a href="#appointments" data-toggle="collapse" class="btn btn-primary">Book Appointment With Patient</a>
+                                              
+                                          @endif
+                                          @if (auth()->user()->role == 'Nurse')
+                                          <a href="./schedule/create" data-toggle="collapse" class="btn btn-primary">Schedule Doctor Visit</a>
+                                          @endif
+                                      </p>
+                                      
+                                      <div class="col-md-12 collapse" id="appointments">
+                                       <div class="iq-card shadow-none mb-0">
+                                          {!! Form::open(['action' => 'AppointmentsController@store', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
+                                        **/ !!}
+                                                            
+                                                   <div class="row">
+                                                      <div class="form-group col-md-6">
+                                                         <label for="with">With?</label>
+                                                         <div class="inner-addon right-addon">
+                                                            <i class="fa fa-user"></i>
+                                                         <input type="text" class="form-control" id="patient" name="patient" value="{{$record->pin}}">
+                                                         </div>
+                                                      </div>
+                                                      <div class="form-group col-md-6">
+                                                         <label for="add">Date</label>
+                                                         <div class="inner-addon right-addon">
+                                                            <i class="fa fa-date"></i>
+                                                         <input type="date" class="form-control" name="date" id="date" placeholder="Date of Appointment....">
+                                                         </div>
+                                                      </div>
+                                                      <div class="form-group col-md-6">
+                                                         <label for="mobno">Time</label>
+                                                         <div class="inner-addon right-addon">
+                                                            <i class="fa fa-clock"></i>
+                                                         <input type="time" class="form-control" id="time" name="time" placeholder="Time of Appointment....">
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                <button type="submit" class="btn btn-primary">Book</button>
+                                                {!! Form::close() !!}
+                                          </div>
+                                       </div>
+                                       <div class="col-md-12 collapse" id="allrecords">
+                                       <div class="row">
+                                           <div class="col-md-3">
+                                               <div class="iq-card shadow-none mb-0">
+                                                   <div class="iq-card-body p-1">
+                                                         <span class="font-size-14">Genotype</span>
+                                                         <h6>
+                                                             {{$record->genotype}}
+                                                         </h6>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                           <div class="col-md-3">
+                                               <div class="iq-card shadow-none mb-0">
+                                                   <div class="iq-card-body p-1">
+                                                         <span class="font-size-14">Blood Group</span>
+                                                         <h6>
+                                                             {{$record->b_group}}
+                                                         </h6>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                           <div class="col-md-3">
+                                               <div class="iq-card shadow-none mb-0">
+                                                   <div class="iq-card-body p-1">
+                                                      <div class="">
+                                                         <span class="font-size-14">Weight</span>
+                                                         <h6>
+                                                             {{$record->weight}}kg
+                                                         </h6>
+         
+                                                      </div>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                           <div class="col-md-3">
+                                               <div class="iq-card shadow-none mb-0">
+                                                   <div class="iq-card-body p-1">
+                                                      <div class="">
+                                                         <span class="font-size-14">Height</span>
+                                                         <h6>
+                                                             {{$record->height}}
+                                                         </h6>
+         
+                                                      </div>
+                                                   </div>
+                                               </div>
+                                            </div>
+                                               <div class="col-md-3">
+                                                   <div class="iq-card shadow-none mb-0">
+                                                       <div class="iq-card-body p-1">
+                                                             <span class="font-size-14">Oxygen Saturation</span>
+                                                             <h6>
+                                                                 {{$record->oxygen}}%
+                                                             </h6>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                               <div class="col-md-3">
+                                                   <div class="iq-card shadow-none mb-0">
+                                                       <div class="iq-card-body p-1">
+                                                             <span class="font-size-14">Glucose level</span>
+                                                             <h6>
+                                                                 {{$record->glucose}}%
+                                                             </h6>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                               <div class="col-md-3">
+                                                   <div class="iq-card shadow-none mb-0">
+                                                       <div class="iq-card-body p-1">
+                                                             <span class="font-size-14">Respiratory rate</span>
+                                                             <h6>
+                                                                 {{$record->r_rate}}%
+                                                             </h6>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                               <div class="col-md-3">
+                                                   <div class="iq-card shadow-none mb-0">
+                                                       <div class="iq-card-body p-1">
+                                                             <span class="font-size-14">BMI</span>
+                                                             <h6>
+                                                                 {{$record->BMI}}
+                                                             </h6>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                               <div class="col-md-12">
+                                                   <div class="iq-card shadow-none mb-0">
+                                                       <div class="iq-card-body p-1">
+                                                             <span class="font-size-14">General Note</span>
+                                                             <h6>
+                                                                 {{$record->note}}
+                                                             </h6>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                       </div><br>
                                           <div class="col-md-12 collapse" id="records">
                                               <div class="iq-card shadow-none mb-0">
                                                   <div class="iq-card-body p-1">
@@ -694,7 +742,7 @@
                               </div>--->
       <!-- Wrapper END -->
       <!-- Footer -->
-        <footer class="bg-white iq-footer">
+        <footer class="bg-white iq-footer" style="margin-top: 160px;">
             <div class="container-fluid">
                <div class="row">
                   <div class="col-lg-6">
@@ -704,7 +752,7 @@
                      </ul>
                   </div>
                   <div class="col-lg-6 text-right">
-                     Copyright 2020 <a href="#">Medicpin</a> All Rights Reserved.
+                     Copyright 2020 <a href="./">Medicpin</a> All Rights Reserved.
                   </div>
                </div>
             </div>

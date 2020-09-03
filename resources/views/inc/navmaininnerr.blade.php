@@ -120,6 +120,54 @@
                        </form>
                    </li>
                    @endif
+                   @if (auth()->user()->role == 'Nurse')
+                   <li>
+                      <a href="../../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                     
+                   </li>
+                   <li class="active">
+                      <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>My Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                      <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                         <li><a href="../../myprofile">My Profile</a></li>
+                          <!---<li><a href="./notifications">Sent Notifications</a></li>
+                         <li><a href="./notifications/create">Send Notification</a></li>
+                          <li><a href="profile-edit.html">User Edit</a></li>--->
+                         <li><a href="../../patients/create">Add Patient</a></li>
+                         <li><a href="../../patients">Patients List</a></li>
+                         <!---<li><a href="./transfered_patients">Transferred Patients</a></li>--->
+                      </ul>
+                 </li>
+                        <li>
+                           <a href="#user-info2" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="las la-tasks"></i><span>To Do</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                           
+                           <ul id="user-info2" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                             <li><a href="../../schedule">My To Do</a></li>
+                             <li><a href="../../schedule/create">Add To Do</a></li>
+                            </ul>
+                       </li>
+                         @php
+                             $hospital = App\HospitalDoctors::orderBy('created_at', 'desc')->where('doctor_pin', auth()->user()->pin)->first(); 
+                         @endphp
+                         @if (!empty($hospital))
+                         <li><a href="../../hospitals/{{$hospital->id}}" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>My Hospital</span></a></li>
+                        @endif
+                         <li><a href="../../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                         <li><a href="../../questions" class="iq-waves-effect"><i class="ri-message-fill"></i><span>Forum</span></a></li>
+                         <li>
+                            <a href="../../" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Homepage</span></a>
+                           
+                         </li>
+                   
+                   <li>
+                       <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+                      
+                        
+
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                          @csrf
+                      </form>
+                  </li>
+                  @endif
                    <!--
                     <li class="active">
                        <a href="index.html" class="iq-waves-effect"><i class="ri-hospital-fill"></i><span>Doctor Dashboard</span></a>

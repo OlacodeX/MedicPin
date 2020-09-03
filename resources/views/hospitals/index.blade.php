@@ -157,7 +157,7 @@
                            
                             {!!Form::close()!!}
 
-                            {!!Form::open(['action' => 'HospitalController@add_doc', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                            {!!Form::open(['action' => 'HospitalController@add_staff', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
                            
                             {{Form::hidden('id', $hospital->id)}}
                             <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add Doctor to Hospital"><i class="fa fa-plus"></i></button>

@@ -58,8 +58,8 @@ Route::get('/schedule_tomorrow', 'TodoController@tomorrow');
 
 //Hospitals
 Route::resource('/hospitals', 'HospitalController');
-Route::post('/add_doc', 'HospitalController@add_doc');
-Route::post('/store_doc', 'HospitalController@store_doc');
+Route::post('/add_staff', 'HospitalController@add_staff');
+Route::post('/store_staff', 'HospitalController@store_staff');
 Route::post('/store_op', 'HospitalController@store_op');
 Route::post('/store_message', 'HospitalController@store_message');
 Route::post('/doctors', 'HospitalController@doctors');
@@ -78,3 +78,6 @@ Route::post('/delete', 'QuestionsController@destroyy');
 
 //appointments
 Route::resource('/appointments', 'AppointmentsController');
+
+//consortations
+Route::resource('/consortations', 'ConsortationsController');

@@ -189,6 +189,7 @@
          <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
          <script>
             CKEDITOR.replace( 'pre' );
+            CKEDITOR.replace( 'question' );
             CKEDITOR.replace( 'note' );
          </script> 
         

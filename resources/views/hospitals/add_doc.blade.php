@@ -8,22 +8,37 @@
                 <div class="iq-card" style="padding-bottom:50px;">
                        <div class="iq-card-header d-flex justify-content-between">
                           <div class="iq-header-title">
-                           <h4 class="card-title">Add To Doctor {{$hospital->h_name}} {{$hospital->h_type}} Hospital </h4>
+                           <h4 class="card-title">Add Staff To {{$hospital->h_name}} {{$hospital->h_type}} Hospital </h4>
                           </div>
                        </div>
                        <div class="iq-card-body">
                         @include('inc.messages')
                         <!---If file upload is involved always add enctype to your opening
                             form tag and set it to multipart/form-data--->
-                       {!! Form::open(['action' => 'HospitalController@store_doc', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
+                       {!! Form::open(['action' => 'HospitalController@store_staff', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
                        **/ !!}
                                 <div class="row">
                                  <div class="form-group col-md-6">
-                                    <label for="pin">Doctor's Pin </label>
+                                    <label for="pin">Staff MedicPin </label>
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-user"></i>
                                     <input type="text" class="form-control" id="pin" name="pin" placeholder="Enter Doctor's Pin">
                                     </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                     <div class="form-group">
+                                         <label for="role">Role</label>
+                                         <select class="form-control" id="gender" name="gender">
+                                            <option value="N/A">Select</option>
+                                            <option value="Nurse">Biochemist</option>
+                                            <option value="Doctor">Doctor</option>
+                                            <option value="Laboratory Worker">Laboratory Worker</option>
+                                            <option value="Nurse">Nurse</option>
+                                            <option value="Pharmacist">Pharmacist</option>
+                                            <option value="Ward Maid">Ward Maid</option>
+                                         </select>
+         
+                                     </div>
                                  </div>
                                     <input type="hidden" class="form-control" name="h_id" id="h_id" value="{{$hospital->id}}">
                                     <input type="hidden" class="form-control" name="h_name" id="h_name" value="{{$hospital->h_name}} {{$hospital->h_type}}">

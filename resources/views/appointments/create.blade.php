@@ -26,14 +26,14 @@
                                        </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                       <label for="add">Date</label>
+                                       <label for="date">Date</label>
                                        <div class="inner-addon right-addon">
                                            <i class="fa fa-date"></i>
                                        <input type="date" class="form-control" name="date" id="date" placeholder="Date of Appointment....">
                                        </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                       <label for="mobno">Time</label>
+                                       <label for="time">Time</label>
                                        <div class="inner-addon right-addon">
                                            <i class="fa fa-clock"></i>
                                        <input type="time" class="form-control" id="time" name="time" placeholder="Time of Appointment....">

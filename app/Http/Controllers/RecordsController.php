@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\patients;
 use App\Records;
+use App\Consortations;
 use App\Messages;
 
 class RecordsController extends Controller
@@ -32,6 +33,7 @@ class RecordsController extends Controller
        
         $pin = $_GET['pin'];
         $username = $_GET['username'];
+        $consult = Consortations::where('patient_pin', $pin)->where('doc_pin', auth()->user()->pin)->where('created_at',now()->day);
         $record = Records::where('pin', $pin)->orderBy('created_at', 'desc')->first();
         $records = Records::where('pin', $pin)->orderBy('created_at', 'desc')->paginate(50);
         if (empty($record)) {
@@ -99,7 +101,7 @@ class RecordsController extends Controller
              if(!empty($request->input('bp'))){
              $patient->bp = $request->input('bp');
              }
-             $patient->username = $patientt->username;
+             $patient->username = $patientt->name;
              $patient->gender = $patientt->gender;
              $patient->doc_email = auth()->user()->email;
              $patient->doctor = auth()->user()->name;

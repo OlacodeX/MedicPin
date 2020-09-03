@@ -34,25 +34,6 @@ class HomeController extends Controller
         
 
  
-        if(request()->ajax()) 
-
-        {
-
-
-        $start = (!empty($_GET["start_date"])) ? ($_GET["start_date"]) : ('');
-
-        $end = (!empty($_GET["end_date"])) ? ($_GET["end_date"]) : ('');
-
-
-
-        $dat = Event::whereDate('start_date', '>=', '2020-08-26')->whereDate('end_date',   '<=', '2020-09-27')->get(['id','title','start_date', 'end_date']);
-
-        //return view('fullcalender');
-
-       
-        return Response::json($dat);
-    } 
-   
     $notices = Notifications::where('to',auth()->user()->id)->paginate(5);
     $notice_sents = Notifications::where('from',auth()->user()->id)->paginate(5);
     $patient = patients::where('email',auth()->user()->email)->first();
@@ -69,7 +50,13 @@ class HomeController extends Controller
         'questions_all' => $questions_all,
         'new_messages' => $new_messages
     );
+    if(auth()->user()->role == 'Patient'){
+        return view('home_p', $data);
+    }
+
+    else{
         return view('home', $data);
     }
   
+}
 }

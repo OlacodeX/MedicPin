@@ -82,11 +82,12 @@ class MessagingController extends Controller
         //
         $pin = $_GET['pin'];
         $find = User::where('pin', $pin)->first();
-        if ($find->role == 'Doctor') {
-           
-        $patient = User::where('pin', $pin)->first();
-        } else {
+        if ($find->role == 'Patient') {
             $patient = patients::where('pin', $pin)->first();
+        } 
+        else {
+           
+            $patient = User::where('pin', $pin)->first();
         }
         
         //$hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();

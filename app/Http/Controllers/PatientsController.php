@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\patients;
+use App\HospitalDoctors;
 use App\pharmacy;
 use App\User;
 use App\Messages;
@@ -34,7 +35,8 @@ class PatientsController extends Controller
      */
     public function index()
     {
-        $users = patients::where('doc_email', auth()->user()->email)->paginate(100);
+        $doctor = HospitalDoctors::where('h_id', auth()->user()->h_id)->pluck('doctor_name');
+        $users = patients::whereIn('doctor',$doctor )->paginate(100);
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = array(
             'users' => $users,

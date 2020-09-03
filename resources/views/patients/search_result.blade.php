@@ -52,6 +52,9 @@
                                         font-size: 12px;
                                         margin: 0;
                                     }
+                                    .iq-card-body{
+                                       padding-bottom: 50px;
+                                    }
                                   @media only screen and (max-width: 768px) {
                            /* align glyph 
                            .left-addon .fa  { left:  0px;}*/
@@ -80,7 +83,7 @@
                                     }
                                   }
                                 </style>
-                                <div class="iq-card-body p-0">
+                                <div class="iq-card-body">
                                     <a href="javascript:{}" onclick="document.getElementById('my_form_1').submit();">
                                                             
                                     {!! Form::open(['action' => 'RecordsController@index', 'method' => 'GET', 'id' => 'my_form_1']) /** The action should be the block of code in the store function in PostsController
@@ -131,15 +134,9 @@
                            </div>
                               </div>
                         </div>
-                     </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      </div>
  <!-- Wrapper END -->
   <!-- Footer -->
-    <footer class="bg-white iq-footer">
+    <footer class="bg-white iq-footer" style="margin-top:300px;">
        <div class="container-fluid">
           <div class="row">
              <div class="col-lg-6">
