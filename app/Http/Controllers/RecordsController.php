@@ -103,6 +103,31 @@ class RecordsController extends Controller
              }
              $patient->username = $patientt->name;
              $patient->gender = $patientt->gender;
+             $patient->sickness1 = $request->input('sickness1');
+             $patient->sickness2 = $request->input('sickness2');
+             $patient->sickness3 = $request->input('sickness3');
+             $patient->sickness4 = $request->input('sickness4');
+             $patient->sickness5 = $request->input('sickness5');
+             $patient->sickness6 = $request->input('sickness6');
+             $patient->dosage1 = $request->input('dosage1');
+             $patient->dosage2 = $request->input('dosage2');
+             $patient->dosage3 = $request->input('dosage3');
+             $patient->dosage4 = $request->input('dosage4');
+             $patient->dosage5 = $request->input('dosage5');
+             $patient->dosage6 = $request->input('dosage6');
+             $patient->drug1 = $request->input('drug1');
+             $patient->drug2 = $request->input('drug2');
+             $patient->drug3 = $request->input('drug3');
+             $patient->drug4 = $request->input('drug4');
+             $patient->drug5 = $request->input('drug5');
+             $patient->drug6 = $request->input('drug6');
+             $patient->frequency1 = $request->input('frequency1');
+             $patient->frequency2 = $request->input('frequency2');
+             $patient->frequency3 = $request->input('frequency3');
+             $patient->frequency4 = $request->input('frequency4');
+             $patient->frequency5 = $request->input('frequency5');
+             $patient->frequency6 = $request->input('frequency6');
+             $patient->doc_comment = $request->input('comment');
              $patient->doc_email = auth()->user()->email;
              $patient->doctor = auth()->user()->name;
              $patient->oxygen = $request->input('oxygen');
@@ -117,7 +142,7 @@ class RecordsController extends Controller
              }
              //Save to db
               $patient->save();
-              return redirect('/patients')->with('success', 'Great!, patient\'s record updated');//I just set the message for session(success).
+              return redirect()->back()->with('success', 'Great!, patient\'s record saved');//I just set the message for session(success).
  
     }
 

@@ -116,6 +116,8 @@
                                       <option>-I am a...-</option>
                                       <option value="Nurse">Nurse</option>
                                       <option value="Pharmacist">Pharmacist</option>
+                                      <option value="Patient">Patient</option>
+                                      <option value="Biochemist/Microbiology">Biochemist/Microbiology</option>
                                       <option value="Doctor">Doctor</option>
                                       <option value="Ward Maid">Ward Maid</option>
                                    </select>

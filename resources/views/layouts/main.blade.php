@@ -272,6 +272,16 @@
         }
     });
   });
+  $(function () {
+    $("div.fie.one").slice(0, 1).show();
+    $("#loadMoreeinputt").on('click', function (e) {
+        e.preventDefault();
+        $("div.fie.one:hidden").slice(0, 1).slideDown();
+        if ($("div.fie.one:hidden").length == 0) {
+            $("#load").fadeOut('slow');
+        }
+    });
+  });
   </script>
         <script src="./jss/custom.js"></script>   
         <!-- Footer END --> 

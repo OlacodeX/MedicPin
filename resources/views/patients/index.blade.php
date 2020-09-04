@@ -348,6 +348,7 @@
                                           @if (auth()->user()->role == 'Doctor')
                                           <a href="#allrecords" data-toggle="collapse" class="btn btn-primary">View Full Current Record</a>
                                           <a href="#records" data-toggle="collapse" class="btn btn-primary">See Past Records</a>
+                                          <a href="#test" data-toggle="collapse" class="btn btn-primary">Patient Laboratory Tests</a>
                                           <a href="#appointments" data-toggle="collapse" class="btn btn-primary">Book Appointment With Patient</a>
                                               
                                           @endif
@@ -355,7 +356,66 @@
                                           <a href="./schedule/create" data-toggle="collapse" class="btn btn-primary">Schedule Doctor Visit</a>
                                           @endif
                                       </p>
-                                      
+        <div class="col-md-12 collapse" id="test"> 
+          <div class="iq-card">
+            <div class="iq-card-body text-center">
+               <h5 class="card-title">Laboratory Test Request Detail</h5>
+               @include('inc.messages')
+               @php
+                   $tests = App\Lab::where('patient_pin', $record->pin)->where('status', 'Done')->orderby('created_at','desc')->paginate(10);
+               @endphp
+
+               @if (count($tests) > 0)
+               <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
+                 <thead>
+                     
+                     <tr>
+                        <th>Date</th>
+                        <th>Test(s)</th>
+                        <th>Requested By</th>
+                        <th>Status</th>
+                        <th>carriedout_by</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                  @foreach ($tests as $test)
+                     <tr>
+                        <td class="text-center">{{$test->created_at}}</td>
+                        <td>
+                            {{$test->test_name1}}
+                            @if ($test->test_name2 !== 'select')
+                            {{$test->test_name2}}
+                                
+                            @endif
+                            @if ($test->test_name3 !== 'select')
+                            {{$test->test_name3}}
+                                
+                            @endif
+                            @if ($test->test_name4 !== 'select')
+                            {{$test->test_name4}}
+                                
+                            @endif
+                            @if ($test->test_name5 !== 'select')
+                            {{$test->test_name5}}
+                                
+                            @endif
+                            @if ($test->test_name6 !== 'select')
+                            {{$test->test_name6}}
+                                
+                            @endif
+                       </td>
+                        <td>{{$test->doc_name}}</td>
+                        <td>{{$test->status}}</td>
+                        <td>{{$test->carriedout_by}}</td>
+                     </tr> 
+                     @endforeach                      
+                 </tbody>
+               </table>
+                   
+               @endif
+            </div>
+            </div>
+         </div>
                                       <div class="col-md-12 collapse" id="appointments">
                                        <div class="iq-card shadow-none mb-0">
                                           {!! Form::open(['action' => 'AppointmentsController@store', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController

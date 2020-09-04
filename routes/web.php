@@ -81,3 +81,7 @@ Route::resource('/appointments', 'AppointmentsController');
 
 //consortations
 Route::resource('/consortations', 'ConsortationsController');
+
+//consortations
+Route::resource('/lab', 'LabsController');
+Route::post('/labs', 'LabsController@storee');

@@ -3,6 +3,610 @@
 @section('content')
 @include('inc.navmain')
      <!-- Page Content  -->
+
+     <div class="">
+      <div class="row">
+         <div class="col-sm-12 col-lg-12">
+            <div class="iq-card">
+               <div class="iq-card-header d-flex justify-content-between">
+                  <div class="iq-header-title">
+                     @php
+                         $detail = App\patients::where('pin', $pin)->first();
+                     @endphp
+                     <h4 class="card-title">Add New Record For {{$detail->name}}</h4>
+                  </div>
+               </div>
+               <style>
+
+           div.col-lg-12.fie.one{
+                    display:none;
+                    margin-bottom: 10px;
+                }
+                #loadMoreeinputt {
+                    transition: all 600ms ease-in-out;
+                    -webkit-transition: all 600ms ease-in-out;
+                    -moz-transition: all 600ms ease-in-out;
+                    -o-transition: all 600ms ease-in-out;
+                    
+                }
+                  button.btn.btn-info{
+                     background: transparent;
+                     border-radius: 0;
+                     font-size: 15px;
+                     margin-bottom: 15px;
+                     padding: 0px 20px;
+                  }
+                  .row,
+                  .col-lg-12{
+                     padding-left: 25px;
+                  }
+                  button.btn.btn-info label{
+                     font-size: 15px;
+                     color: #02818f;
+                  }
+                  input.form-control,
+                  select.form-control{
+                     border-radius: 0;
+                     width: 200px;
+                  }
+                  textarea.form-control{
+                     border-radius: 0;
+                     width: 200px;
+                  }
+               </style>
+               <div class="iq-card-body">
+                  <div class="row">
+                     <div class="col-md-3">
+                        <ul id="top-tabbar-vertical" class="p-0">
+                           <li class="active" id="personal">
+                              <a href="javascript:void();">
+                              <i class="ri-lock-unlock-line text-primary"></i><span>Vitals</span>
+                              </a>
+                           </li>
+                           <li id="contact">
+                              <a href="javascript:void();">
+                              <i class="ri-user-fill text-danger"></i><span>Diagnonosis</span>
+                              </a>
+                           </li>
+                           <li id="official">
+                              <a href="javascript:void();">
+                              <i class="ri-camera-fill text-success"></i><span>Lab Test</span>
+                              </a>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="col-md-9">
+                     <form id="form-wizard3" class="text-center" method="POST" action="{{route('records.store')}}">
+                           <!-- fieldsets -->
+                           <fieldset>
+                              <div class="form-card text-left">
+                                 <div class="row">
+                                    <div class="col-12">
+                                       <h3 class="mb-4">Patient's Vitals</h3>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-6">
+                                       <div class="form-group">
+                                          <label for="name"> Name: *</label>
+                                          <input type="text" class="form-control" id="name" name="name" value="{{$detail->name}}"/>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                       <div class="form-group">
+                                          <label for="pin">MedicPin: *</label>
+                                          <input type="text" class="form-control" id="pin" name="pin" value="{{$detail->pin}}"/>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                    <div class="form-group">
+                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo"><label for="Blood Group"><i class="fa fa-plus"></i> Blood Group</label></button>
+                                       
+                                       <div id="demo" class="collapse">
+                                       <select class="form-control" id="selectbg" name="b_group">
+                                          <option value="N/A">Select</option>
+                                             <option value="O+">O+</option>
+                                             <option value="O-">O-</option>
+                                             <option value="A+">A+</option>
+                                             <option value="A-">A-</option>
+                                             <option value="AB+">AB+</option>
+                                             <option value="AB-">AB-</option>
+                                       </select>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       
+                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo1"><label for="bp"><i class="fa fa-plus"></i>Blood Pressure</label></button>
+                                       
+                                       <div id="demo1" class="collapse">
+                                       <input type="text" class="form-control" id="bp" name="bp" placeholder="Blood Pressure">
+                                    </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo2"><label for="h_rate"><i class="fa fa-plus"></i>Heart Rate</label></button>
+                                          <div id="demo2" class="collapse">
+                                          <input type="text" class="form-control" id="h_rate" name="h_rate" placeholder="Heart Rate in %">
+                                          </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo3"><label for="genotype"><i class="fa fa-plus"></i>Genotype</label></button>
+                                       <div id="demo3" class="collapse">
+                                       <select class="form-control" id="selectgenotype" name="genotype">
+                                          <option value="N/A">Select</option>
+                                          <option value="AA">AA</option>
+                                          <option value="AS">AS</option>
+                                          <option value="SS">SS</option>
+                                       </select>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo4"><label for="weight"><i class="fa fa-plus"></i>Weight</label></button>
+                                       <div id="demo4" class="collapse">
+                                       <input type="text" class="form-control" id="weight" name="weight" placeholder="Weight in kg">
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                     <div class="form-group">
+                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo5"><label for="height"><i class="fa fa-plus"></i>Height</label></button>
+                                       <div id="demo5" class="collapse">
+                                       <input type="text" class="form-control" id="height" name="height" placeholder="Height in cm">
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo6"><label for="temprature"><i class="fa fa-plus"></i>Temperature</label></button>
+                                       <div id="demo6" class="collapse">
+                                       <input type="text" class="form-control" id="temprature" name="temprature" placeholder="Temprature in Celsius">
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo7"><label for="height"><i class="fa fa-plus"></i>Oxygen Saturation</label></button>
+                                      <div id="demo7" class="collapse">
+                                      <input type="text" class="form-control" id="oxygen" name="oxygen" placeholder="Oxygen Saturation in %">
+                                      </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                   <div class="form-group">
+                                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo8"><label for="temprature"><i class="fa fa-plus"></i>Glucose Level</label></button>
+                                      <div id="demo8" class="collapse">
+                                      <input type="text" class="form-control" id="glucose" name="glucose" placeholder="Glucose level in %">
+                                      </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                   <div class="form-group">
+                                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo9"><label for="height"><i class="fa fa-plus"></i>Respiratory Rate</label></button>
+                                     <div id="demo9" class="collapse">
+                                     <input type="text" class="form-control" id="r_rate" name="r_rate" placeholder="Respiratory rate in %">
+                                     </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                  <div class="form-group">
+                                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo10"><label for="temprature"><i class="fa fa-plus"></i>BMI</label></button>
+                                     <div id="demo10" class="collapse">
+                                     <input type="text" class="form-control" id="bmi" name="bmi" placeholder="BMI">
+                                     </div>
+                                  </div>
+                                 </div>
+                              </div>
+                              </div>
+                              
+                              <button id="submit" type="button" name="next" class="btn btn-primary next action-button float-right" value="Next" >Next</button>
+                           </fieldset>
+                           <fieldset>
+                              <div class="form-card text-left">
+                                 <div class="row">
+                                    <div class="col-12">
+                                       <h3 class="mb-4">Doctor's Diagnonosis:</h3>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <div class="form-group">
+                                         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo13"><label for="comment"><i class="fa fa-plus"></i>Doctor's Comment</label></button>
+                                          <div id="demo13" class="collapse">
+                                             <p>Doctor's Comment Based On Patient's Complaint and Medical History...</p>
+                                          <textarea class="form-control" id="pre" name="comment" placeholder="Doctor's Comment Based On Patient's Complaint and Medical History..."></textarea>
+                                       </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                     <div class="form-group">
+                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo11"><label for="temprature"><i class="fa fa-plus"></i>Note</label></button>
+                                        <div id="demo11" class="collapse">
+                                        <textarea class="form-control" id="note" name="note" placeholder="General note on patient medical status"></textarea>
+                                        </div>
+                                     </div>
+                                    </div>
+                                     <div class="col-md-12">
+                                      <div class="form-group">
+                                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo15"><label for="temprature"><i class="fa fa-plus"></i>Diagnosis/Prescription</label></button>
+                                         <div id="demo15" class="collapse">
+                                             <div class="col-lg-12 fie one">
+                                                <div class="row">
+                                            <div class="col-md-6">
+                                             <label>Sickness</label>
+                                             <select class="form-control" id="sickness1" name="sickness1">
+                                                <option>Select</option>
+                                                <option value="Malaria">Malaria</option>
+                                                <option value="Malaria">Malaria</option>
+                                                <option value="Malaria">Malaria</option>
+                                                <option value="Malaria">Malaria</option>
+                                                <option value="Malaria">Malaria</option>
+                                                <option value="Malaria">Malaria</option>
+                                                <option value="Malaria">Malaria</option>
+                                                <option value="Malaria">Malaria</option>
+                                             </select>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                             <label>Drug(s)</label>
+                                             <select class="form-control" id="drug1" name="drug1">
+                                                <option>Select</option>
+                                                <option value="Lumartem">Lumartem</option>
+                                                <option value="Paracetamol">Paracetamol</option>
+                                                <option value="Paracetamol">Paracetamol</option>
+                                                <option value="Paracetamol">Paracetamol</option>
+                                                <option value="Paracetamol">Paracetamol</option>
+                                                <option value="Paracetamol">Paracetamol</option>
+                                             </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                             <label>Dosage</label>
+                                             <input type="text" name="dose1" id="" class="form-control" placeholder="Number of tablets">
+                                             
+
+                                            </div>
+                                            <div class="col-md-6">
+                                             <label>Frequency</label>
+                                          <select class="form-control" id="" name="frequency1">
+                                             <option>Select</option>
+                                             <option value="Once/Day">Once/Day</option>
+                                             <option value="2x/Day">2x/Day</option>
+                                             <option value="3x/Day">3x/Day</option>
+                                             <option value="Pharmacist Discretion">Pharmacist Discretion</option>
+                                          </select>
+                                          </div><br>
+                                       </div>
+                                     </div>
+                                       <div class="col-lg-12 fie one">
+                                          <div class="row">
+                                          <div class="col-md-6">
+                                             <label>Sickness</label>
+                                             <select class="form-control" id="sickness2" name="sickness2">
+                                                <option>Select</option>
+                                                <option value="Malaria">Malaria</option>
+                                                <option value="Malaria">Malaria</option>
+                                                <option value="Malaria">Malaria</option>
+                                                <option value="Malaria">Malaria</option>
+                                                <option value="Malaria">Malaria</option>
+                                                <option value="Malaria">Malaria</option>
+                                                <option value="Malaria">Malaria</option>
+                                                <option value="Malaria">Malaria</option>
+                                             </select>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                             <label>Drug(s)</label>
+                                             <select class="form-control" id="drug2" name="drug2">
+                                                <option>Select</option>
+                                                <option value="Lumartem">Lumartem</option>
+                                                <option value="Paracetamol">Paracetamol</option>
+                                                <option value="Paracetamol">Paracetamol</option>
+                                                <option value="Paracetamol">Paracetamol</option>
+                                                <option value="Paracetamol">Paracetamol</option>
+                                                <option value="Paracetamol">Paracetamol</option>
+                                             </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                             <label>Dosage</label>
+                                             <input type="text" name="dose2" id="" class="form-control" placeholder="Number of tablets">
+                                             
+
+                                            </div>
+                                            <div class="col-md-6">
+                                             <label>Frequency</label>
+                                          <select class="form-control" id="" name="frequency2">
+                                             <option>Select</option>
+                                             <option value="Once/Day">Once/Day</option>
+                                             <option value="2x/Day">2x/Day</option>
+                                             <option value="3x/Day">3x/Day</option>
+                                             <option value="Pharmacist Discretion">Pharmacist Discretion</option>
+                                          </select>
+                                          </div>
+                                       </div>
+             
+                                       </div><br>
+                                       <div class="col-lg-12 fie one">
+                                          <div class="row">
+                                      <div class="col-md-6">
+                                       <label>Sickness</label>
+                                       <select class="form-control" id="sickness3" name="sickness3">
+                                          <option>Select</option>
+                                          <option value="Malaria">Malaria</option>
+                                          <option value="Malaria">Malaria</option>
+                                          <option value="Malaria">Malaria</option>
+                                          <option value="Malaria">Malaria</option>
+                                          <option value="Malaria">Malaria</option>
+                                          <option value="Malaria">Malaria</option>
+                                          <option value="Malaria">Malaria</option>
+                                          <option value="Malaria">Malaria</option>
+                                       </select>
+
+                                      </div>
+                                      <div class="col-md-6">
+                                       <label>Drug(s)</label>
+                                       <select class="form-control" id="drug1" name="drug3">
+                                          <option>Select</option>
+                                          <option value="Lumartem">Lumartem</option>
+                                          <option value="Paracetamol">Paracetamol</option>
+                                          <option value="Paracetamol">Paracetamol</option>
+                                          <option value="Paracetamol">Paracetamol</option>
+                                          <option value="Paracetamol">Paracetamol</option>
+                                          <option value="Paracetamol">Paracetamol</option>
+                                       </select>
+                                      </div>
+                                      <div class="col-md-6">
+                                       <label>Dosage</label>
+                                       <input type="text" name="dose3" id="" class="form-control" placeholder="Number of tablets">
+                                       
+
+                                      </div>
+                                      <div class="col-md-6">
+                                       <label>Frequency</label>
+                                    <select class="form-control" id="" name="frequency3">
+                                       <option>Select</option>
+                                       <option value="Once/Day">Once/Day</option>
+                                       <option value="2x/Day">2x/Day</option>
+                                       <option value="3x/Day">3x/Day</option>
+                                       <option value="Pharmacist Discretion">Pharmacist Discretion</option>
+                                    </select>
+                                    </div><br>
+                                 </div>
+                               </div>
+                               <div class="col-lg-12 fie one">
+                                  <div class="row">
+                              <div class="col-md-6">
+                               <label>Sickness</label>
+                               <select class="form-control" id="sickness4" name="sickness4">
+                                  <option>Select</option>
+                                  <option value="Malaria">Malaria</option>
+                                  <option value="Malaria">Malaria</option>
+                                  <option value="Malaria">Malaria</option>
+                                  <option value="Malaria">Malaria</option>
+                                  <option value="Malaria">Malaria</option>
+                                  <option value="Malaria">Malaria</option>
+                                  <option value="Malaria">Malaria</option>
+                                  <option value="Malaria">Malaria</option>
+                               </select>
+
+                              </div>
+                              <div class="col-md-6">
+                               <label>Drug(s)</label>
+                               <select class="form-control" id="drug4" name="drug4">
+                                  <option>Select</option>
+                                  <option value="Lumartem">Lumartem</option>
+                                  <option value="Paracetamol">Paracetamol</option>
+                                  <option value="Paracetamol">Paracetamol</option>
+                                  <option value="Paracetamol">Paracetamol</option>
+                                  <option value="Paracetamol">Paracetamol</option>
+                                  <option value="Paracetamol">Paracetamol</option>
+                               </select>
+                              </div>
+                              <div class="col-md-6">
+                               <label>Dosage</label>
+                               <input type="text" name="dose4" id="" class="form-control" placeholder="Number of tablets">
+                               
+
+                              </div>
+                              <div class="col-md-6">
+                               <label>Frequency</label>
+                            <select class="form-control" id="" name="frequency4">
+                               <option>Select</option>
+                               <option value="Once/Day">Once/Day</option>
+                               <option value="2x/Day">2x/Day</option>
+                               <option value="3x/Day">3x/Day</option>
+                               <option value="Pharmacist Discretion">Pharmacist Discretion</option>
+                            </select>
+                            </div><br>
+                         </div>
+                       </div>
+                       <div class="col-lg-12 fie one">
+                          <div class="row">
+                      <div class="col-md-6">
+                       <label>Sickness</label>
+                       <select class="form-control" id="sickness5" name="sickness5">
+                          <option>Select</option>
+                          <option value="Malaria">Malaria</option>
+                          <option value="Malaria">Malaria</option>
+                          <option value="Malaria">Malaria</option>
+                          <option value="Malaria">Malaria</option>
+                          <option value="Malaria">Malaria</option>
+                          <option value="Malaria">Malaria</option>
+                          <option value="Malaria">Malaria</option>
+                          <option value="Malaria">Malaria</option>
+                       </select>
+
+                      </div>
+                      <div class="col-md-6">
+                       <label>Drug(s)</label>
+                       <select class="form-control" id="drug5" name="drug5">
+                          <option>Select</option>
+                          <option value="Lumartem">Lumartem</option>
+                          <option value="Paracetamol">Paracetamol</option>
+                          <option value="Paracetamol">Paracetamol</option>
+                          <option value="Paracetamol">Paracetamol</option>
+                          <option value="Paracetamol">Paracetamol</option>
+                          <option value="Paracetamol">Paracetamol</option>
+                       </select>
+                      </div>
+                      <div class="col-md-6">
+                       <label>Dosage</label>
+                       <input type="text" name="dose5" id="" class="form-control" placeholder="Number of tablets">
+                       
+
+                      </div>
+                      <div class="col-md-6">
+                       <label>Frequency</label>
+                    <select class="form-control" id="" name="frequency5">
+                       <option>Select</option>
+                       <option value="Once/Day">Once/Day</option>
+                       <option value="2x/Day">2x/Day</option>
+                       <option value="3x/Day">3x/Day</option>
+                       <option value="Pharmacist Discretion">Pharmacist Discretion</option>
+                    </select>
+                    </div><br>
+                 </div>
+               </div>
+               <div class="col-lg-12 fie one">
+                  <div class="row">
+              <div class="col-md-6">
+               <label>Sickness</label>
+               <select class="form-control" id="sickness6" name="sickness6">
+                  <option>Select</option>
+                  <option value="Malaria">Malaria</option>
+                  <option value="Malaria">Malaria</option>
+                  <option value="Malaria">Malaria</option>
+                  <option value="Malaria">Malaria</option>
+                  <option value="Malaria">Malaria</option>
+                  <option value="Malaria">Malaria</option>
+                  <option value="Malaria">Malaria</option>
+                  <option value="Malaria">Malaria</option>
+               </select>
+
+              </div>
+              <div class="col-md-6">
+               <label>Drug(s)</label>
+               <select class="form-control" id="drug1" name="drug6">
+                  <option>Select</option>
+                  <option value="Lumartem">Lumartem</option>
+                  <option value="Paracetamol">Paracetamol</option>
+                  <option value="Paracetamol">Paracetamol</option>
+                  <option value="Paracetamol">Paracetamol</option>
+                  <option value="Paracetamol">Paracetamol</option>
+                  <option value="Paracetamol">Paracetamol</option>
+               </select>
+              </div>
+              <div class="col-md-6">
+               <label>Dosage</label>
+               <input type="text" name="dose6" id="" class="form-control" placeholder="Number of tablets">
+               
+
+              </div>
+              <div class="col-md-6">
+               <label>Frequency</label>
+            <select class="form-control" id="" name="frequency6">
+               <option>Select</option>
+               <option value="Once/Day">Once/Day</option>
+               <option value="2x/Day">2x/Day</option>
+               <option value="3x/Day">3x/Day</option>
+               <option value="Pharmacist Discretion">Pharmacist Discretion</option>
+            </select>
+            </div><br>
+         </div>
+       </div>
+                                       <a href="" id="loadMoreeinputt" class="btn btn-primary pull-left"><i class="fa fa-plus"></i>Add More Drugs</a>
+                                  
+                                         </div>
+                                      </div>
+                                 </div>
+                              </div>
+                              </div>
+                              <button type="button" name="next" class="btn btn-primary next action-button float-right" value="Next" >Next</button>
+                              <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-right mr-3" value="Previous" >Previous</button>
+                           </fieldset>
+                           <fieldset>
+                              <div class="form-card text-left">
+                                 <div class="row">
+                                    <div class="col-12">
+                                       <h3 class="mb-4">Schedule Lab Test:</h3>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <div class="">
+                                          {!! Form::open(['action' => 'LabsController@storee', 'method' => 'POST', 'id' => 'my_form_1']) /** The action should be the block of code in the store function in PostsController
+                                        **/ !!}
+                                          <label for="Test Name">Test Name</label>
+                                          <select aria-multiselectable="true" multiple name="name[]" class="form-control" id="test_name">
+                                             <option>select</option>
+                                             <option value="one">select-2</option>
+                                             <option value="two">select-3</option>
+                                             <option value="three">select-4</option>
+                                             <option>select-5</option>
+                                             <option>select-6</option>
+                                             <option>select-7</option>
+                                             <option>select-8</option>
+                                          </select> <br>
+                                          <input type="hidden" name="p_pin" value="{{$detail->pin}}">
+                                          {!! Form::close() !!}
+                                          <a href="" class="btn btn-primary" onclick="document.getElementById('my_form_1').submit();">Send Request To Lab Department</a>
+                                       </div><br>
+                                       <p>
+                                       <a href="#LabHistory" data-toggle="collapse" class="btn btn-primary">Lab History of Patient</a>
+                                    </p>
+                                          <div class="col-md-12 collapse" id="LabHistory">
+                                           <div class="iq-card shadow-none mb-0">
+                                              {!! Form::open() /** The action should be the block of code in the store function in PostsController
+                                            **/ !!}
+                                                                
+                                                       <div class="row">
+                                                          <div class="form-group col-md-6">
+                                                             <label for="with">With?</label>
+                                                             <div class="inner-addon right-addon">
+                                                                <i class="fa fa-user"></i>
+                                                             <input type="text" class="form-control" id="patient" name="patient" value="">
+                                                             </div>
+                                                          </div>
+                                                          <div class="form-group col-md-6">
+                                                             <label for="add">Date</label>
+                                                             <div class="inner-addon right-addon">
+                                                                <i class="fa fa-date"></i>
+                                                             <input type="date" class="form-control" name="date" id="date" placeholder="Date of Appointment....">
+                                                             </div>
+                                                          </div>
+                                                          <div class="form-group col-md-6">
+                                                             <label for="mobno">Time</label>
+                                                             <div class="inner-addon right-addon">
+                                                                <i class="fa fa-clock"></i>
+                                                             <input type="time" class="form-control" id="time" name="time" placeholder="Time of Appointment....">
+                                                             </div>
+                                                          </div>
+                                                       </div>
+                                                    <button type="submit" class="btn btn-primary">Book</button>
+                                                    {!! Form::close() !!}
+                                           </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <button type="submit"  class="btn btn-primary next action-button float-right" value="Submit" >Submit</button>
+                              <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-right mr-3" value="Previous" >Previous</button>
+                           </fieldset>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+<!-----
+
      <div>
         <div class="">
            <div class="row">
@@ -58,6 +662,7 @@
                        </div>
                     </div>
               </div>--->
+              <!---
               <div class="col-lg-12">
                     <div class="iq-card">
                        <div class="iq-card-header d-flex justify-content-between">
@@ -87,6 +692,7 @@
                                    </div>
                                 </div>
                                 <hr>---->
+<!---
                                 <h5 class="mb-3">Medical Records</h5>
                                 <div class="row">
                                    
