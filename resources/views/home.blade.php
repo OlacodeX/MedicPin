@@ -207,8 +207,7 @@
                            <p class="text-center">No Sent Notifications Yet</p> 
                            @endif
     
-                        </div>  
-                          </div>
+                        </div>
                        </div>
                  <div class="col-lg-6">
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
@@ -660,7 +659,6 @@
     
                         </div>  
                           </div>
-                       </div>
                  <div class="col-lg-6">
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                        <div class="iq-card-header d-flex justify-content-between">
@@ -915,7 +913,7 @@
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height-half">
                        <div class="iq-card-body">
                           <h6>PATIENTS ASSIGNED FOR TODAY</h6>
-                          <h3><b>{{App\Consortations::where('doc_pin', auth()->user()->pin)->where('created_at', now()->day)->count()}}</b></h3>
+                          <h3><b>{{App\Consortations::where('doc_pin', auth()->user()->pin)->whereDay('created_at', now()->day)->count()}}</b></h3>
                        </div>
                     </div>
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height-half">
@@ -1193,7 +1191,6 @@
     
                         </div>  
                           </div>
-                       </div>
                  <div class="col-lg-6">
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                        <div class="iq-card-header d-flex justify-content-between">
