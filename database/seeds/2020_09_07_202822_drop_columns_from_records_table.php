@@ -39,9 +39,6 @@ class DropColumnsFromRecordsTable extends Migration
         $table->dropColumn('frequency4');
         $table->dropColumn('frequency5');
         $table->dropColumn('frequency6');
-        $table->dropColumn('frequency1');
-        $table->dropColumn('frequency2');
-        $table->dropColumn('twitter');
         });
     }
 
