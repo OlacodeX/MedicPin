@@ -173,7 +173,9 @@
                        </div>
                     </div>
                  </div>
+              </div>
            </div>
+           
                  
            
                  <div class="row">
@@ -206,6 +208,8 @@
                            @else
                            <p class="text-center">No Sent Notifications Yet</p> 
                            @endif
+    
+                       </div>
     
                         </div>
                        </div>
@@ -253,6 +257,8 @@
                     </div>
                  </div>
               </div>
+              
+              
               <!-- for both--->
               <div class="row">
                  <div class="col-lg-8">
@@ -397,13 +403,100 @@
                        </div>
                     </div>
                  </div>
-              </div>
                
               @endif
 
 
 
 
+
+              @if (auth()->user()->role == 'Pharmacist')
+              <div class="">
+                                   
+                 <div class="row" style="margin-bottom: 250px;">
+                    <div class="col-lg-12">
+                       <div class="container">
+                       <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                        <div class="iq-card-header d-flex justify-content-between">
+                           <div class="iq-header-title">
+                                         <h4 class="card-title">Search For Patient To Sell Drug</h4>
+                           </div>
+                        </div>
+                           <div class="iq-card-body">
+                              {!! Form::open(['action' => 'PatientsController@search', 'method' => 'POST', 'class' => 'mr-3 position-relative']) !!}
+                                  <div class="form-group mb-0">
+                                     <input type="search" class="form-control" id="exampleInputSearch" name="pin" placeholder="Enter MedicPin" aria-controls="user-list-table">
+                                   
+                                    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Search</button>
+                                  </div>
+                                  {!! Form::close() !!}
+                            </div>
+                       </div>
+                       </div>
+                       
+                    <div class="col-lg-12">
+                     <div class="">
+                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                           <div class="iq-card-header d-flex justify-content-between">
+                              <div class="iq-header-title">
+                                <h4 class="card-title">Forum Questions</h4>
+                            </div>
+                            <div class="iq-card-header-toolbar d-flex align-items-center">
+                                <a href="./questions" class="">See all questions </a>
+                            </div>
+                           </div>
+                           <div class="iq-card-body">
+                               
+                              <ul class="patient-progress m-0 p-0">
+                                @if (count($questions_all) > 0)
+                                @foreach ($questions_all as $question_all)
+                                <a href="questions/{{$question_all->id}}" >
+                         <li class="d-flex mb-3 align-items-center">
+                            <div class="media-support-info">
+                                <small>{!!$question_all->created_at!!} </small>
+                               <h6>{!!$question_all->question!!} </h6>
+                               @if (auth()->user()->id == $question_all->asker_id)
+                                  <button class ="btn btn-info btn-sm pull-right"><a href="questions/{{$question_all->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Question"><i class="fa fa-edit"></i></a></button>
+                                      {!!Form::open(['action' => ['QuestionsController@destroy', $question_all->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                      {{Form::hidden('_method', 'DELETE')}}
+                                     <button type="submit" class ="btn btn-info btn-sm pull-right" data-toggle="tooltip" data-placement="top" data-original-title="Delete Question"><i class="fa fa-trash-o"></i></button>
+                                    
+                                     {!!Form::close()!!}
+                               @endif
+                            </div>
+                                <span class="user-list-files d-flex float-right">
+                                    <a href="questions/{{$question_all->id}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View answers"> <i class="fa fa-comments"></i>({{App\Answers::where('question_id', $question_all->id)->count()}})</a>
+                                 </span>
+                         </li> 
+                                </a>
+                                @endforeach
+           
+                                @else
+                                <p class="text-center">No Questions in Forum Yet</p>    
+                                @endif
+                              </ul>
+                        </div>
+                        </div>
+                     </div>
+                    </div>
+                     </div>
+                 <!----
+                    <div class="col-lg-4">
+                       <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                          <div class="iq-card-header d-flex justify-content-between">
+                             <div class="iq-header-title">
+                                <h4 class="card-title">Health Curve</h4>
+                             </div>
+                          </div>
+                          <div class="iq-card-body">
+                             <div id="home-chart-06" style="height: 350px;"></div>
+                          </div>
+                       </div>
+                    </div>                  
+                 ----> 
+              </div>
+                
+                 @endif
 
 
 @if (auth()->user()->role == 'Nurse')
@@ -656,8 +749,8 @@
                            @else
                            <p class="text-center">No Sent Notifications Yet</p> 
                            @endif
-    
-                        </div>  
+                           </div>
+                           </div>  
                           </div>
                  <div class="col-lg-6">
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
@@ -847,7 +940,6 @@
                        </div>
                     </div>
                  </div>
-              </div>
                
               @endif
 
@@ -963,7 +1055,7 @@
                         </div>
                           <ul class="patient-progress m-0 p-0">
                             @php
-                                $patients = App\Consortations::where('doc_pin', auth()->user()->pin)->paginate(5);
+                                $patients = App\Consortations::where('doc_pin', auth()->user()->pin)->whereDay('created_at', now()->day)->paginate(5);
                             @endphp
 
                                     @if (count($patients) > 0)
@@ -981,30 +1073,30 @@
                                     <span class="user-list-files d-flex float-right">
                                     
                                     {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
-                                    {{Form::hidden('pin', $patient->pin)}}
+                                    {{Form::hidden('pin', $patient->patient_pin)}}
                                     <button type="submit" class ="btn btn-info btn-sm" title="Add New Medical Record"><i class="fa fa-plus"></i></button>
                                    
                                     {!!Form::close()!!}
                                     {!!Form::open(['action' => 'RecordsController@index', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
-                                    {{Form::hidden('pin', $patient->pin)}}
+                                    {{Form::hidden('pin', $patient->patient_pin)}}
                                     {{Form::hidden('username', $patient->username)}}
                                     <button type="submit" class ="btn btn-info btn-sm" title="View Medical History"><i class="fa fa-bars"></i></button>
                                    
                                     {!!Form::close()!!}
                                     {!!Form::open(['action' => 'PatientsController@transfer', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
-                                    {{Form::hidden('pin', $patient->pin)}}
+                                    {{Form::hidden('pin', $patient->patient_pin)}}
                                     <button type="submit" class ="btn btn-info btn-sm" title="Transfer Patient"><i class="fa fa-paper-plane-o"></i></button>
                                    
                                     {!!Form::close()!!}
                                     {!!Form::open(['action' => 'MessagingController@create', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
-                                    {{Form::hidden('pin', $patient->pin)}}
+                                    {{Form::hidden('pin', $patient->patient_pin)}}
                                     <button type="submit" class ="btn btn-info btn-sm" title="Message Patient"><i class="fa fa-envelope"></i></button>
                                    
                                     {!!Form::close()!!}
 
 
                                         {!!Form::open(['action' => ['PatientsController@destroy', $patient->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
-                                        {{Form::hidden('email', $patient->email)}}
+                                        {{Form::hidden('email', $patient->patient_email)}}
                                         {{Form::hidden('_method', 'DELETE')}}
                                         <button type="submit" class ="btn btn-info btn-sm" title="Delete Patient"><i class="fa fa-trash-o"></i></button>
                                        
@@ -1188,7 +1280,7 @@
                            @else
                            <p class="text-center">No Sent Notifications Yet</p> 
                            @endif
-    
+                           </div>
                         </div>  
                           </div>
                  <div class="col-lg-6">
@@ -1379,7 +1471,6 @@
                        </div>
                     </div>
                  </div>
-              </div>
                
               @endif
               

@@ -8,28 +8,180 @@
                <div class="row">
                   <div class="col-sm-12">
                      <div class="iq-card iq-card-block iq-card-stretch iq-card-height wow fadeInUp" data-wow-delay="0.6s">
+                        @include('inc.messages')
                          <div class="iq-card-header d-flex justify-content-between">
                              <div class="iq-header-title">
-                                 <h4 class="card-title">Summary</h4>
+                                @if (auth()->user()->role == 'Pharmacist')
+                                 <h4 class="card-title">Prescription(s)</h4>
                                  <small>Most Recent Record Dated {{$record->created_at}}</small>
+                                 @endif
+                                 @if (auth()->user()->role == 'Doctor' || auth()->user()->role == 'Doctor')
+                                  <h4 class="card-title">Patient Medical Record</h4>
+                                  <small>Most Recent Record Dated {{$record->created_at}}</small>
+                                  @endif
                              </div>
+                             @if (auth()->user()->role == 'Nurse' || auth()->user()->role == 'Doctor')
                              <div class="dropdown">
                                 <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
                                 <i class="ri-more-fill"></i>
                                 </span>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
                                 <a class="dropdown-item">
-                                 {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
-                                 {{Form::hidden('pin', $record->pin)}}
-                                 <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add New Medical Record"><i class="fa fa-plus"></i>Add New Record </button>
-                                
-                                 {!!Form::close()!!}
+                                    {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                                    {{Form::hidden('pin', $record->pin)}}
+                                    <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add New Medical Record"><i class="fa fa-plus"></i>Add New Record </button>
+                                   
+                                    {!!Form::close()!!}
                                 </a>
                                 </div>
                              </div>
+                                    
+                                 @endif    
+                            
                                
                          </div>
-                              <div class="">
+                         <div class="">
+                                @if (auth()->user()->role == 'Pharmacist')
+                                @php
+                                    $recrds = App\Prescriptions::where('patient_pin', $record->pin)->where('status', '!=', 'Pending Sale')->paginate(10);
+                               
+                                    $records = App\Prescriptions::where('patient_pin', $record->pin)->whereDay('created_at', now()->day)->where('status', 'Pending Sale')->orderby('created_at','desc')->get();
+                                @endphp
+                                 <div class="iq-card-body chat-page p-0">
+                                    <div class="chat-data-block">
+                                    <div>
+
+                                 <div class="">
+                                        <div>
+                                            <div class="container">
+                                                @if (count($records) >0)
+                                                <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
+                                                  <thead>
+                                                      
+                                                      <tr>
+                                                         <th>Drug Name</th>
+                                                         <th>Dosage</th>
+                                                         <th>Frequency</th>
+                                                         <th>Prescribed By</th>
+                                                         <th>Action(s)</th>
+                                                      </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                    @foreach ($records as $record)
+                                                      <tr>
+                                                        @if ($record->drug !== NULL && $record->drug !== 'select')
+                                                         <td>{{$record->drug}}</td>
+                                                         <td>{{$record->dosage}}</td>
+                                                         <td>{{$record->frequency}}</td>
+                                                         @php
+                                                             $prescribed_by = App\User::where('pin', $record->prescribed_by)->first();
+                                                         @endphp
+                                                         <td>Dr. {{$prescribed_by->name}}</td>
+                                                         <td>
+                                                            <div class="dropdown">
+                                                               <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
+                                                               <i class="ri-more-fill"></i>
+                                                               </span>
+                                                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
+                                                               
+                                                                <a class="dropdown-item">
+                                                                   {!!Form::open(['action' =>['PrescriptionController@update',$record->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                                                   {{Form::hidden('id', $record->id)}}
+                                                                   <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Sell Drug"><i class="la la-bezier-curve"></i>Mark Drug As Sold</button>
+                                                                  
+                                                                   {{Form::hidden('_method', 'PUT')}}
+                                                                   {!!Form::close()!!}
+                                                                </a>
+                                                               
+                                                               <a class="dropdown-item">
+                                                                  {!!Form::open(['action' => 'PrescriptionController@NA', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                                                                  {{Form::hidden('id', $record->id)}}
+                                                                  <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Drug Not Available"><i class="ri-delete-bin-6-fill mr-2"></i>Drug Not Available</button>
+                                                                 
+                                                                  {!!Form::close()!!}
+                                                               </a>
+                                                               </div>
+                                                            </div>
+                                                              
+                                                             
+                                                        </td>
+
+                                                              @endif
+                                                          </tr>
+                                                        
+                                                          @endforeach           
+                                                  </tbody>
+                                                </table>
+                                                      
+                                                @else
+                                                
+                                                    No Prescription For Patient Today, Check Prescription History.
+                                    
+                                                @endif
+                                               </div>
+                                           </div>
+                                       </div>
+                                    </div>
+                                    </div>
+                                   </div>
+                                   <p>
+                                    <a href="#records" data-toggle="collapse" class="btn btn-primary" style="margin-left: 70px;">See Prescription Record</a>
+                                    
+                                      <div class="col-md-12 collapse" id="records">
+                                          <div class="iq-card shadow-none mb-0">
+                                              <div class="iq-card-body p-1">
+                                               @if (count($recrds) > 0)
+                                               <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
+                                                 <thead>
+                                                     
+                                                     <tr>
+                                                        <th>Drug Name</th>
+                                                        <th>Dosage</th>
+                                                        <th>Frequency</th>
+                                                        <th>Prescribed By</th>
+                                                        <th>Status</th>
+                                                     </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                    @foreach ($recrds as $recrd)
+                                                     <tr>
+                                                        @if ($recrd->drug !== NULL && $recrd->drug !== 'select')
+                                                         <td>{{$recrd->drug}}</td>
+                                                         <td>{{$recrd->dosage}}</td>
+                                                         <td>{{$recrd->frequency}}</td>
+                                                         @php
+                                                             $prescribed_by = App\User::where('pin', $recrd->prescribed_by)->first();
+                                                         @endphp
+                                                         <td>Dr. {{$prescribed_by->name}}</td>
+                                                         <td>{{$recrd->status}}</td>
+
+                                                              @endif
+                                                          </tr>  
+                                                          @endforeach     
+                                                 </tbody>
+                                               </table>
+                                            </div>
+                                                  <div class="col-md-6">
+                                                      <div style="text-align:right;">
+                                                              <!-----The pagination link----->
+                                                              {{$recrds->links()}}
+                                                      </div>
+                                                    </div>
+                                                      @else
+                                                      <p>No Record Found</p>    
+                                                      @endif
+                                              </div>
+                                          </div>
+                                      </div>
+                                      </div>
+                                @endif
+
+
+
+
+
+
+
                                 @if (auth()->user()->role == 'Patient')
                                  <div class="iq-card-body chat-page p-0">
                                     <div class="chat-data-block">
@@ -406,7 +558,10 @@
                        </td>
                         <td>{{$test->doc_name}}</td>
                         <td>{{$test->status}}</td>
-                        <td>{{$test->carriedout_by}}</td>
+                        @php
+                            $name = App\User::where('pin',$test->carriedout_by)->first();
+                        @endphp
+                        <td>{{$name->name}}</td>
                      </tr> 
                      @endforeach                      
                  </tbody>
@@ -552,6 +707,10 @@
                                               <div class="iq-card shadow-none mb-0">
                                                   <div class="iq-card-body p-1">
                                                      <div class="">
+                                                         @php
+                                                             
+                                                             $records = App\Records::where('pin', $record->pin)->orderBy('created_at', 'desc')->get();
+                                                         @endphp        
                                                       @if (count($records) > 0)
                                                       <div class="col-sm-12 col-md-6">
                                                          <div class="user-list-files d-flex">
@@ -595,21 +754,15 @@
                                                       <td>{{$record->glucose}}</td>
                                                       <td>{{$record->r_rate}}</td>
                                                       <td>{{$record->BMI}}</td>
-                                                      <td>{{$record->note}}</td>
+                                                      <td>{!!$record->note!!}</td>
                                                    </tr> 
                                                          @endforeach                      
                                                      </tbody>
                                                    </table>
                                                 </div>
-                                                      <div class="col-md-6">
-                                                          <div style="text-align:right;">
-                                                                  <!-----The pagination link----->
-                                                                  {{$records->links()}}
-                                                          </div>
                                                           @else
                                                           <p>No Record Found</p>    
                                                           @endif
-                                                     </div>
                                                   </div>
                                               </div>
                                           </div>

@@ -55,12 +55,12 @@
                              <hr>
                              @endforeach
                          @else
-                         <p class="text-center">No Sent Notifications Yet</p>    
-                         @endif
+                         <p class="text-center">No Sent Notifications Yet</p> 
  
-                        </div>
+                        </div>   
+                         @endif
                      </div>
-                    </div>
+                    
                     <div class="col-lg-6">
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden wow fadeInUp" data-wow-delay="0.6s">
                         <div class="iq-card-header d-flex justify-content-between">
@@ -92,11 +92,12 @@
                         @endforeach
                     @else
                     <p class="text-center">No Notifications Yet</p>    
+                  </div>
                     @endif
-                         </div>
-                        </div>
               </div>
            </div>
+         </div>
+      </div>
            
               <style>
                 /* enable absolute positioning */

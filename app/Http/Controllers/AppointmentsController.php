@@ -69,7 +69,13 @@ class AppointmentsController extends Controller
             $appointment->doctor = auth()->user()->pin;
             //Save to db
             $appointment->save();
-            return redirect()->back()->with('success', 'Appointment Booked!');
+            $users = patients::where('doc_email', auth()->user()->email)->paginate(100);
+            $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+            $data = array(
+                'users' => $users,
+                'new_messages' => $new_messages
+       );
+            return view("appointments.index", $data)->with('success', 'Appointment Booked!');
         } else {
             return redirect()->back()->with('error', 'No user with this pin, kindly check and try again!');
         }

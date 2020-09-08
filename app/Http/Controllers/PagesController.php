@@ -20,7 +20,7 @@ class PagesController extends Controller
     */
    public function __construct()
    {
-       $this->middleware('auth', ['except' => ['index','reg_patient']]);
+       $this->middleware('auth', ['except' => ['index','reg_patient','complete_sign_up']]);
    } 
     //
     public function index(){
@@ -33,10 +33,72 @@ class PagesController extends Controller
         //);
         return view('pages.home');//here i can return any page i want.
     }
-     
+    
     public function reg_patient(){
        
         return view("auth.registerpatient");
+    }
+    public function complete_sign_up(){
+       $name = $_POST['name'];
+       $password = $_POST['password'];
+       $email = $_POST['email'];
+       $gender = $_POST['gender'];
+       $password_confirmation = $_POST['password_confirmation'];
+       $data = array(
+                'name' => $name,
+                'password' => $password,
+                'email' => $email,
+                'gender' => $gender,
+                'password_confirmation' => $password_confirmation
+       );
+        return view("auth.completeregi", $data);
+    }
+    public function sign_up(){
+      
+    $pin1 = mt_rand(9, 10) + time();
+        
+    $pin = 'MP'.($pin1 + 73);
+
+    if(!empty($data['pp'])){
+        //Get file name with the extension
+       $filenameWithExt = $data['pp']->getClientOriginalName();
+        //get just file name
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+
+        // Get just Ext
+        $extension = $data['pp']->getClientOriginalExtension();
+
+        // File name to store
+        $fileNameTostore = $filename.'_'.time().'.'.$extension;
+
+        // Upload Image
+        $path = $data['pp']->move('img/profile', $fileNameTostore);
+
+    }
+   else{
+        //default image for post if none was choosed
+      $fileNameTostore = '1.jpeg';
+   }
+    //$patient = patients::where('email', $email)->first();
+    //$update_patient->pin = $pin;
+    $user = new User;
+    $user->name = $request->input('name');
+    $user->email = $request->input('email');
+    $user->p_nummber = $request->input('cc').$request->input('phone');
+    $user->gender = $request->input('gender');
+    $user->role = $request->input('role');
+    $user->type = $request->input('type');
+    $user->nhis = $request->input('nhis');
+    $user->expertise = $request->input('expertise');
+    $user->pin = $pin;
+    $user->img = $fileNameTostore;
+    $user->password =  Hash::make($request->input('password'));
+    //Save to db
+    $user->save();
+    //print success message and redirect
+    return redirect('./login');//I just set the message for session(success).
+
+    
     }
     public function doctors(){
        if (auth()->user()->role == 'Doctor') {

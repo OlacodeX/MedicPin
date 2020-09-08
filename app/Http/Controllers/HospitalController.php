@@ -402,9 +402,7 @@ class HospitalController extends Controller
      */
     public function show($id)
     {
-        //
-        if (auth()->user()->role == 'Doctor') {
-            $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
             $hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
             $operations = Operations::orderBy('created_at', 'desc')->where('h_id', $hospital->id)->get();
             $data = array(
@@ -414,10 +412,7 @@ class HospitalController extends Controller
             );
             return view('hospitals.index', $data);
          
-        }
-        else{
-            return view('pages-error');
-        }
+        
     }
     public function add_staff()
     {

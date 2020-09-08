@@ -72,6 +72,23 @@ class ConsortationsController extends Controller
 
     }
 
+    public function diag(Request $request)
+    {
+        //
+        $this->validate($request, [
+            'name' => 'required|array|min:1',
+            ]);  
+               
+            $test = new Labs;    
+            $patientt = patients::where('pin', $request->input('p_pin'))->first();
+            $test->test_name1 = $request->input('name');
+            $test->patient_name = $patientt->name;
+            $test->patient_pin = $request->input('p_pin');
+            $test->doc_name = auth()->user()->name;
+            $test->doc_pin = auth()->user()->pin;
+            $test->save();
+            return redirect('./')->with('success', 'Great!, Patient can now proceed to the lab to carry out test.');
+    }
     /**
      * Store a newly created resource in storage.
      *

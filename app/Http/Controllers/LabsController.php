@@ -49,39 +49,29 @@ class LabsController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request, [
-            'name' => 'required|array|min:1',
-            ]);  
                
-            $test = new Labs;    
+            $test = new Lab;    
             $patientt = patients::where('pin', $request->input('p_pin'))->first();
-            $test->test_name1 = $request->input('name');
+            $test->test_name = $request->input('test1');
             $test->patient_name = $patientt->name;
             $test->patient_pin = $request->input('p_pin');
             $test->status = 'Pending';
             $test->doc_name = auth()->user()->name;
             $test->doc_pin = auth()->user()->pin;
             $test->save();
+            if ($request->input('test2') !== 'Select') {
+                $test2 = new Lab;
+                $test2->test_name = $request->input('test2');
+                $test2->patient_name = $patientt->name;
+                $test2->patient_pin = $request->input('p_pin');
+                $test2->status = 'Pending';
+                $test2->doc_name = auth()->user()->name;
+                $test2->doc_pin = auth()->user()->pin;
+                $test2->save();
+            }
             return redirect('./patients')->with('success', 'Great!, Patient can now proceed to the lab to carry out test.');
     }
 
-    public function storee(Request $request)
-    {
-        //
-        $this->validate($request, [
-            'name' => 'required|array|min:1',
-            ]);  
-               
-            $test = new Labs;    
-            $patientt = patients::where('pin', $request->input('p_pin'))->first();
-            $test->test_name1 = $request->input('name');
-            $test->patient_name = $patientt->name;
-            $test->patient_pin = $request->input('p_pin');
-            $test->doc_name = auth()->user()->name;
-            $test->doc_pin = auth()->user()->pin;
-            $test->save();
-            return redirect('./')->with('success', 'Great!, Patient can now proceed to the lab to carry out test.');
-    }
     /**
      * Display the specified resource.
      *

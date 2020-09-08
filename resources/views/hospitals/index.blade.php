@@ -30,7 +30,7 @@
                               <div class="d-flex align-items-center justify-content-between">
                                  <div class="rounded-circle iq-card-icon bg-warning"><i class="ri-women-fill"></i></div>
                                  <div class="text-right">                                 
-                                    <h2 class="mb-0"><span class="counter">3450</span></h2>
+                                    <h2 class="mb-0"><span class="counter">{{ App\User::where('h_id', $hospital->id)->where('role', 'Nurse')->count()}}</span></h2>
                                     <h5 class="">Nurses</h5>
                                  </div>
                               </div>
@@ -62,8 +62,8 @@
                            <div class="iq-card-body iq-bg-info rounded">
                               <div class="d-flex align-items-center justify-content-between">
                                  <div class="rounded-circle iq-card-icon bg-info"><i class="ri-hospital-line"></i></div>
-                                 <div class="text-right">                                 
-                                    <h2 class="mb-0"><span class="counter">4500</span></h2>
+                                 <div class="text-right">          
+                                    <h2 class="mb-0"><span class="counter">{{ App\User::where('h_id', $hospital->id)->where('role', 'Pharmacist')->count()}}</span></h2>
                                     <h5 class="">Pharmacists</h5>
                                  </div>
                               </div>
@@ -186,22 +186,20 @@
                         <ul id="doster-list-slide" class="d-flex flex-wrap align-items-center p-0">
                            @php
                                
-                               $docs = App\HospitalDoctors::where('h_id', $hospital->id)->get();
+                               $do = App\HospitalDoctors::where('h_id', $hospital->id)->pluck('doctor_pin');
+                               $docs = App\User::where('role', '!=', 'Patient')->whereIn('pin',$do)->get();
                                        
                            @endphp
                            @if (count($docs) > 0)
                            @foreach ($docs as $doc)
-                           @php
-                               $detail = App\User::where('pin', $doc->doctor_pin)->first();
-                           @endphp
                            <li class="doctor-list-item col-md-3 text-center p-2">
                               <div class="doctor-list-item-inner rounded">
                                  <div class="donter-profile">
-                                    <img src="../img/profile/{{$detail->img}}" class="img-fluid rounded-circle" alt="user-img">
+                                    <img src="../img/profile/{{$doc->img}}" class="img-fluid rounded-circle" alt="user-img">
                                  </div>
                                  <div class="doctor-detail mt-3">
-                                    <h5>{{$detail->name}}</h5>
-                                    <h6>{{$detail->role}}</h6>
+                                    <h5>{{$doc->name}}</h5>
+                                    <h6>{{$doc->role}}</h6>
                                  </div>
                                  <hr>
                                  <div class="doctor-description">

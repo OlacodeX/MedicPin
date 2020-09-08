@@ -58,8 +58,10 @@ class RegisterController extends Controller
             'pp' => ['nullable', 'max:2000'],
             'gender' => ['nullable', 'string', 'max:255'],
             'expertise' => ['nullable', 'string', 'max:255'],
-            'twitter' => ['nullable', 'string', 'max:255'],
-            'facebook' => ['nullable', 'string', 'max:255'],
+            //'twitter' => ['nullable', 'string', 'max:255'],
+            //'facebook' => ['nullable', 'string', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:255'],
+            'cc' => ['nullable', 'string', 'max:255'],
         ]);
     }
 
@@ -101,9 +103,10 @@ class RegisterController extends Controller
             'role' => $data['role'],
             'img' =>  $fileNameTostore,
             'gender' => $data['gender'],
-            'twitter' => $data['twitter'],
-            'facebook' => $data['facebook'],
+            //'twitter' => $data['twitter'],
+            //'facebook' => $data['facebook'],
             'expertise' => $data['expertise'],
+            'P_number' => $data['phone'],
             'pin' => $pin,
             'password' => Hash::make($data['password']),
             //patients::where('email', $data['email'])->get('status') => $data['status'],

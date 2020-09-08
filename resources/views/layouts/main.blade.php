@@ -193,6 +193,11 @@
       } else {
           document.getElementById("selectex").style.display = "none";
       }
+      if (that.value == "Patient") {
+          document.getElementById("nhis").style.display = "block";
+      } else {
+          document.getElementById("nhis").style.display = "none";
+      }
 
 
       if (that.value == "Breast Surgery") {
@@ -278,6 +283,16 @@
         e.preventDefault();
         $("div.fie.one:hidden").slice(0, 1).slideDown();
         if ($("div.fie.one:hidden").length == 0) {
+            $("#load").fadeOut('slow');
+        }
+    });
+  });
+  $(function () {
+    $("div.two").slice(0, 1).show();
+    $("#loadMoreeinput").on('click', function (e) {
+        e.preventDefault();
+        $("div.two:hidden").slice(0, 1).slideDown();
+        if ($("div.two:hidden").length == 0) {
             $("#load").fadeOut('slow');
         }
     });

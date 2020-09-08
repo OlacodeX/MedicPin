@@ -2,6 +2,10 @@
 
 @section('content')
 @include('inc.navmain')
+
+
+
+
      <!-- Page Content  -->
      <div>
         <div class="">

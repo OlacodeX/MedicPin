@@ -19,6 +19,8 @@ Route::get('/doctors', 'PagesController@doctors');
 Route::post('/update', 'PagesController@update');
 Auth::routes();
 Route::get('/account_set_up', 'PagesController@reg_patient');
+Route::post('/sign_up', 'PagesController@sign_up');
+Route::post('/complete_sign_up', 'PagesController@complete_sign_up')->name('complete_sign_up');
 Route::post('/store_transfer', 'PatientsController@store_transfer');
 Route::resource('/patients', 'PatientsController');
 Route::post('/search_result', 'PatientsController@search');
@@ -29,6 +31,8 @@ Route::post('/add_record', 'PatientsController@add_record');
 Route::post('/store_record', 'PatientsController@store_record');
 Route::resource('/notifications', 'NotificationsController');
 Route::resource('/records', 'RecordsController');
+Route::resource('/prescriptions', 'PrescriptionController');
+Route::post('/NA', 'PrescriptionController@NA');
 Route::resource('/chat', 'MessagingController');
 Route::get('/add_drug', 'PatientsController@add_drug');
 Route::get('/pharmacy', 'PatientsController@pharmacy');
@@ -84,4 +88,4 @@ Route::resource('/consortations', 'ConsortationsController');
 
 //consortations
 Route::resource('/lab', 'LabsController');
-Route::post('/labs', 'LabsController@storee');
+Route::get('/record_lab', 'ConsortationsController@diag');

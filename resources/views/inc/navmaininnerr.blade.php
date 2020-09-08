@@ -28,7 +28,7 @@
                        <a href="../../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                       
                     </li>
-                    <li class="active">
+                    <li>
                        <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                        <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                           <li><a href="../../myprofile">My Profile</a></li>
@@ -65,7 +65,7 @@
                        <a href="../../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                       
                     </li>
-                    <li class="active">
+                    <li>
                        <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                        <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                           <li><a href="../../myprofile">My Profile</a></li>
@@ -99,7 +99,7 @@
                        <a href="../../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                       
                     </li>
-                    <li class="active">
+                    <li>
                        <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Doctor's Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                        <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                           <li><a href="../../myprofile">My Profile</a></li>
@@ -162,7 +162,7 @@
                       <a href="../../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                      
                    </li>
-                   <li class="active">
+                   <li>
                       <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>My Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                       <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                          <li><a href="../../myprofile">My Profile</a></li>
@@ -204,6 +204,50 @@
                           @csrf
                       </form>
                   </li>
+                  @endif
+
+                  
+                  @if (auth()->user()->role == 'Pharmacist')
+                  <li>
+                     <a href="../../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                    
+                  </li>
+                  <li>
+                     <a href="#user-info" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ri-user-line"></i><span>Resources</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <ul id="user-info" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                        <li><a href="../../myprofile">My Profile</a></li>
+                        <li><a href="../../notifications">My Notifications</a></li>
+                        <!---<li><a href="profile-edit.html">User Edit</a></li>--->
+                        <li><a href="">My Appointments</a></li>
+                     </ul>
+                  </li>
+                  <li>
+                     <a href="#user-info1" class="iq-waves-effect collapsed"  data-toggle="collapse" aria-expanded="false"><i class="ion-medkit"></i><span>Pharmacy</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     
+                     <ul id="user-info1" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                         <li><a href="../../add_drug">Add Drug</a></li>
+                         <li><a href="../../myshop">My Shop</a></li>
+                         <li><a href="../../pharmacy">Pharmacy Shop</a></li>
+                      </ul>
+                 </li>
+                  <li><a href="../../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                  <li><a href="../../questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
+                  <li>
+                     <a href="../../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
+                    
+                  </li>
+                  
+                  <li>
+                     
+                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+                     
+                       
+
+                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                         @csrf
+                     </form> 
+                 </li>
+                      
                   @endif
                    <!--
                     <li class="active">
@@ -503,7 +547,13 @@
                                    </div>
                                 </a>
                                 <div class="d-inline-block w-100 text-center p-3">
-                                   <a class="bg-primary iq-sign-btn" href="{{ route('logout') }}" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
+                                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+                                
+                                  
+          
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                                 </div>
                              </div>
                           </div>
