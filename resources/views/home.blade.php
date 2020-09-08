@@ -751,7 +751,6 @@
                            @endif
                            </div>
                            </div>  
-                          </div>
                  <div class="col-lg-6">
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                        <div class="iq-card-header d-flex justify-content-between">

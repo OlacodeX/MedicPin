@@ -2,7 +2,225 @@
 
 @section('content')
 @include('inc.navmain')
-  <!-- Page Content  -->
+
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-lg-4">
+         <div class="iq-card">
+            <div class="iq-card-body pl-0 pr-0 pt-0">
+               <div class="doctor-details-block">
+                  <div class="doc-profile-bg bg-primary" style="height:150px;">
+                  </div>
+                  <div class="doctor-profile text-center">
+                     <img src="img/profile/{{$pro->img}}" alt="profile-img" class="avatar-130 rounded img-fluid">
+                  </div>
+                  <div class="text-center mt-3 pl-3 pr-3">
+                     <h4><b>{{$pro->name}}</b></h4>
+                     <p>{{$pro->role}}</p>
+                     <a href="patients/{{$pro->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Profile"><i class="ri-pencil-line"></i></a>
+                  </div>
+                  <hr>
+                  @if (auth()->user()->role == 'Doctor')
+                  <ul class="doctoe-sedual d-flex align-items-center justify-content-between p-0 m-0">
+                     <li class="text-center">
+                        <h3 class="counter">4500</h3>
+                        <span>Operations</span>
+                      </li>
+                      <li class="text-center">
+                        <h3 class="counter">100</h3>
+                        <span>Hospital</span>
+                      </li>
+                      <li class="text-center">
+                        <h3 class="counter">10000</h3>
+                        <span>Patients</span>
+                      </li>
+                  </ul>
+                      
+                  @endif
+               </div>
+            </div>
+         </div>
+         <div class="iq-card">
+            <div class="iq-card-header d-flex justify-content-between">
+               <div class="iq-header-title">
+                  <h4 class="card-title">Personal Information</h4>
+               </div>
+            </div>
+            <div class="iq-card-body">
+               <div class="about-info m-0 p-0">
+                  <div class="row">
+                     <div class="col-4">Name</div>
+                     <div class="col-8">{{$pro->name}}</div>
+                     <div class="col-4">Email</div>
+                     <div class="col-8"><a href="mailto:{{$pro->email}}">{{$pro->email}}</a></div>
+                     <div class="col-4">Phone:</div>
+                     <div class="col-8"><a href="tel:{{$pro->p_number}}">{{$pro->p_number}}</a></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-8">
+         <div class="row">
+            <div class="col-md-6">
+               <div class="iq-card">
+                  <div class="iq-card-header d-flex justify-content-between">
+                     <div class="iq-header-title">
+                        <h4 class="card-title">Social Media</h4>
+                     </div>
+                  </div>
+                  <div class="iq-card-body">
+                     <ul class="speciality-list m-0 p-0">
+                        <li class="d-flex mb-4 align-items-center">
+                           <div class="user-img img-fluid"><a href="www.facebook.com/{{$pro->facebook}}" class="iq-bg-primary"><i class="ri-facebook-fill"></i></a></div>
+                           <div class="media-support-info ml-3">
+                              <a href="www.facebook.com/{{$pro->facebook}}"><h6>Facebook</h6>
+                              <p class="mb-0">{{$pro->facebook}}</p></a>
+                           </div>
+                        </li>
+                        <li class="d-flex mb-4 align-items-center">
+                           <div class="user-img img-fluid"><a href="www.twitter.com/{{$pro->twitter}}" class="iq-bg-warning"><i class="ri-twitter-fill"></i></a></div>
+                           <div class="media-support-info ml-3">
+                              <a href="www.twitter.com/{{$pro->twitter}}" class="iq-bg-warning"><h6>Twitter</h6>
+                              <p class="mb-0">{{$pro->twitter}}</p></a>
+                           </div>
+                        </li>
+                        <!---
+                        <li class="d-flex mb-4 align-items-center">
+                           <div class="user-img img-fluid"><a href="www.instagram.com/{{$pro->instagram}}" class="iq-bg-info"><i class="ri-instagram-fill"></i></a></div>
+                           <div class="media-support-info ml-3">
+                              <h6>Medication Laser</h6>
+                              <p class="mb-0">Hair Lose Product</p>
+                           </div>
+                        </li>--->
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-6">
+               <div class="iq-card">
+                  <div class="iq-card-header d-flex justify-content-between">
+                     <div class="iq-header-title">
+                        <h4 class="card-title">Notifications</h4>
+                     </div>
+                  </div>
+                  <div class="iq-card-body">
+                     <ul class="iq-timeline">
+                        @php
+                             $notices = App\Notifications::where('to',auth()->user()->id)->paginate(5);
+                        @endphp
+                        @if (count($notices) > 0)
+                        @foreach ($notices as $notice)
+                        <li>
+                           <div class="timeline-dots border-success"></div>
+                           <h6 class="">{{$notice->from}}</h6>
+                           <small class="mt-1">{{$notice->created_at}}</small>
+                        </li>
+                            
+                        @endforeach
+                                 
+                        <div class="col-md-6">
+                            <div style="text-align:right;">
+                                    <!-----The pagination link----->
+                                    {{$notices->links()}}
+                            </div>
+                        </div>
+                            
+                        @else
+                        <li>
+                           <div class="timeline-dots border-danger"></div>
+                           <h6 class="">No Notifications Yet</h6>
+                        </li>
+                            
+                        @endif
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-6">
+               <div class="iq-card">
+                  <div class="iq-card-header d-flex justify-content-between">
+                     <div class="iq-header-title">
+                        <h4 class="card-title">Schedule</h4>
+                     </div>
+                  </div>
+                  <div class="iq-card-body">
+                     @php
+                          $todos = App\todo::where('user_id',auth()->user()->id)->paginate(5);
+                     @endphp
+                     @if (count($todos) > 0)
+                     <ul class="list-inline m-0 p-0">
+                     @foreach ($todos as $todo)
+                     <li>
+                        <h6 class="float-left mb-1">{{$todo->title}}</h6>
+                        <small class="float-right mt-1">{{$todo->date}}</small>
+                        <div class="d-inline-block w-100">
+                           <p class="badge badge-primary">{{$todo->time}} </p>
+                        </div>
+                     </li>
+                         
+                     @endforeach
+                                 
+                     <div class="col-md-6">
+                         <div style="text-align:right;">
+                                 <!-----The pagination link----->
+                                 {{$todos->links()}}
+                         </div>
+                     </div>
+                         
+                     @else
+                     <p>No Record Found</p>
+                        
+                     </ul>
+                         
+                     @endif
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-6">
+               <div class="iq-card">
+                  <div class="iq-card-header d-flex justify-content-between">
+                     <div class="iq-header-title">
+                        <h4 class="card-title">Patients Questions</h4>
+                     </div>
+                  </div>
+                  <div class="iq-card-body">
+                     @php
+                          $questions = App\Questions::orderby('created_at','desc')->paginate(5);
+                     @endphp
+                     @if (count($questions) > 0)
+                      <ul class="list-inline m-0 p-0">
+                        @foreach ($questions as $question)
+                        <li class="d-flex align-items-center justify-content-between mb-3">
+                           <div>
+                              <h6>{!!Str::words($question->question,5)!!}</h6>                                      
+                              <p class="mb-0">{{$question->created_at}} </p>
+                           </div>
+                           <div><a href="questions/{{$question->id}}" class="btn iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="View answers"> <i class="fa fa-comments"></i>({{App\Answers::where('question_id', $question->id)->count()}})</a></div>
+                        </li>
+                         
+                        @endforeach
+                                    
+                        <div class="col-md-6">
+                            <div style="text-align:right;">
+                                    <!-----The pagination link----->
+                                    {{$questions->links()}}
+                            </div>
+                        </div>
+                            
+                        @else
+                        <p>No Record Found</p>
+                           
+                        </ul>
+                            
+                        @endif
+                  </div>
+               </div>
+            </div>
+   </div>
+</div>
+   </div>
+  <!-- Page Content 
     <div>
        <div class="">
           <div class="row">
@@ -11,7 +229,7 @@
                    <div class="iq-card-body profile-page p-0">
                       <div class="profile-header">
                          <div class="cover-container">
-                            <img src="images/page-img/profile-bg.jpg" alt="profile-bg" class="rounded img-fluid w-100"> 
+                            <img src="img/profile/{{$pro->img}}" alt="profile-bg" class="rounded img-fluid w-100"> 
                             <ul class="header-nav d-flex flex-wrap justify-end p-0 m-0">
                                <li><a href="patients/{{$pro->id}}/edit" title="Edit Profile"><i class="ri-pencil-line"></i></a></li>
                                
@@ -793,7 +1011,7 @@
                       </div>
                    </div>
                 </div>--->
-                @endif
+               <!-- @endif
              </div>
              <div class="row">
              <div class="col-sm-6 text-center">
@@ -834,7 +1052,7 @@
                </div>
            </div>
           </div>
-             </div>
+             </div> -->
  <!-- Footer -->
  <footer class="bg-white iq-footer">
      <div class="container-fluid">

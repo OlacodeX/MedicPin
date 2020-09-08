@@ -38,20 +38,11 @@
                             </div>
                         </div>
                     </div>
-                    <style>
-                        section.sign-in-page { 
-                            margin-bottom: 100px;
-                         }
-                         
-                         section.sign-in-page div.sign-in-page-bg::after { position: absolute; content: ""; top: 0; bottom: 0; left: 0; right: 270px; z-index: -1; border-radius: 40px; background: rgba(8, 155, 171, 1); background: -moz-linear-gradient(left, rgba(8, 155, 171, 1) 0%, rgba(13, 181, 200, 1) 100%); background: -webkit-gradient(left top, right top, color-stop(0%, rgba(8, 155, 171, 1)), color-stop(100%, rgba(13, 181, 200, 1))); background: -webkit-linear-gradient(left, rgba(8, 155, 171, 1) 0%, rgba(13, 181, 200, 1) 100%); background: -o-linear-gradient(left, rgba(8, 155, 171, 1) 0%, rgba(13, 181, 200, 1) 100%); background: -ms-linear-gradient(left, rgba(8, 155, 171, 1) 0%, rgba(13, 181, 200, 1) 100%); background: linear-gradient(to right, rgba(8, 155, 171, 1) 0%, rgba(13, 181, 200, 1) 100%); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#089bab', endColorstr='#0db5c8', GradientType=1); }
-
-                         section.sign-in-page div.sign-in-page-bg { position: relative; overflow: hidden; }
-                        div.sign-in-from { padding: 20px 60px; border-radius: 37px; position: absolute; top: 2%; bottom: 2%; left: 0; right: 0; background: #fff; }
-                    </style>
                     <div class="col-md-6 position-relative">
                         <div class="sign-in-from">
                             <h1 class="mb-0">Sign Up</h1>
-                            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="mt-4">
+                            <form method="POST" action="{{ route('complete_sign_up') }}" class="mt-4">
+                                @include('inc.messages')
                                 @csrf
                                 <!---<input type="hidden" name="role" value="Doctor">--->
                                 <div class="form-group">
@@ -79,6 +70,7 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <!---
                                 <div class="form-group">
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-twitter"></i>
@@ -103,81 +95,13 @@
                                             </span>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="form-group">
-                            <select class="form-control mb-0" id="type" name="type">
-                                      <option>-select account type-</option>
-                                      <option value="Organization/HMO">Organization/HMO</option>
-                                      <option value="Personal/Individual">Personal/Individual</option>
-                                   </select>
-                                </div>
-                                <div class="form-group">
-                            <select class="form-control mb-0" id="role" name="role" onchange="yesnoCheck(this);">
-                                      <option>-I am a...-</option>
-                                      <option value="Nurse">Nurse</option>
-                                      <option value="Pharmacist">Pharmacist</option>
-                                      <option value="Doctor">Doctor</option>
-                                      <option value="Ward Maid">Ward Maid</option>
-                                   </select>
-                                </div>
-                                <div class="form-group">
-                                   <select class="form-control mb-0" id="selectex" name="expertise" style="display: none;">
-                                      <option>Expertise</option>
-                                      <option value="Allergists/Immunologist">Allergists/Immunologist</option>
-                                      <option value="Anesthesiologist">Anesthesiologist</option>
-                                      <option value="Cardiologist">Cardiologist</option>
-                                      <option value="Colon and Rectal Surgeon">Colon and Rectal Surgeon</option>
-                                      <option value="Critical Care Medicine Specialist">Critical Care Medicine Specialist</option>
-                                      <option value="Dermatologist">Dermatologist</option>
-                                      <option value="Endocrinologist">Endocrinologist</option>
-                                      <option value="Emergency Medicine Specialist">Emergency Medicine Specialist</option>
-                                      <option value="Family Physician">Family Physician</option>
-                                      <option value="Gastroenterologist">Gastroenterologist</option>
-                                      <option value="Geriatric Medicine Specialist">Geriatric Medicine Specialist</option>
-                                      <option value="Hematologist">Hematologist</option>
-                                      <option value="Hospice and Palliative Medicine Specialist">Hospice and Palliative Medicine Specialist</option>
-                                      <option value="Infectious Disease Specialist">Infectious Disease Specialist</option>
-                                      <option value="Internist">Internist</option>
-                                      <option value="Medical Geneticist">Medical Geneticist</option>
-                                      <option value="Nephrologist">Nephrologist</option>
-                                      <option value="Neurologist">Neurologist</option>
-                                      <option value="Obstetricians and Gynecologist">Obstetricians and Gynecologist</option>
-                                      <option value="Oncologist">Oncologist</option>
-                                      <option value="Ophthalmologist">Ophthalmologist</option>
-                                      <option value="Osteopath">Osteopath</option>
-                                      <option value="Otolaryngologist">Otolaryngologist</option>
-                                      <option value="Pathologist">Pathologist</option>
-                                      <option value="Pediatrician">Pediatrician</option>
-                                      <option value="Physiatrist">Physiatrist</option>
-                                      <option value="Plastic Surgeon">Plastic Surgeon</option>
-                                      <option value="Podiatrist">Podiatrist</option>
-                                      <option value="Preventive Medicine Specialist">Preventive Medicine Specialist</option>
-                                      <option value="Psychiatrist">Psychiatrist</option>
-                                      <option value="Pulmonologist">Pulmonologist</option>
-                                      <option value="Radiologist">Radiologist</option>
-                                      <option value="Rheumatologist">Rheumatologist</option>
-                                      <option value="Sleep Medicine Specialist">Sleep Medicine Specialist</option>
-                                      <option value="Sports Medicine Specialist">Sports Medicine Specialist</option>
-                                      <option value="General Surgeon">General Surgeon</option>
-                                      <option value="Urologist">Urologist</option>
-                                   </select>
-                                </div>
+                                </div>---->
                                 <div class="form-group">
                                    <select class="form-control mb-0" id="selectge" name="gender">
                                       <option>Gender</option>
                                       <option value="Male">Male</option>
                                       <option value="Female">Female</option>
                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="image" class="col-form-label text-md-right">{{ __('Profile Picture') }}</label>
-                                        <input id="pp" class="form-control mb-0" type="file" class="form-control @error('pp') is-invalid @enderror" name="pp">
-        
-                                        @error('pp')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
                                 </div>
 
                                 <div class="form-group">
@@ -201,11 +125,7 @@
                                 </div>
         
                                 <div class="d-inline-block w-100">
-                                    <div class="custom-control custom-checkbox d-inline-block mt-2 pt-1">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                        <label class="custom-control-label" for="customCheck1">I accept <a href="#">Terms and Conditions</a></label>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary float-right">Sign Up</button>
+                                    <button type="submit" class="btn btn-primary float-right">Continue</button>
                                 </div>
                             </form>
                         </div>

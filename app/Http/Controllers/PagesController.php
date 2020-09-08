@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\HospitalDoctors;
+use Illuminate\Support\Facades\Hash;
 use App\Messages;
+use Image;
 use App\Mail\BloodRequestMail;
 use Illuminate\Support\Facades\Mail;
 //use App\Contact;
@@ -20,7 +22,7 @@ class PagesController extends Controller
     */
    public function __construct()
    {
-       $this->middleware('auth', ['except' => ['index','reg_patient','complete_sign_up']]);
+       $this->middleware('auth', ['except' => ['index','reg_patient','complete_sign_up','sign_up']]);
    } 
     //
     public function index(){
@@ -53,7 +55,21 @@ class PagesController extends Controller
        );
         return view("auth.completeregi", $data);
     }
-    public function sign_up(){
+    //new reg function
+    public function sign_up(Request $request){
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'/***, 'unique:users' */],
+            'password' => ['required', 'string'/***, 'min:8', 'confirmed' */],
+            'role' => ['required', 'string', 'max:255'],
+            'pp' => ['nullable', 'max:2000'],
+            'gender' => ['nullable', 'string', 'max:255'],
+            'expertise' => ['nullable', 'string', 'max:255'],
+            //'twitter' => ['nullable', 'string', 'max:255'],
+            //'facebook' => ['nullable', 'string', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:255'],
+            'cc' => ['nullable', 'string', 'max:255'],
+        ]);
       
     $pin1 = mt_rand(9, 10) + time();
         
@@ -74,6 +90,16 @@ class PagesController extends Controller
         // Upload Image
         $path = $data['pp']->move('img/profile', $fileNameTostore);
 
+        // crop image
+        /*** 
+        $img = Image::make(public_path('img/profile/'.$filenametostore));
+        $croppath = public_path('img/profile/crop/'.$filenametostore);
+ 
+        $img->crop($request->input('w'), $request->input('h'), $request->input('x1'), $request->input('y1'));
+        $img->save($croppath);
+ 
+        // you can save crop image path below in database
+        $path = asset('img/profile/crop/'.$filenametostore);*/
     }
    else{
         //default image for post if none was choosed
@@ -81,10 +107,20 @@ class PagesController extends Controller
    }
     //$patient = patients::where('email', $email)->first();
     //$update_patient->pin = $pin;
+    if (!empty(User::where('email', $request->input('email'))->first())) {
+        return view('auth.register')->with('error','Sorry,Email taken by another user!');
+    }
+    if (strlen($request->input('password')) > '8') {
+        return view('auth.register')->with('error','Password length should be minimum of 8 characters!');
+    }
+    if ($request->input('password') !== $request->input('password_confirmation')) {
+        return view('auth.register')->with('error','Password and Confirm password not the same!');
+    }
+    else{
     $user = new User;
     $user->name = $request->input('name');
     $user->email = $request->input('email');
-    $user->p_nummber = $request->input('cc').$request->input('phone');
+    $user->p_number = '(+'.$request->input('cc').')'.$request->input('phone');
     $user->gender = $request->input('gender');
     $user->role = $request->input('role');
     $user->type = $request->input('type');
@@ -97,7 +133,7 @@ class PagesController extends Controller
     $user->save();
     //print success message and redirect
     return redirect('./login');//I just set the message for session(success).
-
+}
     
     }
     public function doctors(){

@@ -35,11 +35,15 @@ class PatientsController extends Controller
      */
     public function index()
     {
+          
+       
         $doctor = HospitalDoctors::where('h_id', auth()->user()->h_id)->pluck('doctor_name');
-        $users = patients::whereIn('doctor',$doctor )->paginate(100);
+        $users =patients::where('doc_email', auth()->user()->email)->get();
+        $h_users = patients::whereIn('doctor',$doctor )->paginate(100);
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = array(
             'users' => $users,
+            'h_users' => $h_users,
             'new_messages' => $new_messages
    );
         return view("patients.list", $data);

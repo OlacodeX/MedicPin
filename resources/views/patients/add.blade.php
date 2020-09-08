@@ -292,8 +292,8 @@
                                              <label>Sickness</label>
                                              <select class="form-control" id="sickness" name="sickness">
                                                 <option>Select</option>
-                                                <option value="Malaria">Malaria</option>
-                                                <option value="Malaria">Malaria</option>
+                                                <option value="Acne">Acne</option>
+                                                <option value="Fever">Fever</option>
                                                 <option value="Malaria">Malaria</option>
                                                 <option value="Malaria">Malaria</option>
                                                 <option value="Malaria">Malaria</option>
@@ -308,14 +308,18 @@
                                              <div class="row">
                                             <div class="form-group col-md-6">
                                              <label>Drug</label>
+                                             @php
+                                                 $drugs = App\pharmacy::orderby('name', 'asc')->where('status', 'In stock')->get();
+                                             @endphp
                                              <select class="form-control" id="drug1" name="drug1">
                                                 <option>Select</option>
-                                                <option value="Lumartem">Lumartem</option>
-                                                <option value="Paracetamol">Paracetamol</option>
-                                                <option value="Paracetamol">Paracetamol</option>
-                                                <option value="Paracetamol">Paracetamol</option>
-                                                <option value="Paracetamol">Paracetamol</option>
-                                                <option value="Paracetamol">Paracetamol</option>
+                                                @if (count($drugs) > 0)
+                                                @foreach ($drugs as $drug)
+                                                <option value="{{$drug->name}}">{{$drug->name}}</option>
+                                                @endforeach
+                                                @else
+                                                <option value="">No drugs in store yet</option>
+                                                @endif
                                              </select>
                                             </div>
                                             <div class="form-group col-md-6">
@@ -342,12 +346,13 @@
                                            <label>Drug</label>
                                            <select class="form-control" id="drug2" name="drug2">
                                               <option>Select</option>
-                                              <option value="Lumartem">Lumartem</option>
-                                              <option value="Paracetamol">Paracetamol</option>
-                                              <option value="Paracetamol">Paracetamol</option>
-                                              <option value="Paracetamol">Paracetamol</option>
-                                              <option value="Paracetamol">Paracetamol</option>
-                                              <option value="Paracetamol">Paracetamol</option>
+                                              @if (count($drugs) > 0)
+                                              @foreach ($drugs as $drug)
+                                              <option value="{{$drug->name}}">{{$drug->name}}</option>
+                                              @endforeach
+                                              @else
+                                              <option value="">No drugs in store yet</option>
+                                              @endif
                                            </select>
                                           </div>
                                           <div class="form-group col-md-6">
@@ -373,12 +378,13 @@
                                            <label>Drug</label>
                                            <select class="form-control" id="drug3" name="drug3">
                                               <option>Select</option>
-                                              <option value="Lumartem">Lumartem</option>
-                                              <option value="Paracetamol">Paracetamol</option>
-                                              <option value="Paracetamol">Paracetamol</option>
-                                              <option value="Paracetamol">Paracetamol</option>
-                                              <option value="Paracetamol">Paracetamol</option>
-                                              <option value="Paracetamol">Paracetamol</option>
+                                              @if (count($drugs) > 0)
+                                              @foreach ($drugs as $drug)
+                                              <option value="{{$drug->name}}">{{$drug->name}}</option>
+                                              @endforeach
+                                              @else
+                                              <option value="">No drugs in store yet</option>
+                                              @endif
                                            </select>
                                           </div>
                                           <div class="form-group col-md-6">

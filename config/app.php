@@ -165,6 +165,7 @@ return [
         Unisharp\Ckeditor\ServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -232,6 +233,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
         'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

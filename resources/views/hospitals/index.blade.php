@@ -160,7 +160,7 @@
                             {!!Form::open(['action' => 'HospitalController@add_staff', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
                            
                             {{Form::hidden('id', $hospital->id)}}
-                            <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add Doctor to Hospital"><i class="fa fa-plus"></i></button>
+                            <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add Staff to Hospital"><i class="fa fa-plus"></i></button>
                            
                             {!!Form::close()!!}
 
@@ -293,7 +293,7 @@
                      </div>
                   </div>
                </div>
-               <div class="col-md-12 col-lg-8">
+               <div class="col-md-12">
                   <div class="row">
                      <div class="col-sm-12">
                       <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
@@ -384,87 +384,6 @@
                                     </tr>
                                         
                                     @endforeach
-                                    <tr>
-                                       <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="images/user/02.jpg" alt="profile"></td>
-                                       <td>Anna Sthesia</td>
-                                       <td>
-                                          <div class="iq-media-group">
-                                             <a href="#" class="iq-media">
-                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/05.jpg" alt="">
-                                             </a>
-                                             <a href="#" class="iq-media">
-                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/06.jpg" alt="">
-                                             </a>
-                                             <a href="#" class="iq-media">
-                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/07.jpg" alt="">
-                                             </a>
-                                          </div>
-                                       </td>
-                                       <td>14-02-2020</td>
-                                       <td><i class="ri-file-pdf-line font-size-16 text-danger"></i></td>
-                                       <td>Cataract surgery</td>
-                                    </tr>
-                                    <tr>
-                                       <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="images/user/03.jpg" alt="profile"></td>
-                                       <td>Paul Molive</td>
-                                       <td>
-                                          <div class="iq-media-group">
-                                             <a href="#" class="iq-media">
-                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/05.jpg" alt="">
-                                             </a>
-                                             <a href="#" class="iq-media">
-                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/06.jpg" alt="">
-                                             </a>
-                                             <a href="#" class="iq-media">
-                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/07.jpg" alt="">
-                                             </a>
-                                          </div>
-                                       </td>
-                                       <td>14-02-2020</td>
-                                       <td><i class="ri-file-pdf-line font-size-16 text-danger"></i></td>
-                                       <td>Cancer</td>
-                                       
-                                    </tr>
-                                    <tr>
-                                       <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="images/user/04.jpg" alt="profile"></td>
-                                       <td>Anna Mull</td>
-                                       <td>
-                                          <div class="iq-media-group">
-                                             <a href="#" class="iq-media">
-                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/05.jpg" alt="">
-                                             </a>
-                                             <a href="#" class="iq-media">
-                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/06.jpg" alt="">
-                                             </a>
-                                             <a href="#" class="iq-media">
-                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/07.jpg" alt="">
-                                             </a>
-                                          </div>
-                                       </td>
-                                       <td>16-02-2020</td>
-                                       <td><i class="ri-file-pdf-line font-size-16 text-danger"></i></td>
-                                       <td>Hysterectomy</td>
-                                    </tr>
-                                    <tr>
-                                       <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="images/user/05.jpg" alt="profile"></td>
-                                       <td>Ruby saul</td>
-                                       <td>
-                                          <div class="iq-media-group">
-                                             <a href="#" class="iq-media">
-                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/05.jpg" alt="">
-                                             </a>
-                                             <a href="#" class="iq-media">
-                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/06.jpg" alt="">
-                                             </a>
-                                             <a href="#" class="iq-media">
-                                             <img class="img-fluid avatar-40 rounded-circle" src="images/user/07.jpg" alt="">
-                                             </a>
-                                          </div>
-                                       </td>
-                                       <td>18-02-2020</td>
-                                       <td><i class="ri-file-pdf-line font-size-16 text-danger"></i></td>
-                                       <td>Cancer</td>
-                                    </tr>
                                  </tbody>
                               </table>
                                   
@@ -472,7 +391,9 @@
                            </div>
                         </div>
                       </div> 
-                     </div>                        
+                     </div>    
+                  </div>
+                     <!---                    
                      <div class="col-md-12 col-lg-6">
                         <div class="row">
                            <div class="col-md-6 col-lg-12">
@@ -669,7 +590,7 @@
                   </div>
                </div>
             </div>
-         </div>
+         </div>---->
    <!-- Footer -->
       <footer class="bg-white iq-footer">
          <div class="container-fluid">
