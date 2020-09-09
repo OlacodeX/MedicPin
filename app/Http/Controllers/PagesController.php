@@ -41,11 +41,11 @@ class PagesController extends Controller
         return view("auth.registerpatient");
     }
     public function complete_sign_up(){
-       $name = $_GET['name'];
-       $password = $_GET['password'];
-       $email = $_GET['email'];
-       $gender = $_GET['gender'];
-       $password_confirmation = $_GET['password_confirmation'];
+       $name = $_POST['name'];
+       $password = $_POST['password'];
+       $email = $_POST['email'];
+       $gender = $_POST['gender'];
+       $password_confirmation = $_POST['password_confirmation'];
        if (!empty(User::where('email', $email)->first())) {
            return redirect()->back()->with('error','Sorry,Email taken by another user!');
        }

@@ -41,7 +41,7 @@
                     <div class="col-md-6 position-relative">
                         <div class="sign-in-from">
                             <h1 class="mb-0">Sign Up</h1>
-                            {!! Form::open(['action' => 'PagesController@complete_sign_up', 'method' => 'GET', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
+                            {!! Form::open(['action' => 'PagesController@complete_sign_up', 'method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
                             **/ !!}
                            
                                 @include('inc.messages')

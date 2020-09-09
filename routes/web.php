@@ -20,7 +20,7 @@ Route::post('/update', 'PagesController@update');
 Auth::routes();
 Route::get('/account_set_up', 'PagesController@reg_patient');
 Route::post('/sign_up', 'PagesController@sign_up');
-Route::get('/complete_sign_up', 'PagesController@complete_sign_up');
+Route::post('/complete_sign_up', 'PagesController@complete_sign_up');
 Route::post('/store_transfer', 'PatientsController@store_transfer');
 Route::resource('/patients', 'PatientsController');
 Route::post('/search_result', 'PatientsController@search');
