@@ -41,11 +41,21 @@ class PagesController extends Controller
         return view("auth.registerpatient");
     }
     public function complete_sign_up(){
-       $name = $_POST['name'];
-       $password = $_POST['password'];
-       $email = $_POST['email'];
-       $gender = $_POST['gender'];
-       $password_confirmation = $_POST['password_confirmation'];
+       $name = $_GET['name'];
+       $password = $_GET['password'];
+       $email = $_GET['email'];
+       $gender = $_GET['gender'];
+       $password_confirmation = $_GET['password_confirmation'];
+       if (!empty(User::where('email', $email)->first())) {
+           return redirect()->back()->with('error','Sorry,Email taken by another user!');
+       }
+       elseif (strlen($password) < '8') {
+           return redirect()->back()->with('error','Password length should be minimum of 8 characters!');
+       }
+       elseif ($password !== $password_confirmation) {
+           return redirect()->back()->with('error','Password and Confirm password not the same!');
+       }
+       else{
        $data = array(
                 'name' => $name,
                 'password' => $password,
@@ -54,6 +64,7 @@ class PagesController extends Controller
                 'password_confirmation' => $password_confirmation
        );
         return view("auth.completeregi", $data);
+    }
     }
     //new reg function
     public function sign_up(Request $request){

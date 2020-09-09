@@ -41,7 +41,9 @@
                     <div class="col-md-6 position-relative">
                         <div class="sign-in-from">
                             <h1 class="mb-0">Sign Up</h1>
-                            <form method="POST" action="{{ route('complete_sign_up') }}" class="mt-4">
+                            {!! Form::open(['action' => 'PagesController@complete_sign_up', 'method' => 'GET', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
+                            **/ !!}
+                           
                                 @include('inc.messages')
                                 @csrf
                                 <!---<input type="hidden" name="role" value="Doctor">--->

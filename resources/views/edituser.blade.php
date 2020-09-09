@@ -36,9 +36,8 @@
                                           <i class="fa fa-envelope"></i>
                                       <input type="email" class="form-control" id="email" placeholder="Email" value="{{$user->email}}" name="email">
                                       </div>
-                                    </div> 
-                                    <div class="form-group col-md-12">
-                                           <div class="col-sm-5">
+                                    </div>
+                                           <div class="form-group col-md-5">
                                                <select class="form-control mb-0" id="cc" name="cc">
                                                          <option value="">-select country code-</option>
                                                          <option value="93">Afghanistan 93</option>
@@ -286,7 +285,7 @@
                                                          <option value="263">Zimbabwe 263</option>
                                                       </select>
                                            </div>
-                                           <div class="col-sm-7">
+                                           <div class="form-group col-md-7">
                                        <div class="inner-addon right-addon">
                                            <i class="fa fa-user"></i>
                                            <input id="phone" type="number" class="form-control mb-0 @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Your phone number" autofocus>
@@ -298,11 +297,9 @@
                                            @enderror
                                        </div>
                                            </div>
-                                   </div>
                                     <div class="form-group col-md-6">
                                        <label for="name">Gender:</label>
                                        <select class="form-control mb-0" id="selectge" name="gender">
-                                          <option>Gender</option>
                                           <option value="{{$user->gender}}">{{$user->gender}}</option>
                                           @if ($user->gender == 'Male')
                                           <option value="Female">Female</option>
@@ -323,12 +320,15 @@
                                                  <option value="Biochemist/Microbiologist">Biochemist/Microbiologist</option>
                                                  <option value="Doctor">Doctor</option>
                                                  <option value="Ward Maid">Ward Maid</option>
-                                              </select>
-                                     </div>
-                                     <div class="form-group col-md-6">
-                                       <label for="email">Patient Type:</label>
+                                              </select><br>
                                         <select class="form-control mb-0" id="nhis" name="nhis" style="display: none;">
-                                           <option value="{{$user->type}}">{{$user->type}}</option>
+                                          @if (!empty($user->nhis) && $user->nhis !== 'NULL')
+                                          <option value="{{$user->nhis}}">{{$user->nhis}}</option>
+                                              
+                                          @else
+                                          <option value="">---Patient type--</option>
+                                              
+                                          @endif
                                            <option value="NHIS">NHIS</option>
                                            <option value="Non NHIS">Non NHIS</option>
                                         </select>

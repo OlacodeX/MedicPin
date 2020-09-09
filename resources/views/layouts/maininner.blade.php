@@ -186,6 +186,119 @@
         <!-- Custom JavaScript -->
         <script src="../jss/custom.js"></script>     
         <!-- Footer END --> 
+    <script>  
+    function yesnoCheck(that) {
+        //for reg page
+        if (that.value == "Doctor") {
+            document.getElementById("selectex").style.display = "block";
+        } else {
+            document.getElementById("selectex").style.display = "none";
+        }
+        if (that.value == "Patient") {
+            document.getElementById("nhis").style.display = "block";
+        } else {
+            document.getElementById("nhis").style.display = "none";
+        }
+  
+  
+        if (that.value == "Breast Surgery") {
+            document.getElementById("Breast").style.display = "block";
+            document.getElementById("Breast").style.paddingTop = "16px";
+        } else {
+            document.getElementById("Breast").style.display = "none";
+            document.getElementById("Breast").style.paddingTop = "0";
+        }
+        if (that.value == "Colon and Rectal Surgery") {
+            document.getElementById("Colon").style.display = "block";
+            document.getElementById("Colon").style.paddingTop = "16px";
+        } else {
+            document.getElementById("Colon").style.display = "none";
+            document.getElementById("Colon").style.paddingTop = "0";
+        }
+        if (that.value == "Endocrine Surgery") {
+            document.getElementById("Endocrine").style.display = "block";
+            document.getElementById("Endocrine").style.paddingTop = "16px";
+        } else {
+            document.getElementById("Endocrine").style.display = "none";
+            document.getElementById("Endocrine").style.paddingTop = "0";
+        }
+        if (that.value == "Gynecological Surgery") {
+            document.getElementById("Gynecological").style.display = "block";
+            document.getElementById("Gynecological").style.paddingTop = "16px";
+        } else {
+            document.getElementById("Gynecological").style.display = "none";
+            document.getElementById("Gynecological").style.paddingTop = "0";
+        }
+        if (that.value == "Orthopedic Surgery") {
+            document.getElementById("Orthopedic").style.display = "block";
+            document.getElementById("Orthopedic").style.paddingTop = "16px";
+        } else {
+            document.getElementById("Orthopedic").style.display = "none";
+            document.getElementById("Orthopedic").style.paddingTop = "0";
+        }
+        if (that.value == "Outpatient Surgery") {
+            document.getElementById("Out").style.display = "block";
+            document.getElementById("Out").style.paddingTop = "16px";
+        } else {
+            document.getElementById("Out").style.display = "none";
+            document.getElementById("Out").style.paddingTop = "0";
+        }
+        if (that.value == "Robotic Surgery") {
+            document.getElementById("Robotic").style.display = "block";
+            document.getElementById("Robotic").style.paddingTop = "16px";
+        } else {
+            document.getElementById("Robotic").style.display = "none";
+            document.getElementById("Robotic").style.paddingTop = "0";
+        }
+        if (that.value == "Thoracic Surgery") {
+            document.getElementById("Thoracic").style.display = "block";
+            document.getElementById("Thoracic").style.paddingTop = "16px";
+        } else {
+            document.getElementById("Thoracic").style.display = "none";
+            document.getElementById("Thoracic").style.paddingTop = "0";
+        }
+        if (that.value == "Vascular Surgery") {
+            document.getElementById("Vascular").style.display = "block";
+            document.getElementById("Vascular").style.paddingTop = "16px";
+        } else {
+            document.getElementById("Vascular").style.display = "none";
+            document.getElementById("Vascular").style.paddingTop = "0";
+        }
+    }
+    </script>
+  <script>
+      
+    $(function () {
+      $("input.form-control.fie").slice(0, 1).show();
+      $("#loadMoreeinput").on('click', function (e) {
+          e.preventDefault();
+          $("input.form-control.fie:hidden").slice(0, 1).slideDown();
+          if ($("input.form-control.fie:hidden").length == 0) {
+              $("#load").fadeOut('slow');
+          }
+      });
+    });
+    $(function () {
+      $("div.fie.one").slice(0, 1).show();
+      $("#loadMoreeinputt").on('click', function (e) {
+          e.preventDefault();
+          $("div.fie.one:hidden").slice(0, 1).slideDown();
+          if ($("div.fie.one:hidden").length == 0) {
+              $("#load").fadeOut('slow');
+          }
+      });
+    });
+    $(function () {
+      $("div.two").slice(0, 1).show();
+      $("#loadMoreeinput").on('click', function (e) {
+          e.preventDefault();
+          $("div.two:hidden").slice(0, 1).slideDown();
+          if ($("div.two:hidden").length == 0) {
+              $("#load").fadeOut('slow');
+          }
+      });
+    });
+    </script>
          <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
          <script>
             CKEDITOR.replace( 'pre' );

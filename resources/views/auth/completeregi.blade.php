@@ -52,7 +52,7 @@
                     <div class="col-md-6 position-relative">
                         <div class="sign-in-from">
                             <h1 class="mb-0">Complete Sign Up</h1>
-                            <form method="POST" action="{{ route('sign_up') }}" enctype="multipart/form-data" class="mt-4">
+                            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="mt-4">
                                 @include('inc.messages')
                                 @csrf
                                 <input id="name" type="hidden" name="name" value="{{$name}}">
