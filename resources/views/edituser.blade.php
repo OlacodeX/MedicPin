@@ -37,9 +37,27 @@
                                       <input type="email" class="form-control" id="email" placeholder="Email" value="{{$user->email}}" name="email">
                                       </div>
                                     </div>
+                                    <div class="form-group col-md-6">
+                                       <label for="twitter">Twitter:</label>
+                                       <div class="inner-addon right-addon">
+                                           <i class="fa fa-twitter"></i>
+                                           <input id="twitter" type="text" class="form-control mb-0 @error('twitter') is-invalid @enderror" name="twitter" value="{{ old('twitter') }}" autocomplete="twitter" placeholder="Link To Your Twitter Profile" autofocus>
+           
+                                       </div>
+                                   </div>
+                                   <div class="form-group col-md-6">
+                                       <label for="facebook">Facebook:</label>
+                                       <div class="inner-addon right-addon">
+                                           <i class="fa fa-facebook"></i>
+                                           
+                                           <input id="facebook" type="text" class="form-control mb-0 @error('facebook') is-invalid @enderror" name="facebook" value="{{ old('facebook') }}" autocomplete="facebook" placeholder="Link To Your Facebook Profile" autofocus>
+           
+                                       </div>
+                                     </div>
                                            <div class="form-group col-md-5">
+                                             <label for="cc">Country Code:</label>
                                                <select class="form-control mb-0" id="cc" name="cc">
-                                                         <option value="">-select country code-</option>
+                                                         <option value="{{$user->cc}}">{{$user->cc}}</option>
                                                          <option value="93">Afghanistan 93</option>
                                                          <option value="355"> Albania 355</option>
                                                          <option value="213">Algeria 213</option>
@@ -286,15 +304,11 @@
                                                       </select>
                                            </div>
                                            <div class="form-group col-md-7">
+                                             <label for="number">Phone Number</label>
                                        <div class="inner-addon right-addon">
                                            <i class="fa fa-user"></i>
-                                           <input id="phone" type="number" class="form-control mb-0 @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Your phone number" autofocus>
+                                           <input id="phone" type="number" class="form-control mb-0 @error('phone') is-invalid @enderror" name="phone" value="{{$user->p_number}}" required autocomplete="phone" placeholder="Your phone number">
            
-                                           @error('phone')
-                                               <span class="invalid-feedback" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                               </span>
-                                           @enderror
                                        </div>
                                            </div>
                                     <div class="form-group col-md-6">
@@ -327,10 +341,13 @@
                                               
                                           @else
                                           <option value="">---Patient type--</option>
-                                              
                                           @endif
-                                           <option value="NHIS">NHIS</option>
-                                           <option value="Non NHIS">Non NHIS</option>
+                                          @if ($user->nhis == 'NHIS')
+                                          <option value="None NHIS">None NHIS</option>
+                                          @endif
+                                          @if ($user->nhis == 'None NHIS')
+                                          <option value="NHIS">NHIS</option>
+                                          @endif
                                         </select>
                                      </div>
                                      <div class="form-group col-md-6">
@@ -376,11 +393,11 @@
                                         </select>
                                      </div>
                                 </div>
-                                <hr>
+                              </div>
                           </div>
                           {{Form::hidden('id', $user->id)}}
-                                <button type="submit" class="btn btn-primary">Update</button>
-                                {!! Form::close() !!}
+                                <button type="submit" class="btn btn-primary" style="margin-left:20px;">Update</button>
+                                {!! Form::close() !!} <br><br><br>
                           </div>
                        </div>
                     </div>

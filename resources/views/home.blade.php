@@ -1069,37 +1069,50 @@
                                 <div class="media-support-info">
                                    <h6>{{$patient->patient_name}}</h6>
                                 </div>
-                                    <span class="user-list-files d-flex float-right">
-                                    
-                                    {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
-                                    {{Form::hidden('pin', $patient->patient_pin)}}
-                                    <button type="submit" class ="btn btn-info btn-sm" title="Add New Medical Record"><i class="fa fa-plus"></i></button>
-                                   
-                                    {!!Form::close()!!}
-                                    {!!Form::open(['action' => 'RecordsController@index', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
-                                    {{Form::hidden('pin', $patient->patient_pin)}}
-                                    {{Form::hidden('username', $patient->username)}}
-                                    <button type="submit" class ="btn btn-info btn-sm" title="View Medical History"><i class="fa fa-bars"></i></button>
-                                   
-                                    {!!Form::close()!!}
-                                    {!!Form::open(['action' => 'PatientsController@transfer', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
-                                    {{Form::hidden('pin', $patient->patient_pin)}}
-                                    <button type="submit" class ="btn btn-info btn-sm" title="Transfer Patient"><i class="fa fa-paper-plane-o"></i></button>
-                                   
-                                    {!!Form::close()!!}
-                                    {!!Form::open(['action' => 'MessagingController@create', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
-                                    {{Form::hidden('pin', $patient->patient_pin)}}
-                                    <button type="submit" class ="btn btn-info btn-sm" title="Message Patient"><i class="fa fa-envelope"></i></button>
-                                   
-                                    {!!Form::close()!!}
-
-
-                                        {!!Form::open(['action' => ['PatientsController@destroy', $patient->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
-                                        {{Form::hidden('email', $patient->patient_email)}}
-                                        {{Form::hidden('_method', 'DELETE')}}
-                                        <button type="submit" class ="btn btn-info btn-sm" title="Delete Patient"><i class="fa fa-trash-o"></i></button>
-                                       
-                                        {!!Form::close()!!}
+                                    <span class="user-list-files d-flex float-right"> @if (auth()->user()->role == 'Doctor')
+                                           
+                                       {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                                       {{Form::hidden('pin', $patient->pin)}}
+                                       <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add New Medical Record"><i class="la la-notes-medical"></i></button>
+                                      
+                                       {!!Form::close()!!}
+                                       {!!Form::open(['action' => 'RecordsController@index', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
+                                       {{Form::hidden('pin', $patient->pin)}}
+                                       {{Form::hidden('username', $patient->username)}}
+                                       <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="View Medical History"><i class="la la-book-medical"></i></button>
+                                      
+                                       {!!Form::close()!!}
+                                       @if ($patient->status == 'Admitted')
+                                       {!!Form::open(['action' => ['AdmissionController@update', $patient->pin], 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                                       {{Form::hidden('pin', $patient->pin)}}
+                                       {{Form::hidden('_method', 'PUT')}}
+                                       <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Discharge Patient"><i class="la la-procedures"></i></button>
+                                       {!!Form::close()!!}
+                                         @else
+                                         {!!Form::open(['action' => 'AdmissionController@create', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
+                                         {{Form::hidden('pin', $patient->pin)}}
+                                         <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Admit Patient"><i class="la la-bed"></i></button>
+                                         {!!Form::close()!!}  
+                                       @endif
+                                       {!!Form::open(['action' => 'PatientsController@transfer', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                                       {{Form::hidden('pin', $patient->pin)}}
+                                       <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Transfer Patient"><i class="fa fa-paper-plane-o"></i></button>
+                                      
+                                       {!!Form::close()!!}
+                                       {!!Form::open(['action' => 'MessagingController@create', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
+                                       {{Form::hidden('pin', $patient->pin)}}
+                                       <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Message Patient"><i class="fa fa-envelope"></i></button>
+                                      
+                                       {!!Form::close()!!}
+   
+   
+                                           {!!Form::open(['action' => ['PatientsController@destroy', $patient->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                           {{Form::hidden('email', $patient->email)}}
+                                           {{Form::hidden('_method', 'DELETE')}}
+                                           <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete Patient"><i class="fa fa-trash-o"></i></button>
+                                          
+                                           {!!Form::close()!!}
+                                        @endif
                                      </span>
                              </li> 
                                     </a>
@@ -1348,7 +1361,7 @@
                        <div class="iq-card-body">
                           <div class="table-responsive">
                               @php
-                                  $appointments = App\Appointments::where('doctor',auth()->user()->pin)->paginate(8);
+                                  $appointments = App\Appointments::where('doctor',auth()->user()->pin)->orderby('date', 'desc')->paginate(8);
                               @endphp
                               @if (count($appointments) > 0)
                              <table class="table mb-0 table-borderless">

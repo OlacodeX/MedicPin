@@ -3,7 +3,7 @@
 @section('content')
 @include('inc.navmain')
 
-<div class="container-fluid">
+<div class="">
    <div class="row">
       <div class="col-lg-4">
          <div class="iq-card">
@@ -23,15 +23,28 @@
                   @if (auth()->user()->role == 'Doctor')
                   <ul class="doctoe-sedual d-flex align-items-center justify-content-between p-0 m-0">
                      <li class="text-center">
-                        <h3 class="counter">4500</h3>
+                        <h3 class="counter">
+                           @php
+                               $one = App\Operations::where('doc_1', auth()->user()->pin)->count();
+                               $two = App\Operations::where('doc_2', auth()->user()->pin)->count();
+                               $three = App\Operations::where('doc_3', auth()->user()->pin)->count();
+                               $four = App\Operations::where('doc_4', auth()->user()->pin)->count();
+                               $five = App\Operations::where('doc_5', auth()->user()->pin)->count();
+                           @endphp
+                           {{ $one + $two + $three + $three + $four + $five}}
+                           
+                        </h3>
                         <span>Operations</span>
                       </li>
                       <li class="text-center">
-                        <h3 class="counter">100</h3>
+                        <h3 class="counter">{{App\hospitals::where('id', auth()->user()->h_id)->count()}}</h3>
                         <span>Hospital</span>
                       </li>
                       <li class="text-center">
-                        <h3 class="counter">10000</h3>
+                        <h3 class="counter">
+                           {{App\patients::where('doc_email', auth()->user()->email)->whereNotNull('username')->count()}}
+                           
+                        </h3>
                         <span>Patients</span>
                       </li>
                   </ul>
@@ -54,7 +67,7 @@
                      <div class="col-4">Email</div>
                      <div class="col-8"><a href="mailto:{{$pro->email}}">{{$pro->email}}</a></div>
                      <div class="col-4">Phone:</div>
-                     <div class="col-8"><a href="tel:{{$pro->p_number}}">{{$pro->p_number}}</a></div>
+                     <div class="col-8"><a href="tel:{{$pro->cc}}{{$pro->p_number}}">({{$pro->cc}}){{$pro->p_number}}</a></div>
                   </div>
                </div>
             </div>
@@ -75,14 +88,14 @@
                            <div class="user-img img-fluid"><a href="www.facebook.com/{{$pro->facebook}}" class="iq-bg-primary"><i class="ri-facebook-fill"></i></a></div>
                            <div class="media-support-info ml-3">
                               <a href="www.facebook.com/{{$pro->facebook}}"><h6>Facebook</h6>
-                              <p class="mb-0">{{$pro->facebook}}</p></a>
+                              <p class="mb-0">@ {{$pro->facebook}}</p></a>
                            </div>
                         </li>
                         <li class="d-flex mb-4 align-items-center">
                            <div class="user-img img-fluid"><a href="www.twitter.com/{{$pro->twitter}}" class="iq-bg-warning"><i class="ri-twitter-fill"></i></a></div>
                            <div class="media-support-info ml-3">
                               <a href="www.twitter.com/{{$pro->twitter}}" class="iq-bg-warning"><h6>Twitter</h6>
-                              <p class="mb-0">{{$pro->twitter}}</p></a>
+                              <p class="mb-0">@ {{$pro->twitter}}</p></a>
                            </div>
                         </li>
                         <!---
@@ -141,12 +154,25 @@
                <div class="iq-card">
                   <div class="iq-card-header d-flex justify-content-between">
                      <div class="iq-header-title">
-                        <h4 class="card-title">Schedule</h4>
+                        <h4 class="card-title">Schedule For Today</h4>
+                     </div>
+                     <div class="dropdown">
+                        <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
+                        <i class="ri-more-fill"></i>
+                        </span>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
+                        <a class="dropdown-item">
+                            <a class ="btn btn-info btn-sm" href="./schedule/create" data-toggle="tooltip" data-placement="top" data-original-title="Add To Do"><i class="fa fa-plus"></i>Add New To Do </a>
+                            <a class ="btn btn-info btn-sm" href="./schedule_previous" data-toggle="tooltip" data-placement="top" data-original-title="Add To Do"><i class="fa fa-plus"></i>Past Schedules</a>
+                           
+                           
+                        </a>
+                        </div>
                      </div>
                   </div>
                   <div class="iq-card-body">
                      @php
-                          $todos = App\todo::where('user_id',auth()->user()->id)->paginate(5);
+                          $todos = App\todo::where('user_id',auth()->user()->id)->whereDay('date', now()->day)->orderby('date', 'desc')->paginate(5);
                      @endphp
                      @if (count($todos) > 0)
                      <ul class="list-inline m-0 p-0">
@@ -182,6 +208,18 @@
                   <div class="iq-card-header d-flex justify-content-between">
                      <div class="iq-header-title">
                         <h4 class="card-title">Patients Questions</h4>
+                     </div>
+                     <div class="dropdown">
+                        <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
+                        <i class="ri-more-fill"></i>
+                        </span>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
+                        <a class="dropdown-item">
+                            <a class ="btn btn-info btn-sm" href="./questions/create" data-toggle="tooltip" data-placement="top" data-original-title="Add To Do"><i class="fa fa-plus"></i>Ask Question</a>
+                           
+                           
+                        </a>
+                        </div>
                      </div>
                   </div>
                   <div class="iq-card-body">

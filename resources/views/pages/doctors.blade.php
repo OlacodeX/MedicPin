@@ -35,8 +35,8 @@
                 </div>
                 <div class="iq-doc-social-info mt-3 mb-3">
                    <ul class="m-0 p-0 list-inline">
-                      <li><a href="{{$detail->facebook}}"><i class="ri-facebook-fill"></i></a></li>
-                      <li><a href="{{$detail->twitter}}"><i class="ri-twitter-fill"></i></a> </li>
+                      <li><a href="https://facebook.com/{{$detail->facebook}}"><i class="ri-facebook-fill"></i></a></li>
+                      <li><a href="https://twitter.com/{{$detail->twitter}}"><i class="ri-twitter-fill"></i></a> </li>
                       <li><a href="mailto:{{$detail->email}}"><i class="ri-google-fill"></i></a></li>
                    </ul>
                 </div>

@@ -57,7 +57,7 @@ Route::resource('/events', 'EventsController');
 //todo
 Route::resource('/schedule', 'TodoController');
 Route::post('/done', 'TodoController@done');
-Route::get('/schedule_yesterday', 'TodoController@yesterday');
+Route::get('/schedule_previous', 'TodoController@yesterday');
 Route::get('/schedule_tomorrow', 'TodoController@tomorrow');
 
 //Hospitals
@@ -89,3 +89,6 @@ Route::resource('/consortations', 'ConsortationsController');
 //consortations
 Route::resource('/lab', 'LabsController');
 Route::get('/record_lab', 'ConsortationsController@diag');
+
+//Inpatients
+Route::resource('/inpatients', 'AdmissionController');

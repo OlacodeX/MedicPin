@@ -513,9 +513,6 @@ class PatientsController extends Controller
           $fileNameTostore = $request->input('name').'_'.time().'.'.$extension;
           $path = $request->file('img')->move('img/drugs', $fileNameTostore);
             }
-      else{
-            $fileNameTostoreone = 'yy.jpg';
-      }
       $drug = pharmacy::find($id);
     
       $drug->name = $request->input('name');

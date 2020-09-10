@@ -17,8 +17,8 @@
                             <a href="./schedule/create" class="chat-icon-delete" style="text-decoration: none;">
                              Add To Do 
                             </a>
-                            <a href="./schedule_yesterday" class="chat-icon-delete" style="text-decoration: none;">
-                             Yesterday's Schedule
+                            <a href="./schedule_previous" class="chat-icon-delete" style="text-decoration: none;">
+                              Previous Schedules
                             </a>
                             <a href="./schedule" class="chat-icon-delete" style="text-decoration: none;">
                              Today's Schedule

@@ -235,13 +235,40 @@ class PagesController extends Controller
         //
         
         $this->validate($request, [
-            'name' => 'nullable',
-            'twitter' => 'nullable',
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'/***, 'unique:users' */],
+            'role' => ['required', 'string', 'max:255'],
+            'pp' => ['nullable', 'max:2000'],
+            'gender' => ['nullable', 'string', 'max:255'],
+            'expertise' => ['nullable', 'string', 'max:255'],
+            'twitter' => ['nullable', 'string', 'max:255'],
+            'facebook' => ['nullable', 'string', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:255'],
+            'cc' => ['nullable', 'string', 'max:255'],
         ]); 
         $id=$_POST['id'];
-        $user = User::find($id);
-        $user->name = $request->input('name');//This will get the user input for title
+        $user = User::find($id); //Handle file upload
+        if($request->hasFile('pp')){
+          $filenameWithExt = $request->file('pp')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('pp')->getClientOriginalExtension();
+            $fileNameTostore = $request->input('name').'_'.time().'.'.$extension;
+            $path = $request->file('pp')->move('img/profile', $fileNameTostore);
+              }
+        $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->p_number = $request->input('phone');
+        $user->cc = $request->input('cc');
+        $user->gender = $request->input('gender');
+        $user->role = $request->input('role');
+        $user->type = $request->input('type');
+        $user->twitter = $request->input('twitter');
+        $user->facebook = $request->input('facebook');
+        $user->nhis = $request->input('nhis');
+        $user->expertise = $request->input('expertise');
+        if($request->hasFile('pp')){
+        $user->img = $fileNameTostore;
+        }
         //Save to db
         $user->save();
         //print success message and redirect

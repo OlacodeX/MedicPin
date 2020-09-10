@@ -15,7 +15,7 @@
                                  <h4 class="card-title">Prescription(s)</h4>
                                  <small>Most Recent Record Dated {{$record->created_at}}</small>
                                  @endif
-                                 @if (auth()->user()->role == 'Doctor' || auth()->user()->role == 'Doctor')
+                                 @if (auth()->user()->role == 'Doctor' || auth()->user()->role == 'Nurse')
                                   <h4 class="card-title">Patient Medical Record</h4>
                                   <small>Most Recent Record Dated {{$record->created_at}}</small>
                                   @endif
@@ -502,19 +502,62 @@
                                           <a href="#records" data-toggle="collapse" class="btn btn-primary">See Past Records</a>
                                           <a href="#test" data-toggle="collapse" class="btn btn-primary">Patient Laboratory Tests</a>
                                           <a href="#appointments" data-toggle="collapse" class="btn btn-primary">Book Appointment With Patient</a>
+                                          <a href="#add" data-toggle="collapse" class="btn btn-primary">Admission History</a>
                                               
                                           @endif
                                           @if (auth()->user()->role == 'Nurse')
                                           <a href="./schedule/create" data-toggle="collapse" class="btn btn-primary">Schedule Doctor Visit</a>
                                           @endif
                                       </p>
+                                      <div class="col-md-12 collapse" id="add"> 
+                                        <div class="iq-card">
+                                          <div class="iq-card-body text-center">
+                                             <h5 class="card-title">Admission History</h5>
+                                             @include('inc.messages')
+                                             @php
+                                                 $admits = App\Admission::where('patient', $record->pin)->orderby('created_at','desc')->get();
+                                             @endphp
+                              
+                                             @if (count($admits) > 0)
+                                             <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
+                                               <thead>
+                                                   
+                                                   <tr>
+                                                      <th>Date</th>
+                                                      <th>Reason</th>
+                                                      <th>Admitted By</th>
+                                                   </tr>
+                                               </thead>
+                                               <tbody>
+                                                @foreach ($admits as $admit)
+                                                   <tr>
+                                                      <td class="text-center">{{$admit->created_at}}</td>
+                                                      <td>
+                                                        {!!$admit->reason!!}
+                                                      </td>
+                                                      
+                                                      @php
+                                                          $name = App\User::where('pin',$admit->admitted_by)->first();
+                                                      @endphp
+                                                      <td>Dr. {{$name->name}}</td>
+                                                   </tr> 
+                                                   @endforeach                      
+                                               </tbody>
+                                             </table>
+                                                 
+                                             @endif
+                                          </div>
+                                          </div>
+                                       </div>
+
+
         <div class="col-md-12 collapse" id="test"> 
           <div class="iq-card">
             <div class="iq-card-body text-center">
                <h5 class="card-title">Laboratory Test Request Detail</h5>
                @include('inc.messages')
                @php
-                   $tests = App\Lab::where('patient_pin', $record->pin)->where('status', 'Done')->orderby('created_at','desc')->paginate(10);
+                   $tests = App\Lab::where('patient_pin', $record->pin)->where('status', 'Done')->orderby('created_at','desc')->get();
                @endphp
 
                @if (count($tests) > 0)

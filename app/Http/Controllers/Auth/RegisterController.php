@@ -107,6 +107,7 @@ class RegisterController extends Controller
             //'facebook' => $data['facebook'],
             'expertise' => $data['expertise'],
             'P_number' => $data['phone'],
+            'cc' => $data['cc'],
             'pin' => $pin,
             'password' => Hash::make($data['password']),
             //patients::where('email', $data['email'])->get('status') => $data['status'],
