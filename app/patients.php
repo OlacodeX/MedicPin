@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class patients extends Model
 {
     //
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'address','username','pin','gender','phone','nok','nok_phone',
+    ];
     // Table name
     protected $table = 'patients';
     // primary key

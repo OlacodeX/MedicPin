@@ -34,7 +34,7 @@
                           <li><a href="../../myprofile">My Profile</a></li>
                           <li><a href="../../notifications">My Notifications</a></li>
                           <!---<li><a href="profile-edit.html">User Edit</a></li>--->
-                          <li><a href="">My Appointments</a></li>
+                          <li><a href="../../appointments">My Appointments</a></li>
                        </ul>
                     </li>
                     <li><a href="../../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
@@ -71,7 +71,15 @@
                           <li><a href="../../myprofile">My Profile</a></li>
                           <li><a href="../../notifications">My Notifications</a></li>
                           <!---<li><a href="profile-edit.html">User Edit</a></li>--->
-                          <li><a href="">My Appointments</a></li>
+                          <li><a href="../../appointments">My Appointments</a></li>
+                          @php
+                              $patient = App\patients::where('pin', auth()->user()->pin)->first();
+                          @endphp
+                          @if ($patient->status == 'Admitted')
+                          <li><a href="../../visitors/create">Register Visitor</a></li>
+                          <li><a href="../../visitors">Visitors List</a></li>
+                              
+                          @endif
                        </ul>
                     </li>
                     <li><a href="../../pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
@@ -218,7 +226,7 @@
                         <li><a href="../../myprofile">My Profile</a></li>
                         <li><a href="../../notifications">My Notifications</a></li>
                         <!---<li><a href="profile-edit.html">User Edit</a></li>--->
-                        <li><a href="">My Appointments</a></li>
+                        <li><a href="../../appointments">My Appointments</a></li>
                      </ul>
                   </li>
                   <li>

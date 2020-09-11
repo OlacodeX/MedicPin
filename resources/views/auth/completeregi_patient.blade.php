@@ -73,14 +73,13 @@
                                 
 
                             </style>
-                            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="mt-4">
+                            {!! Form::open(['action' => 'PatientsController@reg_patient', 'method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
+                            **/ !!}
                                 @include('inc.messages')
                                 @csrf
                                 <input id="name" type="hidden" name="name" value="{{$name}}">
                                 <input id="email" type="hidden" name="email" value="{{ $email }}">
                                 <input id="gender" type="hidden"  name="gender" value="{{ $gender }}">
-                                <input id="password" type="hidden"  name="password" value="{{ $password }}">
-                                <input id="password_confirmation" type="hidden"  name="password_confirmation" value="{{ $password_confirmation }}">
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-5">
@@ -346,35 +345,20 @@
                                 </div>
                                 </div>
                                 <div class="form-group">
-                            <select class="form-control mb-0" id="type" name="type">
-                                      <option value="">-select account type-</option>
-                                      <option value="Organization/HMO">Organization/HMO</option>
-                                      <option value="Personal/Individual">Personal/Individual</option>
-                                   </select>
+                                    <input type="text" class="form-control mb-0" name="username" id="username" placeholder="Enter username">
                                 </div>
                                 <div class="form-group">
-                            <select class="form-control mb-0" id="role" name="role" onchange="yesnoCheck(this);">
-                                      <option value="">-I am a...-</option>
-                                      <option value="Nurse">Nurse</option>
-                                      <option value="Pharmacist">Pharmacist</option>
-                                      <option value="Patient">Patient</option>
-                                      <option value="Biochemist/Microbiologist">Biochemist/Microbiologist</option>
-                                      <option value="Doctor">Doctor</option>
-                                      <option value="Ward Maid">Ward Maid</option>
-                                   </select>
+                                    <input type="text" class="form-control mb-0" name="occupation" id="username" placeholder="What do you do for a living?">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control mb-0" name="username" id="username" style="display: none;" placeholder="Enter username">
+                                    <input type="text" class="form-control mb-0" name="add" id="add" placeholder="Enter Address">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control mb-0" name="add" id="add" style="display: none;" placeholder="Enter Address">
+                                    <input type="text" class="form-control mb-0" name="nok"  placeholder="Next of Kin name">
                                 </div>
-                                <div class="form-group">
-                                   <select class="form-control mb-0" id="nhis" name="nhis" style="display: none;">
-                                      <option value="">Patient Type</option>
-                                      <option value="NHIS">NHIS</option>
-                                      <option value="Non NHIS">Non NHIS</option>
-                                   </select>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control mb-0" name="nokp" id="nokp" placeholder="Next of Kin phone number">
+                                    
                                 </div>
                                 <!--
                                 <div class="form-group">

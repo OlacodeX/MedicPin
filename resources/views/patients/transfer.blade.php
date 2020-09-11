@@ -13,6 +13,8 @@
                              <h4 class="card-title">Transfer Patient With MedicPin {!! $patient->pin!!} To Another Doctor</h4>
                           </div>
                        </div>
+
+
                        <div class="iq-card-body">
                                 <hr>
                                 <div class="">

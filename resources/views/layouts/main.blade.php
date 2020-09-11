@@ -220,8 +220,12 @@
       }
       if (that.value == "Patient") {
           document.getElementById("nhis").style.display = "block";
+          document.getElementById("add").style.display = "block";
+          document.getElementById("username").style.display = "block";
       } else {
           document.getElementById("nhis").style.display = "none";
+          document.getElementById("add").style.display = "none";
+          document.getElementById("username").style.display = "none";
       }
 
 

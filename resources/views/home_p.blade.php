@@ -15,7 +15,7 @@
                        <div class="iq-card-body">
                           <div class="user-details-block">
                              <div class="user-profile text-center">
-                                    <img src="img/cover_img/{{auth()->user()->img}}" alt="profile-img" class="avatar-130 img-fluid">
+                                    <img src="img/profile/{{auth()->user()->img}}" alt="profile-img" class="avatar-130 img-fluid">
                              </div>
                              <div class="text-center mt-3">
                                 <h4><b>{{auth()->user()->name}}</b></h4>

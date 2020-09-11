@@ -9,62 +9,67 @@
       
       <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
         <div class="iq-card-header d-flex justify-content-between">
+           @if (auth()->user()->role == 'Patient')
            <div class="iq-header-title">
-              <h4 class="card-title">Your Appointments </h4>
+              <h4 class="card-title">Your Visitors </h4>
            </div>
+               
+           @endif
+           @if (auth()->user()->role == 'Nurse')
+           <div class="iq-header-title">
+              <h4 class="card-title">Visitors For This Patient</h4>
+           </div>
+               
+           @endif
            <div class="iq-card-header-toolbar d-flex align-items-center">
-             <div class="dropdown">
-                <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
-                <i class="ri-more-fill"></i>
-                </span>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
-                   <a class="dropdown-item" href="./appointments/create"><i class="las la-radiation"></i>Add New</a>
-                </div>
-             </div>
+            @if (auth()->user()->role == 'Patient')
+            <div class="dropdown">
+               <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
+               <i class="ri-more-fill"></i>
+               </span>
+               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
+                  <a class="dropdown-item" href="./visitors/create"><i class="las la-radiation"></i>Add New</a>
+               </div>
+            </div>
+                
+            @endif
            </div>
         </div>
         <div class="iq-card-body">
            <div class="table-responsive">
               @if (auth()->user()->role == 'Patient')
-              @php
-                  $appointmentss = App\Appointments::where('patient',auth()->user()->pin)->paginate(8);
-              @endphp
-              @if (count($appointmentss) > 0)
+              @if (count($visitors) > 0)
              <table class="table mb-0 table-borderless">
                 <thead>
                    <tr>
-                      <th scope="col">Doctor</th>
-                      <th scope="col">Date</th>
-                      <th scope="col">Time</th>
+                      <th scope="col">Visitor</th>
+                      <th scope="col">Visit Date</th>
+                      <th scope="col">Gender</th>
                       <th scope="col">Contact</th>
                       <th scope="col">Action</th>
 
                    </tr>
                 </thead>
                 <tbody>
-                    @foreach ($appointmentss as $appointment)
+                    @foreach ($visitors as $visitor)
                    <tr>
-                       @php
-                           $patient = App\patients::where('pin', $appointment->patient)->first();
-                           $doctor = App\User::where('pin', $appointment->doctor)->first();
-                       @endphp
-                      <td>{{$doctor->name}}</td>
-                      <td>{{$appointment->date}}</td>
-                      <td>{{$appointment->time}}</td>
-                      <td><a href="tel:{{$patient->phone}}" style="text-decoration: none;">{{$patient->phone}}</a></td>
+                      <td>{{$visitor->name}}</td>
+                      <td>{{$visitor->date}}</td>
+                      <td>{{$visitor->gender}}</td>
+                      <td><a href="tel:{{$visitor->number}}" style="text-decoration: none;">{{$visitor->number}}</a></td>
                       <td>
                         <div class="dropdown">
                            <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
                            <i class="ri-more-fill"></i>
                            </span>
                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
-                           <a class="dropdown-item" href="appointments/{{$appointment->id}}/edit">
+                           <a class="dropdown-item" href="visitors/{{$visitor->id}}/edit">
                              <button class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Edit Appointment"><i class="ri-pencil-fill mr-2"></i>Edit</button>
                            </a>
                            
                            <a class="dropdown-item">
-                              {!!Form::open(['action' => ['PatientsController@destroy', $appointment->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
-                              {{Form::hidden('id', $appointment->id)}}
+                              {!!Form::open(['action' => ['VisitorController@destroy', $visitor->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                              {{Form::hidden('id', $visitor->id)}}
                               {{Form::hidden('_method', 'DELETE')}}
                               <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete Appointment"><i class="ri-delete-bin-6-fill mr-2"></i>Delete</button>
                              
@@ -83,56 +88,47 @@
            <div class="col-md-6">
                <div style="text-align:right;">
                        <!-----The pagination link----->
-                       {{$appointmentss->links()}}
+                       {{$visitors->links()}}
                </div>
            </div>
                @else
                <p>No Record Found</p>   
              @endif
             @else
-            @php
-                $appointments = App\Appointments::where('doctor',auth()->user()->pin)->paginate(8);
-            @endphp
-            @if (count($appointments) > 0)
+            @if (count($p_visitors) > 0)
            <table class="table mb-0 table-borderless">
               <thead>
                  <tr>
-                  <th scope="col">Patient's Pin</th>
-                    <th scope="col">Patient</th>
-                    <th scope="col">Doctor</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Time</th>
+                    <th scope="col">Visitor</th>
+                    <th scope="col">Visit Date</th>
+                    <th scope="col">Gender</th>
                     <th scope="col">Contact</th>
-                    <th scope="col">Action</th>
+                    <!--
+                    <th scope="col">Action</th>-->
 
                  </tr>
               </thead>
               <tbody>
-                  @foreach ($appointments as $appointment)
+                  @foreach ($p_visitors as $visitor)
                  <tr>
-                     @php
-                         $patient = App\patients::where('pin', $appointment->patient)->first();
-                         $doctor = App\User::where('pin', $appointment->doctor)->first();
-                     @endphp
-                    <td>{{$appointment->patient}}</td>
-                    <td>{{$patient->name}}</td>
-                    <td>{{$doctor->name}}</td>
-                    <td>{{$appointment->date}}</td>
-                    <td>{{$appointment->time}}</td>
-                    <td><a href="tel:{{$patient->phone}}" style="text-decoration: none;">{{$patient->phone}}</a></td>
+                    <td>{{$visitor->name}}</td>
+                    <td>{{$visitor->date}}</td>
+                    <td>{{$visitor->gender}}</td>
+                    <td><a href="tel:{{$visitor->number}}" style="text-decoration: none;">{{$visitor->number}}</a></td>
+                    <!---
                     <td>
                       <div class="dropdown">
                          <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
                          <i class="ri-more-fill"></i>
                          </span>
                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
-                         <a class="dropdown-item" href="appointments/{{$appointment->id}}/edit">
+                         <a class="dropdown-item" href="visitors/{{$visitor->id}}/edit">
                            <button class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Edit Appointment"><i class="ri-pencil-fill mr-2"></i>Edit</button>
                          </a>
                          
                          <a class="dropdown-item">
-                            {!!Form::open(['action' => ['PatientsController@destroy', $appointment->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
-                            {{Form::hidden('id', $appointment->id)}}
+                            {!!Form::open(['action' => ['VisitorController@destroy', $visitor->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                            {{Form::hidden('id', $visitor->id)}}
                             {{Form::hidden('_method', 'DELETE')}}
                             <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete Appointment"><i class="ri-delete-bin-6-fill mr-2"></i>Delete</button>
                            
@@ -141,7 +137,7 @@
                          </div>
                       </div>
                         
-                    </td>
+                    </td>--->
                  </tr>
                 
                  @endforeach
@@ -151,13 +147,13 @@
          <div class="col-md-6">
              <div style="text-align:right;">
                      <!-----The pagination link----->
-                     {{$appointments->links()}}
+                     {{$p_visitors->links()}}
              </div>
          </div>
              @else
              <p>No Record Found</p>   
            @endif
-           
+
               @endif
            </div>
         </div>

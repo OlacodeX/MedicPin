@@ -125,6 +125,13 @@
                                                 <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="View Medical History"><i class="la la-book-medical"></i></button>
                                                
                                                 {!!Form::close()!!}
+                       
+                                                {!!Form::open(['action' => 'VisitorController@other', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                                                {{Form::hidden('pin', $user->pin)}}
+                                                <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="See Visitors List"><i class="la la-user-nurse"></i></button>
+                                               
+                                                {!!Form::close()!!}
+                         
                                                  @endif
                                      </span>
                               </div>

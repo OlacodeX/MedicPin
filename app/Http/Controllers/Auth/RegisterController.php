@@ -57,11 +57,15 @@ class RegisterController extends Controller
             'role' => ['required', 'string', 'max:255'],
             'pp' => ['nullable', 'max:2000'],
             'gender' => ['nullable', 'string', 'max:255'],
+            'nhis' => ['nullable', 'string', 'max:255'],
             'expertise' => ['nullable', 'string', 'max:255'],
-            //'twitter' => ['nullable', 'string', 'max:255'],
-            //'facebook' => ['nullable', 'string', 'max:255'],
+            'type' => ['nullable', 'string', 'max:255'],
+            'username' => ['nullable', 'string', 'max:255'],
+            'address' => ['nullable', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:255'],
             'cc' => ['nullable', 'string', 'max:255'],
+            'nok' => ['nullable', 'string', 'max:255'],
+            'nok_phone' => ['nullable', 'string', 'max:255'],
         ]);
     }
 
@@ -97,6 +101,25 @@ class RegisterController extends Controller
                 //default image for post if none was choosed
               $fileNameTostore = '1.jpeg';
            }
+           if ($data['role'] == 'Patient') {
+            patients::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'address' => $data['add'],
+                //'img' =>  $fileNameTostore,
+                'gender' => $data['gender'],
+                //'twitter' => $data['twitter'],
+                //'facebook' => $data['facebook'],
+                'username' => $data['username'],
+                'Phone' => $data['cc'].$data['phone'],
+                'nok' => $data['nok'],
+                'Phone' => $data['cc'].$data['phone'],
+                'nok_phone' => $data['cc'],
+                'pin' => $pin,
+                //'password' => Hash::make($data['password']),
+                //patients::where('email', $data['email'])->get('status') => $data['status'],
+            ]);
+           }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -108,6 +131,7 @@ class RegisterController extends Controller
             'expertise' => $data['expertise'],
             'P_number' => $data['phone'],
             'cc' => $data['cc'],
+            'nhis' => $data['nhis'],
             'pin' => $pin,
             'password' => Hash::make($data['password']),
             //patients::where('email', $data['email'])->get('status') => $data['status'],

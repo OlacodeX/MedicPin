@@ -21,6 +21,7 @@ Auth::routes();
 Route::get('/account_set_up', 'PagesController@reg_patient');
 Route::post('/sign_up', 'PagesController@sign_up');
 Route::post('/complete_sign_up', 'PagesController@complete_sign_up');
+Route::post('/complete_sign_up_patient', 'PagesController@complete_sign_up_patient');
 Route::post('/store_transfer', 'PatientsController@store_transfer');
 Route::resource('/patients', 'PatientsController');
 Route::post('/search_result', 'PatientsController@search');
@@ -92,3 +93,7 @@ Route::get('/record_lab', 'ConsortationsController@diag');
 
 //Inpatients
 Route::resource('/inpatients', 'AdmissionController');
+
+//visitors
+Route::resource('/visitors', 'VisitorController');
+Route::post('/visitors_list', 'VisitorController@other');
