@@ -17,7 +17,7 @@ class AddColumnsToUsersTable extends Migration
             //
             $table->string('p_number')->nullable();
             $table->string('type')->nullable();
-            $table->string('expertise')->nullable();
+            //$table->string('expertise')->nullable();
         });
     }
 
