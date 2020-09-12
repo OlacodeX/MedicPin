@@ -65,8 +65,8 @@ class RegisterController extends Controller
             'phone' => ['nullable', 'string', 'max:255'],
             'cc' => ['nullable', 'string', 'max:255'],
             //'occupation' => ['nullable', 'string', 'max:255'],
-            'nok' => ['nullable', 'string', 'max:255'],
-            'nokp' => ['nullable', 'string', 'max:255'],
+            //'nok' => ['nullable', 'string', 'max:255'],
+            //'nokp' => ['nullable', 'string', 'max:255'],
         ]);
     }
 
@@ -113,9 +113,9 @@ class RegisterController extends Controller
                 //'occupation' => $data['occupation'],
                 'username' => $data['username'],
                 'Phone' => $data['cc'].$data['phone'],
-                'nok' => $data['nok'],
+                //'nok' => $data['nok'],
                 //'Phone' => $data['cc'].$data['phone'],
-                'nok_phone' => $data['nokp'],
+                //'nok_phone' => $data['nokp'],
                 'pin' => $pin,
                 //'password' => Hash::make($data['password']),
                 //patients::where('email', $data['email'])->get('status') => $data['status'],
