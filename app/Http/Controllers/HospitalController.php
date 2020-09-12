@@ -386,7 +386,7 @@ class HospitalController extends Controller
             $hospital->save();
             
               
-            return redirect('/hospitals')->with('success', 'Great!, hospital created.');//I just set the message for session(success).
+            return redirect('/dashboard')->with('success', 'Great!, hospital created.');//I just set the message for session(success).
      
         }
         else{

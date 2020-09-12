@@ -11,6 +11,7 @@
                                 
               <div class="">
                  <div class="col-lg-12">
+                  @include('inc.messages')
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height iq-user-profile-block">
                        <div class="iq-card-body">
                           <div class="user-details-block">

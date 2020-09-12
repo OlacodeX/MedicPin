@@ -17,6 +17,7 @@
                   <div class="text-center mt-3 pl-3 pr-3">
                      <h4><b>{{$pro->name}}</b></h4>
                      <p>{{$pro->role}}</p>
+                     <p>{{$pro->pin}}</p>
                      <a href="patients/{{$pro->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Profile"><i class="ri-pencil-line"></i></a>
                   </div>
                   <hr>
@@ -67,11 +68,55 @@
                      <div class="col-4">Email</div>
                      <div class="col-8"><a href="mailto:{{$pro->email}}">{{$pro->email}}</a></div>
                      <div class="col-4">Phone:</div>
+                     @if ($pro->p_number == '')
+                     <div class="col-8">
+                     <p>Nothing To Show, Kindly Update Your Phone Number By Editing Your Profile.</p>
+                     </div>
+                     @else
                      <div class="col-8"><a href="tel:{{$pro->cc}}{{$pro->p_number}}">({{$pro->cc}}){{$pro->p_number}}</a></div>
+                         
+                     @endif
                   </div>
                </div>
             </div>
          </div>
+         @if (auth()->user()->role == 'Patient')
+         <div class="iq-card">
+            <div class="iq-card-header d-flex justify-content-between">
+               <div class="iq-header-title">
+                  <h4 class="card-title">Next Of Kin Details</h4>
+               </div>
+            </div>
+            <div class="iq-card-body">
+               <div class="about-info m-0 p-0">
+                  @php
+                      $nok = App\patients::where('pin', auth()->user()->pin)->first();
+                  @endphp
+                  <div class="row">
+                     @if ($nok->nok == '')
+                     <div class="col-12">
+                     <p>You have not added the details of your next of kin yet, update your profile to do so.</p>
+                     </div>
+                     @else
+                     <div class="col-4">Name</div>
+                     <div class="col-8">{{$nok->nok}}</div>
+                     <div class="col-4">Relationship</div>
+                     <div class="col-8">{{$nok->nok_relation}}</div>
+                     <div class="col-4">Phone:</div>
+                     @if ($nok->nok_phone == '')
+                     <div class="col-8">
+                     <p>Nothing To Show, Kindly Update Your Next Of Kin Phone Number By Editing Your Profile.</p>
+                     </div>
+                     @else
+                     <div class="col-8"><a href="tel:{{$nok->nok_phone}}">{{$nok->nok_phone}}</a></div>
+                     @endif 
+                     @endif
+                  </div>
+               </div>
+            </div>
+         </div>
+             
+         @endif
       </div>
       <div class="col-lg-8">
          <div class="row">
@@ -87,15 +132,23 @@
                         <li class="d-flex mb-4 align-items-center">
                            <div class="user-img img-fluid"><a href="www.facebook.com/{{$pro->facebook}}" class="iq-bg-primary"><i class="ri-facebook-fill"></i></a></div>
                            <div class="media-support-info ml-3">
+                              @if ($pro->facebook == '')
+                              <p>Nothing To Show, Kindly Update Your Social Media Handles By Editing Your Profile.</p>
+                              @else
                               <a href="www.facebook.com/{{$pro->facebook}}"><h6>Facebook</h6>
                               <p class="mb-0">@ {{$pro->facebook}}</p></a>
+                              @endif
                            </div>
                         </li>
                         <li class="d-flex mb-4 align-items-center">
                            <div class="user-img img-fluid"><a href="www.twitter.com/{{$pro->twitter}}" class="iq-bg-warning"><i class="ri-twitter-fill"></i></a></div>
                            <div class="media-support-info ml-3">
-                              <a href="www.twitter.com/{{$pro->twitter}}" class="iq-bg-warning"><h6>Twitter</h6>
-                              <p class="mb-0">@ {{$pro->twitter}}</p></a>
+                           @if ($pro->twitter == '')
+                           <p>Nothing To Show, Kindly Update Your Social Media Handles By Editing Your Profile.</p>
+                           @else
+                           <a href="www.twitter.com/{{$pro->twitter}}" class="iq-bg-warning"><h6>Twitter</h6>
+                           <p class="mb-0">@ {{$pro->twitter}}</p></a>
+                           @endif
                            </div>
                         </li>
                         <!---

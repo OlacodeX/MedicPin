@@ -25,7 +25,7 @@ class PatientsController extends Controller
     */
    public function __construct()
    {
-       $this->middleware('auth');
+       $this->middleware('auth',['except' => ['reg_patient']]);
    }
 
     /**
@@ -345,6 +345,16 @@ class PatientsController extends Controller
         }
         else{
             $update_patient->username = $username;
+            $update_patient->address = $request->input('add');
+            $update_patient->gender = $request->input('gender');
+            $update_patient->occupation = $request->input('occupation');
+            $update_patient->nok_relation = $request->input('nok_relation');
+            $update_patient->nok = $request->input('nok');
+            $update_patient->phone = $request->input('phone');
+            $update_patient->cc = $request->input('cc');
+            $update_patient->nok_phone = $request->input('nokp');
+            //$update_patient->occupation = $request->input('occupation');
+            //$update_patient->nok = $request->input('nok');
             //Save to db
             $update_patient->save();
 
@@ -352,18 +362,34 @@ class PatientsController extends Controller
         $user = new User;
         //$patient = patients::where('email', $email)->first();
         //$update_patient->pin = $pin;
+        
+      if($request->hasFile('pp')){
+        $filenameWithExt = $request->file('pp')->getClientOriginalName();
+          $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+          $extension = $request->file('pp')->getClientOriginalExtension();
+          $fileNameTostore = $request->input('name').'_'.time().'.'.$extension;
+          $path = $request->file('pp')->move('img/profile', $fileNameTostore);
+            }
+            else{
+                 //default image for post if none was choosed
+               $fileNameTostore = '1.jpeg';
+            }
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->facebook = $request->input('facebook');
-        $user->twitter = $request->input('twitter');
         $user->role = $request->input('role');
+        $user->gender = $request->input('gender');
+        $user->type = $request->input('type');
+        $user->cc = $request->input('cc');
+        $user->img = $fileNameTostore;
+        $user->p_number = $request->input('phone');
+        $user->nhis = $request->input('nhis');
         $user->pin = $update_patient->pin;
         $user->password =  Hash::make($request->input('password'));
         
         //Save to db
         $user->save();
         //print success message and redirect
-        return redirect('./login');//I just set the message for session(success).
+        return redirect('./dashboard');//I just set the message for session(success).
 
     }
     /**

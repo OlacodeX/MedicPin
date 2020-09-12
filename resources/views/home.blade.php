@@ -7,6 +7,7 @@
 
 @if (auth()->user()->role == 'Biochemist/Microbiologist')
            <div class="">
+            @include('inc.messages')
                                 
               <div class="row">
                  <div class="col-lg-6" >
@@ -128,7 +129,6 @@
                        @endphp
                        <div class="iq-card-body">
                         <div class="col-sm-5">
-                          @include('inc.messages')
                            <div id="user_list_datatable_info" class="dataTables_filter">
                              {!! Form::open(['action' => 'PatientsController@search', 'method' => 'POST', 'class' => 'mr-3 position-relative']) !!}
                                  <div class="form-group mb-0">
@@ -412,6 +412,7 @@
 
               @if (auth()->user()->role == 'Pharmacist')
               <div class="">
+               @include('inc.messages')
                                    
                  <div class="row" style="margin-bottom: 250px;">
                     <div class="col-lg-12">
@@ -501,6 +502,7 @@
 
 @if (auth()->user()->role == 'Nurse')
            <div class="">
+            @include('inc.messages')
                                 
               <div class="row">
                  <div class="col-lg-6" >
@@ -622,7 +624,6 @@
                        </div>
                        <div class="iq-card-body">
                         <div class="col-sm-5">
-                          @include('inc.messages')
                            <div id="user_list_datatable_info" class="dataTables_filter">
                              {!! Form::open(['action' => 'PatientsController@search', 'method' => 'POST', 'class' => 'mr-3 position-relative']) !!}
                                  <div class="form-group mb-0">
@@ -951,6 +952,7 @@
 
 @if (auth()->user()->role == 'Doctor')
            <div class="">
+            @include('inc.messages')
                                 
               <div class="row">
                  <div class="col-lg-4">
@@ -1041,7 +1043,6 @@
                        </div>
                        <div class="iq-card-body">
                         <div class="col-sm-5">
-                          @include('inc.messages')
                            <div id="user_list_datatable_info" class="dataTables_filter">
                              {!! Form::open(['action' => 'PatientsController@search', 'method' => 'POST', 'class' => 'mr-3 position-relative']) !!}
                                  <div class="form-group mb-0">

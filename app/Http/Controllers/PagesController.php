@@ -7,6 +7,7 @@ use App\User;
 use App\HospitalDoctors;
 use Illuminate\Support\Facades\Hash;
 use App\Messages;
+use App\patients;
 use Image;
 use App\Mail\BloodRequestMail;
 use Illuminate\Support\Facades\Mail;
@@ -44,6 +45,7 @@ class PagesController extends Controller
        $name = $_POST['name'];
        $password = $_POST['password'];
        $email = $_POST['email'];
+       //$type = $_POST['type'];
        $gender = $_POST['gender'];
        $password_confirmation = $_POST['password_confirmation'];
        if (!empty(User::where('email', $email)->first())) {
@@ -59,6 +61,7 @@ class PagesController extends Controller
        $data = array(
                 'name' => $name,
                 'password' => $password,
+                //'type' => $type,
                 'email' => $email,
                 'gender' => $gender,
                 'password_confirmation' => $password_confirmation
@@ -70,6 +73,10 @@ class PagesController extends Controller
        $name = $_POST['name'];
        $password = $_POST['password'];
        $email = $_POST['email'];
+       $cc = $_POST['cc'];
+       $type = $_POST['type'];
+       $phone = $_POST['phone'];
+       $username = $_POST['username'];
        $gender = $_POST['gender'];
        $password_confirmation = $_POST['password_confirmation'];
        if (!empty(User::where('email', $email)->first())) {
@@ -87,6 +94,10 @@ class PagesController extends Controller
                 'password' => $password,
                 'email' => $email,
                 'gender' => $gender,
+                'cc' => $cc,
+                'type' => $type,
+                'phone' => $phone,
+                'username' => $username,
                 'password_confirmation' => $password_confirmation
        );
         return view("auth.completeregi_patient", $data);
@@ -273,6 +284,19 @@ class PagesController extends Controller
             'cc' => ['nullable', 'string', 'max:255'],
         ]); 
         $id=$_POST['id'];
+        $patient = patients::where('pin', auth()->user()->pin)->first();
+        $patient->name = $request->input('name');
+        $patient->email = $request->input('email');
+        $patient->phone = $request->input('phone');
+        $patient->cc = $request->input('cc');
+        $patient->gender = $request->input('gender');
+        $patient->address = $request->input('add');
+        $patient->username = $request->input('username');
+        $patient->occupation = $request->input('occupation');
+        $patient->nok_relation = $request->input('nok_relation');
+        $patient->nok = $request->input('nok');
+        $patient->nok_phone = $request->input('nokp');
+        $patient->save();
         $user = User::find($id); //Handle file upload
         if($request->hasFile('pp')){
           $filenameWithExt = $request->file('pp')->getClientOriginalName();
