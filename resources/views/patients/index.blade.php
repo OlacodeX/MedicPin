@@ -453,42 +453,73 @@
                                                     <div class="col-md-4">
                                                         <div class="iq-card shadow-none mb-0">
                                                             <div class="iq-card-body p-1">
-                                                               <span class="font-size-14">Blood pressure</span>
-                                                               <h2>{{$record->bp}}
+                                                               <span class="font-size-14">Genotype</span>
+                                                               @if ($record->genotype == '')
+                                                               <h2>N/A
                                                                    <img class="float-right summary-image-top mt-1" src="images/page-img/04.png" alt="summary-image" /> </h2>
                                                                <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
                                                                    <div class="iq-progress-bar">
-                                                                       <span class="bg-primary" data-percent={{$record->bp}}></span>
+                                                                       <span class="bg-primary" data-percent="0"></span>
                                                                    </div>
                                                                </div>
+                                                               @else
+                                                               <h2>{{$record->genotype}}
+                                                                   <!--<img class="float-right summary-image-top mt-1" src="images/page-img/04.png" alt="summary-image" /> </h2>
+                                                                   --><div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                                   <div class="iq-progress-bar">
+                                                                       <span class="bg-primary" data-percent={{$record->genotype}}></span>
+                                                                   </div>
+                                                               </div>
+                                                               @endif
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="iq-card shadow-none mb-0">
                                                             <div class="iq-card-body p-1">
-                                                                <span class="font-size-14">Temperature</span>
-                                                                <h2>{{$record->temp}}C
-                                                                <img class="float-right summary-image-top mt-1" src="images/page-img/06.png" alt="summary-image" /> </h2>
-                                                                <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                                <span class="font-size-14">Blood Group</span>
+                                                                @if ($record->b_group == '')
+                                                                <h2>N/A
+                                                                <!--<img class="float-right summary-image-top mt-1" src="images/page-img/06.png" alt="summary-image" /> </h2>
+                                                                --><div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
                                                                     <div class="iq-progress-bar">
-                                                                        <span class="bg-success" data-percent={{$record->temp}}></span>
+                                                                        <span class="bg-success" data-percent="0"></span>
                                                                     </div>
                                                                 </div>
+                                                                @else
+                                                                <h2>{{$record->b_group}}
+                                                                <!--<img class="float-right summary-image-top mt-1" src="images/page-img/06.png" alt="summary-image" /> </h2>
+                                                                ---><div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                                    <div class="iq-progress-bar">
+                                                                        <span class="bg-success" data-percent={{$record->b_group}}></span>
+                                                                    </div>
+                                                                </div>
+
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="iq-card shadow-none mb-0">
                                                             <div class="iq-card-body p-1">
-                                                                <span class="font-size-14">Heart Rate</span>
-                                                                <h2>{{$record->h_rate}}%
-                                                                <img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
-                                                                <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                                <span class="font-size-14">Weight</span>
+                                                                @if ($record->weight == '')
+                                                                <h2>N/A
+                                                               <!-- <img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
+                                                               --><div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
                                                                     <div class="iq-progress-bar">
-                                                                        <span class="bg-danger" data-percent={{$record->h_rate}}></span>
+                                                                        <span class="bg-danger" data-percent="0"></span>
                                                                     </div>
                                                                 </div>
+                                                                 @else
+                                                                 <h2>{{$record->weight}}kg
+                                                                 <!---<img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
+                                                                 ---><div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                                     <div class="iq-progress-bar">
+                                                                         <span class="bg-danger" data-percent={{$record->weight}}></span>
+                                                                     </div>
+                                                                 </div>   
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
@@ -577,27 +608,7 @@
                      <tr>
                         <td class="text-center">{{$test->created_at}}</td>
                         <td>
-                            {{$test->test_name1}}
-                            @if ($test->test_name2 !== 'select')
-                            {{$test->test_name2}}
-                                
-                            @endif
-                            @if ($test->test_name3 !== 'select')
-                            {{$test->test_name3}}
-                                
-                            @endif
-                            @if ($test->test_name4 !== 'select')
-                            {{$test->test_name4}}
-                                
-                            @endif
-                            @if ($test->test_name5 !== 'select')
-                            {{$test->test_name5}}
-                                
-                            @endif
-                            @if ($test->test_name6 !== 'select')
-                            {{$test->test_name6}}
-                                
-                            @endif
+                            {{$test->test_name}}
                        </td>
                         <td>{{$test->doc_name}}</td>
                         <td>{{$test->status}}</td>
@@ -651,20 +662,52 @@
                                            <div class="col-md-3">
                                                <div class="iq-card shadow-none mb-0">
                                                    <div class="iq-card-body p-1">
-                                                         <span class="font-size-14">Genotype</span>
+                                                         <span class="font-size-14">Blood Pressure</span>
+                                                         @if ($record->bp == '')
+                                                             
                                                          <h6>
-                                                             {{$record->genotype}}
-                                                         </h6>
+                                                            N/A
+                                                        </h6>
+                                                        @else
+                                                        
+                                                        <h6>
+                                                            {{$record->bp}}
+                                                        </h6>
+                                                         @endif
                                                    </div>
                                                </div>
                                            </div>
                                            <div class="col-md-3">
                                                <div class="iq-card shadow-none mb-0">
                                                    <div class="iq-card-body p-1">
-                                                         <span class="font-size-14">Blood Group</span>
+                                                         <span class="font-size-14">Temperature</span>
+                                                         @if ($record->temp == '')
+                                                             
                                                          <h6>
-                                                             {{$record->b_group}}
+                                                            N/A
+                                                        </h6>
+                                                        @else
+                                                         <h6>
+                                                             {{$record->temp}}
                                                          </h6>
+                                                         @endif
+                                                   </div>
+                                               </div>
+                                           </div>
+                                           <div class="col-md-3">
+                                               <div class="iq-card shadow-none mb-0">
+                                                   <div class="iq-card-body p-1">
+                                                         <span class="font-size-14">FBS/RBS</span>
+                                                         @if ($record->fbs_rbs == '')
+                                                             
+                                                         <h6>
+                                                            N/A
+                                                        </h6>
+                                                        @else
+                                                         <h6>
+                                                             {{$record->fbs_rbs}}
+                                                         </h6>
+                                                         @endif
                                                    </div>
                                                </div>
                                            </div>
@@ -672,10 +715,17 @@
                                                <div class="iq-card shadow-none mb-0">
                                                    <div class="iq-card-body p-1">
                                                       <div class="">
-                                                         <span class="font-size-14">Weight</span>
+                                                          <span class="font-size-14">Height</span>
+                                                         @if ($record->height == '')
+                                                             
                                                          <h6>
-                                                             {{$record->weight}}kg
+                                                            N/A
+                                                        </h6>
+                                                        @else
+                                                         <h6>
+                                                             {{$record->height}}cm
                                                          </h6>
+                                                         @endif
          
                                                       </div>
                                                    </div>
@@ -685,62 +735,36 @@
                                                <div class="iq-card shadow-none mb-0">
                                                    <div class="iq-card-body p-1">
                                                       <div class="">
-                                                         <span class="font-size-14">Height</span>
+                                                         <span class="font-size-14">Glucose Level</span>
+                                                         @if ($record->glucose == '')
+                                                             
                                                          <h6>
-                                                             {{$record->height}}
+                                                            N/A
+                                                        </h6>
+                                                        @else
+                                                         <h6>
+                                                             {{$record->glucose}}
                                                          </h6>
+                                                         @endif
          
                                                       </div>
                                                    </div>
                                                </div>
                                             </div>
-                                               <div class="col-md-3">
-                                                   <div class="iq-card shadow-none mb-0">
-                                                       <div class="iq-card-body p-1">
-                                                             <span class="font-size-14">Oxygen Saturation</span>
-                                                             <h6>
-                                                                 {{$record->oxygen}}%
-                                                             </h6>
-                                                       </div>
-                                                   </div>
-                                               </div>
-                                               <div class="col-md-3">
-                                                   <div class="iq-card shadow-none mb-0">
-                                                       <div class="iq-card-body p-1">
-                                                             <span class="font-size-14">Glucose level</span>
-                                                             <h6>
-                                                                 {{$record->glucose}}%
-                                                             </h6>
-                                                       </div>
-                                                   </div>
-                                               </div>
-                                               <div class="col-md-3">
-                                                   <div class="iq-card shadow-none mb-0">
-                                                       <div class="iq-card-body p-1">
-                                                             <span class="font-size-14">Respiratory rate</span>
-                                                             <h6>
-                                                                 {{$record->r_rate}}%
-                                                             </h6>
-                                                       </div>
-                                                   </div>
-                                               </div>
-                                               <div class="col-md-3">
-                                                   <div class="iq-card shadow-none mb-0">
-                                                       <div class="iq-card-body p-1">
-                                                             <span class="font-size-14">BMI</span>
-                                                             <h6>
-                                                                 {{$record->BMI}}
-                                                             </h6>
-                                                       </div>
-                                                   </div>
-                                               </div>
                                                <div class="col-md-12">
                                                    <div class="iq-card shadow-none mb-0">
                                                        <div class="iq-card-body p-1">
                                                              <span class="font-size-14">General Note</span>
+                                                             @if ($record->note == '')
+                                                                 
                                                              <h6>
-                                                                 {{$record->note}}
+                                                                N/A
+                                                            </h6>
+                                                            @else
+                                                             <h6>
+                                                                 {!!$record->note!!}
                                                              </h6>
+                                                             @endif
                                                        </div>
                                                    </div>
                                                </div>
@@ -770,15 +794,12 @@
                                                       <th>Date</th>
                                                       <th>Temperature</th>
                                                       <th>BP</th>
-                                                      <th>Heart Rate</th>
+                                                      <th>FBS/RBS</th>
                                                       <th>Genotype</th>
                                                       <th>Blood Group</th>
                                                       <th>Weight</th>
                                                       <th>Height</th>
-                                                      <th>Oxygen Saturation</th>
                                                       <th>Glucose Level</th>
-                                                      <th>Respiratory Rate</th>
-                                                      <th>BMI</th>
                                                       <th>Note</th>
                                                    </tr>
                                                </thead>
@@ -788,15 +809,12 @@
                                                       <td class="text-center">{{$record->created_at}}</td>
                                                       <td>{{$record->temp}}</td>
                                                       <td>{{$record->bp}}</td>
-                                                      <td>{{$record->h_rate}}</td>
+                                                      <td>{{$record->fbs_rbs}}</td>
                                                       <td>{{$record->genotype}}</td>
                                                       <td>{{$record->b_group}}</td>
                                                       <td>{{$record->weight}}</td>
                                                       <td>{{$record->height}}</td>
-                                                      <td>{{$record->oxygen}}</td>
                                                       <td>{{$record->glucose}}</td>
-                                                      <td>{{$record->r_rate}}</td>
-                                                      <td>{{$record->BMI}}</td>
                                                       <td>{!!$record->note!!}</td>
                                                    </tr> 
                                                          @endforeach                      

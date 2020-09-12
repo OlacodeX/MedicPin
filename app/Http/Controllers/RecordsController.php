@@ -76,7 +76,7 @@ class RecordsController extends Controller
             'height' => 'nullable',
             'weight' => 'nullable',
             'genotype' => 'nullable',
-            'h_rate' => 'nullable',
+            'fbs/rbs' => 'nullable',
             'bp' => 'nullable',
             'b_group' => 'nullable',
             ]);  
@@ -95,8 +95,8 @@ class RecordsController extends Controller
              if($request->input('genotype')!== 'select'){
              $patient->genotype = $request->input('genotype');
              }
-             if(!empty($request->input('h_rate'))){
-             $patient->h_rate = $request->input('h_rate');
+             if(!empty($request->input('fbs/rbs'))){
+             $patient->fbs_rbs = $request->input('fbs/rbs');
              }
              if(!empty($request->input('bp'))){
              $patient->bp = $request->input('bp');

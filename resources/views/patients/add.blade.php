@@ -117,7 +117,7 @@
                                          width: 200px;
                                       }
                                    </style>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
                                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo"><label for="Blood Group"><i class="fa fa-plus"></i> Blood Group</label></button>
                                        
                                        <div id="demo" class="collapse">
@@ -132,7 +132,7 @@
                                        </select>
                                        </div>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
                                        
                                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo1"><label for="bp"><i class="fa fa-plus"></i>Blood Pressure</label></button>
                                        
@@ -140,53 +140,56 @@
                                        <input type="text" class="form-control" id="bp" name="bp" placeholder="Blood Pressure">
                                     </div>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo2"><label for="h_rate"><i class="fa fa-plus"></i>Heart Rate</label></button>
+                                    <div class="form-group col-md-3">
+                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo2"><label for="fbs/rbs"><i class="fa fa-plus"></i>FBS/RBS</label></button>
                                           <div id="demo2" class="collapse">
-                                          <input type="text" class="form-control" id="h_rate" name="h_rate" placeholder="Heart Rate in %">
+                                          <input type="text" class="form-control" id="fbs/rbs" name="fbs/rbs" placeholder="fbs/rbs">
                                           </div>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
                                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo3"><label for="genotype"><i class="fa fa-plus"></i>Genotype</label></button>
                                        <div id="demo3" class="collapse">
                                        <select class="form-control" id="selectgenotype" name="genotype">
                                           <option value="N/A">Select</option>
                                           <option value="AA">AA</option>
+                                          <option value="AC">AC</option>
                                           <option value="AS">AS</option>
                                           <option value="SS">SS</option>
                                        </select>
                                        </div>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
                                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo4"><label for="weight"><i class="fa fa-plus"></i>Weight</label></button>
                                        <div id="demo4" class="collapse">
                                        <input type="text" class="form-control" id="weight" name="weight" placeholder="Weight in kg">
                                        </div>
                                     </div>
-                                     <div class="form-group col-md-6">
+                                     <div class="form-group col-md-3">
                                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo5"><label for="height"><i class="fa fa-plus"></i>Height</label></button>
                                        <div id="demo5" class="collapse">
                                        <input type="text" class="form-control" id="height" name="height" placeholder="Height in cm">
                                        </div>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
                                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo6"><label for="temprature"><i class="fa fa-plus"></i>Temperature</label></button>
                                        <div id="demo6" class="collapse">
                                        <input type="text" class="form-control" id="temprature" name="temprature" placeholder="Temprature in Celsius">
                                        </div>
                                     </div>
+                                    <!---
                                     <div class="form-group col-md-6">
                                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo7"><label for="height"><i class="fa fa-plus"></i>Oxygen Saturation</label></button>
                                       <div id="demo7" class="collapse">
                                       <input type="text" class="form-control" id="oxygen" name="oxygen" placeholder="Oxygen Saturation in %">
                                       </div>
-                                    </div>
-                                   <div class="form-group col-md-6">
+                                    </div>---->
+                                   <div class="form-group col-md-3">
                                     <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo8"><label for="temprature"><i class="fa fa-plus"></i>Glucose Level</label></button>
                                       <div id="demo8" class="collapse">
                                       <input type="text" class="form-control" id="glucose" name="glucose" placeholder="Glucose level in %">
                                       </div>
                                     </div>
+                                    <!---
                                    <div class="form-group col-md-6">
                                     <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo9"><label for="height"><i class="fa fa-plus"></i>Respiratory Rate</label></button>
                                      <div id="demo9" class="collapse">
@@ -198,7 +201,10 @@
                                      <div id="demo10" class="collapse">
                                      <input type="text" class="form-control" id="bmi" name="bmi" placeholder="BMI">
                                      </div>
-                                  </div>
+                                  </div>--->
+                                  <div class="col-md-12">
+                                    <p class="mb-3">Official Use</p>
+                                 </div>
                                         <div class="form-group col-md-6">
                                           <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo13"><label for="comment"><i class="fa fa-plus"></i>Doctor's Comment</label></button>
                                            <div id="demo13" class="collapse">
@@ -211,12 +217,6 @@
                                          <textarea class="form-control" id="note" name="note" placeholder="General note on patient medical status"></textarea>
                                          </div>
                                       </div>
-                                  <div class="form-group col-md-6">
-                                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo12"><label for="temprature"><i class="fa fa-plus"></i>Drug Prescription</label></button>
-                                     <div id="demo12" class="collapse">
-                                     <textarea class="form-control" id="pre" name="pre" placeholder="Drug prescriptions..."></textarea>
-                                     </div>
-                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary" style="margin-bottom: 80px;">Create Record</button>
                                 {!! Form::close() !!} 
@@ -234,13 +234,12 @@
                                                    <label for="with">Test</label>
                                                    <select class="form-control" id="test1" name="test1">
                                                       <option>Select</option>
-                                                      <option value="Malaria">Malaria</option>
-                                                      <option value="Malaria">Malaria</option>
-                                                      <option value="Malaria">Malaria</option>
-                                                      <option value="Malaria">Malaria</option>
-                                                      <option value="Malaria">Malaria</option>
-                                                      <option value="Malaria">Malaria</option>
-                                                      <option value="Malaria">Malaria</option>
+                                                      <option value="Fever">Fever</option>
+                                                      <option value="Tuberculosis">Tuberculosis</option>
+                                                      <option value="Rabies">Rabies</option>
+                                                      <option value="Hepatitis">Hepatitis</option>
+                                                      <option value="STD">STD</option>
+                                                      <option value="Diarrhea">Diarrhea</option>
                                                       <option value="Malaria">Malaria</option>
                                                    </select>
                                                 </div>
@@ -248,13 +247,12 @@
                                                    <label for="with">Test</label>
                                                    <select class="form-control" id="test2" name="test2">
                                                       <option>Select</option>
-                                                      <option value="Malaria">Malaria</option>
-                                                      <option value="Malaria">Malaria</option>
-                                                      <option value="Malaria">Malaria</option>
-                                                      <option value="Malaria">Malaria</option>
-                                                      <option value="Malaria">Malaria</option>
-                                                      <option value="Malaria">Malaria</option>
-                                                      <option value="Malaria">Malaria</option>
+                                                      <option value="Fever">Fever</option>
+                                                      <option value="Tuberculosis">Tuberculosis</option>
+                                                      <option value="Rabies">Rabies</option>
+                                                      <option value="Hepatitis">Hepatitis</option>
+                                                      <option value="STD">STD</option>
+                                                      <option value="Diarrhea">Diarrhea</option>
                                                       <option value="Malaria">Malaria</option>
                                                    </select>
                                                 </div>
@@ -294,11 +292,11 @@
                                                 <option>Select</option>
                                                 <option value="Acne">Acne</option>
                                                 <option value="Fever">Fever</option>
-                                                <option value="Malaria">Malaria</option>
-                                                <option value="Malaria">Malaria</option>
-                                                <option value="Malaria">Malaria</option>
-                                                <option value="Malaria">Malaria</option>
-                                                <option value="Malaria">Malaria</option>
+                                                <option value="Tuberculosis">Tuberculosis</option>
+                                                <option value="Rabies">Rabies</option>
+                                                <option value="Hepatitis">Hepatitis</option>
+                                                <option value="STD">STD</option>
+                                                <option value="Diarrhea">Diarrhea</option>
                                                 <option value="Malaria">Malaria</option>
                                              </select>
                                           </div>
