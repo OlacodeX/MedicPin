@@ -64,7 +64,7 @@ class RegisterController extends Controller
             'add' => ['nullable', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:255'],
             'cc' => ['nullable', 'string', 'max:255'],
-            'occupation' => ['nullable', 'string', 'max:255'],
+            //'occupation' => ['nullable', 'string', 'max:255'],
             'nok' => ['nullable', 'string', 'max:255'],
             'nokp' => ['nullable', 'string', 'max:255'],
         ]);
@@ -110,7 +110,7 @@ class RegisterController extends Controller
                 //'img' =>  $fileNameTostore,
                 'gender' => $data['gender'],
                 //'twitter' => $data['twitter'],
-                'occupation' => $data['occupation'],
+                //'occupation' => $data['occupation'],
                 'username' => $data['username'],
                 'Phone' => $data['cc'].$data['phone'],
                 'nok' => $data['nok'],
