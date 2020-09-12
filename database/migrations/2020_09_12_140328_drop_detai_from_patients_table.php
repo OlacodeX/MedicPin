@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddMoreDetaiToPatientsTable extends Migration
+class DropDetaiFromPatientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,7 +16,6 @@ class AddMoreDetaiToPatientsTable extends Migration
         Schema::table('patients', function (Blueprint $table) {
             //
             $table->dropColumn('phone');
-            $table->string('phone')->nullable();
         });
     }
 
@@ -29,7 +28,6 @@ class AddMoreDetaiToPatientsTable extends Migration
     {
         Schema::table('patients', function (Blueprint $table) {
             //
-            $table->dropColumn('phone');
         });
     }
 }
