@@ -17,8 +17,6 @@ class AddMoreDetailToPatientsTable extends Migration
             //
             $table->string('occupation')->nullable();
             $table->string('cc')->nullable();
-            $table->string('nok')->nullable();
-            $table->string('nok_phone')->nullable();
             $table->string('nok_relation')->nullable();
             $table->string('status')->nullable();
         });
@@ -36,10 +34,7 @@ class AddMoreDetailToPatientsTable extends Migration
             $table->dropColumn('occupation');
  
             $table->dropColumn('cc');
- 
-            $table->dropColumn('nok');
- 
-            $table->dropColumn('nok_phone'); 
+
             $table->dropColumn('nok_relation');
  
             $table->dropColumn('status');
