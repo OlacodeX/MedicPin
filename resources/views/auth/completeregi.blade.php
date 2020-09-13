@@ -354,10 +354,10 @@
                                    </select>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control mb-0" name="orgname" id="orgname" style="display: none;" placeholder="Enter organisation name">
+                                    <input type="text" class="form-control mb-0" name="hmo_org" id="orgname" style="display: none;" placeholder="Enter organisation name">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control mb-0" name="hmoname" id="hmoname" style="display: none;" placeholder="Enter HMO name">
+                                    <input type="text" class="form-control mb-0" name="hmo_org" id="hmoname" style="display: none;" placeholder="Enter HMO name">
                                 </div>
                                 <div class="form-group">
                             <select class="form-control mb-0" id="role" name="role" onchange="yesnoCheck(this);" style="display: none;">

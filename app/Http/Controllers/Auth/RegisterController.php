@@ -64,7 +64,7 @@ class RegisterController extends Controller
             'add' => ['nullable', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:255'],
             'cc' => ['nullable', 'string', 'max:255'],
-            'hmo_org_name' => ['nullable', 'string', 'max:255'],
+            'hmo_org' => ['nullable', 'string', 'max:255'],
             //'occupation' => ['nullable', 'string', 'max:255'],
             //'nok' => ['nullable', 'string', 'max:255'],
             //'nokp' => ['nullable', 'string', 'max:255'],
