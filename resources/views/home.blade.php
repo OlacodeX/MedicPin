@@ -4,7 +4,157 @@
 @endsection
 @section('content')
 @include('inc.navmain')
-
+@if (auth()->user()->role == 'HMO')
+    
+         <!-- TOP Nav Bar END -->
+         <div class="">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="row">
+                     <div class="col-md-6 col-lg-6">
+                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                           <div class="iq-card-body iq-bg-primary rounded">
+                              <div class="d-flex align-items-center justify-content-between">
+                                 <div class="rounded-circle iq-card-icon bg-primary"><i class="ri-user-fill"></i></div>
+                                 <div class="text-right">                                 
+                                 <h2 class="mb-0"><span class="counter">{{App\User::where('hmo',auth()->user()->id)->count()}}</span></h2>
+                                    <h5 class="">Users</h5>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-lg-6">
+                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                           <div class="iq-card-body iq-bg-warning rounded">
+                              <div class="d-flex align-items-center justify-content-between">
+                                 <div class="rounded-circle iq-card-icon bg-warning"><i class="ri-women-fill"></i></div>
+                                 <div class="text-right">                                 
+                                    <h2 class="mb-0"><span class="counter">{{App\HMO::where('hmo',auth()->user()->id)->count()}}</span></h2>
+                                    <h5 class="">Package(s)</h5>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!----
+                     <div class="col-md-6 col-lg-3">
+                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                           <div class="iq-card-body iq-bg-danger rounded">
+                              <div class="d-flex align-items-center justify-content-between">
+                                 <div class="rounded-circle iq-card-icon bg-danger"><i class="ri-group-fill"></i></div>
+                                 <div class="text-right">                                 
+                                    <h2 class="mb-0"><span class="counter">3500</span></h2>
+                                    <h5 class="">Patients</h5>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-lg-3">
+                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                           <div class="iq-card-body iq-bg-info rounded">
+                              <div class="d-flex align-items-center justify-content-between">
+                                 <div class="rounded-circle iq-card-icon bg-info"><i class="ri-hospital-line"></i></div>
+                                 <div class="text-right">                                 
+                                    <h2 class="mb-0"><span class="counter">4500</span></h2>
+                                    <h5 class="">Pharmacists</h5>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>---->
+                  </div>
+               </div>
+               <div class="col-sm-12" style="margin-bottom: 200px;">
+                  <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                     <div class="iq-card-body pb-0 mt-3">       
+                      <style>
+                         /* enable absolute positioning */
+                 .inner-addon {
+                   position: relative;
+                 }
+                 
+                 /* style glyph */
+                 .inner-addon .fa {
+                   position: absolute;
+                   padding: 10px;
+                   pointer-events: none;
+                   color: #0178ff7b;
+                   font-weight: 900;
+                 }
+                 
+                 /* align glyph 
+                 .left-addon .fa  { left:  0px;}*/
+                 .right-addon .fa { right: 260px;}
+                 
+                 /* add padding 
+                 .left-addon input  { padding-left:  30px; } */
+                 .right-addon input { padding-right: 30px; }
+                          div.panel-body,
+                          div.panel-default{
+                              border-radius: 0;
+                              border-top: none;
+                          }
+                          .btn.btn-info.btn-sm{
+                              background: transparent;
+                              border: none;
+                              color: rgb(20, 109, 224);
+                          }
+                          
+                          
+                          .btn.btn-info.btn-sm i.fa{
+                              font-size: 12px;
+                              margin: 0;
+                          }
+                        @media only screen and (max-width: 768px) {
+                 /* align glyph 
+                 .left-addon .fa  { left:  0px;}*/
+                 .right-addon .fa { right: 20px;}
+                 
+                           
+                          .btn.btn-info.btn-sm{
+                              background: transparent;
+                              border: none;
+                              color: rgb(20, 109, 224);
+                              float: right;
+                              display: inline;
+                          }
+                          
+                          .btn.btn-info.btn-sm i.fa{
+                              font-size: 12px;
+                              margin: 0;
+                              padding: 0;
+                          }
+                          div.panel-body span.pull-left{
+                              font-size: 12px;
+                              margin-bottom: 0;
+                          }
+                          div.panel-body span.user-list-files.d-flex.float-right{
+                             margin-top: 0;
+                          }
+                        }
+                      </style>
+                          <span class="pull-left">{{auth()->user()->hmo_org_name}}</span>
+                          <span class="user-list-files d-flex float-right">
+ 
+                             {!!Form::open(['action' => 'HmoController@create', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
+                            
+                             <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add New Package"><i class="fa fa-plus"></i></button>
+                            
+                             {!!Form::close()!!}
+ 
+                             {!!Form::open(['action' => 'HospitalController@add_staff', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                            
+                             {{Form::hidden('id', auth()->user()->id)}}
+                             <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add Hospital"><i class="ri-home-8-fill"></i></button>
+                            
+                             {!!Form::close()!!}
+                           </span>
+                     </div>   
+                  </div>
+                </div>
+@endif
 @if (auth()->user()->role == 'Biochemist/Microbiologist')
            <div class="">
             @include('inc.messages')
@@ -1265,6 +1415,7 @@
            
                  <div class="row">
                     <div class="col-lg-6">
+                       <!--
                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                           <div class="iq-card-header d-flex justify-content-between">
                              <div class="iq-header-title">
@@ -1273,8 +1424,9 @@
                            <div class="iq-card-header-toolbar d-flex align-items-center">
                                <a href="./notifications" class="">See all</a>
                            </div>
-                          </div>
+                          </div>--->
                             <!---- <div id="home-chart-03" style="height: 280px;"></div>--->
+                            <!---
                            @if (count($notice_sents) > 0)
                            <div class="iq-card-body">
                                @foreach ($notice_sents as $notice_sent)
@@ -1293,8 +1445,72 @@
                            @else
                            <p class="text-center">No Sent Notifications Yet</p> 
                            @endif
-                           </div>
-                        </div>  
+                           </div>--->
+                       <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                        <div class="iq-card-header d-flex justify-content-between">
+                           <div class="iq-header-title">
+                             <h4 class="card-title">Have A Question?</h4>
+                             <small>Ask your fellow doctors on MedicPin</small>
+                         </div>
+                         <div class="iq-card-header-toolbar d-flex align-items-center">
+                             <a href="./notifications" class="">See all</a>
+                         </div>
+                        </div>
+                          <!---- <div id="home-chart-03" style="height: 280px;"></div>--->
+                         <div class="iq-card-body">
+                            {!! Form::open(['action' => 'QuestionsController@store', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
+                            **/ !!}
+                                        <div class="form-group">
+                                            <p>Ask whatever is it on your mind and a specialist/colleague will answer you ASAP</p>
+                                           <textarea class="form-control" id="question" name="question" placeholder="Your question here..."></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                          <select class="form-control mb-0" id="selectex" name="expertise">
+                                             <option value="">--Who should answer?--</option>
+                                             <option value="All Doctors">All Doctors</option>
+                                             <option value="Allergists/Immunologist">Allergists/Immunologist</option>
+                                             <option value="Anesthesiologist">Anesthesiologist</option>
+                                             <option value="Cardiologist">Cardiologist</option>
+                                             <option value="Colon and Rectal Surgeon">Colon and Rectal Surgeon</option>
+                                             <option value="Critical Care Medicine Specialist">Critical Care Medicine Specialist</option>
+                                             <option value="Dermatologist">Dermatologist</option>
+                                             <option value="Endocrinologist">Endocrinologist</option>
+                                             <option value="Emergency Medicine Specialist">Emergency Medicine Specialist</option>
+                                             <option value="Family Physician">Family Physician</option>
+                                             <option value="Gastroenterologist">Gastroenterologist</option>
+                                             <option value="Geriatric Medicine Specialist">Geriatric Medicine Specialist</option>
+                                             <option value="Hematologist">Hematologist</option>
+                                             <option value="Hospice and Palliative Medicine Specialist">Hospice and Palliative Medicine Specialist</option>
+                                             <option value="Infectious Disease Specialist">Infectious Disease Specialist</option>
+                                             <option value="Internist">Internist</option>
+                                             <option value="Medical Geneticist">Medical Geneticist</option>
+                                             <option value="Nephrologist">Nephrologist</option>
+                                             <option value="Neurologist">Neurologist</option>
+                                             <option value="Obstetricians and Gynecologist">Obstetricians and Gynecologist</option>
+                                             <option value="Oncologist">Oncologist</option>
+                                             <option value="Ophthalmologist">Ophthalmologist</option>
+                                             <option value="Osteopath">Osteopath</option>
+                                             <option value="Otolaryngologist">Otolaryngologist</option>
+                                             <option value="Pathologist">Pathologist</option>
+                                             <option value="Pediatrician">Pediatrician</option>
+                                             <option value="Physiatrist">Physiatrist</option>
+                                             <option value="Plastic Surgeon">Plastic Surgeon</option>
+                                             <option value="Podiatrist">Podiatrist</option>
+                                             <option value="Preventive Medicine Specialist">Preventive Medicine Specialist</option>
+                                             <option value="Psychiatrist">Psychiatrist</option>
+                                             <option value="Pulmonologist">Pulmonologist</option>
+                                             <option value="Radiologist">Radiologist</option>
+                                             <option value="Rheumatologist">Rheumatologist</option>
+                                             <option value="Sleep Medicine Specialist">Sleep Medicine Specialist</option>
+                                             <option value="Sports Medicine Specialist">Sports Medicine Specialist</option>
+                                             <option value="General Surgeon">General Surgeon</option>
+                                             <option value="Urologist">Urologist</option>
+                                          </select>
+                                       </div>
+                                    <button type="submit" class="btn btn-primary">Ask Question</button>
+                                    {!! Form::close() !!}
+                         </div>
+                      </div>    
                           </div>
                  <div class="col-lg-6">
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">

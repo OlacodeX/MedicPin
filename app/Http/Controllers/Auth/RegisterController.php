@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role' => ['required', 'string', 'max:255'],
+            'role' => ['nullable', 'string', 'max:255'],
             'pp' => ['nullable', 'max:2000'],
             'gender' => ['nullable', 'string', 'max:255'],
             'nhis' => ['nullable', 'string', 'max:255'],
@@ -64,6 +64,7 @@ class RegisterController extends Controller
             'add' => ['nullable', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:255'],
             'cc' => ['nullable', 'string', 'max:255'],
+            'hmo_org_name' => ['nullable', 'string', 'max:255'],
             //'occupation' => ['nullable', 'string', 'max:255'],
             //'nok' => ['nullable', 'string', 'max:255'],
             //'nokp' => ['nullable', 'string', 'max:255'],
@@ -121,6 +122,26 @@ class RegisterController extends Controller
                 //patients::where('email', $data['email'])->get('status') => $data['status'],
             ]);
            }
+           if ($data['type'] == 'HMO' || $data['type'] == 'Organization') {
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'role' => $data['type'],
+                'img' =>  $fileNameTostore,
+                'gender' => $data['gender'],
+                'type' => $data['type'],
+                'hmo_org_name' => $data['hmo_org'],
+                //'facebook' => $data['facebook'],
+                'expertise' => $data['expertise'],
+                'p_number' => $data['phone'],
+                'cc' => $data['cc'],
+                'nhis' => $data['nhis'],
+                'pin' => $pin,
+                'password' => Hash::make($data['password']),
+                //patients::where('email', $data['email'])->get('status') => $data['status'],
+            ]);
+           }
+           else{
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -137,6 +158,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             //patients::where('email', $data['email'])->get('status') => $data['status'],
         ]);
+    }
         //$pt = patients::find($data['email'])->get('status');
         //$pt = 'active';
         //$pt->save(); 

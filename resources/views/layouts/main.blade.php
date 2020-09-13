@@ -218,6 +218,21 @@
       } else {
           document.getElementById("selectex").style.display = "none";
       }
+      if (that.value == "HMO") {
+          document.getElementById("hmoname").style.display = "block";
+          document.getElementById("role").style.display = "none";
+      } else {
+          document.getElementById("hmoname").style.display = "none";
+      }
+      if (that.value == "Organization") {
+          document.getElementById("orgname").style.display = "block";
+          document.getElementById("role").style.display = "none";
+      } else {
+          document.getElementById("orgname").style.display = "none";
+      }
+      if (that.value == "Personal/Individual") {
+         document.getElementById("role").style.display = "block";
+      } 
       if (that.value == "Patient") {
           document.getElementById("nhis").style.display = "block";
           document.getElementById("add").style.display = "block";

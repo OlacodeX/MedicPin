@@ -304,6 +304,7 @@
             CKEDITOR.replace( 'pre' );
             CKEDITOR.replace( 'question' );
             CKEDITOR.replace( 'note' );
+            CKEDITOR.replace( 'value' );
          </script> 
         
     </body>

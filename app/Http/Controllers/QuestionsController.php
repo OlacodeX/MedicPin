@@ -68,17 +68,41 @@ class QuestionsController extends Controller
         $data = request()->validate([
             'question' => 'required',
         ]); 
-        
+        if (!empty($request->input('expertise'))) {
+            $question = new Questions;
+            $question->question  =  $request->input('question');
+            $question->asker_name = auth()->user()->name;
+            $question->asker_email = auth()->user()->email;
+            $question->asker_id = auth()->user()->id;
+            $question->asker_pin = auth()->user()->pin;
+            $question->asker_role = auth()->user()->role;
+            $question->question_cat = $request->input('expertise');
+            //Save to db
+            $question->save();
+            if ($request->input('expertise') == 'All Doctors') {
+                $doctors = User::where('role', 'Doctor')->select('email')->pluck('email');
+               Mail::to($doctors)->send(new QuestionNotificationMail($data));
+            }
+            else{
+             $doctors = User::where('role', 'Doctor')->where('expertise', $request->input('expertise'))->select('email')->pluck('email');
+
+            Mail::to($doctors)->send(new QuestionNotificationMail($data));
+        }
+        }
+        else{
         $question = new Questions;
         $question->question  =  $request->input('question');
         $question->asker_name = auth()->user()->name;
         $question->asker_email = auth()->user()->email;
         $question->asker_id = auth()->user()->id;
         $question->asker_pin = auth()->user()->pin;
+        $question->asker_role = auth()->user()->role;
+
         //Save to db
         $question->save();
          $doctors = User::where('role', 'Doctor')->select('email')->pluck('email');
         Mail::to($doctors)->send(new QuestionNotificationMail($data));
+    }
         //print success message and redirect
         return redirect('/dashboard')->with('success', 'Question Received!');//I just set the message for session(success).
 
@@ -176,6 +200,9 @@ class QuestionsController extends Controller
             'question' => 'nullable',
             ]);  
             $question = Questions::find($id);
+            if (!empty($request->input('expertise'))) {
+                $question->question_cat = $request->input('expertise');
+            }
             $question->question =  $request->input('question');
             //Save to db
             $question->save();

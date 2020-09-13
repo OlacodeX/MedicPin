@@ -25,6 +25,7 @@ Route::post('/complete_sign_up_patient', 'PagesController@complete_sign_up_patie
 Route::post('/store_transfer', 'PatientsController@store_transfer');
 Route::resource('/patients', 'PatientsController');
 Route::post('/search_result', 'PatientsController@search');
+Route::post('/result', 'PagesController@search');
 Route::post('/reg_patient', 'PatientsController@reg_patient');
 Route::post('/transfer_patient', 'PatientsController@transfer');
 Route::get('/transfered_patients', 'PatientsController@transfered');
@@ -97,3 +98,5 @@ Route::resource('/inpatients', 'AdmissionController');
 //visitors
 Route::resource('/visitors', 'VisitorController');
 Route::post('/visitors_list', 'VisitorController@other');
+//hmo
+Route::resource('/packages', 'HmoController');

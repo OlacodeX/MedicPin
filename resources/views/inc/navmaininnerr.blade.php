@@ -443,10 +443,15 @@
               </div>
               <nav class="navbar navbar-expand-lg navbar-light p-0">
                  <div class="iq-search-bar">
-                    <form action="#" class="searchbox">
-                       <input type="text" class="text search-input" placeholder="Type here to search...">
-                       <a class="search-link" href="#"><i class="ri-search-line"></i></a>
-                    </form>
+                  {!! Form::open(['action' => 'PagesController@search', 'method' => 'POST', 'class' => 'searchbox', 'id' => 'my_form_1']) !!}
+                     <style>
+                        input.text.search-input{
+                           font-size: 13px;
+                        }
+                     </style>
+                       <input type="text" name="pin" class="text search-input" placeholder="Enter MedicPin to search For User...">
+                       <a class="search-link" href="javascript:{}" onclick="document.getElementById('my_form_1').submit();"><i class="ri-search-line"></i></a>
+                  {!! Form::close() !!}
                  </div>
                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                  <i class="ri-menu-3-line"></i>
@@ -521,15 +526,27 @@
                        <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
                           <img src="../../img/profile/{{auth()->user()->img}}" class="img-fluid rounded mr-3" alt="user">
                           <div class="caption">
-                             <h6 class="mb-0 line-height">{{auth()->user()->name}}</h6>
-                             <span class="font-size-12">Available</span>
-                          </div>
-                       </a>
-                       <div class="iq-sub-dropdown iq-user-dropdown">
-                          <div class="iq-card shadow-none m-0">
-                             <div class="iq-card-body p-0 ">
-                                <div class="bg-primary p-3">
-                                   <h5 class="mb-0 text-white line-height">Hello {{auth()->user()->name}}</h5>
+                           @if (auth()->user()->type == 'HMO' || auth()->user()->type == 'Organization')
+                           <h6 class="mb-0 line-height">{{auth()->user()->hmo_org_name}}</h6>
+                           @else
+                           <h6 class="mb-0 line-height">{{auth()->user()->name}}</h6>
+                           
+                           @endif
+                           <span class="font-size-12">Available</span>
+                        </div>
+                     </a>
+                     <div class="iq-sub-dropdown iq-user-dropdown">
+                        <div class="iq-card shadow-none m-0">
+                           <div class="iq-card-body p-0 ">
+                              <div class="bg-primary p-3">
+                                 <h5 class="mb-0 text-white line-height">Hello 
+                                  @if (auth()->user()->type == 'HMO' || auth()->user()->type == 'Organization')
+                                  {{auth()->user()->hmo_org_name}}
+                                  @else
+                                  {{auth()->user()->name}}
+                                  
+                                  @endif
+                                    
                                    <span class="text-white font-size-12">Available</span>
                                 </div>
                                 <a href="../../myprofile" class="iq-sub-card iq-bg-primary-hover">

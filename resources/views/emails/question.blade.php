@@ -1,6 +1,6 @@
 @component('mail::message')
 #Hi there,
-<p>{{ auth()->user()->name}} asked the following question on the forum:</p>
+<p>{{ auth()->user()->role}} {{ auth()->user()->name}} asked the following question on the forum:</p>
 <p>{!! $data['question']!!}</p>
 <p>We would appreciate your professional response.</p>
 @php

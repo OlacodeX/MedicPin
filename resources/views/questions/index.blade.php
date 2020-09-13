@@ -11,7 +11,7 @@
                  
                   <div class="iq-card-header d-flex justify-content-between">
                      <div class="iq-header-title">
-                       <h4 class="card-title" style="color:#02818f;">Recent Questions</h4>
+                       <h4 class="card-title" style="color:#02818f;">Recent Questions From Patients</h4>
                    </div>
                   </div>
                 @include('inc.messages')
@@ -125,9 +125,72 @@
                        </div>
   
                        @else
-                       <p class="text-center">No Questions in Forum Yet</p>    
-                       @endif
+                       <p class="text-center">No Questions From Patients in Forum Yet</p>    
+                       @endif <br><br>
+                        @php
+                            $doc_questions = App\Questions::/*where('question_cat', auth()->user()->expertise)*/where('question_cat', 'All Doctors')->paginate(10);
+                        @endphp
+                  @if (count($doc_questions) > 0)
+                  <h4 class="title">Questions From Your Fellow Doctors.</h4>
+                  @foreach ($doc_questions as $question)
+                     <br><a href="questions/{{$question->id}}">
+                     <div class="panel panel-default">
+                     <div class="panel-body">
+                        <small>{!!$question->created_at!!} </small><br>
+                        <span class="pull-left">
+                           
+                           {!!$question->question!!} 
+                        @if (auth()->user()->id == $question->asker_id)
+                           <button class ="btn btn-info btn-sm pull-right"><a href="questions/{{$question->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Question"><i class="fa fa-edit"></i></a></button>
+                               {!!Form::open(['action' => ['QuestionsController@destroy', $question->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                               {{Form::hidden('_method', 'DELETE')}}
+                              <button type="submit" class ="btn btn-info btn-sm pull-right" data-toggle="tooltip" data-placement="top" data-original-title="Delete Question"><i class="fa fa-trash-o"></i></button>
+                             
+                              {!!Form::close()!!}
+                        @endif
+                        <a href="questions/{{$question->id}}" class="pull-right" data-toggle="tooltip" data-placement="top" title="" data-original-title="View answers"> <i class="fa fa-comments"></i>({{App\Answers::where('question_id', $question->id)->count()}})</a>
+                     </span>
+                     </div>
+                     </div>
+                     </a><br>
+                     @endforeach
+
+                     @else
+                     <p class="text-justify" style="margin-left: 20px">No Questions From Your Fellow Doctors Yet</p>    
+                     @endif<br><br>
+                     @php
+                         $doctor_questions = App\Questions::where('question_cat', auth()->user()->expertise)/*->where('question_cat', 'All Doctors')*/->paginate(10);
+                     @endphp
+               <h4 class="title">Questions For {{auth()->user()->expertise}}.</h4>
+               @if (count($doctor_questions) > 0)
+               @foreach ($doctor_questions as $question)
+                  <br><a href="questions/{{$question->id}}">
+                  <div class="panel panel-default">
+                  <div class="panel-body">
+                     <small>{!!$question->created_at!!} </small><br>
+                     <span class="pull-left">
                         
+                        {!!$question->question!!} 
+                     @if (auth()->user()->id == $question->asker_id)
+                        <button class ="btn btn-info btn-sm pull-right"><a href="questions/{{$question->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Question"><i class="fa fa-edit"></i></a></button>
+                            {!!Form::open(['action' => ['QuestionsController@destroy', $question->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                            {{Form::hidden('_method', 'DELETE')}}
+                           <button type="submit" class ="btn btn-info btn-sm pull-right" data-toggle="tooltip" data-placement="top" data-original-title="Delete Question"><i class="fa fa-trash-o"></i></button>
+                          
+                           {!!Form::close()!!}
+                     @endif
+                     <a href="questions/{{$question->id}}" class="pull-right" data-toggle="tooltip" data-placement="top" title="" data-original-title="View answers"> <i class="fa fa-comments"></i>({{App\Answers::where('question_id', $question->id)->count()}})</a>
+                  </span>
+                  </div>
+                  </div>
+                  </a><br>
+                  @endforeach
+
+                  @else
+                  <p class="text-justify" style="margin-left: 20px">No Questions For {{auth()->user()->expertise}} Yet</p>    
+                  @endif
+
+
                     @endif
                     @if (auth()->user()->role == 'Patient')
                   @if (count($questions) > 0)

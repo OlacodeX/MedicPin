@@ -20,6 +20,52 @@
                                        <label for="question">Your Question</label>
                                        <textarea class="form-control" id="question" name="question" placeholder="Your question here..."></textarea>
                                     </div>
+                                    @if (auth()->user()->role == 'Doctor')
+                                    <div class="form-group">
+                                       <label for="question">Who should answer?</label>
+                                      <select class="form-control mb-0" id="selectex" name="expertise">
+                                         <option value="All Doctors">All Doctors</option>
+                                         <option value="Allergists/Immunologist">Allergists/Immunologist</option>
+                                         <option value="Anesthesiologist">Anesthesiologist</option>
+                                         <option value="Cardiologist">Cardiologist</option>
+                                         <option value="Colon and Rectal Surgeon">Colon and Rectal Surgeon</option>
+                                         <option value="Critical Care Medicine Specialist">Critical Care Medicine Specialist</option>
+                                         <option value="Dermatologist">Dermatologist</option>
+                                         <option value="Endocrinologist">Endocrinologist</option>
+                                         <option value="Emergency Medicine Specialist">Emergency Medicine Specialist</option>
+                                         <option value="Family Physician">Family Physician</option>
+                                         <option value="Gastroenterologist">Gastroenterologist</option>
+                                         <option value="Geriatric Medicine Specialist">Geriatric Medicine Specialist</option>
+                                         <option value="Hematologist">Hematologist</option>
+                                         <option value="Hospice and Palliative Medicine Specialist">Hospice and Palliative Medicine Specialist</option>
+                                         <option value="Infectious Disease Specialist">Infectious Disease Specialist</option>
+                                         <option value="Internist">Internist</option>
+                                         <option value="Medical Geneticist">Medical Geneticist</option>
+                                         <option value="Nephrologist">Nephrologist</option>
+                                         <option value="Neurologist">Neurologist</option>
+                                         <option value="Obstetricians and Gynecologist">Obstetricians and Gynecologist</option>
+                                         <option value="Oncologist">Oncologist</option>
+                                         <option value="Ophthalmologist">Ophthalmologist</option>
+                                         <option value="Osteopath">Osteopath</option>
+                                         <option value="Otolaryngologist">Otolaryngologist</option>
+                                         <option value="Pathologist">Pathologist</option>
+                                         <option value="Pediatrician">Pediatrician</option>
+                                         <option value="Physiatrist">Physiatrist</option>
+                                         <option value="Plastic Surgeon">Plastic Surgeon</option>
+                                         <option value="Podiatrist">Podiatrist</option>
+                                         <option value="Preventive Medicine Specialist">Preventive Medicine Specialist</option>
+                                         <option value="Psychiatrist">Psychiatrist</option>
+                                         <option value="Pulmonologist">Pulmonologist</option>
+                                         <option value="Radiologist">Radiologist</option>
+                                         <option value="Rheumatologist">Rheumatologist</option>
+                                         <option value="Sleep Medicine Specialist">Sleep Medicine Specialist</option>
+                                         <option value="Sports Medicine Specialist">Sports Medicine Specialist</option>
+                                         <option value="General Surgeon">General Surgeon</option>
+                                         <option value="Urologist">Urologist</option>
+                                      </select>
+                                   </div>
+                                        
+                                   @endif
                                 <button type="submit" class="btn btn-primary">Ask Question</button>
                                 {!! Form::close() !!}
                           </div>

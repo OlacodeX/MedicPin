@@ -346,14 +346,21 @@
                                 </div>
                                 </div>
                                 <div class="form-group">
-                            <select class="form-control mb-0" id="type" name="type">
+                            <select class="form-control mb-0" id="type" name="type" onchange="yesnoCheck(this);">
                                       <option value="">-select account type-</option>
-                                      <option value="Organization/HMO">Organization/HMO</option>
+                                      <option value="Organization">Organization</option>
+                                      <option value="HMO">HMO</option>
                                       <option value="Personal/Individual">Personal/Individual</option>
                                    </select>
                                 </div>
                                 <div class="form-group">
-                            <select class="form-control mb-0" id="role" name="role" onchange="yesnoCheck(this);">
+                                    <input type="text" class="form-control mb-0" name="orgname" id="orgname" style="display: none;" placeholder="Enter organisation name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control mb-0" name="hmoname" id="hmoname" style="display: none;" placeholder="Enter HMO name">
+                                </div>
+                                <div class="form-group">
+                            <select class="form-control mb-0" id="role" name="role" onchange="yesnoCheck(this);" style="display: none;">
                                       <option value="">-I am a...-</option>
                                       <option value="Nurse">Nurse</option>
                                       <option value="Pharmacist">Pharmacist</option>

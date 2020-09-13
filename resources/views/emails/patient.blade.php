@@ -1,6 +1,10 @@
 
 @component('mail::message')
+@if (!empty($data['name']))
 # Hello <strong>{{ $data['name']}},</strong>
+@else
+# Hello,
+@endif
 <p>We just want to notify you that Dr. {{auth()->user()->name}} has created a record for you here on Medicpin. </p>
  #Further steps
  <p>To complete your account set up, click the button below</p>

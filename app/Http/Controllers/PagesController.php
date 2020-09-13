@@ -325,4 +325,26 @@ class PagesController extends Controller
         return redirect('/dashboard')->with('success', 'Profile Updated');//I just set the message for session(success).
 
     }
+    /**
+         * Display a listing of the resource.
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function search()
+        {
+            $pin = $_POST['pin'];
+            $user = patients::where('doc_email', auth()->user()->email)->where('pin', $pin)->first();
+            $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+          
+            if (empty($user)) {
+                return redirect('/dashboard')->with('error', 'No user with this pin.');//I just set the message for session(success).
+   
+            } else{
+            $data = array(
+                'user' => $user,
+                'new_messages' => $new_messages
+       );
+            return view("patients.search_result", $data);
+        }
+    }
 }
