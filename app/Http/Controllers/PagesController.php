@@ -284,6 +284,7 @@ class PagesController extends Controller
             'cc' => ['nullable', 'string', 'max:255'],
         ]); 
         $id=$_POST['id'];
+        if (auth()->user()->role == 'Patient') {
         $patient = patients::where('pin', auth()->user()->pin)->first();
         $patient->name = $request->input('name');
         $patient->email = $request->input('email');
@@ -297,7 +298,7 @@ class PagesController extends Controller
         $patient->nok = $request->input('nok');
         $patient->nok_phone = $request->input('nokp');
         $patient->save();
-        $user = User::find($id); //Handle file upload
+        $user = User::where('id',$id)->first(); //Handle file upload
         if($request->hasFile('pp')){
           $filenameWithExt = $request->file('pp')->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
@@ -321,6 +322,36 @@ class PagesController extends Controller
         }
         //Save to db
         $user->save();
+        
+    }
+    else{
+        $user = User::where('id',$id)->first(); //Handle file upload
+        if($request->hasFile('pp')){
+          $filenameWithExt = $request->file('pp')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('pp')->getClientOriginalExtension();
+            $fileNameTostore = $request->input('name').'_'.time().'.'.$extension;
+            $path = $request->file('pp')->move('img/profile', $fileNameTostore);
+              }
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->p_number = $request->input('phone');
+        $user->cc = $request->input('cc');
+        $user->gender = $request->input('gender');
+        $user->role = $request->input('role');
+        $user->type = $request->input('type');
+        $user->twitter = $request->input('twitter');
+        $user->facebook = $request->input('facebook');
+        $user->nhis = $request->input('nhis');
+        $user->expertise = $request->input('expertise');
+        if($request->hasFile('pp')){
+        $user->img = $fileNameTostore;
+        }
+        //Save to db
+        $user->save();
+        
+
+    }
         //print success message and redirect
         return redirect('/dashboard')->with('success', 'Profile Updated');//I just set the message for session(success).
 

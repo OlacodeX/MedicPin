@@ -354,7 +354,7 @@
                                    </select>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control mb-0" name="hmo_org" id="orgname" style="display: none;" placeholder="Enter organisation name">
+                                    <input type="text" class="form-control mb-0" name="hmo_orgg" id="orgname" style="display: none;" placeholder="Enter organisation name">
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control mb-0" name="hmo_org" id="hmoname" style="display: none;" placeholder="Enter HMO name">

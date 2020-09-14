@@ -102,4 +102,10 @@ Route::post('/visitors_list', 'VisitorController@other');
 //hmo
 Route::resource('/packages', 'HmoController');
 Route::get('/add_hospital', 'HmoController@add_hospital');
+Route::get('/add_staff', 'HmoController@create_staff');
 Route::post('/store_hospital', 'HmoController@store_hospital');
+Route::post('/store_staff', 'HmoController@store_staff');
+Route::post('/store_add', 'HmoController@store_add');
+Route::get('/staff_list', 'HmoController@staff_list');
+Route::post('/add', 'HmoController@add');
+Route::post('/complete_add', 'HmoController@complete_add');

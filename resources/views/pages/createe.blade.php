@@ -9,7 +9,7 @@
                     <div class="iq-card">
                        <div class="iq-card-header d-flex justify-content-between">
                           <div class="iq-header-title">
-                             <h4 class="card-title">Add Hospital To HMO</h4>
+                             <h4 class="card-title">Add Staff Members</h4>
                           </div>
                        </div>
                        <div class="iq-card-body">
@@ -47,52 +47,58 @@
                                  <div class="iq-card" style="padding-bottom: 50px; padding-top: 20px;">
                                     <div class="iq-card-header d-flex justify-content-between">
                                        <div class="iq-header-title">
-                                          <h4 class="card-title">Hospital On MedicPin?</h4><!---
+                                          <h4 class="card-title">Staff On MedicPin?</h4><!---
                                <h6>Visitor On MedicPin? Enter Pin and We Will Get Their Details From Our Records</h6>
                                
                                  <p>Note that visitors are only welcomed between 9-11am mornings and 4-6pm evenings daily.</p>---->
                               </div>
                            </div>
                            <div class="iq-card-body">
-                                 {!! Form::open(['action' => 'HmoController@store_hospital', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
+                                 {!! Form::open(['action' => 'HmoController@store_staff', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
                                  **/ !!}
                                  <div class="row">
-                               <div class="form-group col-md-12">
-                               <label for="email">Hospital Email</label>
-                               <p>Enter the hospital email on Medicpin</p>
+                               <div class="form-group col-md-6">
+                               <label for="pin">Staff MedicPin</label>
                                <div class="inner-addon right-addon">
-                                   <i class="fa fa-envelope"></i>
-                               <input type="text" class="form-control" id="h_email" name="h_email" placeholder="Enter Hospital Email On MedicPin">
+                                   <i class="fa fa-expeditedssl"></i>
+                               <input type="text" class="form-control" id="pin" name="pin" placeholder="Enter Staff Pin On MedicPin">
                                </div>
+                               </div>
+                               <div class="form-group col-md-6">
+                                  <label for="address">Address</label>
+                                  <div class="inner-addon right-addon">
+                                      <i class="fa fa-map-signs"></i>
+                                  <input type="text" class="form-control" name="address" id="address" placeholder="Staff address">
+                                  </div>
                                </div>
                               </div>
                            </div>
-                              <button type="submit" class="btn btn-primary" style="margin-left: 20px;">Add Hospital</button>
+                              <button type="submit" class="btn btn-primary" style="margin-left: 20px;">Add Staff</button>
                               {!! Form::close() !!}
-                              {!! Form::open(['action' => 'HmoController@store_hospital', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
+                              {!! Form::open(['action' => 'HmoController@store_staff', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
                               **/ !!}
                               </div>
                               </div>
                               <hr>
                                    <div class="form-group col-md-6">
-                                      <label for="name">Hospital Name:</label>
+                                      <label for="name">Staff Member's Name:</label>
                                       <div class="inner-addon right-addon">
                                           <i class="fa fa-user"></i>
-                                      <input type="text" class="form-control" id="name" name="name" placeholder="Hospital Name">
+                                      <input type="text" class="form-control" id="name" name="name" placeholder="Name">
                                       </div>
                                    </div>
                                    <div class="form-group col-md-6">
-                                      <label for="email">Hospital Email</label>
+                                      <label for="email">Email</label>
                                       <div class="inner-addon right-addon">
                                           <i class="fa fa-envelope"></i>
-                                      <input type="text" class="form-control" name="email" id="email" placeholder="Hospital Email">
+                                      <input type="text" class="form-control" name="email" id="email" placeholder="Email">
                                       </div>
                                    </div>
                                    <div class="form-group col-md-6">
-                                      <label for="email">Hospital Address</label>
+                                      <label for="address">Address</label>
                                       <div class="inner-addon right-addon">
                                           <i class="fa fa-map-signs"></i>
-                                      <input type="text" class="form-control" name="address" id="address" placeholder="Hospital address">
+                                      <input type="text" class="form-control" name="address" id="address" placeholder="Staff address">
                                       </div>
                                    </div>
                                 </div>
@@ -142,7 +148,7 @@
                                     </div>
                                 </div>
                                 ----->
-                                <button type="submit" class="btn btn-primary">Add Hospital</button>
+                                <button type="submit" class="btn btn-primary">Add Staff</button>
                                 {!! Form::close() !!}
                           </div>
                        </div>

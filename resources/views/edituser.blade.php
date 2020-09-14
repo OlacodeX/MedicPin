@@ -7,7 +7,7 @@
         <div class="">
            <div class="">
                        <div class="iq-card-body">
-                        {!! Form::open(['action' => ['PagesController@update', $user->id],'method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
+                        {!! Form::open(['action' => 'PagesController@update','method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
                         **/ !!}
                          @csrf
               <div class="col-lg-12">

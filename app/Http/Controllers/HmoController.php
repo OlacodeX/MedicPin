@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Messages;
 use App\patients;
 use App\HMO;
+use App\User;
+use App\ORG;
 use App\hmo_h;
+use App\hmo_p;
 use App\hospitals;
 use Illuminate\Http\Request;
 
@@ -19,6 +22,68 @@ class HmoController extends Controller
     public function index()
     {
         //
+
+    }
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function add()
+    {
+        //
+        $email = $_POST['email'];
+        
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = array(
+            'email' => $email,
+            'new_messages' => $new_messages
+   );
+        return view("pages.hmo", $data);
+
+
+    }
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function complete_add()
+    {
+        //
+        $email = $_POST['email'];
+        $hmo = $_POST['hmo'];
+        $packages = HMO::where('hmo', $hmo)->get();
+        
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = array(
+            'email' => $email,
+            'hmo' => $hmo,
+            'packages' => $packages,
+            'new_messages' => $new_messages
+   );
+        return view("pages.hmocom", $data);
+
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function staff_list()
+    {
+        $users = ORG::where('org_id', auth()->user()->id)->paginate(100);
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = array(
+            'users' => $users,
+            'new_messages' => $new_messages
+   );
+        return view("pages.index", $data);
+        
     }
 
     /**
@@ -34,6 +99,20 @@ class HmoController extends Controller
         return view("pages.create")->with('new_messages', $new_messages);
 
     }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create_staff()
+    {
+        //
+        
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        return view("pages.createe")->with('new_messages', $new_messages);
+
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -49,6 +128,40 @@ class HmoController extends Controller
 
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store_add(Request $request)
+    {
+        //
+        $this->validate($request, [
+            'email' => 'nullable',
+            'hmo' => 'nullable',
+            'package' => 'nullable',
+             ]);
+             $user = new hmo_p;
+             $detail = ORG::where('email', $request->input('email'))->first();
+             $user->user_name = $detail->name;
+             $user->package_on = $request->input('package');
+             $user->hmo = $request->input('hmo');
+             $value = HMO::where('id', $request->input('package'))->first();
+             $user->package_value = $value->description;
+             $user->added_by = auth()->user()->id;
+            $user->save();
+            $update_user = User::where('email', $request->input('email'))->first();
+            if(!empty($update_user)){
+                $update_user->package_value = $value->description;
+                $update_user->hmo_package = $request->input('package');
+                $update_user->save();
+            }
+            
+              
+            return redirect('./staff_list')->with('success', 'Great!, staff added to package successfully.');//I just set the message for session(success).
+     
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -64,7 +177,7 @@ class HmoController extends Controller
             'price' => 'nullable',
             'value' => 'nullable',
              ]);
-             $package = new HMO;
+             $package = new ORG;
              $package->name = $request->input('name');
              $package->price = $request->input('price');
              $package->description = $request->input('value');
@@ -75,6 +188,54 @@ class HmoController extends Controller
             return redirect()->back()->with('success', 'Great!, package created.');//I just set the message for session(success).
      
     }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store_staff(Request $request)
+    {
+        //
+        $this->validate($request, [
+            'name' => 'nullable',
+            'email' => 'nullable',
+            'address' => 'nullable',
+             ]);
+             if(!empty($request->input('pin'))){
+                 $staff = User::where('pin',$request->input('pin'))->first();
+
+                 if (!empty($staff)) {
+                    $org = new ORG;
+                    $org->name = $staff->name;
+                    $org->email = $staff->email;
+                    $org->address = $request->input('address');
+                    $org->org_id = auth()->user()->id;
+                    $org->save();
+                    $staff->org = auth()->user()->id;
+                    $staff->save();
+    
+                 }
+
+                 else{
+                     return redirect()->back()->with('error', 'No user with this pin in our records!');
+                 }
+             }
+             else{
+                $org = new ORG;
+                $org->name = $request->input('name');
+                $org->email = $request->input('email');
+                $org->address = $request->input('address');
+                $org->org_id = auth()->user()->id;
+                $org->save();
+            }
+              
+            return redirect()->back()->with('success', 'Great!, staff member added.');//I just set the message for session(success).
+     
+    }
+
+
+
     /**
      * Store a newly created resource in storage.
      *

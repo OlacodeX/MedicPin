@@ -214,6 +214,61 @@
                   </li>
                   @endif
 
+
+                  @if (auth()->user()->role == 'Organization')
+                  <li>
+                     <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                    
+                  </li>
+                  <li> <a href="../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                  <li><a href="../add_staff" class="iq-waves-effect"><i class="fa fa-user-secret"></i><span>Add staff </span></a></li>
+                  <li><a href="../staff_list" class="iq-waves-effect"><i class="fa fa-users"></i><span>staff List</span></a></li>
+                  <li><a href="../questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
+                  <li>
+                     <a href="../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
+                    
+                  </li>
+                  
+                  <li>
+                     
+                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+                     
+                       
+
+                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                         @csrf
+                     </form> 
+                 </li>
+                      
+                  @endif
+
+
+                  @if (auth()->user()->role == 'HMO')
+                  <li>
+                     <a href="../dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                    
+                  </li>
+                  <li> <a href="../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                  <li><a href="../packages/create" class="iq-waves-effect"><i class="ri-message-line"></i><span>Add new package </span></a></li>
+                  <li><a href="../questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
+                  <li>
+                     <a href="../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
+                    
+                  </li>
+                  
+                  <li>
+                     
+                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+                     
+                       
+
+                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                         @csrf
+                     </form> 
+                 </li>
+                      
+                  @endif
+
                   
                   @if (auth()->user()->role == 'Pharmacist')
                   <li>
