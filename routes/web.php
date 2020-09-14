@@ -98,5 +98,8 @@ Route::resource('/inpatients', 'AdmissionController');
 //visitors
 Route::resource('/visitors', 'VisitorController');
 Route::post('/visitors_list', 'VisitorController@other');
+
 //hmo
 Route::resource('/packages', 'HmoController');
+Route::get('/add_hospital', 'HmoController@add_hospital');
+Route::post('/store_hospital', 'HmoController@store_hospital');

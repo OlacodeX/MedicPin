@@ -11,20 +11,33 @@
             <div class="row">
                <div class="col-lg-12">
                   <div class="row">
-                     <div class="col-md-6 col-lg-6">
+                     <div class="col-md-6 col-lg-4">
                         <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                            <div class="iq-card-body iq-bg-primary rounded">
                               <div class="d-flex align-items-center justify-content-between">
                                  <div class="rounded-circle iq-card-icon bg-primary"><i class="ri-user-fill"></i></div>
                                  <div class="text-right">                                 
                                  <h2 class="mb-0"><span class="counter">{{App\User::where('hmo',auth()->user()->id)->count()}}</span></h2>
-                                    <h5 class="">Users</h5>
+                                    <h5 class="">Registered Users</h5>
                                  </div>
                               </div>
                            </div>
                         </div>
                      </div>
-                     <div class="col-md-6 col-lg-6">
+                     <div class="col-md-6 col-lg-4">
+                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                           <div class="iq-card-body iq-bg-warning rounded">
+                              <div class="d-flex align-items-center justify-content-between">
+                                 <div class="rounded-circle iq-card-icon bg-warning"><i class="ri-home-8-fill"></i></div>
+                                 <div class="text-right">                                 
+                                    <h2 class="mb-0"><span class="counter">{{App\hospitals::where('hmo',auth()->user()->id)->count()}}</span></h2>
+                                    <h5 class="">Registered Hospital(s)</h5>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-lg-4">
                         <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                            <div class="iq-card-body iq-bg-warning rounded">
                               <div class="d-flex align-items-center justify-content-between">
@@ -144,10 +157,10 @@
                             
                              {!!Form::close()!!}
  
-                             {!!Form::open(['action' => 'HospitalController@add_staff', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                             {!!Form::open(['action' => 'HmoController@add_hospital', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
                             
-                             {{Form::hidden('id', auth()->user()->id)}}
-                             <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add Hospital"><i class="ri-home-8-fill"></i></button>
+                             <!---{{Form::hidden('id', auth()->user()->id)}}--->
+                             <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add Hospital To HMO"><i class="ri-home-8-fill"></i></button>
                             
                              {!!Form::close()!!}
                            </span>
