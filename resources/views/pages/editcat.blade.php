@@ -1,6 +1,6 @@
-@extends('layouts.maininner')
+@extends('layouts.maininnerr')
 @section('content')
-@include('inc.navmaininner')
+@include('inc.navmaininnerr')
      <!-- Page Content  -->
      <div>
         <div class="">
@@ -9,17 +9,13 @@
                     <div class="iq-card">
                        <div class="iq-card-header d-flex justify-content-between">
                           <div class="iq-header-title">
-                             <h4 class="card-title">Add New Package</h4>
+                             <h4 class="card-title">Add New Product Category</h4>
                           </div>
                        </div>
                        <div class="iq-card-body">
                         @include('inc.messages')
-                        {!! Form::open(['action' => 'HmoController@store', 'method' => 'POST','enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
+                        {!! Form::open(['action' => ['HmoController@update', $cat->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
                         **/ !!}
-                        @if (!empty($id))
-                        <input type="hidden" name="id" value="{{$id}}">
-                            
-                        @endif
                         <!-- 
                           <div class="form-group">
                                 <div class="add-img-user profile-img-edit">
@@ -50,32 +46,19 @@
                              </div>---->
                              <div class="row">
                                    <div class="form-group col-md-6">
-                                      <label for="name">Package Name:</label>
+                                      <label for="name">Change Category Name:</label>
                                       <div class="inner-addon right-addon">
                                           <i class="fa fa-user"></i>
-                                      <input type="text" class="form-control" id="name" name="name" placeholder="Package Name">
+                                      <input type="text" class="form-control" id="name" name="name" value="{{$cat->name}}" placeholder="Category Name">
                                       </div>
                                    </div>
                                    <div class="form-group col-md-6">
-                                      <label for="image">Package Cover Image:</label><br>
+                                    <img src="{{ URL::to('img/hmo/cat/'.$cat->img)}}" class="img-responsive" width="100" alt=""><br>
+                                      <label for="image">Change Category Cover Image:</label><br>
                                       <input class="iq-bg-primary" type="file" accept="image/*" name="img">
                                    </div>
-                                   <div class="form-group col-md-6">
-                                      <label for="value">Value:</label><br>
-                                      <small>Package benefits...</small>
-                                      <div class="inner-addon right-addon">
-                                          <i class="fa fa-"></i>
-                                          <textarea name="value" id="value" class="form-control" placeholder="Package benefits"></textarea>
-                                      </div>
-                                   </div>
-                                   <div class="form-group col-md-6">
-                                      <label for="price">Price</label>
-                                      <div class="inner-addon right-addon">
-                                          <i class="fa fa-dollar"></i>
-                                      <input type="text" class="form-control" name="price" id="price" placeholder="How Much Is The Package?">
-                                      </div>
-                                   </div>
                                 </div>
+                                {{Form::hidden('_method', 'PUT')}}
                                 <hr>
                                 <!----
                                 <h5 class="mb-3">Medical Records</h5>
@@ -122,7 +105,7 @@
                                     </div>
                                 </div>
                                 ----->
-                                <button type="submit" class="btn btn-primary">Add New Package</button>
+                                <button type="submit" class="btn btn-primary">Edit Category</button>
                                 {!! Form::close() !!}
                           </div>
                        </div>

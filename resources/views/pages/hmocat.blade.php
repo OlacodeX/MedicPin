@@ -22,53 +22,81 @@
                         </div>
                         @php
                             $hmo = App\User::where('id', $hmo)->first();
-                            $hmo_cat = App\hmo_cat::where('id', $category)->first();
                         @endphp
                             <div class="form-group col-md-6">
                               <label for="hmo">Selected HMO Name</label>
                               <select class="form-control" id="selecthmo" name="hmo">
-                              <option value="{{$hmo->id}}">{{$hmo->hmo_org_name}}</option>
-                              </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                              <label for="hmo">Selected HMO Product Category</label>
-                              <select class="form-control" id="selecthmo_cat" name="category">
-                              <option value="{{$hmo_cat->id}}">{{$hmo_cat->name}}</option>
+                                 <option >{{$hmo->hmo_org_name}}</option>
                               </select>
                             </div>
                             <div class="col-md-12">
-                              <h4 class="card-title">Packages Available Under The {{$hmo_cat->name}} Category</h4>
-
-                               <div class="row">
-                                 @if (count($packages) > 0)
-                                 @foreach ($packages as $package)
-                                 <div class="col-md-4">
-              
-                                    {!! Form::open(['action' => 'HmoController@store_add', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
-                                    **/ !!}
-                                           <input type="hidden" name="package" value="{{$package->id}}"> 
-                                           <input type="hidden" name="hmo" value="{{$hmo->id}}">
-                                           <input type="hidden" name="email" value="{{$email}}">     
-                                           <input type="hidden" name="category" value="{{$hmo_cat->id}}">         
-                                    <div class="card iq-mb-3">
-                                       <img src="{{ URL::to('img/hmo/packages/'.$package->img)}}" class="card-img-top" alt="#">
-                                       <div class="card-body">
-                                          <h4 class="card-title">{{$package->name}}</h4>
-                                          <p class="card-text">
-                                             {!!$package->description!!}
-                                          </p>
-                                       </div>
-                                       <div class="card-body">
-                                          <button type="submit" class="btn btn-primary">Select Package</button>
-                                          
-                                       </div>
-                                    </div>
-                                    {!! Form::close() !!}
-                                 </div>
-                                 @endforeach
-                                 @else
-                                 <p>No record found</p>
-                                 @endif
+                               @if (!empty($hmo_cats))
+                               <h4 class="card-title">Product Categories Available</h4>
+ 
+                                <div class="row">
+                                  @if (count($hmo_cats) > 0)
+                                  @foreach ($hmo_cats as $hmo_cat)
+                                  <div class="col-md-4">
+               
+                                     {!! Form::open(['action' => 'HmoController@get_cat', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
+                                     **/ !!}
+                                            <input type="hidden" name="category" value="{{$hmo_cat->id}}"> 
+                                            <input type="hidden" name="hmo" value="{{$hmo->id}}">   
+                                            <input type="hidden" name="email" value="{{$email}}">           
+                                     <div class="card iq-mb-3">
+                                        <img src="{{ URL::to('img/hmo/cat/'.$hmo_cat->img)}}" class="card-img-top" alt="#">
+                                        <div class="card-body">
+                                           <h4 class="card-title">{{$hmo_cat->name}}</h4>
+                                           <!---
+                                           <p class="card-text">
+                                           </p>--->
+                                        </div>
+                                        <div class="card-body">
+                                           <button type="submit" class="btn btn-primary">See Available Packages</button>
+                                           
+                                        </div>
+                                     </div>
+                                     {!! Form::close() !!}
+                                  </div>
+                                  @endforeach
+                                  @else
+                                  <p>No record found</p>
+                                  @endif
+                                </div>
+                               @else
+                               <h4 class="card-title">Packages Available</h4>
+ 
+                                <div class="row">
+                                  @if (count($packages) > 0)
+                                  @foreach ($packages as $package)
+                                  <div class="col-md-4">
+               
+                                     {!! Form::open(['action' => 'HmoController@store_add', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
+                                     **/ !!}
+                                            <input type="hidden" name="package" value="{{$package->id}}"> 
+                                            <input type="hidden" name="hmo" value="{{$hmo->id}}">       
+                                     <div class="card iq-mb-3">
+                                        <img src="{{ URL::to('img/hmo/packages/'.$package->img)}}" class="card-img-top" alt="#">
+                                        <div class="card-body">
+                                           <h4 class="card-title">{{$package->name}}</h4>
+                                           <p class="card-text">
+                                              {!!$package->description!!}
+                                           </p>
+                                        </div>
+                                        <div class="card-body">
+                                           <button type="submit" class="btn btn-primary">Complete</button>
+                                           
+                                        </div>
+                                     </div>
+                                     {!! Form::close() !!}
+                                  </div>
+                                  @endforeach
+                                  @else
+                                  <p>No record found</p>
+                                  @endif
+                                </div>
+                                   
+                               @endif
                                </div>
                             </div>
                          </div>

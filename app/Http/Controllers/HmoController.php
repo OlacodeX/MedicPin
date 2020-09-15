@@ -7,6 +7,7 @@ use App\patients;
 use App\HMO;
 use App\User;
 use App\ORG;
+use App\hmo_cat;
 use App\hmo_h;
 use App\hmo_p;
 use App\hospitals;
@@ -14,6 +15,17 @@ use Illuminate\Http\Request;
 
 class HmoController extends Controller
 {
+    /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -45,6 +57,28 @@ class HmoController extends Controller
 
     }
 
+    
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function add_cat()
+    {
+        //
+       // $email = $_POST['email'];
+        
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = array(
+            //'email' => $email,
+            'new_messages' => $new_messages
+   );
+        return view("pages.createcat", $data);
+
+
+    }
+
+
      /**
      * Display a listing of the resource.
      *
@@ -55,19 +89,48 @@ class HmoController extends Controller
         //
         $email = $_POST['email'];
         $hmo = $_POST['hmo'];
+        $hmo_cats = hmo_cat::where('HMO', $hmo)->get();
         $packages = HMO::where('hmo', $hmo)->get();
-        
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+      
         $data = array(
             'email' => $email,
             'hmo' => $hmo,
+            'hmo_cats' => $hmo_cats,
             'packages' => $packages,
             'new_messages' => $new_messages
    );
-        return view("pages.hmocom", $data);
-
-
+        return view("pages.hmocat", $data);
+      
     }
+
+    /**
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+   public function get_cat()
+   {
+       //
+       $email = $_POST['email'];
+       $hmo = $_POST['hmo'];
+       $category = $_POST['category'];
+       $hmo_cats = hmo_cat::where('HMO', $hmo)->get();
+       $packages = HMO::where('hmo', $hmo)->where('cat_id', $category)->get();
+       $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+     
+       $data = array(
+           'email' => $email,
+           'hmo' => $hmo,
+           'hmo_cats' => $hmo_cats,
+           'packages' => $packages,
+           'category' => $category,
+           'new_messages' => $new_messages
+  );
+       return view("pages.hmocom", $data);
+     
+   }
+
 
     /**
      * Display a listing of the resource.
@@ -76,7 +139,7 @@ class HmoController extends Controller
      */
     public function staff_list()
     {
-        $users = ORG::where('org_id', auth()->user()->id)->paginate(100);
+        $users = ORG::orderBy('created_at', 'desc')->where('org_id', auth()->user()->id)->paginate(100);
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = array(
             'users' => $users,
@@ -94,10 +157,22 @@ class HmoController extends Controller
     public function create()
     {
         //
+        if (!empty($_GET['id'])) {
+            $id = $_GET['id'];
+            $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+            $data = array(
+                'id' => $id,
+                'new_messages' => $new_messages
+       );
+            return view("pages.create", $data);
+    
+        } else {
         
-        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
-        return view("pages.create")->with('new_messages', $new_messages);
-
+            $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+            return view("pages.create")->with('new_messages', $new_messages);
+    
+        }
+        
     }
     /**
      * Show the form for creating a new resource.
@@ -142,26 +217,131 @@ class HmoController extends Controller
             'hmo' => 'nullable',
             'package' => 'nullable',
              ]);
-             $user = new hmo_p;
-             $detail = ORG::where('email', $request->input('email'))->first();
-             $user->user_name = $detail->name;
-             $user->package_on = $request->input('package');
-             $user->hmo = $request->input('hmo');
-             $value = HMO::where('id', $request->input('package'))->first();
-             $user->package_value = $value->description;
-             $user->added_by = auth()->user()->id;
-            $user->save();
-            $update_user = User::where('email', $request->input('email'))->first();
-            if(!empty($update_user)){
-                $update_user->package_value = $value->description;
-                $update_user->hmo_package = $request->input('package');
-                $update_user->save();
-            }
-            
+             if (!empty($request->input('category'))) {
+                 $get_user = hmo_p::where('user_name', $request->input('email'))->first();
+                 if (!empty($get_user)) {
+                    $get_user->package_on = $request->input('package');
+                    $get_user->hmo = $request->input('hmo');
+                    $get_user->cat_id = $request->input('category');
+                    $value = HMO::where('id', $request->input('package'))->first();
+                    $get_user->package_value = $value->description;
+                   $get_user->save();
+                   $update_user = User::where('email', $request->input('email'))->first();
+                   if(!empty($update_user)){
+                       $update_user->package_value = $value->description;
+                       $update_user->hmo_package = $request->input('package');
+                       $update_user->save();
+                   }
+                 } else {
+                    $user = new hmo_p;
+                    $detail = ORG::where('email', $request->input('email'))->first();
+                    $user->user_name = $request->input('email');
+                    $user->package_on = $request->input('package');
+                    $user->hmo = $request->input('hmo');
+                    $user->cat_id = $request->input('category');
+                    $value = HMO::where('id', $request->input('package'))->first();
+                    $user->package_value = $value->description;
+                    $user->added_by = auth()->user()->id;
+                   $user->save();
+                   $update_user = User::where('email', $request->input('email'))->first();
+                   if(!empty($update_user)){
+                       $update_user->package_value = $value->description;
+                       $update_user->hmo_package = $request->input('package');
+                       $update_user->save();
+                   }
+                 }
+             } else {
+                $get_user = hmo_p::where('user_name', $request->input('email'))->first();
+                if (!empty($get_user)) {
+                   $get_user->package_on = $request->input('package');
+                   $get_user->hmo = $request->input('hmo');
+                   $get_user->cat_id = $request->input('category');
+                   $value = HMO::where('id', $request->input('package'))->first();
+                   $get_user->package_value = $value->description;
+                  $get_user->save();
+                  $update_user = User::where('email', $request->input('email'))->first();
+                  if(!empty($update_user)){
+                      $update_user->package_value = $value->description;
+                      $update_user->hmo_package = $request->input('package');
+                      $update_user->save();
+                  }
+                } else {
+                   $user = new hmo_p;
+                   $detail = ORG::where('email', $request->input('email'))->first();
+                   $user->user_name = $request->input('email');
+                   $user->package_on = $request->input('package');
+                   $user->hmo = $request->input('hmo');
+                   $user->cat_id = $request->input('category');
+                   $value = HMO::where('id', $request->input('package'))->first();
+                   $user->package_value = $value->description;
+                   $user->added_by = auth()->user()->id;
+                  $user->save();
+                  $update_user = User::where('email', $request->input('email'))->first();
+                  if(!empty($update_user)){
+                      $update_user->package_value = $value->description;
+                      $update_user->hmo_package = $request->input('package');
+                      $update_user->save();
+                  }
+                }
+               
+             }
+             
               
             return redirect('./staff_list')->with('success', 'Great!, staff added to package successfully.');//I just set the message for session(success).
      
     }
+
+
+/**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store_cat(Request $request)
+    {
+        //
+        $this->validate($request, [
+            'name' => 'nullable',
+            'img' => 'nullable|max:3000',
+             ]);
+             $cat = new hmo_cat;
+             
+             if($request->hasFile('img')){
+                //Get file name with the extension
+               $filenameWithExt = $request->file('img')->getClientOriginalName();
+                //get just file name
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        
+                // Get just Ext
+                $extension = $request->file('img')->getClientOriginalExtension();
+        
+                // File name to store
+                $fileNameTostore = auth()->user()->hmo_org_name.'_'.$request->input('name').'.'.$extension;
+        
+                // Upload Image
+                $path = $request->file('img')->move('img/hmo/cat', $fileNameTostore);
+        
+                // crop image
+                /*** 
+                $img = Image::make(public_path('img/profile/'.$filenametostore));
+                $croppath = public_path('img/profile/crop/'.$filenametostore);
+         
+                $img->crop($request->input('w'), $request->input('h'), $request->input('x1'), $request->input('y1'));
+                $img->save($croppath);
+         
+                // you can save crop image path below in database
+                $path = asset('img/profile/crop/'.$filenametostore);*/
+                $cat->img = $fileNameTostore;
+            }
+        
+             $cat->name = $request->input('name');
+             $cat->HMO = auth()->user()->id;
+            $cat->save();
+            return redirect()->back()->with('success', 'Great!, category added successfully, kindly add packages to category.');//I just set the message for session(success).
+     
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -176,15 +356,83 @@ class HmoController extends Controller
             'name' => 'required',
             'price' => 'nullable',
             'value' => 'nullable',
+            'img' => 'nullable|max:3000',
              ]);
-             $package = new ORG;
-             $package->name = $request->input('name');
-             $package->price = $request->input('price');
-             $package->description = $request->input('value');
-             $package->hmo = auth()->user()->id;
-            $package->save();
+             if (!empty($request->input('id'))) {
+                $package = new HMO;
+                $package->name = $request->input('name');
+                $package->price = $request->input('price');
+                $package->cat_id = $request->input('id');
+                $package->description = $request->input('value');
+                $package->hmo = auth()->user()->id;
+                
+             
+             if($request->hasFile('img')){
+                //Get file name with the extension
+               $filenameWithExt = $request->file('img')->getClientOriginalName();
+                //get just file name
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        
+                // Get just Ext
+                $extension = $request->file('img')->getClientOriginalExtension();
+        
+                // File name to store
+                $fileNameTostore = auth()->user()->hmo_org_name.'_'.$request->input('name').'.'.$extension;
+        
+                // Upload Image
+                $path = $request->file('img')->move('img/hmo/packages', $fileNameTostore);
+        
+                // crop image
+                /*** 
+                $img = Image::make(public_path('img/profile/'.$filenametostore));
+                $croppath = public_path('img/profile/crop/'.$filenametostore);
+         
+                $img->crop($request->input('w'), $request->input('h'), $request->input('x1'), $request->input('y1'));
+                $img->save($croppath);
+         
+                // you can save crop image path below in database
+                $path = asset('img/profile/crop/'.$filenametostore);*/
+                $package->img = $fileNameTostore;
+            }
+               $package->save();
+             } else {
+                $package = new HMO;
+                $package->name = $request->input('name');
+                $package->price = $request->input('price');
+                $package->description = $request->input('value');
+                $package->hmo = auth()->user()->id;
+                
+             
+                if($request->hasFile('img')){
+                   //Get file name with the extension
+                  $filenameWithExt = $request->file('img')->getClientOriginalName();
+                   //get just file name
+                   $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+           
+                   // Get just Ext
+                   $extension = $request->file('img')->getClientOriginalExtension();
+           
+                   // File name to store
+                   $fileNameTostore = auth()->user()->hmo_org_name.'_'.$request->input('name').'.'.$extension;
+           
+                   // Upload Image
+                   $path = $request->file('img')->move('img/hmo/packages', $fileNameTostore);
+           
+                   // crop image
+                   /*** 
+                   $img = Image::make(public_path('img/profile/'.$filenametostore));
+                   $croppath = public_path('img/profile/crop/'.$filenametostore);
             
-              
+                   $img->crop($request->input('w'), $request->input('h'), $request->input('x1'), $request->input('y1'));
+                   $img->save($croppath);
+            
+                   // you can save crop image path below in database
+                   $path = asset('img/profile/crop/'.$filenametostore);*/
+                   $package->img = $fileNameTostore;
+               }
+               $package->save();
+             }
+             
             return redirect()->back()->with('success', 'Great!, package created.');//I just set the message for session(success).
      
     }
@@ -305,6 +553,14 @@ class HmoController extends Controller
     public function edit($id)
     {
         //
+        $cat = hmo_cat::find($id);
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+       $data = array(
+                'cat' => $cat,
+                'new_messages' => $new_messages
+       );
+
+        return view('pages.editcat', $data);
     }
 
     /**
@@ -317,6 +573,45 @@ class HmoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'name' => 'nullable',
+            ]);  
+            $cat = hmo_cat::find($id);
+             
+            if($request->hasFile('img')){
+               //Get file name with the extension
+              $filenameWithExt = $request->file('img')->getClientOriginalName();
+               //get just file name
+               $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+       
+               // Get just Ext
+               $extension = $request->file('img')->getClientOriginalExtension();
+       
+               // File name to store
+               $fileNameTostore = auth()->user()->hmo_org_name.'_'.$request->input('name').'.'.$extension;
+       
+               // Upload Image
+               $path = $request->file('img')->move('img/hmo/cat', $fileNameTostore);
+       
+               // crop image
+               /*** 
+               $img = Image::make(public_path('img/profile/'.$filenametostore));
+               $croppath = public_path('img/profile/crop/'.$filenametostore);
+        
+               $img->crop($request->input('w'), $request->input('h'), $request->input('x1'), $request->input('y1'));
+               $img->save($croppath);
+        
+               // you can save crop image path below in database
+               $path = asset('img/profile/crop/'.$filenametostore);*/
+               $cat->img = $fileNameTostore;
+           }
+       
+            $cat->name = $request->input('name');
+            //$cat->HMO = auth()->user()->id;
+           $cat->save();
+           return redirect()->back()->with('success', 'Great!, category updated successfully.');//I just set the message for session(success).
+    
+
     }
 
     /**
@@ -328,5 +623,30 @@ class HmoController extends Controller
     public function destroy($id)
     {
         //
+        $staff = ORG::find($id);
+        $staff_medicpin = User::where('email',$staff->email)->first();
+        if (!empty($staff_medicpin)) {
+            $staff_medicpin->org = NULL;
+            $staff_medicpin->save();
+        }
+        $staff->delete();
+         return redirect()->back()->with('success', 'Staff Removed From Your Organization.');
+         
+
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy_cat()
+    {
+        //
+        $cat = hmo_cat::find($_POST['id']);
+        $cat->delete();
+         return redirect()->back()->with('success', 'Staff Removed From Your Organization.');
+         
+
     }
 }

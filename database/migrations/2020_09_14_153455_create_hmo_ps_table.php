@@ -19,6 +19,7 @@ class CreateHmoPsTable extends Migration
             $table->string('hmo')->nullable();
             $table->string('package_on')->nullable();
             $table->string('package_value')->nullable();
+            $table->string('cat_id')->nullable();
             $table->string('added_by')->nullable();
             $table->timestamps();
         });

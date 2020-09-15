@@ -80,7 +80,7 @@
                      </div>---->
                   </div>
                </div>
-               <div class="col-sm-12" style="margin-bottom: 200px;">
+               <div class="col-sm-12">
                   <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                      <div class="iq-card-body pb-0 mt-3">       
                       <style>
@@ -167,6 +167,123 @@
                            </span>
                      </div>   
                   </div>
+               </div>
+                  <div class="col-sm-12" style="text-align:justify; margin-bottom:80px;">
+                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                      <div class="iq-card-header d-flex justify-content-between">
+                         <div class="iq-header-title">
+                            <h4 class="card-title">Your Staff List </h4>
+                         </div>
+                         <div class="iq-card-header-toolbar d-flex align-items-center">
+                           <div class="dropdown">
+                              <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
+                              <i class="ri-more-fill"></i>
+                              </span>
+                              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
+                                 <a class="dropdown-item" href="./add_staff"><i class="las la-radiation"></i>Add New Staff</a>
+                              </div>
+                           </div>
+                         </div>
+                      </div>
+                      @php
+                          $users = App\ORG::orderBy('created_at', 'desc')->where('org_id', auth()->user()->id)->paginate(5);
+                      @endphp
+                      <div class="iq-card-body">
+                         <div class="table-responsive">
+                          @if (count($users) > 0)
+                         <table class="table mb-0 table-borderless">
+                            <thead>
+                               <tr>
+                                <th scope="col">Staff Name</th>
+                                  <th scope="col">Email</th>
+                                  <th scope="col">HMO</th>
+                                  <th scope="col">HMO Category</th>
+                                  <th scope="col">HMO Package On</th>
+                                  <th scope="col">HMO Package Value</th>
+                                  <th scope="col">Address</th>
+                                  <th scope="col">Action</th>
+              
+                               </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($users as $user)
+                               <tr>
+                                  <td>{{$user->name}}</td>
+                                  <td>{{$user->email}}</td>
+                                  @php
+                                      $hmo_user = App\hmo_p::where('user_name',$user->email)->first();
+                                  @endphp
+                                  @if (!empty($hmo_user))
+                                  @php
+                                      $hmo_details = App\User::where('id', $hmo_user->hmo)->first();
+                                      $package_name = App\HMO::where('id',$hmo_user->package_on )->first();
+                                      $cat = App\hmo_cat::where('id',$package_name->cat_id)->first();
+                                  @endphp
+                                      <td>{{$hmo_details->hmo_org_name}}</td>
+                                      @if (!empty($cat))
+                                      <td>{{$cat->name}}</td>
+                                      @else
+                                      <td>N/A</td>
+                                      @endif
+                                      <td>{{$package_name->name}}</td>
+                                      <td>{{$package_name->description}}</td>
+                                  @else
+                                  <td>N/A</td>
+                                  <td>N/A</td>
+                                  <td>N/A</td>
+                                  <td>N/A</td>
+                                      
+                                  @endif
+                                  <td>{{$user->address}}</td>
+                                  <td>
+                                    <div class="dropdown">
+                                       <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
+                                       <i class="ri-more-fill"></i>
+                                       </span>
+                                       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
+                                       <a class="dropdown-item">
+                                          {!!Form::open(['action' => 'HmoController@add', 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                          {{Form::hidden('email', $user->email)}}
+                                          @php
+                                              $package = App\User::where('email',$user->email)->first();
+                                          @endphp
+                                          @if ($package->hmo_package == '')
+                                          <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add Staff To HMO Package"><i class="fa fa-plus mr-2"></i>Add to HMO package</button>
+                                             
+                                          @else
+                                          <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Upgrade/Downgrade HMO Package"><i class="fa fa-plus mr-2"></i>Upgrade/Downgrade HMO package</button>
+                                           @endif
+                                          {!!Form::close()!!}
+                                       </a>
+                                       <a class="dropdown-item">
+                                       {!!Form::open(['action' => ['HmoController@destroy', $user->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                       {{Form::hidden('_method', 'DELETE')}}
+                                      <button type="submit" class ="btn btn-info btn-sm pull-right" data-toggle="tooltip" data-placement="top" data-original-title="Remove Staff From Organization"><i class="fa fa-trash-o mr-2"></i>Remove Staff From Organization</button>
+                                     
+                                      {!!Form::close()!!}
+                                       </a>
+                                       </div>
+                                    </div>
+                                      
+                                  </td>
+                               </tr>
+                              
+                               @endforeach
+                            </tbody>
+                         </table>
+                             
+                       <div class="col-md-6">
+                           <div style="text-align:right;">
+                                   <!-----The pagination link----->
+                                   {{$users->links()}}
+                           </div>
+                       </div>
+                           @else
+                           <p>No Record Found</p>   
+                         @endif
+                         </div>
+                      </div>
+                   </div>
                 </div>
 @endif
 @if (auth()->user()->role == 'HMO')
@@ -202,6 +319,24 @@
                            </div>
                         </div>
                      </div>
+                     @php
+                         $cat = App\hmo_cat::where('HMO', auth()->user()->id)->get();
+                     @endphp
+                     @if (!empty($cat))
+                     <div class="col-md-6 col-lg-4">
+                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                           <div class="iq-card-body iq-bg-warning rounded">
+                              <div class="d-flex align-items-center justify-content-between">
+                                 <div class="rounded-circle iq-card-icon bg-warning"><i class="ri-women-fill"></i></div>
+                                 <div class="text-right">                                 
+                                    <h2 class="mb-0"><span class="counter">{{App\hmo_cat::where('HMO',auth()->user()->id)->count()}}</span></h2>
+                                    <h5 class="">Product Categories</h5>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     @else
                      <div class="col-md-6 col-lg-4">
                         <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                            <div class="iq-card-body iq-bg-warning rounded">
@@ -215,6 +350,8 @@
                            </div>
                         </div>
                      </div>
+                         
+                     @endif
                      <!----
                      <div class="col-md-6 col-lg-3">
                         <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
@@ -244,7 +381,7 @@
                      </div>---->
                   </div>
                </div>
-               <div class="col-sm-12" style="margin-bottom: 200px;">
+               <div class="col-sm-12">
                   <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                      <div class="iq-card-body pb-0 mt-3">       
                       <style>
@@ -315,13 +452,18 @@
                       </style>
                           <span class="pull-left">{{auth()->user()->hmo_org_name}}</span>
                           <span class="user-list-files d-flex float-right">
- 
+                           {!!Form::open(['action' => 'HmoController@add_cat', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
+                          
+                           <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add New Product Category"><i class="fa fa-plus"></i></button>
+                          
+                           {!!Form::close()!!}
+                        <!---
                              {!!Form::open(['action' => 'HmoController@create', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
                             
                              <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add New Package"><i class="fa fa-plus"></i></button>
                             
                              {!!Form::close()!!}
- 
+                                 --->
                              {!!Form::open(['action' => 'HmoController@add_hospital', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
                             
                              <!---{{Form::hidden('id', auth()->user()->id)}}--->
@@ -331,6 +473,125 @@
                            </span>
                      </div>   
                   </div>
+                </div>
+                <div class="col-lg-12" style="margin-bottom: 150px;">
+                   <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                      <div class="iq-card-header d-flex justify-content-between">
+                         <div class="iq-header-title">
+                                       <h4 class="card-title">Your Product Categories</h4>
+                        </div>
+                      </div>
+                      @php
+                          $cats = App\hmo_cat::where('HMO',auth()->user()->id)->paginate(10);
+                      @endphp
+                      <div class="iq-card-body">
+                         @if(count($cats) > 0)
+                        <div id="js-product-list">
+                           <div class="Products">
+                              <ul class="product_list gridcount grid row">
+                                 @foreach ($cats as $cat)
+                                 <li class="product_item col-xs-12 col-sm-6 col-md-6 col-lg-4" style="list-style: none;">
+                                    <div class="product-miniature">
+                                       <div class="thumbnail-container">
+                                          <a href="#"><img src="{{ URL::to('img/hmo/cat/'.$cat->img)}}" alt="product-image" width="120" class="img-fluid" /> </a>                                             
+                                       </div>
+                                       <style>
+                                           span.pull-right{
+                                               font-size: 10px;
+                                               color: #0084ff;
+                                           }
+                                           span.pull-right.in{
+                                               font-size: 10px;
+                                               color: #4ff84f;
+                                           }
+                                           span.pull-right.out{
+                                               font-size: 10px;
+                                               color: #fa1414;
+                                                            }
+                                                            
+                                             
+                                                            .btn.btn-info.btn-sm{
+                                                background: transparent;
+                                                border: none;
+                                                color: rgb(20, 109, 224);
+
+                                             }
+                                             .btn.btn-info.btn-sm i.fa{
+                                                font-size: 12px;
+                                                margin: 0;
+                                             }
+                                             .product-description{
+                                                padding-bottom:50px;
+                                             }
+                          @media only screen and (max-width: 768px) {
+                             
+                            .btn.btn-info.btn-sm{
+                                background: transparent;
+                                border: none;
+                                color: rgb(20, 109, 224);
+                                float: right;
+                                display: inline;
+                            }
+                            
+                            .btn.btn-info.btn-sm i.fa{
+                                font-size: 12px;
+                                margin: 0;
+                                padding: 0;
+                            }
+                                             .product-description{
+                                                padding-bottom:80px;
+                                             }
+                          }
+                                       </style>
+                                       <div class="product-description">
+                                          <h4>
+                                             {{$cat->name}} 
+                                             <span class="pull-right">
+                                                {{App\HMO::where('cat_id',$cat->id)->count()}} Packages
+                                                <br>
+                                                
+                                             {!!Form::open(['action' => 'HmoController@create', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
+                                             {{Form::hidden('id', $cat->id)}}
+                                             <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add package to category.">Add Package(s)</button>
+                                          
+                                             {!!Form::close()!!}
+                                             </span>
+                                          </h4> 
+                                          <div class="d-flex flex-wrap justify-content-between align-items-center">
+                                              <!---
+                                             <div class="product-action">
+                                                <div class="add-to-cart">
+                                                   <a href="pa" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Cart"> <i class="ri-shopping-cart-2-line"></i> </a>
+                                                   
+                                                </div>
+                                             </div>
+                                            
+                                             <div class="product-price">
+                                             <div class="regular-price"><b>₦/Pack</b></div>
+                                             </div>--->
+                                             <div class="text-center">
+                                             <span class="user-list-files d-flex float-right">
+                                             <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Edit category."><a href="packages/{{$cat->id}}/edit"><i class="fa fa-edit"></i></a></button>
+                                          
+                                                {!!Form::open(['action' => 'HmoController@destroy_cat', 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                                {{Form::hidden('id', $cat->id)}}
+                                                <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete Category"><i class="fa fa-trash-o"></i></button>
+                                                
+                                                {!!Form::close()!!}
+                                             </span>
+                                             </div>
+                                             </div>
+                                    </div>
+                                 </li>
+                                 @endforeach
+                                 @else
+                                 <p>Your Products does not have any category yet.</p>
+                              </ul>
+                           </div>
+                        </div>
+                        @endif
+                      </div>
+                   </div>
                 </div>
 @endif
 @if (auth()->user()->role == 'Biochemist/Microbiologist')

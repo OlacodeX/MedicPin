@@ -45,6 +45,8 @@ class PagesController extends Controller
        $name = $_POST['name'];
        $password = $_POST['password'];
        $email = $_POST['email'];
+       $cc = $_POST['cc'];
+       $phone = $_POST['phone'];
        //$type = $_POST['type'];
        $gender = $_POST['gender'];
        $password_confirmation = $_POST['password_confirmation'];
@@ -61,6 +63,8 @@ class PagesController extends Controller
        $data = array(
                 'name' => $name,
                 'password' => $password,
+                'cc' => $cc,
+                'phone' => $phone,
                 //'type' => $type,
                 'email' => $email,
                 'gender' => $gender,
