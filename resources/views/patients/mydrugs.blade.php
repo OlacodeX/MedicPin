@@ -17,7 +17,7 @@
                            </div>
                         </div>
                         <div class="iq-card-body">
-                           <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
+                          <!---- <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
                              <thead>
                                  
                               <style>
@@ -131,8 +131,8 @@
                                    
                                      @endforeach           
                              </tbody>
-                           </table>
-                           <!----
+                           </table>----->
+                           
                            <div id="js-product-list">
                               <div class="Products">
                                  <ul class="product_list gridcount grid row">
@@ -201,12 +201,12 @@
                                                 @endif
                                              </h4> 
                                              <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                                <div class="product-action">
+                                                <!----<div class="product-action">
                                                    <div class="add-to-cart">
                                                       <a href="{{route('cart.add', $drug->id)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Cart"> <i class="ri-shopping-cart-2-line"></i> </a>
                                                       
                                                    </div>
-                                                </div>
+                                                </div>---->
                                                 <div class="product-price">
                                                    <div class="regular-price"><b>₦{{$drug->price}}/Pack</b></div>
                                                 </div>
@@ -215,19 +215,19 @@
                                                 <span class="user-list-files d-flex float-right">
                                                 {!!Form::open(['action' => 'PatientsController@edit_drug', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
                                                 {{Form::hidden('id', $drug->id)}}
-                                                <button type="submit" class ="btn btn-info btn-sm" title="Edit Drug Details"><i class="fa fa-edit"></i></button>
+                                                <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Edit Drug Details"><i class="fa fa-edit"></i></button>
                                              
                                                 {!!Form::close()!!}
                                                 {!!Form::open(['action' => 'PatientsController@status_change', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
                                                 {{Form::hidden('id', $drug->id)}}
-                                                <button type="submit" class ="btn btn-info btn-sm" title="Mark As Out Of Stock"><i class="fa fa-check-circle"></i></button>
+                                                <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Mark As Out Of Stock"><i class="fa fa-check-circle"></i></button>
                                              
                                                 {!!Form::close()!!}
                
                
                                                    {!!Form::open(['action' => 'PatientsController@destroy_drug', 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
                                                    {{Form::hidden('id', $drug->id)}}
-                                                   <button type="submit" class ="btn btn-info btn-sm" title="Delete Drug"><i class="fa fa-trash-o"></i></button>
+                                                   <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete Drug"><i class="fa fa-trash-o"></i></button>
                                                    
                                                    {!!Form::close()!!}
                                                 </span>
@@ -240,7 +240,7 @@
                                     
                                  </ul>
                               </div>
-                           </div>----->
+                           </div>
                         </div>
                      </div>
                      <div class="col-md-6">

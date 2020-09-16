@@ -83,6 +83,69 @@
                                       </div>
                                    </div>
                                    <div class="form-group col-md-6">
+                                      <label for="category">Category:</label>
+                                      <select class="form-control" id="selectcat" name="category">
+                                         <option>--Select Drug--</option>
+                                         <option value="5-alpha-reductase inhibitors">5-alpha-reductase inhibitors</option>
+                                         <option value="5-aminosalicylates">5-aminosalicylates</option>
+                                         <option value="5HT3 receptor antagonists">5HT3 receptor antagonists</option>
+
+                                         <option value="Ace inhibitors with calcium channel blocking agents">Ace inhibitors with calcium channel blocking agents</option>
+                                         <option value="Ace inhibitors with thiazides">Ace inhibitors with thiazides</option>
+                                         <option value="Adamantane antivirals">Adamantane antivirals</option>
+                                         <option value="Adrenal cortical steroids"> Adrenal cortical steroids</option>
+                                         <option value="Adrenal corticosteroid inhibitors"> Adrenal corticosteroid inhibitors</option>
+                                         <option value="Adrenergic bronchodilators">Adrenergic bronchodilators</option>
+                                         <option value="Agents for hypertensive emergencies">Agents for hypertensive emergencies</option>
+                                         <option value="Agents for pulmonary hypertension">Agents for pulmonary hypertension</option>
+                                         <option value="Aldosterone receptor antagonists">Aldosterone receptor antagonists</option>
+                                         <option value="Alkylating agents">Alkylating agents</option>
+                                         <option value="Allergenics">Allergenics</option>
+                                         <option value="Alpha-glucosidase inhibitors">Alpha-glucosidase inhibitors</option>
+                                         <option value="Alternative medicines">Alternative medicines</option>
+                                         <option value="Amebicides">Amebicides</option>
+                                         <option value="Aminoglycosides">Aminoglycosides</option>
+
+                                         <option value="Aminopenicillins">Aminopenicillins</option>
+                                         <option value="Ampa receptor antagonists">Ampa receptor antagonists</option>
+                                         <option value="Analgesic combinations">Analgesic combinations</option>
+                                         <option value="Antibiotics/antineoplastics">Antibiotics/antineoplastics</option>
+                                         <option value="Anticholinergic antiemetics">Anticholinergic antiemetics</option>
+                                         <option value="Anticholinergic antiparkinson agents">Anticholinergic antiparkinson agents</option>
+                                         <option value="Anticholinergic bronchodilators">Anticholinergic bronchodilators </option>
+                                         <option value="Anticholinergic chronotropic agents">Anticholinergic chronotropic agents</option>
+                                         <option value="Angiotensin ii inhibitors with thiazides">Angiotensin ii inhibitors with thiazides</option>
+                                         <option value="Angiotensin receptor blockers">Angiotensin receptor blockers</option>
+                                         <option value="Angiotensin receptor blockers and neprilysin inhibitors">Angiotensin receptor blockers and neprilysin inhibitors</option>
+                                         <option value="Anorectal preparations">Anorectal preparations</option>
+
+                                         <option value="Anorexiants">Anorexiants</option>
+                                         <option value="Antacids">Antacids</option>
+                                         <option value="Anthelmintics">Anthelmintics</option>
+                                         <option value="Anticholinergics/antispasmodics">Anticholinergics/antispasmodics</option>
+                                         <option value="Anti-infectives">Anti-infectives</option>
+                                         <option value="Anti-pd-1 monoclonal antibodies">Anti-pd-1 monoclonal antibodies</option>
+                                         <option value="Antiadrenergic agents (central) with thiazides">Antiadrenergic agents (central) with thiazides</option>
+                                         <option value="Antiadrenergic agents (peripheral) with thiazides">Antiadrenergic agents (peripheral) with thiazides</option>
+                                         <option value="Angiotensin ii inhibitors with thiazides">Angiotensin ii inhibitors with thiazides</option>
+                                         <option value="Antiadrenergic agents, centrally acting">Antiadrenergic agents, centrally acting</option>
+                                         <option value="Antiadrenergic agents, peripherally acting">Antiadrenergic agents, peripherally acting</option>
+                                         <option value="Antiandrogens">Antiandrogens</option>
+                                         
+                                         <option value="Antianginal agents">Antianginal agents</option>
+                                         <option value="Antiarrhythmic agents">Antiarrhythmic agents</option>
+                                         <option value="Antiasthmatic combinations">Antiasthmatic combinations</option>
+                                         <option value="Anticoagulant reversal agents">Anticoagulant reversal agents</option>
+                                         <option value="Anticoagulants">Anticoagulants</option>
+                                         <option value="Anticonvulsants">Anticonvulsants</option>
+                                         <option value="Antidepressants">Antidepressants</option>
+                                         <option value="Antidiabetic agents">Antidiabetic agents</option>
+                                         <option value="Antidiabetic combinations">Antidiabetic combinations</option>
+                                      
+                                      
+                                      </select>
+                                   </div>
+                                   <div class="form-group col-md-6">
                                       <label for="price">Price:</label>
                                       <small> Specify in Naira</small>
                                       <div class="inner-addon right-addon">

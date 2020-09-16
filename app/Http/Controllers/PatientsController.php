@@ -249,8 +249,8 @@ class PatientsController extends Controller
     {
         //
         $this->validate($request, [
-            'name' => 'required',
-            'price' => 'required',
+            'name' => 'nullable',
+            'price' => 'nullable',
              //image means it must be in image format|nullable means the field is optional, then max size is 1999
              'img' => 'image|nullable|max:2000'
              ]);
@@ -271,6 +271,7 @@ class PatientsController extends Controller
            //This will get the user input for title
             $drug->img = $fileNameTostore;
             $drug->price = $request->input('price');
+            $drug->category = $request->input('category');
             $drug->doc_pin = auth()->user()->pin;
             $drug->status = 'In Stock';
             $drug->save();
@@ -562,6 +563,7 @@ class PatientsController extends Controller
       $drug->img = $fileNameTostore;
     }
       $drug->price = $request->input('price');
+      $drug->category = $request->input('category');
       $drug->status = $request->input('status');
       $drug->save();
       //$patient->status = 'pending';
