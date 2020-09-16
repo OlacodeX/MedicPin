@@ -119,14 +119,16 @@
                                <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Message Doctor"><i class="fa fa-envelope"></i></button>
                               
                                {!!Form::close()!!}
-
-
+                                 @if ($doctor->added_by == auth()->user()->id)
+             
                                    {!!Form::open(['action' => ['HospitalController@destroy', $doctor->id], 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
                                    {{Form::hidden('pin', $doctor->doctor_pin)}}
                                    {{Form::hidden('_method', 'DELETE')}}
                                    <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Remove Doctor from Your Hospital"><i class="fa fa-trash-o"></i></button>
                                   
                                    {!!Form::close()!!}
+                                     
+                                   @endif
                                 </span>
                                </div>
                                </div>

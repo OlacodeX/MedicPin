@@ -143,52 +143,70 @@
                                              <a href="#"><img src="{{ URL::to('img/drugs/'.$drug->img)}}" alt="product-image" class="img-fluid" /> </a>                                             
                                           </div>
                                           <style>
-                                              span.pull-right{
-                                                  font-size: 10px;
-                                                  color: #0084ff;
-                                              }
-                                              span.pull-right.in{
-                                                  font-size: 10px;
-                                                  color: #4ff84f;
-                                              }
-                                              span.pull-right.out{
-                                                  font-size: 10px;
-                                                  color: #fa1414;
-                                                               }
-                                                               
-                                                
-                                                               .btn.btn-info.btn-sm{
-                                                   background: transparent;
-                                                   border: none;
-                                                   color: rgb(20, 109, 224);
-
-                                                }
-                                                .btn.btn-info.btn-sm i.fa{
-                                                   font-size: 12px;
-                                                   margin: 0;
-                                                }
-                                                .product-description{
-                                                   padding-bottom:50px;
-                                                }
-                             @media only screen and (max-width: 768px) {
+                                             .product-miniature{
+                                                margin-bottom: 20px;
+                                                padding: 8px;
+                                                height: 400px;
+                                                box-shadow: 2px 5px 3px 5px rgba(236, 236, 236, 0.2);
+ 
+                                             } 
+                                             .product-miniature .thumbnail-container a img{
+                                                height: 300px;
+                                             }
+                                               span.pull-right{
+                                                   font-size: 10px;
+                                                   color: #0084ff;
+                                               }
+                                               span.pull-right.in{
+                                                   font-size: 10px;
+                                                   color: #4ff84f;
+                                               }
+                                               span.pull-right.out{
+                                                   font-size: 10px;
+                                                   color: #fa1414;
+                                                                }
+                                                                
+                                                 
+                                                                .btn.btn-info.btn-sm{
+                                                    background: transparent;
+                                                    border: none;
+                                                    color: rgb(20, 109, 224);
+ 
+                                                 }
+                                                 .btn.btn-info.btn-sm i.fa{
+                                                    font-size: 12px;
+                                                    margin: 0;
+                                                 }
+                                                 .product-description{
+                                                    padding-bottom:50px;
+                                                 }
+                              @media only screen and (max-width: 768px) {
+                                             .product-miniature{
+                                                margin-bottom: 20px;
+                                                padding: 8px;
+                                                height: 480px;
+                                                box-shadow: 2px 5px 3px 5px rgba(236, 236, 236, 0.2);
+ 
+                                             } 
+                                 
+                                .btn.btn-info.btn-sm{
+                                    background: transparent;
+                                    border: none;
+                                    color: rgb(20, 109, 224);
+                                    float: right;
+                                    display: inline;
+                                }
                                 
-                               .btn.btn-info.btn-sm{
-                                   background: transparent;
-                                   border: none;
-                                   color: rgb(20, 109, 224);
-                                   float: right;
-                                   display: inline;
-                               }
-                               
-                               .btn.btn-info.btn-sm i.fa{
-                                   font-size: 12px;
-                                   margin: 0;
-                                   padding: 0;
-                               }
-                                                .product-description{
-                                                   padding-bottom:80px;
-                                                }
-                             }
+                                .btn.btn-info.btn-sm i.fa{
+                                    font-size: 12px;
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                                                 .product-description{
+                                                    padding-bottom:80px;
+                                                 }
+                              }
+                                           </style>
                                           </style>
                                           <div class="product-description">
                                              <h4>

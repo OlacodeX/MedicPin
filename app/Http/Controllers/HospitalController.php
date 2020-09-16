@@ -403,7 +403,7 @@ class HospitalController extends Controller
     public function show($id)
     {
          $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
-            $hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
+            $hospital = hospitals::orderBy('created_at', 'desc')->where('id',auth()->user()->h_id)->first();
             $operations = Operations::orderBy('created_at', 'desc')->where('h_id', $hospital->id)->get();
             $data = array(
                 'new_messages' => $new_messages,
@@ -435,7 +435,6 @@ class HospitalController extends Controller
     public function doctors()
     {
         //
-        if (auth()->user()->role == 'Doctor') {
         $id = $_POST['id'];
         $hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
@@ -447,10 +446,7 @@ class HospitalController extends Controller
         );
         return view('hospitals.list', $data);
      
-    }
-    else{
-        return view('pages-error');
-    }
+    
     }
     public function search()
     {
@@ -475,7 +471,6 @@ class HospitalController extends Controller
     public function store_staff(Request $request)
     {
         //
-        if (auth()->user()->role == 'Doctor') {
         $this->validate($request, [
             'pin' => 'required',
              ]);
@@ -499,12 +494,7 @@ class HospitalController extends Controller
               $doctor->h_name = $request->input('h_name');
               $doctor->save();
             return redirect('/hospitals')->with('success', 'Great!, doctor added.');//I just set the message for session(success).
-            }
-                 
-    }
-    else{
-        return view('pages-error');
-    }
+        }
     }
 
     /**
@@ -600,7 +590,7 @@ class HospitalController extends Controller
             $hospital->save();
             
               
-            return redirect('/hospitals')->with('success', 'Great!, hospital details updated.');//I just set the message for session(success).
+            return redirect('hospitals/'.$id)->with('success', 'Great!, hospital details updated.');//I just set the message for session(success).
 
     }
 

@@ -19,6 +19,10 @@
                     </div>
                  </div>
            </div>
+           @php
+               
+        $new_messages = App\Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+           @endphp
            <div id="sidebar-scrollbar">
               <nav class="iq-sidebar-menu">
                  <ul id="iq-sidebar-toggle" class="iq-menu">
@@ -184,7 +188,8 @@
                           <li><a href="./blood_bank" class="iq-waves-effect"><i class="ri-briefcase-4-fill"></i><span>Blood Bank</span></a></li>
                           
                           @php
-                              $hospital = App\HospitalDoctors::orderBy('created_at', 'desc')->where('doctor_pin', auth()->user()->pin)->first(); 
+                          $hospital = App\hospitals::where('id',auth()->user()->h_id)->first();
+                              //$hospital = App\HospitalDoctors::orderBy('created_at', 'desc')->where('doctor_pin', auth()->user()->pin)->first(); 
                           @endphp
                           @if (!empty($hospital))
                           <li><a href="./hospitals/{{$hospital->id}}" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>My Hospital</span></a></li>
@@ -238,7 +243,8 @@
                             </ul>
                        </li>
                          @php
-                             $hospital = App\HospitalDoctors::orderBy('created_at', 'desc')->where('doctor_pin', auth()->user()->pin)->first(); 
+                         $hospital = App\hospitals::where('id',auth()->user()->h_id)->first();
+                             //$hospital = App\HospitalDoctors::orderBy('created_at', 'desc')->where('doctor_pin', auth()->user()->pin)->first(); 
                          @endphp
                          @if (!empty($hospital))
                          <li><a href="./hospitals/{{$hospital->id}}" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>My Hospital</span></a></li>

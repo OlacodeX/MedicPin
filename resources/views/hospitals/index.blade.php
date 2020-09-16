@@ -5,6 +5,7 @@
          <div class="">
             <div class="row">
                <div class="col-lg-12">
+                  @include('inc.messages')
                   <div class="iq-card-header d-flex justify-content-between">
                      <div class="iq-header-title">
                         <h4 class="card-title">Your Hospital</h4>
@@ -156,7 +157,7 @@
                             <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Doctors list"><i class="fa fa-user-o"></i></button>
                            
                             {!!Form::close()!!}
-
+                              @if ($hospital->user_id == auth()->user()->id)
                             {!!Form::open(['action' => 'HospitalController@add_staff', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
                            
                             {{Form::hidden('id', $hospital->id)}}
@@ -170,8 +171,11 @@
                              <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete Hospital"><i class="fa fa-trash-o"></i></button>
                             
                              {!!Form::close()!!}
-                             <button class ="btn btn-info btn-sm"><a href="hospitals/{{$hospital->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Hospital Details"><i class="fa fa-edit"></i></a></button>
+                             <button class ="btn btn-info btn-sm"><a href="../hospitals/{{$hospital->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Hospital Details"><i class="fa fa-edit"></i></a></button>
+                                 
+                             @endif
                           </span>
+
                     </div>   
                  </div>
                </div>
@@ -328,6 +332,7 @@
                                        <th scope="col">Date Of Operation</th>
                                        <th scope="col"> Report</th>
                                        <th scope="col">Diseases</th>
+                                       <th scope="col">Status</th>
                                     </tr>
                                  </thead>
                                  <tbody>
@@ -381,6 +386,7 @@
                                        <td>{{$operation->created_at}}</td>
                                        <td><a href="../img/reports/{{$operation->report}}" style="text-decoration: none;" download="{{$operation->report}}"><i class="ri-file-pdf-line font-size-16 text-danger"></i></a></td>
                                        <td>{{$operation->disease}}</td>
+                                       <td>{{$operation->status}}</td>
                                     </tr>
                                         
                                     @endforeach
