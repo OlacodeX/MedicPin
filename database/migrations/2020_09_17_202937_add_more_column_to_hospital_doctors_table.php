@@ -16,7 +16,6 @@ class AddMoreColumnToHospitalDoctorsTable extends Migration
         Schema::table('hospital_doctors', function (Blueprint $table) {
             //
             $table->string('addedby_pin')->nullable();
-            $table->string('role')->nullable();
         });
     }
 
@@ -30,7 +29,6 @@ class AddMoreColumnToHospitalDoctorsTable extends Migration
         Schema::table('hospital_doctors', function (Blueprint $table) {
             //
             $table->dropColumn('addedby_pin');
-            $table->dropColumn('role');
         });
     }
 }
