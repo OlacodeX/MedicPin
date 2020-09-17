@@ -42,7 +42,7 @@
 									<a class="text-warning"><i class="mdi mdi-star"></i></a>
 									<a class="text-warning"><i class="mdi mdi-star"></i></a>
 								</div>---->
-								<h5 class="pro-price mb-0 mt-20">&#8358;{{$drug->price}}
+								<h5 class="pro-price mb-0 mt-20">&#8358;{{$drug->price}}/{{$drug->sell}}
 										<!--<span class="old-price">&#36;540</span>---->
                         </h5>
 								<hr>
@@ -50,7 +50,13 @@
                            {{$drug->description}}
                         </p>
 								<div class="row">
-									<div class="col-sm-12">
+									<div class="col-sm-6">
+										<h6 class="mt-20">Product Brand</h6>
+										<p class="mb-0">
+                                 {{$drug->make}}
+										</p>
+									</div>
+									<div class="col-sm-6">
 										<h6 class="mt-20">Weight</h6>
 										<p class="mb-0">
                                  {{$drug->weight}}Mg
