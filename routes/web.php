@@ -46,6 +46,9 @@ Route::post('/mark_as_sold_out', 'PatientsController@status_change');
 Route::post('/edit_drug', 'PatientsController@edit_drug');
 Route::post('/drug_detail', 'PatientsController@get_drug');
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+
+
+Route::post('/pay', 'PagesController@payment');
 //Route::get('/dashboard', 'PagesController@index')->name('dashboard');
 
 //shopping cart
@@ -67,7 +70,7 @@ Route::get('/schedule_tomorrow', 'TodoController@tomorrow');
 //Hospitals
 Route::resource('/hospitals', 'HospitalController');
 Route::post('/add_staff', 'HospitalController@add_staff');
-Route::post('/store_staff', 'HospitalController@store_staff');
+Route::post('/store_staf', 'HospitalController@store_staff');
 Route::post('/store_op', 'HospitalController@store_op');
 Route::post('/store_message', 'HospitalController@store_message');
 Route::post('/doctors', 'HospitalController@doctors');

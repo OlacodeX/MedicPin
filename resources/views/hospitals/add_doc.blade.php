@@ -22,13 +22,13 @@
                                     <label for="pin">Staff MedicPin </label>
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-user"></i>
-                                    <input type="text" class="form-control" id="pin" name="pin" placeholder="Enter Doctor's Pin">
+                                    <input type="text" class="form-control" id="pin" name="pin" placeholder="Enter Staff Member's Pin">
                                     </div>
                                  </div>
                                  <div class="col-md-6">
                                      <div class="form-group">
                                          <label for="role">Role</label>
-                                         <select class="form-control" id="gender" name="gender">
+                                         <select class="form-control" id="role" name="role">
                                             <option value="N/A">Select</option>
                                             <option value="Nurse">Biochemist</option>
                                             <option value="Doctor">Doctor</option>
@@ -45,7 +45,7 @@
                                 
                               </div>
                               <hr>
-                        {{Form::submit('Add Doctor', ['class' => 'btn btn-primary btn-md pull-left', 'style' => 'text-transform:uppercase;'])}}
+                        {{Form::submit('Add Staff', ['class' => 'btn btn-primary btn-md pull-left', 'style' => 'text-transform:uppercase;'])}}
                        {!! Form::close() !!}
                     </div>
                     <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>

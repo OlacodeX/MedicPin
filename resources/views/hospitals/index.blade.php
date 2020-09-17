@@ -186,15 +186,15 @@
                            <h4 class="card-title">Hospital Staff</h4>
                         </div>
                      </div>
+                     @php
+                         
+                         $do = App\HospitalDoctors::where('h_id', $hospital->id)->pluck('doctor_pin');
+                         $docs = App\User::where('role', '!=', 'Patient')->whereIn('pin',$do)->get();
+                                 
+                     @endphp
+                     @if (count($docs) > 0)
                      <div class="iq-card-body">
                         <ul id="doster-list-slide" class="d-flex flex-wrap align-items-center p-0">
-                           @php
-                               
-                               $do = App\HospitalDoctors::where('h_id', $hospital->id)->pluck('doctor_pin');
-                               $docs = App\User::where('role', '!=', 'Patient')->whereIn('pin',$do)->get();
-                                       
-                           @endphp
-                           @if (count($docs) > 0)
                            @foreach ($docs as $doc)
                            <li class="doctor-list-item col-md-3 text-center p-2">
                               <div class="doctor-list-item-inner rounded">
@@ -213,88 +213,13 @@
                            </li>
                                
                            @endforeach
-                           @else
-                           <p>You have no hospital staff yet</p>   
-                               
-                               
-                           @endif
-                           <li class="doctor-list-item col-md-3 text-center p-2">
-                              <div class="doctor-list-item-inner rounded">
-                                 <div class="donter-profile">
-                                    <img src="images/user/07.jpg" class="img-fluid rounded-circle" alt="user-img">
-                                 </div>
-                                 <div class="doctor-detail mt-3">
-                                    <h5>Dr. Paul Molive</h5>
-                                    <h6>Surgeon</h6>
-                                 </div>
-                                 <hr>
-                                 <div class="doctor-description">
-                                    <p class="mb-0 text-center pl-2 pr-2">California Hospital Medical Center</p>
-                                 </div>
-                              </div>
-                           </li>
-                           <li class="doctor-list-item col-md-3 text-center p-2">
-                              <div class="doctor-list-item-inner rounded">
-                                 <div class="donter-profile">
-                                    <img src="images/user/08.jpg" class="img-fluid rounded-circle" alt="user-img">
-                                 </div>
-                                 <div class="doctor-detail mt-3">
-                                    <h5>Dr. Paul Molive</h5>
-                                    <h6>Doctor</h6>
-                                 </div>
-                                 <hr>
-                                 <div class="doctor-description">
-                                    <p class="mb-0 text-center pl-2 pr-2">California Hospital Medical Center</p>
-                                 </div>
-                              </div>
-                           </li>
-                           <li class="doctor-list-item col-md-3 text-center p-2">
-                              <div class="doctor-list-item-inner rounded">
-                                 <div class="donter-profile">
-                                    <img src="images/user/08.jpg" class="img-fluid rounded-circle" alt="user-img">
-                                 </div>
-                                 <div class="doctor-detail mt-3">
-                                    <h5>Dr. Paul Molive</h5>
-                                    <h6>Doctor</h6>
-                                 </div>
-                                 <hr>
-                                 <div class="doctor-description">
-                                    <p class="mb-0 text-center pl-2 pr-2">California Hospital Medical Center</p>
-                                 </div>
-                              </div>
-                           </li>
-                           <li class="doctor-list-item col-md-3 text-center p-2">
-                              <div class="doctor-list-item-inner rounded">
-                                 <div class="donter-profile">
-                                    <img src="images/user/08.jpg" class="img-fluid rounded-circle" alt="user-img">
-                                 </div>
-                                 <div class="doctor-detail mt-3">
-                                    <h5>Dr. Paul Molive</h5>
-                                    <h6>Doctor</h6>
-                                 </div>
-                                 <hr>
-                                 <div class="doctor-description">
-                                    <p class="mb-0 text-center pl-2 pr-2">California Hospital Medical Center</p>
-                                 </div>
-                              </div>
-                           </li>
-                           <li class="doctor-list-item col-md-3 text-center p-2">
-                              <div class="doctor-list-item-inner rounded">
-                                 <div class="donter-profile">
-                                    <img src="images/user/09.jpg" class="img-fluid rounded-circle" alt="user-img">
-                                 </div>
-                                 <div class="doctor-detail mt-3">
-                                    <h5>Dr. Paul Molive</h5>
-                                    <h6>Surgeon</h6>
-                                 </div>
-                                 <hr>
-                                 <div class="doctor-description">
-                                    <p class="mb-0 text-center pl-2 pr-2">California Hospital Medical Center</p>
-                                 </div>
-                              </div>
-                           </li>
                         </ul>
                      </div>
+                     @else
+                     <p>You have no hospital staff yet</p>   
+                         
+                         
+                     @endif
                   </div>
                </div>
                <div class="col-md-12">
@@ -311,11 +236,7 @@
                                  <i class="ri-more-fill"></i>
                                  </span>
                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
-                                    <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>View</a>
-                                    <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>Delete</a>
-                                    <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Edit</a>
-                                    <a class="dropdown-item" href="#"><i class="ri-printer-fill mr-2"></i>Print</a>
-                                    <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>Download</a>
+                                    <a class="dropdown-item" href="../add_op"><i class="ri-pencil-fill mr-2"></i>Add Operation</a>
                                  </div>
                               </div>
                            </div>
@@ -392,6 +313,8 @@
                                     @endforeach
                                  </tbody>
                               </table>
+                              @else 
+                              <p>No Record Yet</p>
                                   
                               @endif
                            </div>

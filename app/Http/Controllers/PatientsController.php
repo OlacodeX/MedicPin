@@ -88,7 +88,7 @@ class PatientsController extends Controller
     public function pharmacist()
     {
         $doc = User::where('h_id', auth()->user()->h_id)->pluck('pin');
-        $drugs = pharmacy::orderBy('created_at', 'desc')->orderBy('status', 'asc')->whereIn('doc_pin', $doc)->paginate(10);
+        $drugs = pharmacy::orderBy('created_at', 'desc')->orderBy('status', 'asc')->paginate(10);
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = array(
             'drugs' => $drugs,

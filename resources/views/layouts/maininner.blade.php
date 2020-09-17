@@ -37,7 +37,7 @@
       position: absolute;
       padding: 10px;
       pointer-events: none;
-      color: #0084ff;
+      color: #089faf;
       font-weight: 900;
     }
     

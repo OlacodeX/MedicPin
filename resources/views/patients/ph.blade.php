@@ -235,9 +235,9 @@
                                                    <div class="regular-price"><b>₦{{$drug->price}}/Pack</b></div>
                                                 </div>
                                                 @php
-                                                    $h_id = App\User::where('pin', $drug->doc_pin)->first();
+                                                    $user = App\User::where('pin', $drug->doc_pin)->first();
                                                 @endphp
-                                                @if (auth()->user()->h_id == $h_id->h_id)
+                                                @if ($user->h_id == auth()->user()->h_id && auth()->user()->role == 'Pharmacist')
                                                 <div class="text-center">
                                                 <span class="user-list-files d-flex float-right">
                                                 {!!Form::open(['action' => 'PatientsController@edit_drug', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}

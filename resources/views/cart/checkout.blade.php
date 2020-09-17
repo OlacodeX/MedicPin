@@ -5,6 +5,7 @@
          <div>
             <div class="">
                <div class="row">
+                  @include('inc.messages')
                   <div class="col-sm-12">
                      <div id="cart" class="card-block show b-0">
                          <div class="row">
@@ -53,7 +54,10 @@
                                        <span class="text-dark"><strong>Total</strong></span>
                                        <span class="text-dark"><strong>&#8358;{{App\StoreCart::where('user_id', auth()->user()->id)->sum('price')}}</strong></span>
                                     </div>
-                                    <a id="place-order" href="javascript:void();" type="button" class="btn btn-primary d-block mt-1 next">Place order</a>
+                                    {!!Form::open(['action' => 'PagesController@payment','id' => 'my_form_11','method' => 'POST', 'class' => 'pull-left', 'style' => 'margin-right:20px;'])!!}
+                                    {{Form::hidden('amount', App\StoreCart::where('user_id', auth()->user()->id)->sum('price'))}}
+                                    {!!Form::close()!!}
+                                    <a id="place-order" href="javascript:{}" onclick="document.getElementById('my_form_11').submit();" type="button" class="btn btn-primary d-block mt-1 next">Place order</a>
 
                                  </div>
                               </div>

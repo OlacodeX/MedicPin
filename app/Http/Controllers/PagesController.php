@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Messages;
 use App\patients;
 use Image;
+use Yabacon\Paystack;
 use App\Mail\BloodRequestMail;
 use Illuminate\Support\Facades\Mail;
 //use App\Contact;
@@ -35,6 +36,88 @@ class PagesController extends Controller
            // 'portfolios' => $portfolios
         //);
         return view('pages.home');//here i can return any page i want.
+    }
+    public function payment(){
+        $amount = $_POST['amount'];
+        $email = auth()->user()->email;
+        $paystack = new \Yabacon\Paystack('sk_test_e09c42e4832c94d669d14a1d0d79de75dc6d72b7');
+        try
+        {
+          $tranx = $paystack->transaction->initialize([
+            'amount'=>$amount,       // in kobo
+            'email'=>$email,         // unique to customers
+            //'reference'=>$reference, // unique to transactions
+          ]);
+        } catch(\Yabacon\Paystack\Exception\ApiException $e){
+          print_r($e->getResponseObject());
+          die($e->getMessage());
+        }
+    
+        // store transaction reference so we can query in case user never comes back
+        // perhaps due to network issue
+        //save_last_transaction_reference($tranx->data->reference);
+    
+        // redirect to page so User can pay
+        header('Location: ' . $tranx->data->authorization_url);
+        // Retrieve the request's body and parse it as JSON
+    $event = \Yabacon\Paystack\Event::capture();
+    http_response_code(200);
+
+    /* It is a important to log all events received. Add code *
+     * here to log the signature and body to db or file       */
+    openlog('MyPaystackEvents', LOG_CONS | LOG_NDELAY | LOG_PID, LOG_USER | LOG_PERROR);
+    syslog(LOG_INFO, $event->raw);
+    closelog();
+
+    /* Verify that the signature matches one of your keys*/
+    $my_keys = [
+                //'live'=>'sk_live_blah',
+                'test'=>'sk_test_e09c42e4832c94d669d14a1d0d79de75dc6d72b7',
+              ];
+    $owner = $event->discoverOwner($my_keys);
+    if(!$owner){
+        // None of the keys matched the event's signature
+        die();
+    }
+
+    // Do something with $event->obj
+    // Give value to your customer but don't give any output
+    // Remember that this is a call from Paystack's servers and
+    // Your customer is not seeing the response here at all
+    switch($event->obj->event){
+        // charge.success
+        case 'charge.success':
+            if('success' === $event->obj->data->status){
+                // TIP: you may still verify the transaction
+                // via an API call before giving value.
+            }
+            break;
+    }
+    $reference = isset($_GET['reference']) ? $_GET['reference'] : '';
+    if(!$reference){
+      die('No reference supplied');
+    }
+
+    // initiate the Library's Paystack Object
+    $paystack = new Yabacon\Paystack(SECRET_KEY);
+    try
+    {
+      // verify using the library
+      $tranx = $paystack->transaction->verify([
+        'reference'=>$reference, // unique to transactions
+      ]);
+    } catch(\Yabacon\Paystack\Exception\ApiException $e){
+      print_r($e->getResponseObject());
+      die($e->getMessage());
+    }
+
+    if ('success' === $tranx->data->status) {
+      // transaction was successful...
+      // please check other things like whether you already gave value for this ref
+      // if the email matches the customer who owns the product etc
+      // Give value
+      return redirect('/dashboard')->with('success', 'Great!, patient has been added and notified.');
+    }
     }
     
     public function reg_patient(){

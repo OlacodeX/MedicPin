@@ -384,7 +384,11 @@ class HospitalController extends Controller
              $hospital->user_name = auth()->user()->name;
              $hospital->user_id = auth()->user()->id;
             $hospital->save();
-            
+            $get_hospital = hospitals::where('user_pin', auth()->user()->pin)->orderBy('created_at', 'desc')->first();
+            $doctor = User::where('pin', auth()->user()->pin)->first();
+            $doctor->h_id = $get_hospital->id;
+            $doctor->h_name = $get_hospital->h_name;
+            $doctor->save();
               
             return redirect('/dashboard')->with('success', 'Great!, hospital created.');//I just set the message for session(success).
      
@@ -457,7 +461,7 @@ class HospitalController extends Controller
         $hospital = hospitals::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->first();
         $doctor = HospitalDoctors::orderBy('created_at', 'desc')->where('doctor_pin', $pin)->first();
         if (empty($doctor)) {
-            return redirect('/hospitals')->with('error', 'oops, no doctor with this record in your hospital.');
+            return redirect()->back()->with('error', 'oops, no doctor with this record in your hospital.');
         }
         else{
         $data = array(
@@ -476,7 +480,7 @@ class HospitalController extends Controller
              ]);
             $doctor = User::where('pin', $request->input('pin'))->first();
             if (empty($doctor)) {
-                return redirect('/hospitals')->with('error', 'oops, no doctor with this pin in our record, please check and try again.');
+                return redirect()->back()->with('error', 'oops, no doctor with this pin in our record, please check and try again.');
             }
             else{
              $hospital = new HospitalDoctors;
@@ -484,7 +488,7 @@ class HospitalController extends Controller
              $hospital->h_id = $request->input('h_id');
              $hospital->doctor_pin = $doctor->pin;
              $hospital->doctor_name = $doctor->name;
-             //$hospital->h_number = $request->input('h_number');
+             $hospital->role = $request->input('role');
              //$hospital->user_pin = auth()->user()->pin;
              $hospital->addedby_pin = auth()->user()->pin;
              $hospital->added_by = auth()->user()->id;
@@ -493,7 +497,7 @@ class HospitalController extends Controller
               $doctor->h_id = $request->input('h_id');
               $doctor->h_name = $request->input('h_name');
               $doctor->save();
-            return redirect('/hospitals')->with('success', 'Great!, doctor added.');//I just set the message for session(success).
+            return redirect()->back()->with('success', 'Great!, doctor added.');//I just set the message for session(success).
         }
     }
 
@@ -610,7 +614,7 @@ class HospitalController extends Controller
         $user_update->save();
         $doctor = HospitalDoctors::find($id);
        $doctor->delete();
-        return redirect('/hospitals')->with('success', 'Doctor Removed from your hospital.');
+        return redirect()->back()->with('success', 'Doctor Removed from your hospital.');
         
     }
     

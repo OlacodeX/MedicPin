@@ -166,6 +166,7 @@ return [
         Darryldecode\Cart\CartServiceProvider::class,
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        //Unicodeveloper\Paystack\PaystackServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -234,6 +235,7 @@ return [
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
         'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        //'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
     ],
 
 ];
