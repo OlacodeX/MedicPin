@@ -38,11 +38,13 @@ Route::post('/NA', 'PrescriptionController@NA');
 Route::resource('/chat', 'MessagingController');
 Route::get('/add_drug', 'PatientsController@add_drug');
 Route::get('/pharmacy', 'PatientsController@pharmacy');
+Route::get('/pharmacist_shop', 'PatientsController@pharmacist');
 Route::get('/myshop', 'PatientsController@myshop');
 Route::post('/delete_drug', 'PatientsController@destroy_drug');
 Route::post('/store_drug', 'PatientsController@store_drug');
 Route::post('/mark_as_sold_out', 'PatientsController@status_change');
 Route::post('/edit_drug', 'PatientsController@edit_drug');
+Route::post('/drug_detail', 'PatientsController@get_drug');
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 //Route::get('/dashboard', 'PagesController@index')->name('dashboard');
 

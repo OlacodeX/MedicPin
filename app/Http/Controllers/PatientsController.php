@@ -77,13 +77,24 @@ class PatientsController extends Controller
     public function pharmacy()
     {
         $doc = User::where('h_id', auth()->user()->h_id)->pluck('pin');
-        $drugs = pharmacy::orderBy('status', 'asc')->whereIn('doc_pin', $doc)->paginate(10);
+        $drugs = pharmacy::orderBy('created_at', 'desc')->orderBy('status', 'asc')->whereIn('doc_pin', $doc)->paginate(10);
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = array(
             'drugs' => $drugs,
             'new_messages' => $new_messages
    );
         return view("patients.drugs", $data);
+    }
+    public function pharmacist()
+    {
+        $doc = User::where('h_id', auth()->user()->h_id)->pluck('pin');
+        $drugs = pharmacy::orderBy('created_at', 'desc')->orderBy('status', 'asc')->whereIn('doc_pin', $doc)->paginate(10);
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = array(
+            'drugs' => $drugs,
+            'new_messages' => $new_messages
+   );
+        return view("patients.ph", $data);
     }
     public function myshop()
     {
@@ -251,6 +262,10 @@ class PatientsController extends Controller
         $this->validate($request, [
             'name' => 'nullable',
             'price' => 'nullable',
+            'description' => 'nullable',
+            'sell' => 'nullable',
+            'make' => 'nullable',
+            'weight' => 'nullable',
              //image means it must be in image format|nullable means the field is optional, then max size is 1999
              'img' => 'image|nullable|max:2000'
              ]);
@@ -271,6 +286,10 @@ class PatientsController extends Controller
            //This will get the user input for title
             $drug->img = $fileNameTostore;
             $drug->price = $request->input('price');
+            $drug->weight = $request->input('weight');
+            $drug->description = $request->input('describe');
+            $drug->sell = $request->input('sell');
+            $drug->make = $request->input('make');
             $drug->category = $request->input('category');
             $drug->doc_pin = auth()->user()->pin;
             $drug->status = 'In Stock';
@@ -521,6 +540,25 @@ class PatientsController extends Controller
 
         return view('patients.editdrug', $data);
     }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function get_drug()
+    {
+        $id = $_POST['id'];
+        $drug = pharmacy::find($id);
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+       $data = array(
+                'drug' => $drug,
+                'new_messages' => $new_messages
+       );
+
+        return view('patients.drug', $data);
+    }
+
 
     
     public function status_change()

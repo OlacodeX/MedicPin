@@ -26,8 +26,7 @@
            <div id="sidebar-scrollbar">
               <nav class="iq-sidebar-menu">
                  <ul id="iq-sidebar-toggle" class="iq-menu">
-                    <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Dashboard</span></li>
-                    @if (auth()->user()->role == 'Biochemist/Microbiologist')
+                   @if (auth()->user()->role == 'Biochemist/Microbiologist')
                     <li>
                        <a href="./dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                       
@@ -43,6 +42,8 @@
                     </li>
                     <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                     <li><a href="./questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
+                    <li><a href="./pharmacist_shop" class="iq-waves-effect"><i class="ion-medkit"></i><span>Buy Drugs</span></a></li>
+                    
                     <li>
                        <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                       
@@ -71,6 +72,8 @@
                     <li><a href="./add_staff" class="iq-waves-effect"><i class="fa fa-user-secret"></i><span>Add staff </span></a></li>
                     <li><a href="./staff_list" class="iq-waves-effect"><i class="fa fa-users"></i><span>staff List</span></a></li>
                     <li><a href="./questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
+                    <li><a href="./pharmacist_shop" class="iq-waves-effect"><i class="ion-medkit"></i><span>Buy Drugs</span></a></li>
+                    
                     <li>
                        <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                       
@@ -98,6 +101,8 @@
                     <li> <a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                     <li><a href="./packages/create" class="iq-waves-effect"><i class="ri-message-line"></i><span>Add new package </span></a></li>
                     <li><a href="./questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
+                    <li><a href="./pharmacist_shop" class="iq-waves-effect"><i class="ion-medkit"></i><span>Buy Drugs</span></a></li>
+                    
                     <li>
                        <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                       
@@ -140,6 +145,8 @@
                     <li><a href="./pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
                     <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                     <li><a href="./questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
+                    <li><a href="./pharmacist_shop" class="iq-waves-effect"><i class="ion-medkit"></i><span>Buy Drugs</span></a></li>
+                    
                     <li>
                        <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                       
@@ -199,6 +206,8 @@
                           <li><a href="./add_op" class="iq-waves-effect"><i class="ri-folders-fill"></i><span>Add Operation Record</span></a></li>
                           <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                           <li><a href="./questions" class="iq-waves-effect"><i class="ri-message-fill"></i><span>Forum</span></a></li>
+                          <li><a href="./pharmacist_shop" class="iq-waves-effect"><i class="ion-medkit"></i><span>Buy Drugs</span></a></li>
+                          
                           <li>
                              <a href="./" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                             
@@ -251,6 +260,8 @@
                         @endif
                          <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                          <li><a href="./questions" class="iq-waves-effect"><i class="ri-message-fill"></i><span>Forum</span></a></li>
+                         <li><a href="./pharmacist_shop" class="iq-waves-effect"><i class="ion-medkit"></i><span>Buy Drugs</span></a></li>
+                         
                          <li>
                             <a href="./" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                            
@@ -293,6 +304,8 @@
                  </li>
                   <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                   <li><a href="./questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
+                  <li><a href="./pharmacist_shop" class="iq-waves-effect"><i class="ion-medkit"></i><span>Buy Drugs</span></a></li>
+                  
                   <li>
                      <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                     

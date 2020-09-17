@@ -46,6 +46,8 @@ else{
         $Store->user_id = auth()->user()->id;
         $Store->drug_name = $drug->name;
         $Store->price = $drug->price;
+        $Store->img = $drug->img;
+        $Store->description = $drug->description;
         $Store->quantity = '1';
        // $Store->price_sum = $qty * $product->price;
          //Save to db

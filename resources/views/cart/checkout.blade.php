@@ -17,8 +17,12 @@
                                        <div class="d-flex align-items-center justify-content-between">
                                           <div class="d-flex align-items-center">
                                           <div class=" ml-3 checkout-product-details">
+                                             <img src="{{ URL::to('img/drugs/'.$cartItem->img)}}" alt="" width="80">
                                              <h5>{{$cartItem->drug_name}}</h5>
-                                             <p class="mb-0"><b>{{$cartItem->quantity}}</b></p>
+                                             <p>
+                                                {{$cartItem->description}}
+                                              </p>
+                                             <p class="mb-0"><b>{{$cartItem->quantity}}</b>qty(s)</p>
                                           </div>
                                        </div>
                                           <div class="checkout-amount-data text-center">
@@ -26,10 +30,10 @@
                                                 <h5>&#8358;{{$cartItem->price}}</h5>
                                              </div>
                                              <div class="checkout-button">
-                                                {!!Form::open(['action' => 'CartController@delete','id' => 'my_form_1','method' => 'GET', 'class' => 'pull-left', 'style' => 'margin-right:20px;'])!!}
+                                                {!!Form::open(['action' => 'CartController@delete','id' => $cartItem->id,'method' => 'GET', 'class' => 'pull-left', 'style' => 'margin-right:20px;'])!!}
                                                 {{Form::hidden('id', $cartItem->id)}}
                                                 {!!Form::close()!!}
-                                                <a href="javascript:{}" onclick="document.getElementById('my_form_1').submit();"class="btn btn-light d-block"><i class="ri-close-line mr-1"></i>Remove</a>
+                                                <a href="javascript:{}" onclick="document.getElementById({{$cartItem->id}}).submit();"class="btn btn-light d-block"><i class="ri-close-line mr-1"></i>Remove</a>
                                             </div>
                                           </div>
                                        </div>

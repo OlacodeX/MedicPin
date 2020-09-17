@@ -563,12 +563,39 @@
                                       </select>
                                    </div>
                                    <div class="form-group col-md-6">
+                                      <label for="mae">Drug Make:</label>
+                                      <div class="inner-addon right-addon">
+                                          <i class="fa fa-bank"></i>
+                                      <input type="text" class="form-control" id="make" name="make" placeholder="Made by which company?">
+                                      </div>
+                                   </div>
+                                   <div class="form-group col-md-6">
+                                      <label for="weight">Weight:</label>
+                                      <div class="inner-addon right-addon">
+                                          <i class="fa fa-bed"></i>
+                                      <input type="text" class="form-control" id="weight" name="weight" placeholder="In milligram (mg)">
+                                      </div>
+                                   </div>
+                                   <div class="form-group col-md-6">
                                       <label for="price">Price:</label>
                                       <small> Specify in Naira</small>
                                       <div class="inner-addon right-addon">
                                           <i class="fa fa-dollar"></i>
                                       <input type="text" class="form-control" id="price" placeholder="How much do you sell?" name="price">
                                       </div>
+                                   </div>
+                                   <div class="form-group col-md-6">
+                                      <label for="sell">How do you sell/price?:</label>
+                                      <select class="form-control" id="select" name="sell">
+                                            <option value="Pack">Pack</option>
+                                            <option value="Carton">Carton</option>
+                                            <option value="Milligram">Milligram</option>
+                                            <option value="Other">Other</option>
+                                      </select>
+                                   </div>
+                                   <div class="form-group col-md-6">
+                                    <label for="description">Drug Description:</label>
+                                    <textarea class="form-control" id="description" name="describe" placeholder="Drug description"></textarea>
                                    </div>
                                 </div>
                                 <hr>

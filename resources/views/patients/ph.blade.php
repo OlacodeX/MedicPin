@@ -138,21 +138,22 @@
                               <div class="Products">
                                  <ul class="product_list gridcount grid row">
                                     @foreach ($drugs as $drug)
-                                    <li class="product_item col-xs-12 col-sm-6 col-md-6 col-lg-4" style="list-style: none;">
+                                    <li class="product_item col-xs-12 col-sm-6 col-md-6 col-lg-3" style="list-style: none;">
+                                       <a href="javascript:{}" onclick="document.getElementById({{$drug->id}}).submit();">
                                        <div class="product-miniature">
                                           <div class="thumbnail-container">
-                                             <a href="#"><img src="{{ URL::to('img/drugs/'.$drug->img)}}" alt="product-image" class="img-fluid" /> </a>                                             
+                                             <img src="{{ URL::to('img/drugs/'.$drug->img)}}" alt="product-image" class="img-fluid" />                                             
                                           </div>
                                           <style>
-                                            .product-miniature{
+                                            div.product-miniature{
                                                margin-bottom: 20px;
                                                padding: 8px;
-                                               height: 400px;
+                                               height: 350px;
                                                box-shadow: 2px 5px 3px 5px rgba(236, 236, 236, 0.2);
 
                                             } 
-                                            .product-miniature .thumbnail-container a img{
-                                               height: 300px;
+                                            div.product-miniature div.thumbnail-container img{
+                                               height: 200px;
                                             }
                                               span.pull-right{
                                                   font-size: 10px;
@@ -179,7 +180,7 @@
                                                    margin: 0;
                                                 }
                                                 .product-description{
-                                                   padding-bottom:200px;
+                                                   padding-bottom:90px;
                                                    padding-top: 10px;
                                                 }
                              @media only screen and (max-width: 768px) {
@@ -210,6 +211,9 @@
                              }
                                           </style>
                                           <div class="product-description">
+                                             {!!Form::open(['action' => 'PatientsController@get_drug', 'method' => 'POST', 'id' => $drug->id, 'style' => 'margin-right:20px;'])!!}
+                                             {{Form::hidden('id', $drug->id)}}
+                                             {!!Form::close()!!}
                                              <h4>
                                                 {{$drug->name}} 
                                                 @if ($drug->status == 'In Stock')
@@ -258,6 +262,7 @@
                                                    @endif
                                           </div>
                                        </div>
+                                    </a> 
                                     </li>
                                     @endforeach
                                     
