@@ -20,8 +20,14 @@
                            <label for="email">Email</label>
                            <div class="inner-addon right-addon">
                                <i class="fa fa-envelope"></i>
-                           <input type="text" class="form-control" value="{{$email}}" name="email" id="email" placeholder="Email">
-                           </div>
+                               @if (auth()->user()->role == 'Patient')
+                               <input type="text" class="form-control" value="{{auth()->user()->email}}" name="email" id="email" placeholder="Email" readonly>
+    
+                              @else       
+                              <input type="text" class="form-control" value="{{$email}}" name="email" id="email" placeholder="Email" readonly>
+                               
+                              @endif
+                         </div>
                         </div>
                         @php
                             $hmos = App\User::where('role', 'HMO')->get();

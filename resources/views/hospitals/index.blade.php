@@ -105,14 +105,20 @@
                          }
                          .btn.btn-info.btn-sm{
                              background: transparent;
-                             border: none;
+                             border: solid 1px rgb(20, 109, 224);
                              color: rgb(20, 109, 224);
+                             margin-bottom: 13px;
+                             border-radius: 16px;
                          }
                          
                          
                          .btn.btn-info.btn-sm i.fa{
                              font-size: 12px;
                              margin: 0;
+                         }
+                         img.img-fluid.rounded-circle.one{
+                            width: 120px;
+                            height: 120px;
                          }
                        @media only screen and (max-width: 768px) {
                 /* align glyph 
@@ -122,7 +128,6 @@
                           
                          .btn.btn-info.btn-sm{
                              background: transparent;
-                             border: none;
                              color: rgb(20, 109, 224);
                              float: right;
                              display: inline;
@@ -154,24 +159,24 @@
                             {!!Form::open(['action' => 'HospitalController@doctors', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
                            
                             {{Form::hidden('id', $hospital->id)}}
-                            <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Doctors list"><i class="fa fa-user-o"></i></button>
+                            <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Doctors list"><i class="fa fa-user-o"></i>Staff List</button>
                            
                             {!!Form::close()!!}
                               @if ($hospital->user_id == auth()->user()->id)
                             {!!Form::open(['action' => 'HospitalController@add_staff', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
                            
                             {{Form::hidden('id', $hospital->id)}}
-                            <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add Staff to Hospital"><i class="fa fa-plus"></i></button>
+                            <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add Staff to Hospital"><i class="fa fa-plus"></i>Add Staff</button>
                            
                             {!!Form::close()!!}
 
                              {!!Form::open(['action' => 'HospitalController@destroyy', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
                             
                              {{Form::hidden('id', $hospital->id)}}
-                             <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete Hospital"><i class="fa fa-trash-o"></i></button>
+                             <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete Hospital"><i class="fa fa-trash-o"></i>Delete Hospital</button>
                             
                              {!!Form::close()!!}
-                             <button class ="btn btn-info btn-sm"><a href="../hospitals/{{$hospital->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Hospital Details"><i class="fa fa-edit"></i></a></button>
+                             <button class ="btn btn-info btn-sm"><a href="../hospitals/{{$hospital->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Hospital Details"><i class="fa fa-edit"></i>Edit Hospital Details</a></button>
                                  
                              @endif
                           </span>
@@ -189,36 +194,35 @@
                      @php
                          
                          $do = App\HospitalDoctors::where('h_id', $hospital->id)->pluck('doctor_pin');
-                         $docs = App\User::where('role', '!=', 'Patient')->whereIn('pin',$do)->get();
+                         $docs = App\User::where('role', '!=', 'Patient')->orderby('updated_at', 'desc')->whereIn('pin',$do)->get();
                                  
                      @endphp
                      @if (count($docs) > 0)
                      <div class="iq-card-body">
-                        <ul id="doster-list-slide" class="d-flex flex-wrap align-items-center p-0">
-                           @foreach ($docs as $doc)
-                           <li class="doctor-list-item col-md-3 text-center p-2">
-                              <div class="doctor-list-item-inner rounded">
-                                 <div class="donter-profile">
-                                    <img src="../img/profile/{{$doc->img}}" class="img-fluid rounded-circle" alt="user-img">
+                        <div class="row">
+                        @foreach ($docs as $doc)
+                        <div class="col-md-3">
+                           <div class="iq-card">
+                              <div class="iq-card-body text-center">
+                                 <div class="doc-profile">
+                                    
+                                    <img src="../img/profile/{{$doc->img}}" class="img-fluid rounded-circle one" alt="user-img">
                                  </div>
-                                 <div class="doctor-detail mt-3">
+                                 <div class="iq-doc-info mt-3">
                                     <h5>{{$doc->name}}</h5>
                                     <h6>{{$doc->role}}</h6>
                                  </div>
-                                 <hr>
-                                 <div class="doctor-description">
+                                 <div class="iq-doc-social-info mt-3 mb-3">
                                     <p class="mb-0 text-center pl-2 pr-2">{{$hospital->h_name}} {{$hospital->h_type}} hospital</p>
                                  </div>
                               </div>
-                           </li>
-                               
+                           </div>
+                        </div> 
                            @endforeach
-                        </ul>
-                     </div>
                      @else
                      <p>You have no hospital staff yet</p>   
                          
-                         
+                        </div>
                      @endif
                   </div>
                </div>
@@ -305,7 +309,7 @@
                                           </div>
                                        </td>
                                        <td>{{$operation->created_at}}</td>
-                                       <td><a href="../img/reports/{{$operation->report}}" style="text-decoration: none;" download="{{$operation->report}}"><i class="ri-file-pdf-line font-size-16 text-danger"></i></a></td>
+                                       <td><a href="../img/reports/{{$operation->report}}" style="text-decoration: none;" download="{{$operation->report}}"><i class="ri-file-pdf-line font-size-16 text-danger"> Download Report</i></a></td>
                                        <td>{{$operation->disease}}</td>
                                        <td>{{$operation->status}}</td>
                                     </tr>
@@ -531,7 +535,7 @@
                   </ul>
                </div>
                <div class="col-lg-6 text-right">
-                  Copyright 2020 <a href="#">XRay</a> All Rights Reserved.
+                  Copyright 2020 <a href="./">Medicpin</a> All Rights Reserved.
                </div>
             </div>
          </div>

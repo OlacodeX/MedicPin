@@ -95,6 +95,7 @@
                        </ul>
                     </li>
                     <li><a href="../../pharmacy" class="iq-waves-effect"><i class="ion-medkit"></i><span>Pharmacy</span></a></li>
+                    <li><a href="../../buy_hmo" class="iq-waves-effect"><i class="ri-briefcase-4-fill"></i><span>Buy HMO package</span></a></li>
                     <li><a href="../../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                     <li><a href="../../questions" class="iq-waves-effect"><i class="ri-message-fill"></i><span>Forum</span></a></li>
                     <li><a href="../../pharmacist_shop" class="iq-waves-effect"><i class="ion-medkit"></i><span>Buy Drugs</span></a></li>

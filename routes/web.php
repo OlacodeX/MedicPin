@@ -69,8 +69,8 @@ Route::get('/schedule_tomorrow', 'TodoController@tomorrow');
 
 //Hospitals
 Route::resource('/hospitals', 'HospitalController');
-Route::post('/add_staff', 'HospitalController@add_staff');
-Route::post('/store_staf', 'HospitalController@store_staff');
+Route::post('/hospital_add_staff', 'HospitalController@add_staff');
+Route::post('/hospital_store_staff', 'HospitalController@store_staff');
 Route::post('/store_op', 'HospitalController@store_op');
 Route::post('/store_message', 'HospitalController@store_message');
 Route::post('/doctors', 'HospitalController@doctors');
@@ -115,6 +115,7 @@ Route::post('/destroy_cat', 'HmoController@destroy_cat');
 Route::post('/store_add', 'HmoController@store_add');
 Route::get('/staff_list', 'HmoController@staff_list');
 Route::post('/add', 'HmoController@add');
+Route::get('/buy_hmo', 'HmoController@buy_hmo');
 Route::get('/add_category', 'HmoController@add_cat');
 Route::post('/get_category', 'HmoController@get_cat');
 Route::post('/complete_add', 'HmoController@complete_add');

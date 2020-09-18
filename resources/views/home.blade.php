@@ -111,8 +111,10 @@
                               border-top: none;
                           }
                           .btn.btn-info.btn-sm{
-                              background: transparent;
-                              border: none;
+                             border: solid 1px rgb(20, 109, 224);
+                             color: rgb(20, 109, 224);
+                             margin-bottom: 13px;
+                             border-radius: 16px;
                               color: rgb(20, 109, 224);
                           }
                           
@@ -128,8 +130,10 @@
                  
                            
                           .btn.btn-info.btn-sm{
-                              background: transparent;
-                              border: none;
+                             border: solid 1px rgb(20, 109, 224);
+                             color: rgb(20, 109, 224);
+                             margin-bottom: 13px;
+                             border-radius: 16px;
                               color: rgb(20, 109, 224);
                               float: right;
                               display: inline;
@@ -154,14 +158,14 @@
  
                              {!!Form::open(['action' => 'HmoController@create_staff', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
                             
-                             <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add Staff"><i class="fa fa-plus"></i></button>
+                             <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add Staff"><i class="fa fa-plus"></i>Add Staff</button>
                             
                              {!!Form::close()!!}
  
                              {!!Form::open(['action' => 'HmoController@staff_list', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
                             
                             
-                             <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Staff List"><i class="fa fa-user-secret"></i></button>
+                             <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Staff List"><i class="fa fa-user-secret"></i>Staff List</button>
                             
                              {!!Form::close()!!}
                            </span>
@@ -1724,6 +1728,7 @@
                  </div>
               <div class="row" style="margin-top: 20px;">
                  <div class="col-lg-4">
+                    <!---
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                        <div class="iq-card-header d-flex justify-content-between">
                           <div class="iq-header-title">
@@ -1733,7 +1738,63 @@
                        <div class="iq-card-body smaill-calender-home">
                           <input type="text" class="flatpicker d-none">
                        </div>
-                    </div>
+                    </div>---->
+                    
+                    <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                     <div class="iq-card-header d-flex justify-content-between">
+                        <div class="iq-header-title">
+                           <h4 class="card-title">Daily Tasks</h4>
+                        </div>
+                       
+                        <div class="iq-card-header-toolbar d-flex align-items-center">
+                           <a href="schedule/create">Create Task</a>
+                            <!--<ul class="nav nav-pills" id="myTab" role="tablist">
+                              <li class="nav-item">
+                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                              </li>
+                           </ul>---->
+                        </div>
+                     </div>
+                     <div class="iq-card-body">
+                        @php
+                            $todos = App\todo::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->whereDay('date', now()->day)->get();
+                        @endphp
+                        @if (count($todos) > 0)
+                        <div class="tab-content" id="myTabContent">
+                           
+                           <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                              @foreach ($todos as $todo)
+                              <div class="d-flex tasks-card" role="alert">
+                                 <div class="custom-control custom-checkbox">
+                                    <!--<input type="checkbox" class="custom-control-input" id="customCheck112">-->
+                                    
+                                    <label class="" for="customCheck112"><a href="schedule/{{$todo->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit/Move Schedule"><i class="fa fa-edit"></i></a>{{$todo->title}}</label>
+                                 </div>
+                                 {!!Form::open(['action' => ['TodoController@destroy', $todo->id], 'method' => 'POST', 'id' => 'my_form_1'])!!}
+                                
+                                 {{Form::hidden('_method', 'DELETE')}}
+                                 <button type="submit" class="close ml-auto" data-dismiss="" aria-label="Close" data-toggle="tooltip" data-placement="top" data-original-title="Delete schedule">
+                                    <i class="ri-close-line"></i>
+                                    </button>
+                                 {!!Form::close()!!}
+                                
+                              </div>
+                              @endforeach
+                           </div>
+                        </div>
+                        @else
+                            <p>Nothing to show for today, kindly add to your to do list <a href="schedule/create">here</a></p>
+                           
+                            
+                        @endif
+                     </div>
+                  </div>
                  </div>
                  <div class="col-lg-4">
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">

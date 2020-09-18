@@ -57,6 +57,26 @@ class HmoController extends Controller
 
     }
 
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function buy_hmo()
+    {
+        //
+       // $email = $_POST['email'];
+        
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = array(
+            //'email' => $email,
+            'new_messages' => $new_messages
+   );
+        return view("pages.hmo", $data);
+
+
+    }
     
      /**
      * Display a listing of the resource.
@@ -285,10 +305,16 @@ class HmoController extends Controller
                 }
                
              }
-             
+             if (auth()->user()->email == $request->input('email')) {
               
-            return redirect('./staff_list')->with('success', 'Great!, staff added to package successfully.');//I just set the message for session(success).
-     
+                return redirect('./dashboard')->with('success', 'Great!, HMO purchase successful.');//I just set the message for session(success).
+         
+             } else {
+              
+                return redirect('./staff_list')->with('success', 'Great!, staff added to package successfully.');//I just set the message for session(success).
+         
+             }
+             
     }
 
 

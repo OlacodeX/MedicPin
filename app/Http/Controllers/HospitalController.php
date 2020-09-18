@@ -153,7 +153,7 @@ class HospitalController extends Controller
              if($disease9 !== 'N/A'){
                  $op->disease = $disease9;
              }
-             elseif($disease == 'N/A' && $disease2 == 'N/A' && $disease3 == 'N/A' && $disease4 == 'N/A' && $disease5 == 'N/A' && $disease6 == 'N/A' && $disease7 == 'N/A' && $disease8 == 'N/A' && $disease9 == 'N/A') {
+             elseif($disease1 == 'N/A' && $disease2 == 'N/A' && $disease3 == 'N/A' && $disease4 == 'N/A' && $disease5 == 'N/A' && $disease6 == 'N/A' && $disease7 == 'N/A' && $disease8 == 'N/A' && $disease9 == 'N/A') {
                  $op->disease = 'N/A';
              }
              $op->status = $request->input('status');
@@ -497,7 +497,7 @@ class HospitalController extends Controller
               $doctor->h_id = $request->input('h_id');
               $doctor->h_name = $request->input('h_name');
               $doctor->save();
-            return redirect()->back()->with('success', 'Great!, doctor added.');//I just set the message for session(success).
+            return redirect('hospitals/'.$request->input('h_id'))->with('success', 'Great!,'.$request->input('role').' added'.'.');//I just set the message for session(success).
         }
     }
 
