@@ -155,7 +155,6 @@
                          {!! Form::close() !!}---->
                          <span class="pull-left">{{$hospital->h_name}} {{$hospital->h_type}} Hospital</span>
                          <span class="user-list-files d-flex float-right">
-
                             {!!Form::open(['action' => 'HospitalController@doctors', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
                            
                             {{Form::hidden('id', $hospital->id)}}
@@ -163,6 +162,8 @@
                            
                             {!!Form::close()!!}
                               @if ($hospital->user_id == auth()->user()->id)
+                              <button class ="btn btn-info btn-sm" style="margin-right: 6px;"><a href="../create_ward" data-toggle="tooltip" data-placement="top" title="" data-original-title="Create Hospital Wards"><i class="ri-award-line"></i>Create Ward</a></button>
+                             
                             {!!Form::open(['action' => 'HospitalController@add_staff', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
                            
                             {{Form::hidden('id', $hospital->id)}}
@@ -226,6 +227,8 @@
                      @endif
                   </div>
                </div>
+            </div>
+         </div>
                <div class="col-md-12">
                   <div class="row">
                      <div class="col-sm-12">
@@ -321,11 +324,6 @@
                               <p>No Record Yet</p>
                                   
                               @endif
-                           </div>
-                        </div>
-                      </div> 
-                     </div>    
-                  </div>
                      <!---                    
                      <div class="col-md-12 col-lg-6">
                         <div class="row">
@@ -520,10 +518,18 @@
                      <div class="iq-card-body">
                         <div id="apex-radialbar-chart"></div>
                      </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>---->
+                        </div>
+                     </div>
+                  </div>
                   </div>
                </div>
             </div>
-         </div>---->
+         </div>
+         
    <!-- Footer -->
       <footer class="bg-white iq-footer">
          <div class="container-fluid">
@@ -541,8 +547,6 @@
          </div>
       </footer>
    <!-- Footer END -->
-      </div>
-   </div>
    <!-- Wrapper END -->
    
 @endsection

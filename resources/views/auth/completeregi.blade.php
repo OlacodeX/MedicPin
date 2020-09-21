@@ -58,6 +58,7 @@
                                 <input id="name" type="hidden" name="name" value="{{$name}}">
                                 <input id="email" type="hidden" name="email" value="{{ $email }}">
                                 <input id="cc" type="hidden" name="cc" value="{{$cc}}">
+                                <input id="age" type="hidden" name="age" value="{{$age}}">
                                 <input id="phone" type="hidden" name="phone" value="{{ $phone }}">
                                 <input id="gender" type="hidden"  name="gender" value="{{ $gender }}">
                                 <input id="password" type="hidden"  name="password" value="{{ $password }}">
@@ -77,6 +78,18 @@
                                     <input type="text" class="form-control mb-0" name="hmo_org" id="hmoname" style="display: none;" placeholder="Enter HMO name">
                                 </div>
                                 <div class="form-group">
+                                   <select class="form-control mb-0" id="m_status" name="m_status" onchange="yesnoCheck(this);">
+                                      <option value="">--Marital Status--</option>
+                                      <option value="Single">Single</option>
+                                      <option value="Married">Married</option>
+                                      <option value="Divorced">Divorced</option>
+                                      <option value="Widowed">Widowed</option>
+                                   </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control mb-0" name="children" id="children" style="display: none;" placeholder="Number of children">
+                                </div>
+                                <div class="form-group">
                             <select class="form-control mb-0" id="role" name="role" onchange="yesnoCheck(this);" style="display: none;">
                                       <option value="">-I am a...-</option>
                                       <option value="Nurse">Nurse</option>
@@ -94,16 +107,15 @@
                                     <input type="text" class="form-control mb-0" name="add" id="add" style="display: none;" placeholder="Enter Address">
                                 </div>
                                 <div class="form-group">
-                                   <select class="form-control mb-0" id="nhis" name="nhis" style="display: none;">
+                                   <select class="form-control mb-0" id="nhis" name="nhis" style="display: none;" onchange="yesnoCheck(this);">
                                       <option value="">Patient Type</option>
                                       <option value="NHIS">NHIS</option>
                                       <option value="Non NHIS">Non NHIS</option>
                                    </select>
                                 </div>
-                                <!--
                                 <div class="form-group">
                                     <input type="text" class="form-control mb-0" name="nhiss" id="nhiss" style="display: none;" placeholder="Enter NHIS number...">
-                                </div>-->
+                                </div>
                                 <div class="form-group">
                                    <select class="form-control mb-0" id="selectex" name="expertise" style="display: none;">
                                       <option value="">Expertise</option>
@@ -149,8 +161,8 @@
                                 <style>
                                     
                                             input.form-control.fie{
-                                                padding-top: 90px;
-                                                padding-bottom: 90px;
+                                                padding-top: 20px;
+                                                padding-bottom: 50px;
                                                 text-align: center;
                                                 background: #aaaaaa;
                                                 border:#00b2ac 2px dashed;
@@ -163,8 +175,8 @@
                                     }
                                     input.form-control.fie[type="file"]::-webkit-file-upload-button{
                                     -webkit-appearance: none;
-                                    margin: 0 0 0 150px;
-                                    border: 1px solid #00b2ac;
+                                    margin: 0 0 300px 150px;
+                                    border: none;
                                     border-radius: 4px;
                                     padding: 3px 30px;
                                     background: transparent;

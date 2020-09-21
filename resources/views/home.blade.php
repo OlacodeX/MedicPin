@@ -1093,6 +1093,170 @@
                  @endif
 
 
+
+                 
+
+
+              @if (auth()->user()->role == 'Ward Maid')
+              <div class="">
+               @include('inc.messages')
+                                   
+                 <div class="row" style="margin-bottom: 250px;">
+                  <!---
+                    <div class="col-lg-12">
+                       <div class="container">
+                       <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                        <div class="iq-card-header d-flex justify-content-between">
+                           <div class="iq-header-title">
+                                         <h4 class="card-title">Search For Patient To Sell Drug</h4>
+                           </div>
+                        </div>
+                           <div class="iq-card-body">
+                              {!! Form::open(['action' => 'PatientsController@search', 'method' => 'POST', 'class' => 'mr-3 position-relative']) !!}
+                                  <div class="form-group mb-0">
+                                     <input type="search" class="form-control" id="exampleInputSearch" name="pin" placeholder="Enter MedicPin" aria-controls="user-list-table">
+                                   
+                                    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Search</button>
+                                  </div>
+                                  {!! Form::close() !!}
+                            </div>
+                       </div>
+                       </div>--->
+                       
+                    <div class="col-lg-12">
+                     <div class="">
+                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                           <div class="iq-card-header d-flex justify-content-between">
+                              <div class="iq-header-title">
+                                <h4 class="card-title">Admitted Patients</h4>
+                            </div>
+                            <!--
+                            <div class="iq-card-header-toolbar d-flex align-items-center">
+                                <a href="./questions" class="">See all questions </a>
+                            </div>-->
+                           </div>
+                           <div class="iq-card-body">
+                              <div class="iq-card-body">
+                                 <div class="table-responsive">
+                                     @php
+                                         $patients = App\patients::where('status','Admitted')->paginate(10);
+                                        
+                                     @endphp
+                                     @if (count($patients) > 0)
+                                    <table class="table mb-0 table-borderless">
+                                       <thead>
+                                          <tr>
+                                           <th scope="col">Patient's Pin</th>
+                                             <th scope="col">Patient Name</th>
+                                             <th scope="col">Admitted By</th>
+                                             <th scope="col">Ward</th>
+                                             <th scope="col">Next Of Kin</th>
+                                             <th scope="col">Relationship</th>
+                                             <th scope="col">Contact</th>
+                                             <th scope="col">Date</th>
+                                          </tr>
+                                       </thead>
+                                       <tbody>
+                                           @foreach ($patients as $patient)
+                                          <tr>
+                                              @php
+                                                 $get_detail = App\Admission::where('patient', $patient->pin)->first();
+                                                 $doctor = App\User::where('pin', $get_detail->admitted_by)->first();
+                                              @endphp
+                                             <td>{{$patient->pin}}</td>
+                                             <td>{{$patient->name}}</td>
+                                             <td>Dr. {{$doctor->name}}</td>
+                                             <td>{{$get_detail->ward}}</td>
+                                             <td>{{$patient->nok}}</td>
+                                             <td>{{$patient->nok_relation}}</td>
+                                             <td><a href="tel:{{$patient->nok_phone}}" style="text-decoration: none;">{{$patient->nok_phone}}</a></td>
+                                             
+                                             <td>{{$get_detail->created_at}}</td>
+                                          </tr>
+                                         
+                                          @endforeach
+                                       </tbody>
+                                    </table>
+                                        
+                                  <div class="col-md-6">
+                                      <div style="text-align:right;">
+                                              <!-----The pagination link----->
+                                              {{$patients->links()}}
+                                      </div>
+                                  </div>
+                                      @else
+                                      <p>No Record Found</p>   
+                                    @endif
+                                 </div>
+                              </div>
+                           </div>
+                    </div>
+                       
+                    <div class="col-lg-12">
+                     <div class="">
+                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                           <div class="iq-card-header d-flex justify-content-between">
+                              <div class="iq-header-title">
+                                <h4 class="card-title">Forum Questions</h4>
+                            </div>
+                            <div class="iq-card-header-toolbar d-flex align-items-center">
+                                <a href="./questions" class="">See all questions </a>
+                            </div>
+                           </div>
+                           <div class="iq-card-body">
+                               
+                              <ul class="patient-progress m-0 p-0">
+                                @if (count($questions_all) > 0)
+                                @foreach ($questions_all as $question_all)
+                                <a href="questions/{{$question_all->id}}" >
+                         <li class="d-flex mb-3 align-items-center">
+                            <div class="media-support-info">
+                                <small>{!!$question_all->created_at!!} </small>
+                               <h6>{!!$question_all->question!!} </h6>
+                               @if (auth()->user()->id == $question_all->asker_id)
+                                  <button class ="btn btn-info btn-sm pull-right"><a href="questions/{{$question_all->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Question"><i class="fa fa-edit"></i></a></button>
+                                      {!!Form::open(['action' => ['QuestionsController@destroy', $question_all->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                      {{Form::hidden('_method', 'DELETE')}}
+                                     <button type="submit" class ="btn btn-info btn-sm pull-right" data-toggle="tooltip" data-placement="top" data-original-title="Delete Question"><i class="fa fa-trash-o"></i></button>
+                                    
+                                     {!!Form::close()!!}
+                               @endif
+                            </div>
+                                <span class="user-list-files d-flex float-right">
+                                    <a href="questions/{{$question_all->id}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View answers"> <i class="fa fa-comments"></i>({{App\Answers::where('question_id', $question_all->id)->count()}})</a>
+                                 </span>
+                         </li> 
+                                </a>
+                                @endforeach
+           
+                                @else
+                                <p class="text-center">No Questions in Forum Yet</p>    
+                                @endif
+                              </ul>
+                        </div>
+                        </div>
+                     </div>
+                    </div>
+                     </div>
+                 <!----
+                    <div class="col-lg-4">
+                       <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                          <div class="iq-card-header d-flex justify-content-between">
+                             <div class="iq-header-title">
+                                <h4 class="card-title">Health Curve</h4>
+                             </div>
+                          </div>
+                          <div class="iq-card-body">
+                             <div id="home-chart-06" style="height: 350px;"></div>
+                          </div>
+                       </div>
+                    </div>                  
+                 ----> 
+              </div>
+                
+         @endif
+
+
 @if (auth()->user()->role == 'Nurse')
            <div class="">
             @include('inc.messages')

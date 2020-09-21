@@ -14,6 +14,7 @@ use App\HospitalDoctors;
 use App\pharmacy;
 use App\User;
 use App\Messages;
+use App\Records;
 use App\Transfers;
 class PatientsController extends Controller
 { 
@@ -115,6 +116,7 @@ class PatientsController extends Controller
         {
             $pin = $_POST['pin'];
             $user = patients::where('doc_email', auth()->user()->email)->where('pin', $pin)->first();
+            if(!empty($user)){
             $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
             $data = array(
                 'user' => $user,
@@ -122,6 +124,11 @@ class PatientsController extends Controller
        );
             return view("patients.search_result", $data);
         }
+   
+    else{
+        return redirect()->back()->with('error', 'You Dont\'t Have Access To This Patient\'s Record.');
+    }
+ }
     /**
      * Show the form for creating a new resource.
      *
@@ -437,9 +444,11 @@ class PatientsController extends Controller
     {
         //
         $pin = $_POST['pin'];
+        $record = Records::where('pin', $pin)->orderBy('created_at', 'desc')->first();
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = array(
             'pin' => $pin,
+            'record' => $record,
             'new_messages' => $new_messages
    );
         return view('patients.add',$data);
@@ -605,7 +614,7 @@ class PatientsController extends Controller
       $drug->status = $request->input('status');
       $drug->save();
       //$patient->status = 'pending';
-       return redirect('/myshop')->with('success', 'Great!, drug details updated.');//I just set the message for session(success).
+       return redirect('/pharmacy')->with('success', 'Great!, drug details updated.');//I just set the message for session(success).
 
     }
     /**
@@ -619,7 +628,7 @@ class PatientsController extends Controller
                 $id = $_POST['id'];
                $drug = pharmacy::find($id);
               $drug->delete();
-              return redirect('/myshop')->with('success', 'Drug Deleted From Our Records.');
+              return redirect('/pharmacy')->with('success', 'Drug Deleted From Our Records.');
         
    }
 

@@ -101,6 +101,35 @@
                     @endif
 
 
+                    @if (auth()->user()->role == 'Ward Maid')
+                    <li>
+                       <a href="./dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+                      
+                    </li>
+                    <li> <a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                    <li><a href="./wards" class="iq-waves-effect"><i class="ri-award-line"></i><span>Wards & Availability</span></a></li>
+                    <li><a href="./questions" class="iq-waves-effect"><i class="ri-book-open-line"></i><span>Forum</span></a></li>
+                    <li><a href="./pharmacist_shop" class="iq-waves-effect"><i class="ion-medkit"></i><span>Buy Drugs</span></a></li>
+                     
+                    <li>
+                       <a href="./"><i class="ri-home-4-line"></i><span>Homepage</span></a>
+                      
+                    </li>
+                    
+                    <li>
+                       
+                       <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+                       
+                         
+
+                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                           @csrf
+                       </form> 
+                   </li>
+                        
+                    @endif
+
+
                     @if (auth()->user()->role == 'HMO')
                     <li>
                        <a href="./dashboard"><i class="ri-home-4-line"></i><span>Dashboard</span></a>

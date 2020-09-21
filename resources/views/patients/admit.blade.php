@@ -17,6 +17,22 @@
                                 <hr>
                                 @include('inc.messages')
                                 <div class="">
+                                 @php
+                                     $wards = App\Wards::where('hospital', auth()->user()->h_id)->where('status', 'Available')->get();
+                                 @endphp
+                                       <div class="form-group">
+                                          <label for="ward">Ward of Admission</label>
+                                          <select class="form-control" id="ward" name="ward" required>
+                                           <option value="N/A" selected>-Select Ward-</option>
+                                           @if($wards->count())        
+                                              @foreach ($wards as $ward)
+                                                  <option value="{!! $ward->name!!}">{!! $ward->name !!}</option>
+                                  
+                                              @endforeach
+                                              @endif
+                                          </select>
+                                         
+                                       </div>
                                  <input type="hidden" class="form-control" id="patient" name="patient" value="{{ $patient->pin}}">
                                     <div class="form-group">
                                        <label for="note">Reason For Admission</label>

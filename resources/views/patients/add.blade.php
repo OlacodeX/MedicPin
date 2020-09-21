@@ -57,6 +57,516 @@
                     </div>
               </div>--->
               <div class="col-lg-12">
+               <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
+                  <div class="iq-card-header d-flex justify-content-between">
+                     <div class="iq-header-title">
+                        <h4 class="card-title">Add Medical Record</h4>
+                     </div>
+                     <div class="iq-card-header-toolbar d-flex align-items-center">
+                        <ul class="nav nav-pills" id="myTab" role="tablist">
+                           <li class="nav-item">
+                              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Personal Details</a>
+                           </li>
+                           <li class="nav-item">
+                              <a class="nav-link" id="hom-tab" data-toggle="tab" href="#hom" role="tab" aria-controls="hom" aria-selected="false">Medical Record</a>
+                           </li>
+                           <li class="nav-item">
+                              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Investigation & Diagnosis</a>
+                           </li>
+                           <li class="nav-item">
+                              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Prescription</a>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="iq-card-body">
+                     <div class="tab-content" id="myTabContent">
+
+                        @php
+                           $patient = App\patients::where('pin', $record->pin)->first();
+                           $user = App\User::where('pin', $record->pin)->first();
+                        @endphp
+
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                           <div class="row">
+                              <div class="col-md-4">
+                                 <div class="iq-card shadow-none mb-0">
+                                     <div class="iq-card-body p-1">
+                                       <nav aria-label="breadcrumb">
+                                          <ol class="breadcrumb iq-bg-primary">
+                                          <li class="breadcrumb-item active" aria-current="page">MedicPin <br>
+                                             @if ($patient->pin == '')
+                                                 N/A
+                                             @else
+                                             {{$patient->pin}}
+                                                 
+                                             @endif
+                                          </li>
+                                          </ol>
+                                       </nav>
+                                     </div>
+                                 </div>
+                             </div>
+                              <div class="col-md-4">
+                                 <div class="iq-card shadow-none mb-0">
+                                     <div class="iq-card-body p-1">
+                                       <nav aria-label="breadcrumb">
+                                          <ol class="breadcrumb iq-bg-primary">
+                                          <li class="breadcrumb-item active" aria-current="page">Name <br>
+                                             @if ($patient->name == '')
+                                                 N/A
+                                             @else
+                                             {{$patient->name}}
+                                                 
+                                             @endif
+                                             </li>
+                                          </ol>
+                                       </nav>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-4">
+                                <div class="iq-card shadow-none mb-0">
+                                    <div class="iq-card-body p-1">
+                                      <nav aria-label="breadcrumb">
+                                         <ol class="breadcrumb iq-bg-primary">
+                                         <li class="breadcrumb-item active" aria-current="page">Gender <br>
+                                          @if ($patient->gender == '')
+                                              N/A
+                                          @else
+                                          {{$patient->gender}}
+                                              
+                                          @endif
+                                          </li>
+                                         </ol>
+                                      </nav>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                               <div class="iq-card shadow-none mb-0">
+                                   <div class="iq-card-body p-1">
+                                     <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb iq-bg-primary">
+                                        <li class="breadcrumb-item active" aria-current="page">Age <br>
+                                          @if ($user->age == '')
+                                              N/A
+                                          @else
+                                          {{$user->age}}
+                                              
+                                          @endif
+                                          </li>
+                                        </ol>
+                                     </nav>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="iq-card shadow-none mb-0">
+                                  <div class="iq-card-body p-1">
+                                    <nav aria-label="breadcrumb">
+                                       <ol class="breadcrumb iq-bg-primary">
+                                       <li class="breadcrumb-item active" aria-current="page">Marital Status <br>
+                                         @if ($user->m_status == '')
+                                             N/A
+                                         @else
+                                         {{$user->m_status}}
+                                             
+                                         @endif
+                                         </li>
+                                       </ol>
+                                    </nav>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                             <div class="iq-card shadow-none mb-0">
+                                 <div class="iq-card-body p-1">
+                                   <nav aria-label="breadcrumb">
+                                      <ol class="breadcrumb iq-bg-primary">
+                                      <li class="breadcrumb-item active" aria-current="page">No of Children <br>
+                                        @if ($user->children == '')
+                                            N/A
+                                        @else
+                                        {{$user->children}}
+                                            
+                                        @endif
+                                        </li>
+                                      </ol>
+                                   </nav>
+                                 </div>
+                             </div>
+                         </div>
+                            <div class="col-md-4">
+                               <div class="iq-card shadow-none mb-0">
+                                   <div class="iq-card-body p-1">
+                                     <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb iq-bg-primary">
+                                        <li class="breadcrumb-item active" aria-current="page">Genotype <br>
+                                          @if ($record->genotype == '')
+                                              N/A
+                                          @else
+                                          {{$record->genotype}}
+                                              
+                                          @endif
+                                          </li>
+                                        </ol>
+                                     </nav>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="iq-card shadow-none mb-0">
+                                  <div class="iq-card-body p-1">
+                                    <nav aria-label="breadcrumb">
+                                       <ol class="breadcrumb iq-bg-primary">
+                                       <li class="breadcrumb-item active" aria-current="page">Blood Group <br>
+                                          @if ($record->b_group == '')
+                                              N/A
+                                          @else
+                                          {{$record->b_group}}
+                                              
+                                          @endif
+                                          </li>
+                                       </ol>
+                                    </nav>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                             <div class="iq-card shadow-none mb-0">
+                                 <div class="iq-card-body p-1">
+                                  <nav aria-label="breadcrumb">
+                                     <ol class="breadcrumb iq-bg-primary">
+                                        <li class="breadcrumb-item active" aria-current="page">Address <br>
+                                          @if ($patient->address == '')
+                                              N/A
+                                          @else
+                                          {{$patient->address}}
+                                              
+                                          @endif
+                                          
+                                       </li>
+                                     </ol>
+                                  </nav>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="col-md-4">
+                            <div class="iq-card shadow-none mb-0">
+                                <div class="iq-card-body p-1">
+                                 <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb iq-bg-primary">
+                                       <li class="breadcrumb-item active" aria-current="page">Phone number <br>
+                                          @if ($user->p_number == '')
+                                              N/A
+                                          @else
+                                          {{$user->p_number}}
+                                              
+                                          @endif
+                                          </li>
+                                    </ol>
+                                 </nav>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="iq-card shadow-none mb-0">
+                               <div class="iq-card-body p-1">
+                                <nav aria-label="breadcrumb">
+                                   <ol class="breadcrumb iq-bg-primary">
+                                      <li class="breadcrumb-item active" aria-current="page">Category <br>
+                                       @if ($user->nhis == '')
+                                           N/A
+                                       @else
+                                       {{$user->nhis}}
+                                           
+                                       @endif</li>
+                                   </ol>
+                                </nav>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="col-md-4">
+                          <div class="iq-card shadow-none mb-0">
+                              <div class="iq-card-body p-1">
+                               <nav aria-label="breadcrumb">
+                                  <ol class="breadcrumb iq-bg-primary">
+                                     <li class="breadcrumb-item active" aria-current="page">NHIS Number <br>
+                                      @if ($user->nhis_number == '')
+                                          N/A
+                                      @else
+                                      {{$user->nhis_number}}
+                                          
+                                      @endif
+                                    </li>
+                                  </ol>
+                               </nav>
+                              </div>
+                          </div>
+                      </div>
+                            <div class="col-md-4">
+                               <div class="iq-card shadow-none mb-0">
+                                   <div class="iq-card-body p-1">
+                                     <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb iq-bg-primary">
+                                        <li class="breadcrumb-item active" aria-current="page">Occupation <br>
+                                          @if ($patient->occupation == '')
+                                              N/A
+                                          @else
+                                          {{$patient->occupation}}
+                                              
+                                          @endif
+                                       </li>
+                                        </ol>
+                                     </nav>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="iq-card shadow-none mb-0">
+                                  <div class="iq-card-body p-1">
+                                    <nav aria-label="breadcrumb">
+                                       <ol class="breadcrumb iq-bg-primary">
+                                       <li class="breadcrumb-item active" aria-current="page">Next of kin name <br>
+                                          @if ($patient->nok == '')
+                                              N/A
+                                          @else
+                                          {{$patient->nok}}
+                                              
+                                          @endif
+                                          </li>
+                                       </ol>
+                                    </nav>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                             <div class="iq-card shadow-none mb-0">
+                                 <div class="iq-card-body p-1">
+                                   <nav aria-label="breadcrumb">
+                                      <ol class="breadcrumb iq-bg-primary">
+                                      <li class="breadcrumb-item active" aria-current="page">Relationship With next of kin <br>
+                                       @if ($patient->nok_relation == '')
+                                           N/A
+                                       @else
+                                       {{$patient->nok_relation}}
+                                           
+                                       @endif
+                                       </li>
+                                      </ol>
+                                   </nav>
+                                 </div>
+                             </div>
+                         </div>
+                          <!---    
+                              <div class="col-md-4">
+                                 <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb iq-bg-primary">
+                                       <li class="breadcrumb-item active" aria-current="page">Address <br>{{$patient->address}}</li>
+                                    </ol>
+                                 </nav>
+                                 <div class="iq-card shadow-none mb-0">
+                                     <div class="iq-card-body p-1">
+                                        <span class="font-size-14">Genotype</span>
+                                        @if ($record->genotype == '')
+                                        <h2>N/A
+                                            <img class="float-right summary-image-top mt-1" src="images/page-img/04.png" alt="summary-image" /> </h2>
+                                        <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                            <div class="iq-progress-bar">
+                                                <span class="bg-primary" data-percent="0"></span>
+                                            </div>
+                                        </div>
+                                        @else
+                                        <h2>{{$record->genotype}}
+                                            <img class="float-right summary-image-top mt-1" src="images/page-img/04.png" alt="summary-image" /> </h2>
+                                            <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                            <div class="iq-progress-bar">
+                                                <span class="bg-primary" data-percent={{$record->genotype}}></span>
+                                            </div>
+                                        </div>
+                                        @endif
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-4">
+                                 <div class="iq-card shadow-none mb-0">
+                                     <div class="iq-card-body p-1">
+                                         <span class="font-size-14">Blood Group</span>
+                                         @if ($record->b_group == '')
+                                         <h2>N/A
+                                         <img class="float-right summary-image-top mt-1" src="images/page-img/06.png" alt="summary-image" /> </h2>
+                                         <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                             <div class="iq-progress-bar">
+                                                 <span class="bg-success" data-percent="0"></span>
+                                             </div>
+                                         </div>
+                                         @else
+                                         <h2>{{$record->b_group}}
+                                         <img class="float-right summary-image-top mt-1" src="images/page-img/06.png" alt="summary-image" /> </h2>
+                                        <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                             <div class="iq-progress-bar">
+                                                 <span class="bg-success" data-percent={{$record->b_group}}></span>
+                                             </div>
+                                         </div>
+
+                                         @endif
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-4">
+                                 <div class="iq-card shadow-none mb-0">
+                                     <div class="iq-card-body p-1">
+                                         <span class="font-size-14">Weight</span>
+                                         @if ($record->weight == '')
+                                         <h2>N/A
+                                        <img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
+                                        <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                             <div class="iq-progress-bar">
+                                                 <span class="bg-danger" data-percent="0"></span>
+                                             </div>
+                                         </div>
+                                          @else
+                                          <h2>{{$record->weight}}kg
+                                          <img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
+                                          <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                              <div class="iq-progress-bar">
+                                                  <span class="bg-danger" data-percent={{$record->weight}}></span>
+                                              </div>
+                                          </div>   
+                                         @endif
+                                     </div>
+                                 </div>
+                             </div>
+                             --->
+                           </div>
+                        </div>
+
+
+                        <div class="tab-pane fade" id="hom" role="tabpanel" aria-labelledby="hom-tab">
+                           <!---
+                           <div class="d-flex tasks-card" role="alert">
+                              <div class="custom-control custom-checkbox">
+                                 <input type="checkbox" class="custom-control-input" id="customCheck10">
+                                 <label class="custom-control-label" for="customCheck10">Get the address of customer</label>
+                              </div>
+                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
+                              <i class="ri-close-line"></i>
+                              </button>
+                           </div>
+                           <div class="d-flex tasks-card" role="alert">
+                              <div class="custom-control custom-checkbox">
+                                 <input type="checkbox" class="custom-control-input" id="customCheck12">
+                                 <label class="custom-control-label" for="customCheck12">Contact Vendor for parcel</label>
+                              </div>
+                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
+                              <i class="ri-close-line"></i>
+                              </button>
+                           </div>
+                           <div class="d-flex tasks-card" role="alert">
+                              <div class="custom-control custom-checkbox">
+                                 <input type="checkbox" class="custom-control-input" id="customCheck13">
+                                 <label class="custom-control-label" for="customCheck13">Refule delivery truck</label>
+                              </div>
+                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
+                              <i class="ri-close-line"></i>
+                              </button>
+                           </div>
+                           <div class="d-flex tasks-card" role="alert">
+                              <div class="custom-control custom-checkbox">
+                                 <input type="checkbox" class="custom-control-input" id="customCheck14">
+                                 <label class="custom-control-label" for="customCheck14">Pick up for order no. 334</label>
+                              </div>
+                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
+                              <i class="ri-close-line"></i>
+                              </button>
+                           </div>
+                           <div class="d-flex tasks-card" role="alert">
+                              <div class="custom-control custom-checkbox">
+                                 <input type="checkbox" class="custom-control-input" id="customCheck15">
+                                 <label class="custom-control-label" for="customCheck15">Pay taxes for every bill</label>
+                              </div>
+                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
+                              <i class="ri-close-line"></i>
+                              </button>
+                           </div>
+                           <div class="d-flex tasks-card" role="alert">
+                              <div class="custom-control custom-checkbox">
+                                 <input type="checkbox" class="custom-control-input" id="customCheck16">
+                                 <label class="custom-control-label" for="customCheck16">I am designers &amp; I have no life</label>
+                              </div>
+                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
+                              <i class="ri-close-line"></i>
+                              </button>
+                           </div>
+                           <div class="d-flex tasks-card" role="alert">
+                              <div class="custom-control custom-checkbox">
+                                 <input type="checkbox" class="custom-control-input" id="customCheck17">
+                                 <label class="custom-control-label" for="customCheck17">This is a good product. Buy it :) </label>
+                              </div>
+                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
+                              <i class="ri-close-line"></i>
+                              </button>
+                           </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                           <div class="d-flex tasks-card" role="alert">
+                              <div class="custom-control custom-checkbox">
+                                 <input type="checkbox" class="custom-control-input" id="customCheck18">
+                                 <label class="custom-control-label" for="customCheck18">You should check in on some of  below.</label>
+                              </div>
+                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
+                              <i class="ri-close-line"></i>
+                              </button>
+                           </div>
+                           <div class="d-flex tasks-card" role="alert">
+                              <div class="custom-control custom-checkbox">
+                                 <input type="checkbox" class="custom-control-input" id="customCheck19">
+                                 <label class="custom-control-label" for="customCheck19">You should check in on some of  below.</label>
+                              </div>
+                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
+                              <i class="ri-close-line"></i>
+                              </button>
+                           </div>---->
+                        </div>
+
+
+                        
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                           <!---
+                           <div class="d-flex tasks-card" role="alert">
+                              <div class="custom-control custom-checkbox">
+                                 <input type="checkbox" class="custom-control-input" id="customCheck110">
+                                 <label class="custom-control-label" for="customCheck110">You should check in on some of  below.</label>
+                              </div>
+                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
+                              <i class="ri-close-line"></i>
+                              </button>
+                           </div>
+                           <div class="d-flex tasks-card" role="alert">
+                              <div class="custom-control custom-checkbox">
+                                 <input type="checkbox" class="custom-control-input" id="customCheck111">
+                                 <label class="custom-control-label" for="customCheck111">You should check in on some of  below.</label>
+                              </div>
+                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
+                              <i class="ri-close-line"></i>
+                              </button>
+                           </div>
+                           <div class="d-flex tasks-card" role="alert">
+                              <div class="custom-control custom-checkbox">
+                                 <input type="checkbox" class="custom-control-input" id="customCheck112">
+                                 <label class="custom-control-label" for="customCheck112">You should check in on some of  below.</label>
+                              </div>
+                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
+                              <i class="ri-close-line"></i>
+                              </button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>--->
+              </div>
                     <div class="iq-card">
                        <div class="iq-card-header d-flex justify-content-between">
                         @include('inc.messages')

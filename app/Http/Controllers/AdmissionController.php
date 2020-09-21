@@ -58,6 +58,7 @@ class AdmissionController extends Controller
             $admit = new Admission;
             $admit->patient  =  $request->input('patient');
             $admit->reason =  $request->input('reason');
+            $admit->ward =  $request->input('ward');
             $admit->admitted_by = auth()->user()->pin;
             //Save to db
             $admit->save();
@@ -68,7 +69,7 @@ class AdmissionController extends Controller
                 'patient' => $patient,
                 'new_messages' => $new_messages
        );
-            return redirect()->back()->with('success', 'Patient Admitted!');
+            return redirect('/dashboard')->with('success', 'Patient Admitted!');
 
     }
 
@@ -107,7 +108,7 @@ class AdmissionController extends Controller
         $patient = patients::where('pin', $request->input('pin'))->first();
         $patient->status = 'Discharged';
         $patient->save();
-        return redirect()->back()->with('success', 'Patient Discharged!');
+        return redirect('/dashboard')->with('success', 'Patient Discharged!');
     }
 
     /**

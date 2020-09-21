@@ -218,6 +218,21 @@
       } else {
           document.getElementById("selectex").style.display = "none";
       }
+      if (that.value == "Married") {
+          document.getElementById("children").style.display = "block";
+      } else {
+          document.getElementById("children").style.display = "none";
+      }
+      if (that.value == "Divorced") {
+          document.getElementById("children").style.display = "block";
+      } else {
+          document.getElementById("children").style.display = "none";
+      }
+      if (that.value == "Widowed") {
+          document.getElementById("children").style.display = "block";
+      } else {
+          document.getElementById("children").style.display = "none";
+      }
       if (that.value == "HMO") {
           document.getElementById("hmoname").style.display = "block";
           document.getElementById("role").style.display = "none";
@@ -226,7 +241,7 @@
       }
       if (that.value == "Organization") {
           document.getElementById("orgname").style.display = "block";
-          document.getElementById("role").style.display = "none";
+          document.getElementById("role").style.display = "none"
       } else {
           document.getElementById("orgname").style.display = "none";
       }
@@ -241,6 +256,11 @@
           document.getElementById("nhis").style.display = "none";
           document.getElementById("add").style.display = "none";
           document.getElementById("username").style.display = "none";
+      }
+      if (that.value == "NHIS") {
+         document.getElementById("nhiss").style.display = "block";
+      } else {
+          document.getElementById("nhiss").style.display = "none";
       }
 
 

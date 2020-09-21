@@ -8,6 +8,7 @@ use App\HospitalDoctors;
 use Illuminate\Support\Facades\Hash;
 use App\Messages;
 use App\patients;
+use App\Wards;
 use Image;
 use Yabacon\Paystack;
 use App\Mail\BloodRequestMail;
@@ -28,14 +29,13 @@ class PagesController extends Controller
    } 
     //
     public function index(){
-       // $posts = Post::orderBy('created_at', 'desc')->paginate(2);
-        //$portfolios = Portfolio::orderBy('created_at', 'desc')->paginate(12);
-
-       // $data = array(
-         //   'posts' => $posts,
-           // 'portfolios' => $portfolios
-        //);
         return view('pages.home');//here i can return any page i want.
+    }
+    public function wards(){
+        return view('pages.wards');//here i can return any page i want.
+    }
+    public function create_ward(){
+        return view('pages.create_ward');//here i can return any page i want.
     }
     public function payment(){
         $amount = $_POST['amount'];
@@ -129,6 +129,7 @@ class PagesController extends Controller
        $password = $_POST['password'];
        $email = $_POST['email'];
        $cc = $_POST['cc'];
+       $age = $_POST['age'];
        $phone = $_POST['phone'];
        //$type = $_POST['type'];
        $gender = $_POST['gender'];
@@ -147,6 +148,7 @@ class PagesController extends Controller
                 'name' => $name,
                 'password' => $password,
                 'cc' => $cc,
+                'age' => $age,
                 'phone' => $phone,
                 //'type' => $type,
                 'email' => $email,
@@ -347,6 +349,20 @@ class PagesController extends Controller
         return view('edituser', $data);
     }
     
+    public function store_ward(Request $request)
+    {
+        // 
+        $this->validate($request, [
+            'name' => 'nullable',
+            ]);  
+            $ward = new Wards;
+            $ward->name = $request->input('name');
+            $ward->status = 'Available';
+            $ward->hospital = auth()->user()->h_id;
+            $ward->save();
+            return redirect()->back()->with('success', 'Ward Created!');
+
+        }
     /**
      * Update the specified resource in storage.
      *
@@ -442,6 +458,16 @@ class PagesController extends Controller
         //print success message and redirect
         return redirect('/dashboard')->with('success', 'Profile Updated');//I just set the message for session(success).
 
+    }
+
+    public function update_ward(Request $request){
+        $this->validate($request, [
+            'status' => 'nullable',
+        ]);
+          $ward = Wards::where('id', $request->input('id'))->first();
+          $ward->status = $request->input('status');
+          $ward->save();
+     return redirect()->back()->with('success', 'Ward details updated successfully');
     }
     /**
          * Display a listing of the resource.

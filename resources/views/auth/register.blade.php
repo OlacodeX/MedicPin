@@ -337,19 +337,20 @@
                                 </div>
                         </div>
                         </div>
-                                <!---
+                                
                                 <div class="form-group">
                                     <div class="inner-addon right-addon">
-                                        <i class="fa fa-twitter"></i>
-                                        <input id="twitter" type="url" class="form-control mb-0 @error('twitter') is-invalid @enderror" name="twitter" value="{{ old('twitter') }}" autocomplete="twitter" placeholder="Link To Your Twitter Profile" autofocus>
+                                        <i class="fa fa-"></i>
+                                        <input id="age" type="text" class="form-control mb-0 @error('age') is-invalid @enderror" name="age" value="{{ old('age') }}" autocomplete="age" placeholder="How Old Are You?">
         
-                                        @error('twitter')
+                                        @error('age')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
                                 </div>
+                                <!---
                                 <div class="form-group">
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-facebook"></i>

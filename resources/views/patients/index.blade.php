@@ -193,42 +193,73 @@
                                                 <div class="col-md-4">
                                                     <div class="iq-card shadow-none mb-0">
                                                         <div class="iq-card-body p-1">
-                                                           <span class="font-size-14">Blood pressure</span>
-                                                           <h2>{{$record->bp}}
+                                                           <span class="font-size-14">Genotype</span>
+                                                           @if ($record->genotype == '')
+                                                           <h2>N/A
                                                                <img class="float-right summary-image-top mt-1" src="images/page-img/04.png" alt="summary-image" /> </h2>
                                                            <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
                                                                <div class="iq-progress-bar">
-                                                                   <span class="bg-primary" data-percent={{$record->bp}}></span>
+                                                                   <span class="bg-primary" data-percent="0"></span>
                                                                </div>
                                                            </div>
+                                                           @else
+                                                           <h2>{{$record->genotype}}
+                                                               <!--<img class="float-right summary-image-top mt-1" src="images/page-img/04.png" alt="summary-image" /> </h2>
+                                                               --><div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                               <div class="iq-progress-bar">
+                                                                   <span class="bg-primary" data-percent={{$record->genotype}}></span>
+                                                               </div>
+                                                           </div>
+                                                           @endif
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="iq-card shadow-none mb-0">
                                                         <div class="iq-card-body p-1">
-                                                            <span class="font-size-14">Temperature</span>
-                                                            <h2>{{$record->temp}}Celsius 
-                                                            <img class="float-right summary-image-top mt-1" src="images/page-img/06.png" alt="summary-image" /> </h2>
-                                                            <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                            <span class="font-size-14">Blood Group</span>
+                                                            @if ($record->b_group == '')
+                                                            <h2>N/A
+                                                            <!--<img class="float-right summary-image-top mt-1" src="images/page-img/06.png" alt="summary-image" /> </h2>
+                                                            --><div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
                                                                 <div class="iq-progress-bar">
-                                                                    <span class="bg-success" data-percent={{$record->temp}}></span>
+                                                                    <span class="bg-success" data-percent="0"></span>
                                                                 </div>
                                                             </div>
+                                                            @else
+                                                            <h2>{{$record->b_group}}
+                                                            <!--<img class="float-right summary-image-top mt-1" src="images/page-img/06.png" alt="summary-image" /> </h2>
+                                                            ---><div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                                <div class="iq-progress-bar">
+                                                                    <span class="bg-success" data-percent={{$record->b_group}}></span>
+                                                                </div>
+                                                            </div>
+
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="iq-card shadow-none mb-0">
                                                         <div class="iq-card-body p-1">
-                                                            <span class="font-size-14">Heart Rate</span>
-                                                            <h2>{{$record->h_rate}}%
-                                                            <img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
-                                                            <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                            <span class="font-size-14">Weight</span>
+                                                            @if ($record->weight == '')
+                                                            <h2>N/A
+                                                           <!-- <img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
+                                                           --><div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
                                                                 <div class="iq-progress-bar">
-                                                                    <span class="bg-danger" data-percent={{$record->h_rate}}></span>
+                                                                    <span class="bg-danger" data-percent="0"></span>
                                                                 </div>
                                                             </div>
+                                                             @else
+                                                             <h2>{{$record->weight}}kg
+                                                             <!---<img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
+                                                             ---><div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
+                                                                 <div class="iq-progress-bar">
+                                                                     <span class="bg-danger" data-percent={{$record->weight}}></span>
+                                                                 </div>
+                                                             </div>   
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -556,6 +587,7 @@
                                                    <tr>
                                                       <th>Date</th>
                                                       <th>Reason</th>
+                                                      <th>Ward</th>
                                                       <th>Admitted By</th>
                                                    </tr>
                                                </thead>
@@ -565,6 +597,9 @@
                                                       <td class="text-center">{{$admit->created_at}}</td>
                                                       <td>
                                                         {!!$admit->reason!!}
+                                                      </td>
+                                                      <td>
+                                                        {!!$admit->ward!!}
                                                       </td>
                                                       
                                                       @php

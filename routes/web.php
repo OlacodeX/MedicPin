@@ -13,6 +13,10 @@
 
 Route::get('/', 'PagesController@index');
 Route::get('/blood_bank', 'PagesController@blood_bank');
+Route::get('/wards', 'PagesController@wards');
+Route::get('/create_ward', 'PagesController@create_ward');
+Route::post('/update_ward', 'PagesController@update_ward');
+Route::post('/store_ward', 'PagesController@store_ward');
 Route::post('/send_request_mail', 'PagesController@send_request_mail');
 Route::get('/myprofile', 'PagesController@pro');
 Route::get('/doctors', 'PagesController@doctors');
