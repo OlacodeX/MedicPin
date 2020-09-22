@@ -1009,7 +1009,7 @@
                                    
                  <div class="row" style="margin-bottom: 250px;">
                     <div class="col-lg-12">
-                       <div class="container">
+                       <div class="">
                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
                         <div class="iq-card-header d-flex justify-content-between">
                            <div class="iq-header-title">

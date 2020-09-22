@@ -443,7 +443,7 @@ class PatientsController extends Controller
     public function add_record()
     {
         //
-        $pin = $_POST['pin'];
+        $pin = $_GET['pin'];
         $record = Records::where('pin', $pin)->orderBy('created_at', 'desc')->first();
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = array(

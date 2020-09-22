@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Prescriptions;
+use App\Bills;
+use App\pharmacy;
 use App\Records;
 use App\Consortations;
+use App\User;
 use App\Messages;
 
 class PrescriptionController extends Controller
@@ -47,6 +50,16 @@ class PrescriptionController extends Controller
         $prescription1->frequency = $request->input('frequency1');
         $prescription1->prescribed_by = auth()->user()->pin;
         $prescription1->save();
+        $drug1 = pharmacy::where('id', $request->input('drug1'))->first();
+        $bill = new Bills;
+        $user = User::where('pin', $request->input('pin'))->first();
+        $bill->patient_name = $user->name;
+        $bill->patient_pin = $user->pin;
+        $bill->service = $drug1->name;
+        $bill->status = 'Unpaid';
+        $bill->amount = $drug1->price;
+        $bill->action_by = auth()->user()->pin;
+        $bill->save();
         if ($request->input('drug2') !== 'Select') {
             $prescription2 = new Prescriptions;
             $prescription2->sickness = $request->input('sickness');
@@ -56,6 +69,16 @@ class PrescriptionController extends Controller
             $prescription2->frequency = $request->input('frequency2');
             $prescription2->prescribed_by = auth()->user()->pin;
             $prescription2->save();
+            $drug2 = pharmacy::where('id', $request->input('drug2'))->first();
+            $bill = new Bills;
+            $user = User::where('pin', $request->input('pin'))->first();
+            $bill->patient_name = $user->name;
+            $bill->patient_pin = $user->pin;
+            $bill->service = $drug2->name;
+            $bill->status = 'Unpaid';
+            $bill->amount = $drug2->price;
+            $bill->action_by = auth()->user()->pin;
+            $bill->save();
         }
         if ($request->input('drug3') !== 'Select') {
             $prescription3 = new Prescriptions;
@@ -66,6 +89,16 @@ class PrescriptionController extends Controller
             $prescription3->frequency = $request->input('frequency3');
             $prescription3->prescribed_by = auth()->user()->pin;
             $prescription3->save();
+            $drug3 = pharmacy::where('id', $request->input('drug3'))->first();
+            $bill = new Bills;
+            $user = User::where('pin', $request->input('pin'))->first();
+            $bill->patient_name = $user->name;
+            $bill->patient_pin = $user->pin;
+            $bill->service = $drug3->name;
+            $bill->status = 'Unpaid';
+            $bill->amount = $drug3->price;
+            $bill->action_by = auth()->user()->pin;
+            $bill->save();
         }
 
         $pin = $_POST['pin'];  
@@ -83,7 +116,7 @@ class PrescriptionController extends Controller
                 'records' => $records,
                 'record' => $record
             );
-              return view('patients.index', $data)->with('success', 'Great, prescription sent!');
+              return redirect()->back()->with('success', 'Great, prescription sent!');
         
     }
 

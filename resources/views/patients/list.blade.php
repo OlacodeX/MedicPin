@@ -55,7 +55,7 @@
                                     <span class="user-list-files d-flex float-right">
                                        @if (auth()->user()->role == 'Doctor')
                                            
-                                           {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                                           {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
                                            {{Form::hidden('pin', $user->pin)}}
                                            <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add New Medical Record"><i class="la la-notes-medical"></i></button>
                                           
@@ -174,7 +174,7 @@
                                     <span class="user-list-files d-flex float-right">
                                        @if (auth()->user()->role == 'Doctor')
                                            
-                                           {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                                           {!!Form::open(['action' => 'PatientsController@add_record', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
                                            {{Form::hidden('pin', $h_user->pin)}}
                                            <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add New Medical Record"><i class="la la-notes-medical"></i></button>
                                           
@@ -293,8 +293,12 @@
                                
                                
                                .btn.btn-info.btn-sm i.fa{
-                                   font-size: 12px;
                                    margin: 0;
+                               }
+                               .btn.btn-info.btn-sm i{
+                                   font-size: 16px;
+                                   margin: 0;
+                                   font-weight: bold;
                                }
                              @media only screen and (max-width: 768px) {
                       /* align glyph 

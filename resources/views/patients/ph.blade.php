@@ -154,6 +154,7 @@
                                             } 
                                             div.product-miniature div.thumbnail-container img{
                                                height: 200px;
+                                                width: 500px;
                                             }
                                               span.pull-right{
                                                   font-size: 10px;

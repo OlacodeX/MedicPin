@@ -71,10 +71,10 @@
                               <a class="nav-link" id="hom-tab" data-toggle="tab" href="#hom" role="tab" aria-controls="hom" aria-selected="false">Medical Record</a>
                            </li>
                            <li class="nav-item">
-                              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Investigation & Diagnosis</a>
+                              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Lab Test Request</a>
                            </li>
                            <li class="nav-item">
-                              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Prescription</a>
+                              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Diagnosis & Prescription</a>
                            </li>
                         </ul>
                      </div>
@@ -444,161 +444,59 @@
 
 
                         <div class="tab-pane fade" id="hom" role="tabpanel" aria-labelledby="hom-tab">
-                           <!---
-                           <div class="d-flex tasks-card" role="alert">
-                              <div class="custom-control custom-checkbox">
-                                 <input type="checkbox" class="custom-control-input" id="customCheck10">
-                                 <label class="custom-control-label" for="customCheck10">Get the address of customer</label>
-                              </div>
-                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
-                              <i class="ri-close-line"></i>
-                              </button>
-                           </div>
-                           <div class="d-flex tasks-card" role="alert">
-                              <div class="custom-control custom-checkbox">
-                                 <input type="checkbox" class="custom-control-input" id="customCheck12">
-                                 <label class="custom-control-label" for="customCheck12">Contact Vendor for parcel</label>
-                              </div>
-                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
-                              <i class="ri-close-line"></i>
-                              </button>
-                           </div>
-                           <div class="d-flex tasks-card" role="alert">
-                              <div class="custom-control custom-checkbox">
-                                 <input type="checkbox" class="custom-control-input" id="customCheck13">
-                                 <label class="custom-control-label" for="customCheck13">Refule delivery truck</label>
-                              </div>
-                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
-                              <i class="ri-close-line"></i>
-                              </button>
-                           </div>
-                           <div class="d-flex tasks-card" role="alert">
-                              <div class="custom-control custom-checkbox">
-                                 <input type="checkbox" class="custom-control-input" id="customCheck14">
-                                 <label class="custom-control-label" for="customCheck14">Pick up for order no. 334</label>
-                              </div>
-                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
-                              <i class="ri-close-line"></i>
-                              </button>
-                           </div>
-                           <div class="d-flex tasks-card" role="alert">
-                              <div class="custom-control custom-checkbox">
-                                 <input type="checkbox" class="custom-control-input" id="customCheck15">
-                                 <label class="custom-control-label" for="customCheck15">Pay taxes for every bill</label>
-                              </div>
-                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
-                              <i class="ri-close-line"></i>
-                              </button>
-                           </div>
-                           <div class="d-flex tasks-card" role="alert">
-                              <div class="custom-control custom-checkbox">
-                                 <input type="checkbox" class="custom-control-input" id="customCheck16">
-                                 <label class="custom-control-label" for="customCheck16">I am designers &amp; I have no life</label>
-                              </div>
-                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
-                              <i class="ri-close-line"></i>
-                              </button>
-                           </div>
-                           <div class="d-flex tasks-card" role="alert">
-                              <div class="custom-control custom-checkbox">
-                                 <input type="checkbox" class="custom-control-input" id="customCheck17">
-                                 <label class="custom-control-label" for="customCheck17">This is a good product. Buy it :) </label>
-                              </div>
-                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
-                              <i class="ri-close-line"></i>
-                              </button>
-                           </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                           <div class="d-flex tasks-card" role="alert">
-                              <div class="custom-control custom-checkbox">
-                                 <input type="checkbox" class="custom-control-input" id="customCheck18">
-                                 <label class="custom-control-label" for="customCheck18">You should check in on some of  below.</label>
-                              </div>
-                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
-                              <i class="ri-close-line"></i>
-                              </button>
-                           </div>
-                           <div class="d-flex tasks-card" role="alert">
-                              <div class="custom-control custom-checkbox">
-                                 <input type="checkbox" class="custom-control-input" id="customCheck19">
-                                 <label class="custom-control-label" for="customCheck19">You should check in on some of  below.</label>
-                              </div>
-                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
-                              <i class="ri-close-line"></i>
-                              </button>
-                           </div>---->
-                        </div>
-
-
-                        
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                           <!---
-                           <div class="d-flex tasks-card" role="alert">
-                              <div class="custom-control custom-checkbox">
-                                 <input type="checkbox" class="custom-control-input" id="customCheck110">
-                                 <label class="custom-control-label" for="customCheck110">You should check in on some of  below.</label>
-                              </div>
-                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
-                              <i class="ri-close-line"></i>
-                              </button>
-                           </div>
-                           <div class="d-flex tasks-card" role="alert">
-                              <div class="custom-control custom-checkbox">
-                                 <input type="checkbox" class="custom-control-input" id="customCheck111">
-                                 <label class="custom-control-label" for="customCheck111">You should check in on some of  below.</label>
-                              </div>
-                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
-                              <i class="ri-close-line"></i>
-                              </button>
-                           </div>
-                           <div class="d-flex tasks-card" role="alert">
-                              <div class="custom-control custom-checkbox">
-                                 <input type="checkbox" class="custom-control-input" id="customCheck112">
-                                 <label class="custom-control-label" for="customCheck112">You should check in on some of  below.</label>
-                              </div>
-                              <button type="button" class="close ml-auto" data-dismiss="alert" aria-label="Close">
-                              <i class="ri-close-line"></i>
-                              </button>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>--->
-              </div>
-                    <div class="iq-card">
-                       <div class="iq-card-header d-flex justify-content-between">
-                        @include('inc.messages')
-                          <div class="iq-header-title">
-                             <h4 class="card-title">New Patient Record</h4>
-                          </div>
-                       </div>
-                       <div class="iq-card-body">
-                          <div class="new-user-info">
-                                <div class="row">
-                                   <!----
-                                   <div class="form-group col-md-6">
-                                      <label for="name">Name:</label>
-                                      <input type="text" class="form-control" id="name" name="name" placeholder="First Name">
-                                   </div>
-                                   <div class="form-group col-md-6">
-                                      <label for="add">Address</label>
-                                      <input type="text" class="form-control" name="add" id="add" placeholder="Street Address">
-                                   </div>
-                                   <div class="form-group col-md-6">
-                                      <label for="mobno">Mobile Number:</label>
-                                      <input type="text" class="form-control" id="number" name="number" placeholder="Mobile Number">
-                                   </div>
-                                   <div class="form-group col-md-6">
-                                      <label for="email">Email:</label>
-                                      <input type="email" class="form-control" id="email" placeholder="Email" name="email">
-                                   </div>
-                                </div>
-                                <hr>---->
-                        {!! Form::open(['action' => 'RecordsController@store', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
+                          
+                           <div class="form-group col-md-12">
+                              <h5 class="card-title">Patient Complain</h5>
+                              {!! Form::open(['action' => 'RecordsController@store', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
+                              **/ !!}
+                                 <input type="hidden" class="form-control" id="pin" name="pin" value="{{$pin}}">
+                               <textarea class="form-control" id="pre" name="note" placeholder="Patient's Complaint..."></textarea><br>
+                               
+                               <button type="submit" class="btn btn-primary" style="margin-bottom: 0px;">Add Complain</button>
+                               <a href="#test" data-toggle="collapse" class="btn btn-primary pull-right" style="margin-top: 0;">View Complain History</a>
+                               {!! Form::close() !!} 
+                               <style>
+                                  a.btn.btn-primary.pull-right{
+                                     margin-top: 0;
+                                  }
+                               </style>
+                               
+                             
+                                          <div class="collapse" id="test"> 
+                                             <div class="iq-card">
+                                             <div class="iq-card-body text-center">
+                                                <h5 class="card-title">Complain History</h5>
+                                                @php
+                                                      $records = App\Records::where('pin', $pin)->where('note', '!=', '')->orderby('created_at','desc')->get();
+                                                @endphp      
+                                                @if (count($records) > 0)
+                                                   <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
+                                                     <thead>
+                                                         
+                                                     <tr>
+                                                      <th>Date</th>
+                                                      <th>Complain</th>
+                                                   </tr>
+                                               </thead>
+                                               <tbody>
+                                                @foreach ($records as $record)
+                                                   <tr>
+                                                      <td class="text-center">{{$record->created_at}}</td>
+                                                      <td>{!!$record->note!!}</td>
+                                                   </tr> 
+                                                         @endforeach                      
+                                                     </tbody>
+                                                   </table>
+                                          </div>
+                                          @else
+                                          <p>No Record Found</p>    
+                                          @endif
+                                          </div>
+                                       </div>
+                                       
+                        {!! Form::open(['action' => 'RecordsController@store_bio', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
                         **/ !!}
-                                <p class="mb-3">Patient's Vitals</p>
+                        <h5 class="card-title" style="margin-top: 80px;">Patient's Bio Vitals</h5>
                                 <div class="row">
                                  <input type="hidden" class="form-control" id="pin" name="pin" value="{{$pin}}">
                                    <style>
@@ -617,22 +515,16 @@
                                          font-size: 15px;
                                          color: #02818f;
                                       }
-                                      input.form-control,
-                                      select.form-control{
-                                         border-radius: 0;
-                                         width: 200px;
-                                      }
-                                      textarea.form-control{
-                                         border-radius: 0;
-                                         width: 200px;
-                                      }
                                    </style>
-                                    <div class="form-group col-md-3">
-                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo"><label for="Blood Group"><i class="fa fa-plus"></i> Blood Group</label></button>
-                                       
-                                       <div id="demo" class="collapse">
+                                    <div class="form-group col-md-4">
+                                       <label for="blood group">Blood Group</label>
+                                       <div>
+                                          @php
+                                              $bg = App\Records::where('pin', $pin)->where('b_group', '!=', '')->first();
+                                              $gen = App\Records::where('pin', $pin)->where('genotype', '!=', '')->first();
+                                          @endphp
                                        <select class="form-control" id="selectbg" name="b_group">
-                                          <option value="N/A">Select</option>
+                                          <option value="{{$bg->b_group}}">{{$bg->b_group}}</option>
                                              <option value="O+">O+</option>
                                              <option value="O-">O-</option>
                                              <option value="A+">A+</option>
@@ -642,25 +534,23 @@
                                        </select>
                                        </div>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                       
-                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo1"><label for="bp"><i class="fa fa-plus"></i>Blood Pressure</label></button>
-                                       
-                                       <div id="demo1" class="collapse">
+                                    <div class="form-group col-md-4">
+                                       <label for="Blood Pressure">Blood Pressure</label>
+                                       <div>
                                        <input type="text" class="form-control" id="bp" name="bp" placeholder="Blood Pressure">
                                     </div>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo2"><label for="fbs/rbs"><i class="fa fa-plus"></i>FBS/RBS</label></button>
-                                          <div id="demo2" class="collapse">
+                                    <div class="form-group col-md-4">
+                                       <label for="fbs/rbs">FBS/RBS</label>
+                                       <div>
                                           <input type="text" class="form-control" id="fbs/rbs" name="fbs/rbs" placeholder="fbs/rbs">
                                           </div>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo3"><label for="genotype"><i class="fa fa-plus"></i>Genotype</label></button>
-                                       <div id="demo3" class="collapse">
+                                    <div class="form-group col-md-4">
+                                       <label for="genotype">Genotype</label>
+                                       <div>
                                        <select class="form-control" id="selectgenotype" name="genotype">
-                                          <option value="N/A">Select</option>
+                                          <option value="{{$gen->genotype}}">{{$gen->genotype}}</option>
                                           <option value="AA">AA</option>
                                           <option value="AC">AC</option>
                                           <option value="AS">AS</option>
@@ -668,21 +558,21 @@
                                        </select>
                                        </div>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo4"><label for="weight"><i class="fa fa-plus"></i>Weight</label></button>
-                                       <div id="demo4" class="collapse">
+                                    <div class="form-group col-md-4">
+                                       <label for="weight">Weight</label>
+                                       <div>
                                        <input type="text" class="form-control" id="weight" name="weight" placeholder="Weight in kg">
                                        </div>
                                     </div>
-                                     <div class="form-group col-md-3">
-                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo5"><label for="height"><i class="fa fa-plus"></i>Height</label></button>
-                                       <div id="demo5" class="collapse">
+                                     <div class="form-group col-md-4">
+                                       <label for="height">Height</label>
+                                        <div>
                                        <input type="text" class="form-control" id="height" name="height" placeholder="Height in cm">
                                        </div>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo6"><label for="temprature"><i class="fa fa-plus"></i>Temperature</label></button>
-                                       <div id="demo6" class="collapse">
+                                    <div class="form-group col-md-4">
+                                       <label for="temprature">Temperature</label>
+                                       <div>
                                        <input type="text" class="form-control" id="temprature" name="temprature" placeholder="Temprature in Celsius">
                                        </div>
                                     </div>
@@ -693,9 +583,9 @@
                                       <input type="text" class="form-control" id="oxygen" name="oxygen" placeholder="Oxygen Saturation in %">
                                       </div>
                                     </div>---->
-                                   <div class="form-group col-md-3">
-                                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo8"><label for="temprature"><i class="fa fa-plus"></i>Glucose Level</label></button>
-                                      <div id="demo8" class="collapse">
+                                   <div class="form-group col-md-4">
+                                    <label for="glucose">Glucose level</label>
+                                      <div>
                                       <input type="text" class="form-control" id="glucose" name="glucose" placeholder="Glucose level in %">
                                       </div>
                                     </div>
@@ -711,218 +601,425 @@
                                      <div id="demo10" class="collapse">
                                      <input type="text" class="form-control" id="bmi" name="bmi" placeholder="BMI">
                                      </div>
-                                  </div>--->
+                                  </div>
                                   <div class="col-md-12">
                                     <p class="mb-3">Official Use</p>
-                                 </div>
-                                        <div class="form-group col-md-6">
-                                          <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo13"><label for="comment"><i class="fa fa-plus"></i>Doctor's Comment</label></button>
-                                           <div id="demo13" class="collapse">
-                                           <textarea class="form-control" id="pre" name="pre" placeholder="Doctor's Comment Based On Patient's Complaint and Medical History..."></textarea>
-                                        </div>
-                                     </div>
-                                      <div class="form-group col-md-6">
-                                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo11"><label for="temprature"><i class="fa fa-plus"></i>Note</label></button>
-                                         <div id="demo11" class="collapse">
-                                         <textarea class="form-control" id="note" name="note" placeholder="General note on patient medical status"></textarea>
-                                         </div>
-                                      </div>
+                                 </div>--->
+                                <div class="form-group col-md-12">
+                                   <label for="comment">Doctor's Investigation</label>
+                                   <br><small>What do you think is wrong with patient?</small>
+                                   
+                                   <textarea class="form-control" id="note" name="comment" placeholder="Doctor's Comment Based On Patient's Complaint and Medical History..."></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary" style="margin-bottom: 80px;">Create Record</button>
-                                {!! Form::close() !!} 
-                                <a href="#test" data-toggle="collapse" class="btn btn-primary" style="margin-bottom: 50px;">Request Lab Test</a>
-                                <a href="#records" data-toggle="collapse" class="btn btn-primary" style="margin-bottom: 50px; margin-left:30px;">Diagnosis and Drug Prescription</a>
+                                     
+                              </div>
+                             
+                                <button type="submit" class="btn btn-primary" style="margin-bottom: 0px;">Add Bio Vitals</button>
+                                <a href="#vitals" data-toggle="collapse" class="btn btn-primary pull-right" style="margin-top: 0;">View Bio Vitals History</a>
+                               {!! Form::close() !!} 
+                               <style>
+                                  a.btn.btn-primary.pull-right{
+                                     margin-top: 0;
+                                  }
+                               </style>
                                
-                                <div class="col-md-12 collapse" id="test">
-                                 <div class="iq-card shadow-none mb-0">
-                                    {!! Form::open(['action' => 'LabsController@store', 'method' => 'POST', 'id'=>'my_form_2']) /** The action should be the block of code in the store function in PostsController
-                                  **/ !!}
-                                                      
-                                             <div class="row">
-                                                <input type="hidden" class="form-control" id="p_pin" name="p_pin" value="{{$pin}}">
-                                                <div class="form-group col-lg-12 two">
-                                                   <label for="with">Test</label>
-                                                   <select class="form-control" id="test1" name="test1">
-                                                      <option>Select</option>
-                                                      <option value="Fever">Fever</option>
-                                                      <option value="Tuberculosis">Tuberculosis</option>
-                                                      <option value="Rabies">Rabies</option>
-                                                      <option value="Hepatitis">Hepatitis</option>
-                                                      <option value="STD">STD</option>
-                                                      <option value="Diarrhea">Diarrhea</option>
-                                                      <option value="Malaria">Malaria</option>
-                                                   </select>
-                                                </div>
-                                                <div class="form-group col-lg-12 two">
-                                                   <label for="with">Test</label>
-                                                   <select class="form-control" id="test2" name="test2">
-                                                      <option>Select</option>
-                                                      <option value="Fever">Fever</option>
-                                                      <option value="Tuberculosis">Tuberculosis</option>
-                                                      <option value="Rabies">Rabies</option>
-                                                      <option value="Hepatitis">Hepatitis</option>
-                                                      <option value="STD">STD</option>
-                                                      <option value="Diarrhea">Diarrhea</option>
-                                                      <option value="Malaria">Malaria</option>
-                                                   </select>
-                                                </div>
+                             
+                                          <div class="collapse" id="vitals"> 
+                                             <div class="iq-card">
+                                             <div class="iq-card-body text-center">
+                                                <h5 class="card-title">Bio Vitals History</h5>
+                                                @php
+                                                      $records = App\Records::where('pin', $pin)->orderby('created_at','desc')->get();
+                                                @endphp      
+                                                @if (count($records) > 0)
+                                                   <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
+                                                     <thead>
+                                                         
+                                                      <tr>
+                                                       <th>Date</th>
+                                                       <th>Temperature</th>
+                                                       <th>BP</th>
+                                                       <th>FBS/RBS</th>
+                                                       <th>Genotype</th>
+                                                       <th>Blood Group</th>
+                                                       <th>Weight</th>
+                                                       <th>Height</th>
+                                                       <th>Glucose Level</th>
+                                                       <th>Complain</th>
+                                                       <th>Doctor's Investigation</th>
+                                                    </tr>
+                                               </thead>
+                                               <tbody>
+                                                @foreach ($records as $record)
+                                                <tr>
+                                                   <td class="text-center">{{$record->created_at}}</td>
+                                                   <td>{{$record->temp}}</td>
+                                                   <td>{{$record->bp}}</td>
+                                                   <td>{{$record->fbs_rbs}}</td>
+                                                   <td>{{$record->genotype}}</td>
+                                                   <td>{{$record->b_group}}</td>
+                                                   <td>{{$record->weight}}</td>
+                                                   <td>{{$record->height}}</td>
+                                                   <td>{{$record->glucose}}</td>
+                                                   <td>{!!$record->note!!}</td>
+                                                   <td>{!!$record->comment!!}</td>
+                                                </tr> 
+                                                         @endforeach                      
+                                                     </tbody>
+                                                   </table>
+                                          </div>
+                                          @else
+                                          <p>No Record Found</p>    
+                                          @endif
+                                          </div>
+                                       </div>
+                           </div>
+                        </div>
+
+
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                          
+                           
+                              <div class="iq-card shadow-none">
+                                 {!! Form::open(['action' => 'LabsController@store', 'method' => 'POST', 'id'=>'my_form_2']) /** The action should be the block of code in the store function in PostsController
+                               **/ !!}
+                                                   
+                                          <div class="col-md-12">
+                                             <input type="hidden" class="form-control" id="p_pin" name="p_pin" value="{{$pin}}">
+                                             <div class="form-group two">
+                                                <label for="test">Test</label>
+                                                <select class="form-control" id="test1" name="test1">
+                                                   <option>Select</option>
+                                                   <option value="Fever">Fever</option>
+                                                   <option value="Tuberculosis">Tuberculosis</option>
+                                                   <option value="Rabies">Rabies</option>
+                                                   <option value="Hepatitis">Hepatitis</option>
+                                                   <option value="STD">STD</option>
+                                                   <option value="Diarrhea">Diarrhea</option>
+                                                   <option value="Malaria">Malaria</option>
+                                                </select>
                                              </div>
-                                          {!! Form::close() !!}
-                                          <a href="" id="loadMoreeinput" class="btn btn-primary"><i class="fa fa-plus"></i>Add More Test Field</a>
-                                          <a href="javascript:{}" onclick="document.getElementById('my_form_2').submit();" class="btn btn-primary">Send To The Lab</a>
-                                    </div>
-                                 </div>
-                                <div class="col-md-12 collapse" id="records">
-                                    <div class="iq-card shadow-none mb-0">
-                                        <div class="iq-card-body p-1">
-                                
-                                          <style>
-    
-                                             div.col-lg-12.fie.one,
-                                             div.col-lg-12.two{
-                                                      display:none;
-                                                      margin-bottom: 10px;
-                                                      
-                                                  }
-                                                  #loadMoreeinput {
-                                                      transition: all 600ms ease-in-out;
-                                                      -webkit-transition: all 600ms ease-in-out;
-                                                      -moz-transition: all 600ms ease-in-out;
-                                                      -o-transition: all 600ms ease-in-out;
-                                                      
-                                                  }
-                                                 </style>
-                                             {!! Form::open(['action' => 'PrescriptionController@store', 'method' => 'POST', 'id' => 'my_form_1']) /** The action should be the block of code in the store function in PostsController
-                                             **/ !!}
-                                             <div class="">
-                                                <input type="hidden" class="form-control" id="pin" name="pin" value="{{$pin}}">
-                                            <div class="form-group col-lg-12">
-                                             <label>Sickness</label>
-                                             <select class="form-control" id="sickness" name="sickness">
-                                                <option>Select</option>
-                                                <option value="Acne">Acne</option>
-                                                <option value="Fever">Fever</option>
-                                                <option value="Tuberculosis">Tuberculosis</option>
-                                                <option value="Rabies">Rabies</option>
-                                                <option value="Hepatitis">Hepatitis</option>
-                                                <option value="STD">STD</option>
-                                                <option value="Diarrhea">Diarrhea</option>
-                                                <option value="Malaria">Malaria</option>
-                                             </select>
+                                             <div class="form-group two">
+                                                <label for="test">Test</label>
+                                                <select class="form-control" id="test2" name="test2">
+                                                   <option>Select</option>
+                                                   <option value="Fever">Fever</option>
+                                                   <option value="Tuberculosis">Tuberculosis</option>
+                                                   <option value="Rabies">Rabies</option>
+                                                   <option value="Hepatitis">Hepatitis</option>
+                                                   <option value="STD">STD</option>
+                                                   <option value="Diarrhea">Diarrhea</option>
+                                                   <option value="Malaria">Malaria</option>
+                                                </select>
+                                             </div>
                                           </div>
-                                            </div>
-                                               
-                                            <div class="col-lg-12 fie one">
-                                             <div class="row">
-                                            <div class="form-group col-md-6">
-                                             <label>Drug</label>
-                                             @php
-                                                 $drugs = App\pharmacy::orderby('name', 'asc')->where('status', 'In stock')->get();
-                                             @endphp
-                                             <select class="form-control" id="drug1" name="drug1">
-                                                <option>Select</option>
-                                                @if (count($drugs) > 0)
-                                                @foreach ($drugs as $drug)
-                                                <option value="{{$drug->name}}">{{$drug->name}}</option>
-                                                @endforeach
-                                                @else
-                                                <option value="">No drugs in store yet</option>
-                                                @endif
-                                             </select>
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                             <label>Dosage</label>
-                                             <input type="text" name="dose1" id="" class="form-control" placeholder="Number of tablets">
-                                             
+                                       {!! Form::close() !!}
+                                       <a href="" id="loadMoreeinput" class="btn btn-primary"><i class="fa fa-plus"></i>Add More Test Field</a>
+                                       <a href="javascript:{}" onclick="document.getElementById('my_form_2').submit();" class="btn btn-primary">Send To The Lab</a>
+                                       <a href="#test" data-toggle="collapse" class="btn btn-primary">Patient Laboratory Tests</a>
+                                 
+                              </div>
+              </div>
 
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                             <label>Frequency</label>
-                                          <select class="form-control" id="" name="frequency1">
-                                             <option>Select</option>
-                                             <option value="Once/Day">Once/Day</option>
-                                             <option value="2x/Day">2x/Day</option>
-                                             <option value="3x/Day">3x/Day</option>
-                                             <option value="Pharmacist Discretion">Pharmacist Discretion</option>
-                                          </select>
-                                          </div>
-                                          </div>
-                                               
-                                          <div class="col-lg-12 fie one">
-                                           <div class="row">
-                                          <div class="form-group col-md-6">
-                                           <label>Drug</label>
-                                           <select class="form-control" id="drug2" name="drug2">
-                                              <option>Select</option>
-                                              @if (count($drugs) > 0)
-                                              @foreach ($drugs as $drug)
-                                              <option value="{{$drug->name}}">{{$drug->name}}</option>
-                                              @endforeach
-                                              @else
-                                              <option value="">No drugs in store yet</option>
-                                              @endif
-                                           </select>
-                                          </div>
-                                          <div class="form-group col-md-6">
-                                           <label>Dosage</label>
-                                           <input type="text" name="dose2" id="" class="form-control" placeholder="Number of tablets">
-                                           
 
-                                          </div>
-                                          <div class="form-group col-md-6">
-                                           <label>Frequency</label>
-                                        <select class="form-control" id="" name="frequency2">
+              <div class="col-md-12 collapse" id="test"> 
+                <div class="iq-card">
+                  <div class="iq-card-body text-center">
+                     <h5 class="card-title">Laboratory Test Request Detail</h5>
+                     @include('inc.messages')
+                     @php
+                         $tests = App\Lab::where('patient_pin', $pin)->get();
+                     @endphp
+      
+                     @if (count($tests) > 0)
+                     <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
+                       <thead>
+                           
+                           <tr>
+                              <th>Date</th>
+                              <th>Test(s)</th>
+                              <th>Requested By</th>
+                              <th>Status</th>
+                              <th>carriedout_by</th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                        @foreach ($tests as $test)
+                           <tr>
+                              <td class="text-center">{{$test->created_at}}</td>
+                              <td>
+                                  {{$test->test_name}}
+                             </td>
+                              <td>{{$test->doc_name}}</td>
+                              <td>{{$test->status}}</td>
+                              @if ($test->carriedout_by == '')
+                              <td>N/A</td>
+                                  
+                              @else
+                              @php
+                                  $name = App\User::where('pin', $test->carriedout_by)->first();
+                              @endphp
+                              <td>{{$name->name}}</td>
+                              @endif
+                           </tr> 
+                           @endforeach                      
+                       </tbody>
+                     </table>
+                         
+                     @endif
+                  </div>
+                  </div>
+               </div>
+
+                        
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                          
+                               <div class="iq-card">
+                                   <div class="iq-card-body">
+                           
+                                     <style>
+
+                                        div.fie.one,
+                                        div.two{
+                                                 display:none;
+                                                 margin-bottom: 10px;
+                                                 
+                                             }
+                                             #loadMoreeinput {
+                                                 transition: all 600ms ease-in-out;
+                                                 -webkit-transition: all 600ms ease-in-out;
+                                                 -moz-transition: all 600ms ease-in-out;
+                                                 -o-transition: all 600ms ease-in-out;
+                                                 
+                                             }
+                                            </style>
+                                        {!! Form::open(['action' => 'PrescriptionController@store', 'method' => 'POST', 'id' => 'my_form_11']) /** The action should be the block of code in the store function in PostsController
+                                        **/ !!}
+                                           <input type="hidden" class="form-control" id="pin" name="pin" value="{{$pin}}">
+                                       <div class="form-group">
+                                        <label>Sickness</label>
+                                        <select class="form-control" id="sickness" name="sickness">
                                            <option>Select</option>
-                                           <option value="Once/Day">Once/Day</option>
-                                           <option value="2x/Day">2x/Day</option>
-                                           <option value="3x/Day">3x/Day</option>
-                                           <option value="Pharmacist Discretion">Pharmacist Discretion</option>
+                                           <option value="Acne">Acne</option>
+                                           <option value="Fever">Fever</option>
+                                           <option value="Tuberculosis">Tuberculosis</option>
+                                           <option value="Rabies">Rabies</option>
+                                           <option value="Hepatitis">Hepatitis</option>
+                                           <option value="STD">STD</option>
+                                           <option value="Diarrhea">Diarrhea</option>
+                                           <option value="Malaria">Malaria</option>
                                         </select>
-                                        </div>
-                                        </div>
-                                          <div class="col-lg-12 fie one">
-                                           <div class="row">
-                                          <div class="form-group col-md-6">
-                                           <label>Drug</label>
-                                           <select class="form-control" id="drug3" name="drug3">
-                                              <option>Select</option>
-                                              @if (count($drugs) > 0)
-                                              @foreach ($drugs as $drug)
-                                              <option value="{{$drug->name}}">{{$drug->name}}</option>
-                                              @endforeach
-                                              @else
-                                              <option value="">No drugs in store yet</option>
-                                              @endif
-                                           </select>
-                                          </div>
-                                          <div class="form-group col-md-6">
-                                           <label>Dosage</label>
-                                           <input type="text" name="dose3" id="" class="form-control" placeholder="Number of tablets">
-                                           
-
-                                          </div>
-                                          <div class="form-group col-md-6">
-                                           <label>Frequency</label>
-                                        <select class="form-control" id="" name="frequency3">
+                                     </div>
+                                          
+                                       <div class="fie one">
+                                        <div class="row">
+                                       <div class="form-group col-md-6">
+                                        <label>Drug</label>
+                                        @php
+                                            $drugs = App\pharmacy::orderby('name', 'asc')->where('status', 'In stock')->get();
+                                        @endphp
+                                        <select class="form-control" id="drug1" name="drug1">
                                            <option>Select</option>
-                                           <option value="Once/Day">Once/Day</option>
-                                           <option value="2x/Day">2x/Day</option>
-                                           <option value="3x/Day">3x/Day</option>
-                                           <option value="Pharmacist Discretion">Pharmacist Discretion</option>
+                                           @if (count($drugs) > 0)
+                                           @foreach ($drugs as $drug)
+                                           @if ($drug->weight == '')
+                                           <option value="{{$drug->id}}">{{$drug->name}}</option>
+                                               
+                                           @else
+                                           <option value="{{$drug->id}}">{{$drug->name}} {{$drug->weight}}mmg</option>
+                                               
+                                           @endif
+                                           @endforeach
+                                           @else
+                                           <option value="">No drugs in store yet</option>
+                                           @endif
                                         </select>
-                                        </div>
-                                        </div>
-                                             {!!Form::close()!!}
+                                       </div>
+                                       <div class="form-group col-md-6">
+                                        <label>Dosage</label>
+                                        <input type="text" name="dose1" id="" class="form-control" placeholder="Number of tablets">
                                         
-                                        </div>
-                                    </div>
-                                    <p>
-                                    <a href="javascript:{}" onclick="document.getElementById('my_form_1').submit();" class="btn btn-primary">Send To The Pharmacy</a>
-                                    <a href="" id="loadMoreeinputt" class="btn btn-primary"><i class="fa fa-plus"></i>Add More Drug Field</a>
-                                 </p>    
+
+                                       </div>
+                                       <div class="form-group col-md-6">
+                                        <label>Frequency</label>
+                                     <select class="form-control" id="" name="frequency1">
+                                        <option>Select</option>
+                                        <option value="Once/Day">Once/Day</option>
+                                        <option value="2x/Day">2x/Day</option>
+                                        <option value="3x/Day">3x/Day</option>
+                                        <option value="Pharmacist Discretion">Pharmacist Discretion</option>
+                                     </select>
+                                     </div>
+                                     </div>
+                                          
+                                     <div class="fie one">
+                                      <div class="row">
+                                     <div class="form-group col-md-6">
+                                      <label>Drug</label>
+                                      <select class="form-control" id="drug2" name="drug2">
+                                         <option>Select</option>
+                                         @if (count($drugs) > 0)
+                                         @foreach ($drugs as $drug)
+                                         @if ($drug->weight == '')
+                                         <option value="{{$drug->id}}">{{$drug->name}}</option>
+                                             
+                                         @else
+                                         <option value="{{$drug->id}}">{{$drug->name}} {{$drug->weight}}mmg</option>
+                                             
+                                         @endif
+                                         @endforeach
+                                         @else
+                                         <option value="">No drugs in store yet</option>
+                                         @endif
+                                      </select>
+                                     </div>
+                                     <div class="form-group col-md-6">
+                                      <label>Dosage</label>
+                                      <input type="text" name="dose2" id="" class="form-control" placeholder="Number of tablets">
+                                      
+
+                                     </div>
+                                     <div class="form-group col-md-6">
+                                      <label>Frequency</label>
+                                   <select class="form-control" id="" name="frequency2">
+                                      <option>Select</option>
+                                      <option value="Once/Day">Once/Day</option>
+                                      <option value="2x/Day">2x/Day</option>
+                                      <option value="3x/Day">3x/Day</option>
+                                      <option value="Pharmacist Discretion">Pharmacist Discretion</option>
+                                   </select>
+                                   </div>
+                                   </div>
+                                     <div class="fie one">
+                                      <div class="row">
+                                     <div class="form-group col-md-6">
+                                      <label>Drug</label>
+                                      <select class="form-control" id="drug3" name="drug3">
+                                         <option>Select</option>
+                                         @if (count($drugs) > 0)
+                                         @foreach ($drugs as $drug)
+                                         @if ($drug->weight == '')
+                                         <option value="{{$drug->id}}">{{$drug->name}}</option>
+                                             
+                                         @else
+                                         <option value="{{$drug->id}}">{{$drug->name}} {{$drug->weight}}mmg</option>
+                                             
+                                         @endif
+                                         @endforeach
+                                         @else
+                                         <option value="">No drugs in store yet</option>
+                                         @endif
+                                      </select>
+                                     </div>
+                                     <div class="form-group col-md-6">
+                                      <label>Dosage</label>
+                                      <input type="text" name="dose3" id="" class="form-control" placeholder="Number of tablets">
+                                      
+
+                                     </div>
+                                     <div class="form-group col-md-6">
+                                      <label>Frequency</label>
+                                   <select class="form-control" id="" name="frequency3">
+                                      <option>Select</option>
+                                      <option value="Once/Day">Once/Day</option>
+                                      <option value="2x/Day">2x/Day</option>
+                                      <option value="3x/Day">3x/Day</option>
+                                      <option value="Pharmacist Discretion">Pharmacist Discretion</option>
+                                   </select>
+                                   </div>
+                                   </div>
+                                        {!!Form::close()!!}
+                                   
+                                   </div>
+                               </div>
+                               <p>
+                               <a href="javascript:{}" onclick="document.getElementById('my_form_11').submit();" class="btn btn-primary">Send To The Pharmacy</a>
+                               <a href="" id="loadMoreeinputt" class="btn btn-primary"><i class="fa fa-plus"></i>Add More Drug Field</a>
+                               <a href="#pre" data-toggle="collapse" class="btn btn-primary pull-right" style="margin-top: 0;">View Previous Prescriptions</a>
+                            </p>   
+                            <div class="col-md-12 collapse" id="pre"> 
+                              <div class="iq-card">
+                                <div class="iq-card-body text-center">
+                                   <h5 class="card-title">Prescription History</h5>
+                                   @php
+                                       $records = App\Prescriptions::orderBy('created_at','desc')->where('patient_pin', $pin)->get();
+                                   @endphp
+                                         @if (count($records) >0)
+                                         <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
+                                           <thead>
+                                               
+                                               <tr>
+                                                  <th>Drug Name</th>
+                                                  <th>Dosage</th>
+                                                  <th>Frequency</th>
+                                                  <th>Prescribed By</th>
+                                                  <th>Action(s)</th>
+                                               </tr>
+                                           </thead>
+                                           <tbody>
+                                             @foreach ($records as $record)
+                                               <tr>
+                                                 @if ($record->drug !== NULL && $record->drug !== 'select')
+                                                 @php
+                                                     $drug_main = App\pharmacy::where('id', $record->drug)->first();
+                                                 @endphp
+                                                  <td>{{$drug_main->name}}</td>
+                                                  <td>{{$record->dosage}}</td>
+                                                  <td>{{$record->frequency}}</td>
+                                                  @php
+                                                      $prescribed_by = App\User::where('pin', $record->prescribed_by)->first();
+                                                  @endphp
+                                                  <td>Dr. {{$prescribed_by->name}}</td>
+                                                  <td>
+                                                     <div class="dropdown">
+                                                        <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
+                                                        <i class="ri-more-fill"></i>
+                                                        </span>
+                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
+                                                        
+                                                         <a class="dropdown-item">
+                                                            {!!Form::open(['action' =>['PrescriptionController@update',$record->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                                                            {{Form::hidden('id', $record->id)}}
+                                                            <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Sell Drug"><i class="la la-bezier-curve"></i>Mark Drug As Sold</button>
+                                                           
+                                                            {{Form::hidden('_method', 'PUT')}}
+                                                            {!!Form::close()!!}
+                                                         </a>
+                                                        
+                                                        <a class="dropdown-item">
+                                                           {!!Form::open(['action' => 'PrescriptionController@NA', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                                                           {{Form::hidden('id', $record->id)}}
+                                                           <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Drug Not Available"><i class="ri-delete-bin-6-fill mr-2"></i>Drug Not Available</button>
+                                                          
+                                                           {!!Form::close()!!}
+                                                        </a>
+                                                        </div>
+                                                     </div>
+                                                       
+                                                      
+                                                 </td>
+
+                                                       @endif
+                                                   </tr>
+                                                 
+                                                   @endforeach           
+                                           </tbody>
+                                         </table>
+                                               
+                                         @else
+                                         
+                                             No Prescription For Patient Today, Check Prescription History.
+                             
+                                         @endif
                                 </div>
-                          </div>
-                       </div>
+                                </div>
+                             </div> 
+                           </div>
+                     </div>
+                  </div>
+               </div>
+              </div>
                     </div>
               </div>
            </div>

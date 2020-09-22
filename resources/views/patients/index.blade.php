@@ -70,7 +70,10 @@
                                                     @foreach ($records as $record)
                                                       <tr>
                                                         @if ($record->drug !== NULL && $record->drug !== 'select')
-                                                         <td>{{$record->drug}}</td>
+                                                        @php
+                                                            $drug_main = pharmacy::where('id', $record->drug)->first();
+                                                        @endphp
+                                                         <td>{{$drug_main->name}}</td>
                                                          <td>{{$record->dosage}}</td>
                                                          <td>{{$record->frequency}}</td>
                                                          @php

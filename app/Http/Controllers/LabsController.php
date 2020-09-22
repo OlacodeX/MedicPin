@@ -69,7 +69,7 @@ class LabsController extends Controller
                 $test2->doc_pin = auth()->user()->pin;
                 $test2->save();
             }
-            return redirect('./patients')->with('success', 'Great!, Patient can now proceed to the lab to carry out test.');
+            return redirect()->back()->with('success', 'Great!, Patient can now proceed to the lab to carry out test.');
     }
 
     /**
