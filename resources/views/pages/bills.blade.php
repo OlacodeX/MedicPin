@@ -71,9 +71,6 @@
                               <div class="col-sm-6">  
                                  <nav aria-label="breadcrumb" class="text-center">
                                  <ol class="breadcrumb text-center">
-                                    <li class="breadcrumb-item active text-center" aria-current="page"> Total Due Amount <br>
-                                       <!---&#8358;{{App\Bills::where('patient_pin', auth()->user()->pin)->whereDay('created_at', now()->day)->sum('amount')}}---->
-                                    </li>
                                  </ol>
                                </nav>
                               </div>
