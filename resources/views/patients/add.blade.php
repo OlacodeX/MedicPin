@@ -149,11 +149,14 @@
                                      <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb iq-bg-primary">
                                         <li class="breadcrumb-item active" aria-current="page">Age <br>
+                                          @if (!empty($user))
+                                              
                                           @if ($user->age == '')
                                               N/A
                                           @else
                                           {{$user->age}}
                                               
+                                          @endif
                                           @endif
                                           </li>
                                         </ol>
@@ -167,10 +170,13 @@
                                     <nav aria-label="breadcrumb">
                                        <ol class="breadcrumb iq-bg-primary">
                                        <li class="breadcrumb-item active" aria-current="page">Marital Status <br>
+                                          @if (!empty($user))
                                          @if ($user->m_status == '')
                                              N/A
                                          @else
                                          {{$user->m_status}}
+                                             
+                                         @endif
                                              
                                          @endif
                                          </li>
@@ -185,11 +191,14 @@
                                    <nav aria-label="breadcrumb">
                                       <ol class="breadcrumb iq-bg-primary">
                                       <li class="breadcrumb-item active" aria-current="page">No of Children <br>
+                                       @if (!empty($user))
                                         @if ($user->children == '')
                                             N/A
                                         @else
                                         {{$user->children}}
                                             
+                                        @endif
+                                             
                                         @endif
                                         </li>
                                       </ol>
@@ -270,11 +279,14 @@
                                  <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb iq-bg-primary">
                                        <li class="breadcrumb-item active" aria-current="page">Phone number <br>
+                                          @if (!empty($user))
                                           @if ($user->p_number == '')
                                               N/A
                                           @else
                                           {{$user->p_number}}
                                               
+                                          @endif
+                                          
                                           @endif
                                           </li>
                                     </ol>
@@ -288,12 +300,16 @@
                                 <nav aria-label="breadcrumb">
                                    <ol class="breadcrumb iq-bg-primary">
                                       <li class="breadcrumb-item active" aria-current="page">Category <br>
+                                       @if (!empty($user))
                                        @if ($user->nhis == '')
                                            N/A
                                        @else
                                        {{$user->nhis}}
                                            
-                                       @endif</li>
+                                       @endif
+                                          
+                                       @endif
+                                    </li>
                                    </ol>
                                 </nav>
                                </div>
@@ -305,10 +321,13 @@
                                <nav aria-label="breadcrumb">
                                   <ol class="breadcrumb iq-bg-primary">
                                      <li class="breadcrumb-item active" aria-current="page">NHIS Number <br>
+                                       @if (!empty($user))
                                       @if ($user->nhis_number == '')
                                           N/A
                                       @else
                                       {{$user->nhis_number}}
+                                          
+                                      @endif
                                           
                                       @endif
                                     </li>

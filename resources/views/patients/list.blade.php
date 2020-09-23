@@ -39,7 +39,6 @@
                      </div>
                      <div class="iq-card-body pl-0 pr-0">
                        <!---- <div id="home-chart-03" style="height: 280px;"></div>--->
-                       @if (!empty($users))
                       @if (count($users) > 0)
                       <div class="iq-card-body">
                           @foreach ($users as $user)
@@ -143,11 +142,6 @@
                       </div>
                       @else
                       <p class="text-center">No Patients Yet</p>    
-                      @endif
-                           
-                      @else
-                      <p class="text-center">No Patients Yet</p> 
-                          
                       @endif
 
                      </div>
