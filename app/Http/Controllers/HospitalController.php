@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Bills;
 use App\hospitals;
 use App\User;
 use App\HospitalDoctors;
@@ -566,6 +566,49 @@ class HospitalController extends Controller
 
         return view('hospitals.edit', $data);
     }
+    public function set_fee()
+    {
+        //
+        $id = $_POST['id'];
+        $hospital = hospitals::where('id',$id)->first();
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+       $data = array(
+                'hospital' => $hospital,
+                'new_messages' => $new_messages
+       );
+
+        return view('hospitals.fee', $data);
+    }
+    public function add_patient()
+    {
+        //
+        $pin = $_GET['pin'];
+        $user = User::where('pin',$pin)->first();
+        if (auth()->user()->h_id != '') {
+        
+            $user->h_id = auth()->user()->h_id;
+            $user->save();
+            $hospital = hospitals::where('id',auth()->user()->h_id)->first();
+            $bill = new Bills;
+            $user = User::where('pin', $pin)->first();
+            $bill->patient_name = $user->name;
+            $bill->patient_pin = $user->pin;
+            $bill->service = 'Hospital Card Fee';
+            $bill->status = 'Unpaid';
+            $bill->amount = $hospital->card_fee;
+            $bill->action_by = auth()->user()->pin;
+            $bill->save();
+            $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+           $data = array(
+                    'hospital' => $hospital,
+                    'new_messages' => $new_messages
+           );
+    
+          return redirect('/dashboard')->with('success', 'Great!, Patient registered with you hospital.');
+        } else {
+            return redirect('/dashboard')->with('error', 'You don\'t belong to any hospital yet, kindly ask the administrator at your hospital to add you.');
+        }
+    }
 
     /**
      * Update the specified resource in storage.
@@ -591,9 +634,13 @@ class HospitalController extends Controller
              $hospital->h_add = $request->input('h_add');
              $hospital->h_type = $request->input('h_type');
              $hospital->h_number = $request->input('h_number');
+             if (!empty($request->input('card'))) {
+                $hospital->card_fee = $request->input('card');
+             }
+             if (!empty($request->input('consult'))) {
+                $hospital->consultation_fee = $request->input('consult');
+             }
             $hospital->save();
-            
-              
             return redirect('hospitals/'.$id)->with('success', 'Great!, hospital details updated.');//I just set the message for session(success).
 
     }

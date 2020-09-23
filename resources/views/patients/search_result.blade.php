@@ -147,7 +147,42 @@
                                                
                                                 {!!Form::close()!!}
                                                  @endif
+                                                 @if (auth()->user()->role == 'Biochemist/Microbiologist')
+                                                 <a href="javascript:{}" onclick="document.getElementById('my_form_1').submit();">
+                                                                         
+                                                 {!! Form::open(['action' => 'LabsController@index', 'method' => 'GET', 'id' => 'my_form_1']) /** The action should be the block of code in the store function in PostsController
+                                                 **/ !!}
+                                                  {{Form::hidden('pin', $user->pin)}}
+                                                  {{Form::hidden('username', $user->username)}}
+                                                 {!! Form::close() !!}
+                                          <li class="d-flex mb-3 align-items-center">
+                                             <div class="media-support-info">
+                                                <h6>{{$user->patient_name}}</h6>
+                                             </div>
+                                                      
+                                                      <span class="user-list-files d-flex float-right">
+                                                         {!!Form::open(['action' => 'LabsController@index', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
+                                                         {{Form::hidden('pin', $user->pin)}}
+                                                         <!--{{Form::hidden('username', $user->username)}}--->
+                                                         <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="View and Complete Test."><i class="las la-eye"></i></button>
+                                                        
+                                                         {!!Form::close()!!}
+                                                       </span>
+                                          </li> 
+                                                 </a>
+                                                      @endif
                                             @if (auth()->user()->role == 'Nurse')
+                                            @php
+                                                $patient = App\User::where('pin',$user->pin)->first();
+                                            @endphp
+                                          @if (auth()->user()->h_id != $patient->h_id )
+                                          {!!Form::open(['action' => 'HospitalController@add_patient', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
+                                          {{Form::hidden('pin', $user->pin)}}
+                                          <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add patient to hospital"><i class="las la-location-arrow"></i></button>
+                                         
+                                          {!!Form::close()!!}
+                                              
+                                          @endif
                                                 
                                                    {!!Form::open(['action' => 'ConsortationsController@create', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
                                                    {{Form::hidden('pin', $user->pin)}}

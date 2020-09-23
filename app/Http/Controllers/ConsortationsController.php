@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Bills;
 use App\patients;
 use App\Consortations;
 use App\HospitalDoctors;
+use App\hospitals;
 use App\pharmacy;
 use App\User;
 use App\Messages;
@@ -59,7 +61,7 @@ class ConsortationsController extends Controller
         $pin = $_GET['pin'];
         $consortations = Consortations::where('patient_pin', $pin)->paginate(10);
         $patient = patients::where('pin', $pin)->first();
-       $doctors = User::where('role', 'doctor')->get();
+       $doctors = User::where('role', 'doctor')->where('h_id', auth()->user()->h_id)->get();
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
        
         $data = array(
@@ -116,6 +118,16 @@ class ConsortationsController extends Controller
             $appointment->scheduled_by = auth()->user()->name;
             //Save to db
             $appointment->save();
+            $bill = new Bills;
+            $user = User::where('pin', $request->input('patient_pin'))->first();
+            $bill->patient_name = $user->name;
+            $bill->patient_pin = $user->pin;
+            $bill->service = 'Doctor Consultation Fee';
+            $bill->status = 'Unpaid';
+            $hospital = hospitals::where('id',auth()->user()->h_id)->first();
+            $bill->amount = $hospital->consultation_fee;
+            $bill->action_by = auth()->user()->pin;
+            $bill->save();
             return redirect()->back()->with('success', 'Great!, patient can proceed now to see doctor.');
 
     }

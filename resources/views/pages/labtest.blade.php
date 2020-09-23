@@ -25,7 +25,7 @@
                       
                       <tr>
                          <th>Date</th>
-                         <th>Test(s)</th>
+                         <th>Test</th>
                          <th>Requested By</th>
                          <th>Status</th>
                          <th>Action</th>
@@ -36,27 +36,7 @@
                       <tr>
                          <td class="text-center">{{$patient->created_at}}</td>
                          <td>
-                             {{$patient->test_name1}}
-                             @if ($patient->test_name2 !== 'select')
-                             {{$patient->test_name2}}
-                                 
-                             @endif
-                             @if ($patient->test_name3 !== 'select')
-                             {{$patient->test_name3}}
-                                 
-                             @endif
-                             @if ($patient->test_name4 !== 'select')
-                             {{$patient->test_name4}}
-                                 
-                             @endif
-                             @if ($patient->test_name5 !== 'select')
-                             {{$patient->test_name5}}
-                                 
-                             @endif
-                             @if ($patient->test_name6 !== 'select')
-                             {{$patient->test_name6}}
-                                 
-                             @endif
+                             {{$patient->test_name}}
                         </td>
                          <td>{{$patient->doc_name}}</td>
                          <td>{{$patient->status}}</td>
@@ -66,10 +46,10 @@
                                <i class="ri-more-fill"></i>
                                </span>
                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton5">
-                               {!!Form::open(['action' => ['LabsController@update', $patient->id], 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
+                               {!!Form::open(['action' => 'LabsController@create', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
                                {{Form::hidden('pin', $patient->patient_pin)}}
-                               {{Form::hidden('_method', 'PUT')}}
-                               <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Mark Test As Done"><i class="ri-pencil-fill mr-2"></i>Mark Test As Done</button>
+                               {{Form::hidden('id', $patient->id)}}
+                               <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Carry Out Test"><i class="ri-pencil-fill mr-2"></i>Carry Out Test</button>
                               
                                {!!Form::close()!!}
                                </div>
@@ -79,7 +59,8 @@
                       @endforeach                      
                   </tbody>
                 </table>
-                    
+                    @else
+                    <p>No test for today</p>
                 @endif
 
              </div>

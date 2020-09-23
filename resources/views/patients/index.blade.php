@@ -43,9 +43,9 @@
                          <div class="">
                                 @if (auth()->user()->role == 'Pharmacist')
                                 @php
-                                    $recrds = App\Prescriptions::where('patient_pin', $record->pin)->where('status', '!=', 'Pending Sale')->paginate(10);
+                                    $recrds = App\Prescriptions::where('patient_pin', $record->pin)->where('status', '!=', 'Pending')->paginate(10);
                                
-                                    $records = App\Prescriptions::where('patient_pin', $record->pin)->whereDay('created_at', now()->day)->where('status', 'Pending Sale')->orderby('created_at','desc')->get();
+                                    $records = App\Prescriptions::where('patient_pin', $record->pin)->whereDay('created_at', now()->day)->where('status', 'Pending')->orderby('created_at','desc')->get();
                                 @endphp
                                  <div class="iq-card-body chat-page p-0">
                                     <div class="chat-data-block">
@@ -71,7 +71,7 @@
                                                       <tr>
                                                         @if ($record->drug !== NULL && $record->drug !== 'select')
                                                         @php
-                                                            $drug_main = pharmacy::where('id', $record->drug)->first();
+                                                            $drug_main = App\pharmacy::where('id', $record->drug)->first();
                                                         @endphp
                                                          <td>{{$drug_main->name}}</td>
                                                          <td>{{$record->dosage}}</td>

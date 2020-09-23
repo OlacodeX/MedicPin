@@ -7,10 +7,13 @@ use App\patients;
 use App\HMO;
 use App\User;
 use App\ORG;
+use App\Bills;
 use App\hmo_cat;
 use App\hmo_h;
 use App\hmo_p;
 use App\hospitals;
+use App\Mail\PaymentRequestMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
 class HmoController extends Controller
@@ -240,12 +243,21 @@ class HmoController extends Controller
              if (!empty($request->input('category'))) {
                  $get_user = hmo_p::where('user_name', $request->input('email'))->first();
                  if (!empty($get_user)) {
+                    $value = HMO::where('id', $request->input('package'))->first();
                     $get_user->package_on = $request->input('package');
                     $get_user->hmo = $request->input('hmo');
                     $get_user->cat_id = $request->input('category');
-                    $value = HMO::where('id', $request->input('package'))->first();
                     $get_user->package_value = $value->description;
                    $get_user->save();
+                   $bill = new Bills;
+                   $user = User::where('email', $request->input('email'))->first();
+                   $bill->patient_name = auth()->user()->hmo_org_name;
+                   $bill->patient_pin = auth()->user()->pin;
+                   $bill->service = 'HMO plan purchase';
+                   $bill->status = 'Unpaid';
+                   $bill->amount = $value->price;
+                   $bill->action_by = auth()->user()->pin;
+                   $bill->save();
                    $update_user = User::where('email', $request->input('email'))->first();
                    if(!empty($update_user)){
                        $update_user->package_value = $value->description;
@@ -254,15 +266,24 @@ class HmoController extends Controller
                    }
                  } else {
                     $user = new hmo_p;
+                    $value = HMO::where('id', $request->input('package'))->first();
                     $detail = ORG::where('email', $request->input('email'))->first();
                     $user->user_name = $request->input('email');
                     $user->package_on = $request->input('package');
                     $user->hmo = $request->input('hmo');
                     $user->cat_id = $request->input('category');
-                    $value = HMO::where('id', $request->input('package'))->first();
                     $user->package_value = $value->description;
                     $user->added_by = auth()->user()->id;
                    $user->save();
+                   $bill = new Bills;
+                   $user = User::where('email', $request->input('email'))->first();
+                   $bill->patient_name = auth()->user()->hmo_org_name;
+                   $bill->patient_pin = auth()->user()->pin;
+                   $bill->service = 'HMO plan purchase';
+                   $bill->status = 'Unpaid';
+                   $bill->amount = $value->price;
+                   $bill->action_by = auth()->user()->pin;
+                   $bill->save();
                    $update_user = User::where('email', $request->input('email'))->first();
                    if(!empty($update_user)){
                        $update_user->package_value = $value->description;
@@ -273,12 +294,21 @@ class HmoController extends Controller
              } else {
                 $get_user = hmo_p::where('user_name', $request->input('email'))->first();
                 if (!empty($get_user)) {
+                    $value = HMO::where('id', $request->input('package'))->first();
                    $get_user->package_on = $request->input('package');
                    $get_user->hmo = $request->input('hmo');
                    $get_user->cat_id = $request->input('category');
-                   $value = HMO::where('id', $request->input('package'))->first();
                    $get_user->package_value = $value->description;
                   $get_user->save();
+                  $bill = new Bills;
+                  $user = User::where('email', $request->input('email'))->first();
+                  $bill->patient_name = auth()->user()->hmo_org_name;
+                  $bill->patient_pin = auth()->user()->pin;
+                  $bill->service = 'HMO plan purchase';
+                  $bill->status = 'Unpaid';
+                  $bill->amount = $value->price;
+                  $bill->action_by = auth()->user()->pin;
+                  $bill->save();
                   $update_user = User::where('email', $request->input('email'))->first();
                   if(!empty($update_user)){
                       $update_user->package_value = $value->description;
@@ -286,16 +316,25 @@ class HmoController extends Controller
                       $update_user->save();
                   }
                 } else {
+                    $value = HMO::where('id', $request->input('package'))->first();
                    $user = new hmo_p;
                    $detail = ORG::where('email', $request->input('email'))->first();
                    $user->user_name = $request->input('email');
                    $user->package_on = $request->input('package');
                    $user->hmo = $request->input('hmo');
                    $user->cat_id = $request->input('category');
-                   $value = HMO::where('id', $request->input('package'))->first();
                    $user->package_value = $value->description;
                    $user->added_by = auth()->user()->id;
                   $user->save();
+                  $bill = new Bills;
+                  $user = User::where('email', $request->input('email'))->first();
+                  $bill->patient_name = auth()->user()->hmo_org_name;
+                  $bill->patient_pin = auth()->user()->pin;
+                  $bill->service = 'HMO plan purchase';
+                  $bill->status = 'Unpaid';
+                  $bill->amount = $value->price;
+                  $bill->action_by = auth()->user()->pin;
+                  $bill->save();
                   $update_user = User::where('email', $request->input('email'))->first();
                   if(!empty($update_user)){
                       $update_user->package_value = $value->description;
@@ -314,6 +353,34 @@ class HmoController extends Controller
                 return redirect('./staff_list')->with('success', 'Great!, staff added to package successfully.');//I just set the message for session(success).
          
              }
+             
+    }
+
+      /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function payment_request(Request $request)
+    {
+        //
+        $this->validate($request, [
+            'pin' => 'nullable',
+             ]);
+             $pin = $_GET['pin'];
+             $user = User::where('pin', $pin)->first();
+             $hmo = User::where('id', $user->hmo)->first();
+
+             $bills = Bills::where('patient_pin', $pin)->whereDay('created_at', now()->day)->get();
+             foreach ($bills as $bills) {
+                 $bills->patient_pin = $hmo->pin;
+                 $bills->patient_name = $hmo->hmo_org_name;
+                 $bills->inherited_from = $pin;
+                 $bills->save();
+             }
+             Mail::to($hmo->email)->send(new PaymentRequestMail(auth()->user()->pin));
+             return redirect()->back()->with('success','Great!, Your HMO has been notified of your claims request');
              
     }
 

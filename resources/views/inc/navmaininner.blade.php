@@ -49,8 +49,13 @@
                         //$hospital = App\HospitalDoctors::orderBy('created_at', 'desc')->where('doctor_pin', auth()->user()->pin)->first(); 
                     @endphp
                     @if (!empty($hospital))
-                    <li><a href="./hospitals/{{$hospital->id}}" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>My Hospital</span></a></li>
+                    <li><a href="../hospitals/{{$hospital->id}}" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>My Hospital</span></a></li>
                     @endif
+                    <li>
+                       <a href="../mybills"><i class="ri-device-fill"></i><span>My Bills</span></a>
+                      
+                    </li>
+                    
                     <li>
                        <a href="../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                       
@@ -105,6 +110,10 @@
                     @if (!empty($hospital))
                     <li><a href="./hospitals/{{$hospital->id}}" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>My Hospital</span></a></li>
                      @endif
+                     <li>
+                        <a href="../mybills"><i class="ri-device-fill"></i><span>My Bills</span></a>
+                       
+                     </li>
                     <li>
                        <a href="../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                       
@@ -175,6 +184,10 @@
                           <li><a href="../questions" class="iq-waves-effect"><i class="ri-message-fill"></i><span>Forum</span></a></li>
                           <li><a href="../pharmacist_shop" class="iq-waves-effect"><i class="ion-medkit"></i><span>Buy Drugs</span></a></li>
                           
+                    <li>
+                     <a href="../mybills"><i class="ri-device-fill"></i><span>My Bills</span></a>
+                    
+                  </li>
                           <li>
                              <a href="../" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                             
@@ -225,6 +238,10 @@
                          <li><a href="../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                          <li><a href="../questions" class="iq-waves-effect"><i class="ri-message-fill"></i><span>Forum</span></a></li>
                          <li><a href="../pharmacist_shop" class="iq-waves-effect"><i class="ion-medkit"></i><span>Buy Drugs</span></a></li>
+                         <li>
+                            <a href="../mybills"><i class="ri-device-fill"></i><span>My Bills</span></a>
+                           
+                         </li>
                          
                          <li>
                             <a href="../" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Homepage</span></a>
@@ -253,6 +270,10 @@
                   <li><a href="../staff_list" class="iq-waves-effect"><i class="fa fa-users"></i><span>staff List</span></a></li>
                   <li><a href="../questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
                   <li><a href="../pharmacist_shop" class="iq-waves-effect"><i class="ion-medkit"></i><span>Buy Drugs</span></a></li>
+                  <li>
+                     <a href="../mybills"><i class="ri-device-fill"></i><span>Bills</span></a>
+                    
+                  </li>
                   
                   <li>
                      <a href="../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
@@ -282,6 +303,10 @@
                   <li><a href="../packages/create" class="iq-waves-effect"><i class="ri-message-line"></i><span>Add new package </span></a></li>
                   <li><a href="../questions" class="iq-waves-effect"><i class="ri-message-line"></i><span>Forum</span></a></li>
                   <li><a href="../pharmacist_shop" class="iq-waves-effect"><i class="ion-medkit"></i><span>Buy Drugs</span></a></li>
+                  <li>
+                     <a href="../mybills"><i class="ri-device-fill"></i><span>Bills</span></a>
+                    
+                  </li>
                   
                   <li>
                      <a href="../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
@@ -336,6 +361,10 @@
                   @if (!empty($hospital))
                   <li><a href="./hospitals/{{$hospital->id}}" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>My Hospital</span></a></li>
                   @endif
+                  <li>
+                     <a href="../mybills"><i class="ri-device-fill"></i><span>My Bills</span></a>
+                    
+                  </li>
                   <li>
                      <a href="../"><i class="ri-home-4-line"></i><span>Homepage</span></a>
                     

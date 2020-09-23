@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Bills;
 use App\User;
 use App\HospitalDoctors;
 use Illuminate\Support\Facades\Hash;
@@ -30,6 +31,16 @@ class PagesController extends Controller
     //
     public function index(){
         return view('pages.home');//here i can return any page i want.
+    }
+    public function bills(){
+
+        $bills = Bills::where('patient_pin', auth()->user()->pin)->whereDay('created_at', now()->day)->orderBy('created_at', 'desc')->get();
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $data = array(
+            'bills' => $bills,
+            'new_messages' => $new_messages
+   );
+        return view("pages.bills",$data);
     }
     public function wards(){
         return view('pages.wards');//here i can return any page i want.

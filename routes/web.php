@@ -13,6 +13,7 @@
 
 Route::get('/', 'PagesController@index');
 Route::get('/blood_bank', 'PagesController@blood_bank');
+Route::get('/mybills', 'PagesController@bills');
 Route::get('/wards', 'PagesController@wards');
 Route::get('/create_ward', 'PagesController@create_ward');
 Route::post('/update_ward', 'PagesController@update_ward');
@@ -75,6 +76,7 @@ Route::get('/schedule_tomorrow', 'TodoController@tomorrow');
 //Hospitals
 Route::resource('/hospitals', 'HospitalController');
 Route::post('/hospital_add_staff', 'HospitalController@add_staff');
+Route::get('/add_patient', 'HospitalController@add_patient');
 Route::post('/hospital_store_staff', 'HospitalController@store_staff');
 Route::post('/store_op', 'HospitalController@store_op');
 Route::post('/store_message', 'HospitalController@store_message');
@@ -83,6 +85,7 @@ Route::post('/search', 'HospitalController@search');
 Route::get('/send_message', 'HospitalController@message');
 Route::get('/add_op', 'HospitalController@add_op');
 Route::post('/remove', 'HospitalController@destroyy');
+Route::post('/set_fees', 'HospitalController@set_fee');
 
 //Q&S
 
@@ -111,6 +114,7 @@ Route::post('/visitors_list', 'VisitorController@other');
 
 //hmo
 Route::resource('/packages', 'HmoController');
+Route::get('/payment_request', 'HmoController@payment_request');
 Route::get('/add_hospital', 'HmoController@add_hospital');
 Route::get('/add_staff', 'HmoController@create_staff');
 Route::post('/store_hospital', 'HmoController@store_hospital');

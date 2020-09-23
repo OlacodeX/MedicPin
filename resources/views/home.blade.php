@@ -230,7 +230,7 @@
                                       <td>N/A</td>
                                       @endif
                                       <td>{{$package_name->name}}</td>
-                                      <td>{{$package_name->description}}</td>
+                                      <td>{!!$package_name->description!!}</td>
                                   @else
                                   <td>N/A</td>
                                   <td>N/A</td>
@@ -1390,10 +1390,15 @@
                                  </div>
                                  {!! Form::close() !!}
                            </div>
-                        </div>
+                        </div> <br>
                           <ul class="patient-progress m-0 p-0">
-                                    @if (count($patients) > 0)
-                                    @foreach ($patients as $patient)
+                             @php
+                                 
+                               $pin = App\patients::whereNotNull('username')->pluck('pin');
+                               $patientss = App\User::whereIn('pin',$pin)->where('h_id', auth()->user()->h_id)->get();
+                             @endphp   
+                                    @if (count($patientss) > 0)
+                                    @foreach ($patientss as $patient)
                                     <a href="javascript:{}" onclick="document.getElementById('my_form_1').submit();">
                                                             
                                     {!! Form::open(['action' => 'RecordsController@index', 'method' => 'GET', 'id' => 'my_form_1']) /** The action should be the block of code in the store function in PostsController
@@ -1443,6 +1448,17 @@
                                      @if (auth()->user()->role == 'Nurse')
                                          
                                          <span class="user-list-files d-flex float-right">
+                                            @php
+                                                $user = App\User::where('pin',$patient->pin)->first();
+                                            @endphp
+                                          @if (auth()->user()->h_id != $user->h_id )
+                                          {!!Form::open(['action' => 'HospitalController@add_patient', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
+                                          {{Form::hidden('pin', $patient->pin)}}
+                                          <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add patient to hospital"><i class="las la-location-arrow"></i></button>
+                                         
+                                          {!!Form::close()!!}
+                                              
+                                          @endif
                                             {!!Form::open(['action' => 'ConsortationsController@create', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
                                             {{Form::hidden('pin', $patient->pin)}}
                                             {{Form::hidden('username', $patient->username)}}

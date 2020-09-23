@@ -177,6 +177,13 @@
                              <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete Hospital"><i class="fa fa-trash-o"></i>Delete Hospital</button>
                             
                              {!!Form::close()!!}
+
+                             {!!Form::open(['action' => 'HospitalController@set_fee', 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
+                            
+                             {{Form::hidden('id', $hospital->id)}}
+                             <button class ="btn btn-info btn-sm" type="submit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Set Service Fees"><i class="fa fa-dollar"></i>Set Service Fees</button>
+                        
+                             {!!Form::close()!!}
                              <button class ="btn btn-info btn-sm"><a href="../hospitals/{{$hospital->id}}/edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Hospital Details"><i class="fa fa-edit"></i>Edit Hospital Details</a></button>
                                  
                              @endif
