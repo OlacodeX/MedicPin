@@ -83,8 +83,8 @@
                      <div class="tab-content" id="myTabContent">
 
                         @php
-                           $patient = App\patients::where('pin', $record->pin)->first();
-                           $user = App\User::where('pin', $record->pin)->first();
+                           $patient = App\patients::where('pin', $pin)->first();
+                           $user = App\User::where('pin', $pin)->first();
                         @endphp
 
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -203,10 +203,16 @@
                                      <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb iq-bg-primary">
                                         <li class="breadcrumb-item active" aria-current="page">Genotype <br>
+                                          @if (!empty($record))
                                           @if ($record->genotype == '')
                                               N/A
                                           @else
                                           {{$record->genotype}}
+                                              
+                                          @endif
+                                              
+                                          @else
+                                          {{'No Record'}}
                                               
                                           @endif
                                           </li>
@@ -221,10 +227,16 @@
                                     <nav aria-label="breadcrumb">
                                        <ol class="breadcrumb iq-bg-primary">
                                        <li class="breadcrumb-item active" aria-current="page">Blood Group <br>
+                                          @if (!empty($record))
                                           @if ($record->b_group == '')
                                               N/A
                                           @else
                                           {{$record->b_group}}
+                                              
+                                          @endif
+                                              
+                                          @else
+                                          {{'No Record'}}
                                               
                                           @endif
                                           </li>
@@ -359,86 +371,6 @@
                                  </div>
                              </div>
                          </div>
-                          <!---    
-                              <div class="col-md-4">
-                                 <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb iq-bg-primary">
-                                       <li class="breadcrumb-item active" aria-current="page">Address <br>{{$patient->address}}</li>
-                                    </ol>
-                                 </nav>
-                                 <div class="iq-card shadow-none mb-0">
-                                     <div class="iq-card-body p-1">
-                                        <span class="font-size-14">Genotype</span>
-                                        @if ($record->genotype == '')
-                                        <h2>N/A
-                                            <img class="float-right summary-image-top mt-1" src="images/page-img/04.png" alt="summary-image" /> </h2>
-                                        <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
-                                            <div class="iq-progress-bar">
-                                                <span class="bg-primary" data-percent="0"></span>
-                                            </div>
-                                        </div>
-                                        @else
-                                        <h2>{{$record->genotype}}
-                                            <img class="float-right summary-image-top mt-1" src="images/page-img/04.png" alt="summary-image" /> </h2>
-                                            <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
-                                            <div class="iq-progress-bar">
-                                                <span class="bg-primary" data-percent={{$record->genotype}}></span>
-                                            </div>
-                                        </div>
-                                        @endif
-                                     </div>
-                                 </div>
-                             </div>
-                             <div class="col-md-4">
-                                 <div class="iq-card shadow-none mb-0">
-                                     <div class="iq-card-body p-1">
-                                         <span class="font-size-14">Blood Group</span>
-                                         @if ($record->b_group == '')
-                                         <h2>N/A
-                                         <img class="float-right summary-image-top mt-1" src="images/page-img/06.png" alt="summary-image" /> </h2>
-                                         <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
-                                             <div class="iq-progress-bar">
-                                                 <span class="bg-success" data-percent="0"></span>
-                                             </div>
-                                         </div>
-                                         @else
-                                         <h2>{{$record->b_group}}
-                                         <img class="float-right summary-image-top mt-1" src="images/page-img/06.png" alt="summary-image" /> </h2>
-                                        <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
-                                             <div class="iq-progress-bar">
-                                                 <span class="bg-success" data-percent={{$record->b_group}}></span>
-                                             </div>
-                                         </div>
-
-                                         @endif
-                                     </div>
-                                 </div>
-                             </div>
-                             <div class="col-md-4">
-                                 <div class="iq-card shadow-none mb-0">
-                                     <div class="iq-card-body p-1">
-                                         <span class="font-size-14">Weight</span>
-                                         @if ($record->weight == '')
-                                         <h2>N/A
-                                        <img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
-                                        <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
-                                             <div class="iq-progress-bar">
-                                                 <span class="bg-danger" data-percent="0"></span>
-                                             </div>
-                                         </div>
-                                          @else
-                                          <h2>{{$record->weight}}kg
-                                          <img class="float-right summary-image-top mt-1" src="images/page-img/05.png" alt="summary-image" /> </h2>
-                                          <div class="iq-progress-bar-linear d-inline-block w-100 mt-3">
-                                              <div class="iq-progress-bar">
-                                                  <span class="bg-danger" data-percent={{$record->weight}}></span>
-                                              </div>
-                                          </div>   
-                                         @endif
-                                     </div>
-                                 </div>
-                             </div>
-                             --->
                            </div>
                         </div>
 
@@ -453,47 +385,46 @@
                                <textarea class="form-control" id="pre" name="note" placeholder="Patient's Complaint..."></textarea><br>
                                
                                <button type="submit" class="btn btn-primary" style="margin-bottom: 0px;">Add Complain</button>
-                               <a href="#test" data-toggle="collapse" class="btn btn-primary pull-right" style="margin-top: 0;">View Complain History</a>
+                               <a href="#complain" data-toggle="collapse" class="btn btn-primary pull-right" style="margin-top: 0;">View Complain History</a>
                                {!! Form::close() !!} 
                                <style>
                                   a.btn.btn-primary.pull-right{
                                      margin-top: 0;
                                   }
                                </style>
-                               
                              
-                                          <div class="collapse" id="test"> 
-                                             <div class="iq-card">
-                                             <div class="iq-card-body text-center">
-                                                <h5 class="card-title">Complain History</h5>
-                                                @php
-                                                      $records = App\Records::where('pin', $pin)->where('note', '!=', '')->orderby('created_at','desc')->get();
-                                                @endphp      
-                                                @if (count($records) > 0)
-                                                   <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
-                                                     <thead>
-                                                         
-                                                     <tr>
-                                                      <th>Date</th>
-                                                      <th>Complain</th>
-                                                   </tr>
-                                               </thead>
-                                               <tbody>
-                                                @foreach ($records as $record)
-                                                   <tr>
-                                                      <td class="text-center">{{$record->created_at}}</td>
-                                                      <td>{!!$record->note!!}</td>
-                                                   </tr> 
-                                                         @endforeach                      
-                                                     </tbody>
-                                                   </table>
-                                          </div>
-                                          @else
-                                          <p>No Record Found</p>    
-                                          @endif
-                                          </div>
-                                       </div>
-                                       
+                             <div class="collapse" id="complain"> 
+                                <div class="iq-card">
+                                <div class="iq-card-body text-center">
+                                   <h5 class="card-title">Complain History</h5>
+                                   @php
+                                         $records = App\Records::where('pin', $pin)->where('note', '!=', '')->orderby('created_at','desc')->get();
+                                   @endphp      
+                                   @if (count($records) > 0)
+                                      <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
+                                        <thead>
+                                            
+                                        <tr>
+                                         <th>Date</th>
+                                         <th>Complain</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                   @foreach ($records as $record)
+                                      <tr>
+                                         <td class="text-center">{{$record->created_at}}</td>
+                                         <td>{!!$record->note!!}</td>
+                                      </tr> 
+                                            @endforeach                      
+                                        </tbody>
+                                      </table>
+                             @else
+                             <p>No Record Found</p>    
+                             @endif
+                             </div>
+                          </div>
+                        </div>
+                          
                         {!! Form::open(['action' => 'RecordsController@store_bio', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
                         **/ !!}
                         <h5 class="card-title" style="margin-top: 80px;">Patient's Bio Vitals</h5>
@@ -524,7 +455,14 @@
                                               $gen = App\Records::where('pin', $pin)->where('genotype', '!=', '')->first();
                                           @endphp
                                        <select class="form-control" id="selectbg" name="b_group">
+
+                                          @if (!empty($bg))
                                           <option value="{{$bg->b_group}}">{{$bg->b_group}}</option>
+                                              
+                                          @else
+                                          <option value="">---Select Blood Group---</option>
+                                              
+                                          @endif
                                              <option value="O+">O+</option>
                                              <option value="O-">O-</option>
                                              <option value="A+">A+</option>
@@ -550,7 +488,14 @@
                                        <label for="genotype">Genotype</label>
                                        <div>
                                        <select class="form-control" id="selectgenotype" name="genotype">
+
+                                          @if (!empty($gen))
                                           <option value="{{$gen->genotype}}">{{$gen->genotype}}</option>
+                                          @else
+                                          <option value="">---Select Genotype---</option>
+                                              
+                                          @endif
+                                          
                                           <option value="AA">AA</option>
                                           <option value="AC">AC</option>
                                           <option value="AS">AS</option>
@@ -612,69 +557,69 @@
                                    <textarea class="form-control" id="note" name="comment" placeholder="Doctor's Comment Based On Patient's Complaint and Medical History..."></textarea>
                                 </div>
                                      
-                              </div>
                              
                                 <button type="submit" class="btn btn-primary" style="margin-bottom: 0px;">Add Bio Vitals</button>
-                                <a href="#vitals" data-toggle="collapse" class="btn btn-primary pull-right" style="margin-top: 0;">View Bio Vitals History</a>
                                {!! Form::close() !!} 
+                               <a href="#vitals" data-toggle="collapse" class="btn btn-primary pull-right" style="margin-top: 0;">View Bio Vitals History</a>
                                <style>
                                   a.btn.btn-primary.pull-right{
                                      margin-top: 0;
                                   }
                                </style>
                                
-                             
-                                          <div class="collapse" id="vitals"> 
-                                             <div class="iq-card">
-                                             <div class="iq-card-body text-center">
-                                                <h5 class="card-title">Bio Vitals History</h5>
-                                                @php
-                                                      $records = App\Records::where('pin', $pin)->orderby('created_at','desc')->get();
-                                                @endphp      
-                                                @if (count($records) > 0)
-                                                   <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
-                                                     <thead>
-                                                         
-                                                      <tr>
-                                                       <th>Date</th>
-                                                       <th>Temperature</th>
-                                                       <th>BP</th>
-                                                       <th>FBS/RBS</th>
-                                                       <th>Genotype</th>
-                                                       <th>Blood Group</th>
-                                                       <th>Weight</th>
-                                                       <th>Height</th>
-                                                       <th>Glucose Level</th>
-                                                       <th>Complain</th>
-                                                       <th>Doctor's Investigation</th>
-                                                    </tr>
-                                               </thead>
-                                               <tbody>
-                                                @foreach ($records as $record)
-                                                <tr>
-                                                   <td class="text-center">{{$record->created_at}}</td>
-                                                   <td>{{$record->temp}}</td>
-                                                   <td>{{$record->bp}}</td>
-                                                   <td>{{$record->fbs_rbs}}</td>
-                                                   <td>{{$record->genotype}}</td>
-                                                   <td>{{$record->b_group}}</td>
-                                                   <td>{{$record->weight}}</td>
-                                                   <td>{{$record->height}}</td>
-                                                   <td>{{$record->glucose}}</td>
-                                                   <td>{!!$record->note!!}</td>
-                                                   <td>{!!$record->comment!!}</td>
-                                                </tr> 
-                                                         @endforeach                      
-                                                     </tbody>
-                                                   </table>
-                                          </div>
-                                          @else
-                                          <p>No Record Found</p>    
-                                          @endif
-                                          </div>
-                                       </div>
-                           </div>
                         </div>
+                             
+                        <div class="collapse" id="vitals"> 
+                           <div class="iq-card">
+                           <div class="iq-card-body text-center">
+                              <h5 class="card-title">Bio Vitals History</h5>
+                              @php
+                                    $records = App\Records::where('pin', $pin)->orderby('created_at','desc')->get();
+                              @endphp      
+                              @if (count($records) > 0)
+                                 <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
+                                   <thead>
+                                       
+                                    <tr>
+                                     <th>Date</th>
+                                     <th>Temperature</th>
+                                     <th>BP</th>
+                                     <th>FBS/RBS</th>
+                                     <th>Genotype</th>
+                                     <th>Blood Group</th>
+                                     <th>Weight</th>
+                                     <th>Height</th>
+                                     <th>Glucose Level</th>
+                                     <th>Complain</th>
+                                     <th>Doctor's Investigation</th>
+                                  </tr>
+                             </thead>
+                             <tbody>
+                              @foreach ($records as $record)
+                              <tr>
+                                 <td class="text-center">{{$record->created_at}}</td>
+                                 <td>{{$record->temp}}</td>
+                                 <td>{{$record->bp}}</td>
+                                 <td>{{$record->fbs_rbs}}</td>
+                                 <td>{{$record->genotype}}</td>
+                                 <td>{{$record->b_group}}</td>
+                                 <td>{{$record->weight}}</td>
+                                 <td>{{$record->height}}</td>
+                                 <td>{{$record->glucose}}</td>
+                                 <td>{!!$record->note!!}</td>
+                                 <td>{!!$record->comment!!}</td>
+                              </tr> 
+                                       @endforeach                      
+                                   </tbody>
+                                 </table>
+                        @else
+                        <p>No Record Found</p>    
+                        @endif
+                     </div>
+                     </div>
+         </div>
+                     </div>
+                     </div>
 
 
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -1025,6 +970,7 @@
            </div>
         </div>
      </div>
+   </div>
      <!-- Wrapper END -->
       <!-- Footer -->
         <footer class="bg-white iq-footer">
