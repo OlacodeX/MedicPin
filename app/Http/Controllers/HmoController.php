@@ -59,6 +59,13 @@ class HmoController extends Controller
 
 
     }
+    public function view()
+    {
+        //
+        return view("pages.view");
+
+
+    }
 
 
      /**
@@ -251,7 +258,12 @@ class HmoController extends Controller
                    $get_user->save();
                    $bill = new Bills;
                    $user = User::where('email', $request->input('email'))->first();
-                   $bill->patient_name = auth()->user()->hmo_org_name;
+                   if (!empty(auth()->user()->hmo_org_name)) {
+                    $bill->patient_name = auth()->user()->hmo_org_name;
+                   } else {
+                    $bill->patient_name = auth()->user()->name;
+                   }
+                   
                    $bill->patient_pin = auth()->user()->pin;
                    $bill->service = 'HMO plan purchase';
                    $bill->status = 'Unpaid';
@@ -277,7 +289,11 @@ class HmoController extends Controller
                    $user->save();
                    $bill = new Bills;
                    $user = User::where('email', $request->input('email'))->first();
-                   $bill->patient_name = auth()->user()->hmo_org_name;
+                   if (!empty(auth()->user()->hmo_org_name)) {
+                    $bill->patient_name = auth()->user()->hmo_org_name;
+                   } else {
+                    $bill->patient_name = auth()->user()->name;
+                   }
                    $bill->patient_pin = auth()->user()->pin;
                    $bill->service = 'HMO plan purchase';
                    $bill->status = 'Unpaid';
@@ -302,7 +318,11 @@ class HmoController extends Controller
                   $get_user->save();
                   $bill = new Bills;
                   $user = User::where('email', $request->input('email'))->first();
-                  $bill->patient_name = auth()->user()->hmo_org_name;
+                  if (!empty(auth()->user()->hmo_org_name)) {
+                   $bill->patient_name = auth()->user()->hmo_org_name;
+                  } else {
+                   $bill->patient_name = auth()->user()->name;
+                  }
                   $bill->patient_pin = auth()->user()->pin;
                   $bill->service = 'HMO plan purchase';
                   $bill->status = 'Unpaid';
@@ -328,7 +348,11 @@ class HmoController extends Controller
                   $user->save();
                   $bill = new Bills;
                   $user = User::where('email', $request->input('email'))->first();
-                  $bill->patient_name = auth()->user()->hmo_org_name;
+                  if (!empty(auth()->user()->hmo_org_name)) {
+                   $bill->patient_name = auth()->user()->hmo_org_name;
+                  } else {
+                   $bill->patient_name = auth()->user()->name;
+                  }
                   $bill->patient_pin = auth()->user()->pin;
                   $bill->service = 'HMO plan purchase';
                   $bill->status = 'Unpaid';

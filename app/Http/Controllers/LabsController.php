@@ -59,6 +59,12 @@ class LabsController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'test1' => 'required',
+            'p_pin' => 'required',
+             //image means it must be in image format|nullable means the field is optional, then max size is 1999
+             ///'pp' => 'image|nullable|max:1999'
+             ]);
                
             $test = new Lab;    
             $patientt = patients::where('pin', $request->input('p_pin'))->first();

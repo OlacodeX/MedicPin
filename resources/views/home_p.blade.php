@@ -57,11 +57,11 @@
                              @endforeach
                          @else
                          <p class="text-center">No Sent Notifications Yet</p> 
+                         @endif
  
                         </div>   
-                         @endif
                      </div>
-                    
+                    </div>
                     <div class="col-lg-6">
                     <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden wow fadeInUp" data-wow-delay="0.6s">
                         <div class="iq-card-header d-flex justify-content-between">
@@ -98,7 +98,6 @@
               </div>
            </div>
          </div>
-      </div>
            
               <style>
                 /* enable absolute positioning */
@@ -264,7 +263,7 @@
                        <div class="iq-card-body">
                           <div class="table-responsive">
                               @php
-                                  $appointments = App\Appointments::where('doctor',auth()->user()->pin)->paginate(8);
+                                  $appointments = App\Appointments::where('patient',auth()->user()->pin)->paginate(8);
                               @endphp
                               @if (count($appointments) > 0)
                              <table class="table mb-0 table-borderless">

@@ -94,7 +94,55 @@
                                  <!---<button type="button" class="btn btn-link mr-3"><i class="ri-printer-line"></i> Download Print</button>--->
                                  <button type="button" class="btn btn-primary">Pay Now</button>
                               </div>
-                              <div class="col-sm-6"> 
+                              <div class="col-sm-12"> 
+                                 <a href="#bills" data-toggle="collapse" class="btn btn-primary pull-left" style="margin-top: 0;">Billing History</a>
+                             
+                                 <div class="collapse" id="bills"> 
+                                    <div class="iq-card">
+                                    <div class="iq-card-body text-center">
+                                       <h5 class="card-title">Billing History</h5>
+                                       @php
+                                             $billings = App\Bills::where('patient_pin', auth()->user()->pin)->orderby('created_at','desc')->get();
+                                       @endphp      
+                                       @if (count($billings) > 0)
+                                          <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" aria-describedby="user-list-page-info">
+                                           
+                                       <thead>
+                                          <tr>
+                                             <th class="text-center" scope="col">Date</th>
+                                             <th class="text-center" scope="col">Item</th>
+                                             <th class="text-center" scope="col">Bill Status</th>
+                                             <th class="text-center" scope="col">Amount</th>
+                                             <th class="text-center" scope="col">Bill By</th>
+                                          </tr>
+                                       </thead>
+                                       <tbody>
+                                          @foreach ($billings as $billing)
+                                          <tr>
+                                             <td class="text-center">{{$billing->created_at}}</td>
+                                             <td class="text-center">{{$billing->service}}</td>
+                                             @if ($billing->status == 'Unpaid')
+                                             <td class="text-center"><span class="badge badge-danger">{{$billing->status}}</span></td>
+                                                 
+                                             @else
+                                             <td class="text-center"><span class="badge badge-success">{{$billing->status}}</span></td>
+                                                 
+                                             @endif
+                                             <td class="text-center">{{$billing->amount}}</td>
+                                             <td class="text-center">{{$billing->action_by}}</td>
+                                          </tr> 
+                                              
+                                          @endforeach
+                                          @else
+                                          <div class="col-md-12">
+                                             <p class="text-center">You have not incur any expenses yet.</p>
+                                          </div>
+                                       </tbody>
+                                       @endif
+                                    </table>
+                                 </div>
+                              </div>
+                            </div>
                               </div>
                            </div>
                         </div>

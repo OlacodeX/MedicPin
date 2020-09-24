@@ -128,3 +128,4 @@ Route::get('/buy_hmo', 'HmoController@buy_hmo');
 Route::get('/add_category', 'HmoController@add_cat');
 Route::post('/get_category', 'HmoController@get_cat');
 Route::post('/complete_add', 'HmoController@complete_add');
+Route::get('/view_hmo', 'HmoController@view');
