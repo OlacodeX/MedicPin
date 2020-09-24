@@ -33,7 +33,6 @@ class AddMoreColumnsToRecordsTable extends Migration
     {
         Schema::table('records', function (Blueprint $table) {
             //
-            $table->dropColumn('note');
             $table->dropColumn('glucose');
             $table->dropColumn('prescription');
             $table->dropColumn('doc_comment');
