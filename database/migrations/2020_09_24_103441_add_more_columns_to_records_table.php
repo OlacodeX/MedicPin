@@ -15,10 +15,6 @@ class AddMoreColumnsToRecordsTable extends Migration
     {
         Schema::table('records', function (Blueprint $table) {
             //
-        $table->string('glucose')->nullable();
-        $table->string('prescription')->nullable();
-        $table->string('doc_comment')->nullable();
-        $table->string('oxygen')->nullable();
         $table->string('fbs_rbs')->nullable();
         });
     }
@@ -32,10 +28,6 @@ class AddMoreColumnsToRecordsTable extends Migration
     {
         Schema::table('records', function (Blueprint $table) {
             //
-            $table->dropColumn('glucose');
-            $table->dropColumn('prescription');
-            $table->dropColumn('doc_comment');
-            $table->dropColumn('oxygen');
             $table->dropColumn('fbs_rbs');
         });
     }
