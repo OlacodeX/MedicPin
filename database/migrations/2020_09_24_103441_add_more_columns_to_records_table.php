@@ -15,7 +15,6 @@ class AddMoreColumnsToRecordsTable extends Migration
     {
         Schema::table('records', function (Blueprint $table) {
             //
-        $table->string('note')->nullable();
         $table->string('glucose')->nullable();
         $table->string('prescription')->nullable();
         $table->string('doc_comment')->nullable();
