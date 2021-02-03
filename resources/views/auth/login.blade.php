@@ -179,14 +179,25 @@
                             <div class="login-header">
                                 <h3>Login Into <span>MedicPin</span></h3>
                             </div>
-                            <form action="{{ route('login') }}" method="POST">
+                            <form method="POST" action="{{ route('login') }}" >
+                                @csrf
                                 <div class="form-group form-focus">
-                                    <input type="email" class="form-control floating">
+                                    <input id="email" type="email" id="exampleInputEmail1" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email" autofocus class="form-control floating @error('email') is-invalid @enderror">
                                     <label class="focus-label">Email</label>
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group form-focus">
-                                    <input type="password" class="form-control floating">
+                                    <input id="password" type="password" class="form-control floating @error('password') is-invalid @enderror" id="exampleInputPassword1" name="password" required autocomplete="current-password" placeholder="Password">
                                     <label class="focus-label">Password</label>
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="text-right">
                                     @if (Route::has('password.request'))
