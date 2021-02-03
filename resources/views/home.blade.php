@@ -4,9 +4,9 @@
 @endsection
 @section('content')
 @include('inc.navmain')
-@if (auth()->user()->status == 'Active')
+<!--@if (auth()->user()->status == 'Active')
 			
-<!-- Breadcrumb -->
+ Breadcrumb -->
 <div class="breadcrumb-bar">
    <div class="container-fluid">
       <div class="row align-items-center">
@@ -825,13 +825,13 @@
 
          </div>
 			</div>	
-@else
+<!--@else
 <div class="text-center" style="background: #ffffff; padding-top:30px; padding-bottom:100px; margin-bottom:30px; border-radius:50px;">
    <img src="{{ URL::to('img/oop.jpg')}}" alt="" class="img-fluid" />
    <h5 class="text-center">Your account has been suspended, kindly contact the administrators to restore account access.</h5>
 
 </div>
-@endif   	
+@endif-->
 			<!-- /Page Content -->
      <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
      <script>
