@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use  App\Notifications;
+use App\Questions;
 use Illuminate\Http\Request;
 use App\Bills;
 use App\User;
@@ -9,8 +11,11 @@ use App\HospitalDoctors;
 use Illuminate\Support\Facades\Hash;
 use App\Messages;
 use App\patients;
+use App\Orders;
 use App\Wards;
 use Image;
+use App\pharmacy;
+use App\Laboratories;
 use Yabacon\Paystack;
 use App\Mail\BloodRequestMail;
 use Illuminate\Support\Facades\Mail;
@@ -26,15 +31,58 @@ class PagesController extends Controller
     */
    public function __construct()
    {
-       $this->middleware('auth', ['except' => ['index','reg_patient','complete_sign_up','complete_sign_up_patient','sign_up']]);
+       $this->middleware('auth', ['except' => ['index','reg_patient','complete_sign_up','complete_sign_up_patient','sign_up','contact','blog','faqs','out_breaks','symptoms_checker','terms','privacy','about']]);
    } 
     //
     public function index(){
-        return view('pages.home');//here i can return any page i want.
+        return view('pages.index1');//here i can return any page i want.
+    }
+    public function home(){
+        $notices = Notifications::where('to',auth()->user()->id)->paginate(5);
+        $notice_sents = Notifications::where('from',auth()->user()->id)->paginate(5);
+        $patient = patients::where('email',auth()->user()->email)->first();
+        $patients = patients::where('doc_email',auth()->user()->email)->paginate(10);
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        $questions_all = Questions::orderBy('created_at', 'desc')->paginate(5);
+        $data = array(
+            //'calendar' => $calendar,
+            'patient' => $patient,
+            'patients' => $patients,
+            'notice_sents' => $notice_sents,
+            'notices' => $notices,
+            //'hospital' => $hospital,
+            'questions_all' => $questions_all,
+            'new_messages' => $new_messages
+        );
+        return view('home_old', $data);//here i can return any page i want.
+    }
+    public function about(){
+        return view('pages.about');//here i can return any page i want.
+    }
+    public function privacy(){
+        return view('pages.privacy');//here i can return any page i want.
+    }
+    public function terms(){
+        return view('pages.terms');//here i can return any page i want.
+    }
+    public function symptoms_checker(){
+        return view('pages.symptoms_checker');//here i can return any page i want.
+    }
+    public function out_breaks(){
+        return view('pages.out-breaks');//here i can return any page i want.
+    }
+    public function faqs(){
+        return view('pages.faqs');//here i can return any page i want.
+    }
+    public function contact(){
+        return view('pages.contact');//here i can return any page i want.
+    }
+    public function blog(){
+        return view('pages.blog');//here i can return any page i want.
     }
     public function bills(){
 
-        $bills = Bills::where('patient_pin', auth()->user()->pin)->whereDay('created_at', now()->day)->orderBy('created_at', 'desc')->get();
+        $bills = Bills::where('patient_pin', auth()->user()->pin)->/*whereDay('created_at', now()->day)*/where('status', 'Unpaid')->orderBy('created_at', 'desc')->get();
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = array(
             'bills' => $bills,
@@ -48,89 +96,165 @@ class PagesController extends Controller
     public function create_ward(){
         return view('pages.create_ward');//here i can return any page i want.
     }
-    public function payment(){
-        $amount = $_POST['amount'];
-        $email = auth()->user()->email;
-        $paystack = new \Yabacon\Paystack('sk_test_e09c42e4832c94d669d14a1d0d79de75dc6d72b7');
-        try
-        {
-          $tranx = $paystack->transaction->initialize([
-            'amount'=>$amount,       // in kobo
-            'email'=>$email,         // unique to customers
-            //'reference'=>$reference, // unique to transactions
-          ]);
-        } catch(\Yabacon\Paystack\Exception\ApiException $e){
-          print_r($e->getResponseObject());
-          die($e->getMessage());
-        }
-    
-        // store transaction reference so we can query in case user never comes back
-        // perhaps due to network issue
-        //save_last_transaction_reference($tranx->data->reference);
-    
-        // redirect to page so User can pay
-        header('Location: ' . $tranx->data->authorization_url);
-        // Retrieve the request's body and parse it as JSON
-    $event = \Yabacon\Paystack\Event::capture();
-    http_response_code(200);
-
-    /* It is a important to log all events received. Add code *
-     * here to log the signature and body to db or file       */
-    openlog('MyPaystackEvents', LOG_CONS | LOG_NDELAY | LOG_PID, LOG_USER | LOG_PERROR);
-    syslog(LOG_INFO, $event->raw);
-    closelog();
-
-    /* Verify that the signature matches one of your keys*/
-    $my_keys = [
-                //'live'=>'sk_live_blah',
-                'test'=>'sk_test_e09c42e4832c94d669d14a1d0d79de75dc6d72b7',
-              ];
-    $owner = $event->discoverOwner($my_keys);
-    if(!$owner){
-        // None of the keys matched the event's signature
-        die();
+    public function create_lab(){
+        return view('pages.create_lab');
     }
-
-    // Do something with $event->obj
-    // Give value to your customer but don't give any output
-    // Remember that this is a call from Paystack's servers and
-    // Your customer is not seeing the response here at all
-    switch($event->obj->event){
-        // charge.success
-        case 'charge.success':
-            if('success' === $event->obj->data->status){
-                // TIP: you may still verify the transaction
-                // via an API call before giving value.
-            }
-            break;
-    }
-    $reference = isset($_GET['reference']) ? $_GET['reference'] : '';
-    if(!$reference){
-      die('No reference supplied');
-    }
-
-    // initiate the Library's Paystack Object
-    $paystack = new Yabacon\Paystack(SECRET_KEY);
-    try
-    {
-      // verify using the library
-      $tranx = $paystack->transaction->verify([
-        'reference'=>$reference, // unique to transactions
-      ]);
-    } catch(\Yabacon\Paystack\Exception\ApiException $e){
-      print_r($e->getResponseObject());
-      die($e->getMessage());
-    }
-
-    if ('success' === $tranx->data->status) {
-      // transaction was successful...
-      // please check other things like whether you already gave value for this ref
-      // if the email matches the customer who owns the product etc
-      // Give value
-      return redirect('/dashboard')->with('success', 'Great!, patient has been added and notified.');
-    }
+    public function my_lab(){
+        return view('pages.lab');
     }
     
+  
+    public function Transaction(Request $request){ /** Prepare the post data to be sent via request
+        * @param array data
+        * @return post response
+        */
+
+       $data1 = [
+
+           'amount' => ($request->input('amount')) * 100,
+           'address' => ($request->input('address')),
+           'item' => ($request->input('item')),
+
+           'user' => auth()->user()->name,
+
+           'email' => auth()->user()->email,
+
+           'callback_url' => '/paidfull'
+           ];
+
+           /** Initiate the client for url's */
+           $curl = curl_init();
+
+           /** Curl array values to be passed */
+           curl_setopt_array($curl, array(
+
+           /** The url to visit and get response from */
+           CURLOPT_URL => "https://api.paystack.co/transaction/initialize",
+
+           /** The curl options should have return transfer values */
+           CURLOPT_RETURNTRANSFER => true,
+
+           /** Specify the encoding if necessary: omitted here */
+           CURLOPT_ENCODING => "",
+
+           /** The maximum redirect the link can have */
+           CURLOPT_MAXREDIRS => 10,
+
+           /** The time out for the load time can be set here */
+           CURLOPT_TIMEOUT => 30000,
+
+           /** The version for the curl can be set here */
+           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+
+           /** The request being sent to the endpoint is a POST request */
+           CURLOPT_CUSTOMREQUEST => "POST",
+
+           /** The fields returned should be json encoded */
+           CURLOPT_POSTFIELDS => json_encode($data1),
+
+           CURLOPT_HTTPHEADER => array(
+
+           /** The headers for the curl array can be set here: Auth_key */
+
+           "accept: */*",
+
+           "authorization: Bearer sk_test_e09c42e4832c94d669d14a1d0d79de75dc6d72b7",
+
+           "accept-language: en-US,en;q=0.8",
+
+           "content-type: application/json",
+
+           ),
+
+           ));
+
+           /** The response gotten from the client for urls */
+           $response = curl_exec($curl);
+
+           /** If errors exist then return the error messages */
+           $err = curl_error($curl);
+
+           /** Close the connection to the end point once done */
+           curl_close($curl);
+
+           /** If there are errors then echo them out  */
+           if ($err) {
+
+           return redirect()->back()->with("cURL Error #:" . $err);
+
+           } else {
+
+           /** This should send the data from the Callback with transaction details */
+           $trans = json_decode($response, true);
+           return redirect($trans['data']['authorization_url']);
+
+           }
+       }
+
+
+    /** 
+    * Controller method to handle response from paystack after payment
+    * @param trxref
+    */
+    public function Callback(){
+        //$getLocation = Order::orderBy('created_at', 'desc')->where('user',auth()->user()->name)->limit(1)->get();
+
+/** Initialize the client for urls */
+$curl = curl_init();
+
+/** Check for a reference and return else make empty */
+$reference = isset($_GET['reference']) ? $_GET['reference'] : '';
+if(!$reference){
+die('No reference supplied');
+}
+
+/** Set the client for url's array values for the Curl's */
+curl_setopt_array($curl, array(
+CURLOPT_URL => "https://api.paystack.co/transaction/verify/" . rawurlencode($reference),
+CURLOPT_RETURNTRANSFER => true,
+
+/** Set the client for url header values passed */
+CURLOPT_HTTPHEADER => [
+"accept: application/json",
+"authorization: Bearer sk_test_e09c42e4832c94d669d14a1d0d79de75dc6d72b7",
+"cache-control: no-cache"
+],
+));
+
+/** The response should be executed if successful */
+$response = curl_exec($curl);
+
+/** If there's an error return the error message */
+$err = curl_error($curl);
+
+if($err){
+print_r('Api returned error'. $err);
+}
+
+/** The transaction details and stats would be returned */
+$trans = json_decode($response);
+if(!$trans->status){
+die('Api returned Error'. $trans->message);
+}
+
+/** If the transaction stats are successful snd to DB */
+if('success' == $trans->data->status){
+$payment = new Orders;
+$payment->channel = $trans->data->channel;
+$payment->status  = $trans->data->status;
+$payment->item  = $trans->data->item;
+$payment->address  = $trans->data->address;
+$payment->amount   = ($trans->data->amount)/100;
+$payment->reference = $trans->data->reference;
+$payment->transaction_date = $trans->data->transaction_date;
+$payment->user_pin = auth()->user()->pin;
+$payment->user_email = auth()->user()->email;
+$payment->save();  
+}
+
+/** Finally return the callback view for the end user */
+return redirect()->back();
+}
     public function reg_patient(){
        
         return view("auth.registerpatient");
@@ -176,7 +300,7 @@ class PagesController extends Controller
        $cc = $_POST['cc'];
        $type = $_POST['type'];
        $phone = $_POST['phone'];
-       $username = $_POST['username'];
+       $age = $_POST['age'];
        $gender = $_POST['gender'];
        $password_confirmation = $_POST['password_confirmation'];
        if (!empty(User::where('email', $email)->first())) {
@@ -197,7 +321,7 @@ class PagesController extends Controller
                 'cc' => $cc,
                 'type' => $type,
                 'phone' => $phone,
-                'username' => $username,
+                'age' => $age,
                 'password_confirmation' => $password_confirmation
        );
         return view("auth.completeregi_patient", $data);
@@ -374,6 +498,21 @@ class PagesController extends Controller
             return redirect()->back()->with('success', 'Ward Created!');
 
         }
+        public function store_lab(Request $request)
+        {
+            // 
+            $this->validate($request, [
+                'name' => 'nullable',
+                'add' => 'nullable',
+                ]);  
+                $lab = new Laboratories;
+                $lab->name = $request->input('name');
+                $lab->add = $request->input('add');
+                $lab->created_by = auth()->user()->pin;
+                $lab->save();
+                return redirect()->back()->with('success', 'Laboratory Created!');
+    
+            }
     /**
      * Update the specified resource in storage.
      *
@@ -428,6 +567,7 @@ class PagesController extends Controller
         $user->role = $request->input('role');
         $user->type = $request->input('type');
         $user->twitter = $request->input('twitter');
+        $user->children = $request->input('children');
         $user->facebook = $request->input('facebook');
         $user->nhis = $request->input('nhis');
         $user->expertise = $request->input('expertise');
@@ -456,6 +596,7 @@ class PagesController extends Controller
         $user->type = $request->input('type');
         $user->twitter = $request->input('twitter');
         $user->facebook = $request->input('facebook');
+        $user->children = $request->input('children');
         $user->nhis = $request->input('nhis');
         $user->expertise = $request->input('expertise');
         if($request->hasFile('pp')){
@@ -485,21 +626,40 @@ class PagesController extends Controller
          *
          * @return \Illuminate\Http\Response
          */
-        public function search()
+        public function search_drug()
         {
-            $pin = $_POST['pin'];
-            $user = patients::where('doc_email', auth()->user()->email)->where('pin', $pin)->first();
-            $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
-          
-            if (empty($user)) {
-                return redirect('/dashboard')->with('error', 'No user with this pin.');//I just set the message for session(success).
-   
-            } else{
-            $data = array(
-                'user' => $user,
-                'new_messages' => $new_messages
-       );
-            return view("patients.search_result", $data);
+            $drug = $_POST['name'];
+            $drugs = pharmacy::orderBy('created_at', 'desc')->orderBy('status', 'asc')->where('name', $drug)->paginate(10);
+            return view("pages.search_result")->with('drugs', $drugs);
         }
+    public function search()
+    {
+        $pin = $_POST['pin'];
+        $user = patients::where('doc_email', auth()->user()->email)->where('pin', $pin)->first();
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+      
+        if (empty($user)) {
+            return redirect('/dashboard')->with('error', 'No user with this pin.');//I just set the message for session(success).
+
+        } else{
+        $data = array(
+            'user' => $user,
+            'new_messages' => $new_messages
+   );
+        return view("patients.search_result", $data);
     }
+}
+public function search_patient()
+{
+    $pin = $_POST['pin'];
+    $patient = patients::where('pin', $pin)->first();
+    $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+  
+    $data = array(
+        'patient' => $patient,
+        'new_messages' => $new_messages
+);
+    return view("pages.search_reult", $data);
+}
+
 }

@@ -39,7 +39,7 @@ class PatientsController extends Controller
           
        
         $doctor = HospitalDoctors::where('h_id', auth()->user()->h_id)->pluck('doctor_name');
-        $users =patients::where('doc_email', auth()->user()->email)->get();
+        $users =patients::where('doc_email', auth()->user()->email)->paginate(100);
         $h_users = patients::whereIn('doctor',$doctor )->paginate(100);
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = array(
@@ -115,8 +115,9 @@ class PatientsController extends Controller
         public function search()
         {
             $pin = $_POST['pin'];
-            $user = patients::where('doc_email', auth()->user()->email)->where('pin', $pin)->first();
-            if(!empty($user)){
+            $get_h_id = User::where('pin', $pin)->first();
+            $user = patients::where('pin', $pin)->first();
+            if($get_h_id->h_id == auth()->user()->h_id){
             $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
             $data = array(
                 'user' => $user,
@@ -126,7 +127,7 @@ class PatientsController extends Controller
         }
    
     else{
-        return redirect()->back()->with('error', 'You Dont\'t Have Access To This Patient\'s Record.');
+        return redirect()->back()->with('error', 'You Don\'t Have Access To This Patient\'s Record.');
     }
  }
     /**
@@ -371,7 +372,7 @@ class PatientsController extends Controller
     public function reg_patient(Request $request)
     {
         $email = $_POST['email'];
-        $username = $_POST['username'];
+        //$username = $_POST['username'];
         $this->validate($request, [
             'name' => 'required',
             'facebook' => 'nullable',
@@ -386,7 +387,7 @@ class PatientsController extends Controller
 
         }
         else{
-            $update_patient->username = $username;
+            $update_patient->age = $request->input('age');
             $update_patient->address = $request->input('add');
             $update_patient->gender = $request->input('gender');
             $update_patient->occupation = $request->input('occupation');
@@ -426,6 +427,7 @@ class PatientsController extends Controller
         $user->p_number = $request->input('phone');
         $user->nhis = $request->input('nhis');
         $user->pin = $update_patient->pin;
+        $user->age = $request->input('age');
         $user->password =  Hash::make($request->input('password'));
         
         //Save to db

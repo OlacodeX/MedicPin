@@ -1,242 +1,91 @@
 @extends('layouts.main')
+
 @section('content')
 @include('inc.navmain')
-   <!-- Page Content  -->
-         <!-- Page Content  -->
-         <div id="" class="">
-            <div class="">
-               <div class="row" style="padding-bottom: 100px;padding-left:20px;">
-                  <div class="col-sm-12">
-                     <div class="iq-card" style="padding-top: 10px;padding-bottom: 10px;">
-                        <h3 class="title" style="padding-left:20px;">Your <span>Inbox</span></h3>
-                    </div>
-    
-                    @if (
-                        //if there is data in the db
-                    count($messages) > 0
-                    )
-                
-            @foreach (
-                // Loop through them
-                $messages as $message
-                )
-    
-    <h4 class="title">{{$message->sender_name}}</h4>
-    <a href="chat/{{$message->id}}" style="text-decoration: none;">
-    <div class="panel-body">
-    <p><strong>{!!Str::words($message->message,8)!!}</strong></p>
-    <small><i class="fa fa-calendar"></i>{!!$message->created_at!!}</small>
-    </div>
-    </a>
-     @endforeach
-     <div class="pull-right">
-             <!-----The pagination link----->
-             {{$messages->links()}}
-     </div>
-         @else
-         <p class="text-center">No message found</p>
-         @endif
-                     <!----
-                              <div class="col-lg-12 chat-data p-0 chat-data-right">
-                                 <div class="tab-content">
-                                    <div class="tab-pane fade" id="chatbox10" role="tabpanel">
-                                       <div class="chat-head">
-                                          <header class="d-flex justify-content-between align-items-center bg-white pt-3 pl-3 pr-3 pb-3">
-                                            <div class="d-flex align-items-center">
-                                             <div id="sidebar-toggle" class="sidebar-toggle">
-                                                <i class="ri-menu-3-line"></i>
-                                             </div>
-                                              <div class="avatar chat-user-profile m-0 mr-3">
-                                                <img src="images/user/08.jpg" alt="avatar" class="avatar-50 ">
-                                                <span class="avatar-status"><i class="ri-checkbox-blank-circle-fill text-success"></i></span>
-                                              </div>
-                                              <h5 class="mb-0">Monty Carlo</h5>
-                                            </div>
-                                            <div id="chat-user-detail-popup" class="scroller">
-                                                <div class="user-profile text-center">
-                                                   <button type="submit" class="close-popup p-3"><i class="ri-close-fill"></i></button>
-                                                   <div class="user mb-4">
-                                                    <a class="avatar m-0">
-                                                      <img src="images/user/08.jpg" alt="avatar">
-                                                    </a>
-                                                  <div class="user-name mt-4"><h4>Monty Carlo</h4></div>
-                                                  <div class="user-desc"><p>Cape Town, RSA</p></div>
-                                                  </div>
-                                                  <hr>
-                                                  <div class="chatuser-detail text-left mt-4">
-                                                      <div class="row">
-                                                         <div class="col-6 col-md-6 title">Nik Name:</div>
-                                                         <div class="col-6 col-md-6 text-right">Babe</div>
-                                                      </div><hr>
-                                                      <div class="row">
-                                                         <div class="col-6 col-md-6 title">Tel:</div>
-                                                         <div class="col-6 col-md-6 text-right">072 143 9920</div>
-                                                      </div><hr>
-                                                      <div class="row">
-                                                         <div class="col-6 col-md-6 title">Date Of Birth:</div>
-                                                         <div class="col-6 col-md-6 text-right">July 12, 1989</div>
-                                                      </div><hr>
-                                                      <div class="row">
-                                                         <div class="col-6 col-md-6 title">Gender:</div>
-                                                         <div class="col-6 col-md-6 text-right">Female</div>
-                                                      </div><hr>
-                                                      <div class="row">
-                                                         <div class="col-6 col-md-6 title">Language:</div>
-                                                         <div class="col-6 col-md-6 text-right">Engliah</div>
-                                                      </div>
-                                                  </div>
-                                               </div>
-                                            </div>
-                                            <div class="chat-header-icons d-flex">
-                                              <a href="javascript:void();" class="chat-icon-phone">
-                                                <i class="ri-phone-line"></i>
-                                              </a>
-                                             <a href="javascript:void();" class="chat-icon-video">
-                                                <i class="ri-vidicon-line"></i>
-                                              </a>
-                                              <a href="javascript:void();" class="chat-icon-delete">
-                                                <i class="ri-delete-bin-line"></i>
-                                              </a>
-                                              <span class="dropdown">
-                                                <i class="ri-more-2-line cursor-pointer dropdown-toggle nav-hide-arrow cursor-pointer" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu"></i>
-                                                <span class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                                  <a class="dropdown-item" href="JavaScript:void(0);"><i class="fa fa-thumb-tack" aria-hidden="true"></i> Pin to top</a>
-                                                  <a class="dropdown-item" href="JavaScript:void(0);"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete chat</a>
-                                                  <a class="dropdown-item" href="JavaScript:void(0);"><i class="fa fa-ban" aria-hidden="true"></i> Block</a>
-                                                </span>
-                                              </span>
-                                            </div>
-                                          </header>
-                                        </div>
-                                       <div class="chat-content scroller">
-                                          <div class="chat">
-                                            <div class="chat-user">
-                                              <a class="avatar m-0">
-                                                <img src="images/user/1.jpg" alt="avatar" class="avatar-35 ">
-                                              </a>
-                                                <span class="chat-time mt-1">6:45</span>
-                                            </div>
-                                            <div class="chat-detail">
-                                              <div class="chat-message">
-                                                <p>How can we help? We're here for you! 😄</p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="chat chat-left">
-                                            <div class="chat-user">
-                                              <a class="avatar m-0">
-                                                <img src="images/user/08.jpg" alt="avatar" class="avatar-35 ">
-                                              </a>
-                                                <span class="chat-time mt-1">6:48</span>
-                                            </div>
-                                            <div class="chat-detail">
-                                              <div class="chat-message">
-                                                <p>Hey John, I am looking for the best admin template.</p>
-                                                <p>Could you please help me to find it out? 🤔</p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="chat">
-                                            <div class="chat-user">
-                                              <a class="avatar m-0">
-                                                <img src="images/user/1.jpg" alt="avatar" class="avatar-35 ">
-                                              </a>
-                                                <span class="chat-time mt-1">6:49</span>
-                                            </div>
-                                            <div class="chat-detail">
-                                              <div class="chat-message">
-                                                <p>Absolutely!</p>
-                                                <p>Sofbox Dashboard is the responsive bootstrap 4 admin template.</p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="chat chat-left">
-                                            <div class="chat-user">
-                                              <a class="avatar m-0">
-                                                <img src="images/user/08.jpg" alt="avatar" class="avatar-35 ">
-                                              </a>
-                                                <span class="chat-time mt-1">6:52</span>
-                                            </div>
-                                            <div class="chat-detail">
-                                              <div class="chat-message">
-                                                <p>Looks clean and fresh UI.</p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="chat">
-                                            <div class="chat-user">
-                                              <a class="avatar m-0">
-                                                <img src="images/user/1.jpg" alt="avatar" class="avatar-35 ">
-                                              </a>
-                                                <span class="chat-time mt-1">6:53</span>
-                                            </div>
-                                            <div class="chat-detail">
-                                              <div class="chat-message">
-                                                <p>Thanks, from ThemeForest.</p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="chat chat-left">
-                                            <div class="chat-user">
-                                              <a class="avatar m-0">
-                                                <img src="images/user/08.jpg" alt="avatar" class="avatar-35 ">
-                                              </a>
-                                                <span class="chat-time mt-1">6:54</span>
-                                            </div>
-                                            <div class="chat-detail">
-                                              <div class="chat-message">
-                                                <p>I will purchase it for sure. 👍</p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="chat">
-                                            <div class="chat-user">
-                                              <a class="avatar m-0">
-                                                <img src="images/user/1.jpg" alt="avatar" class="avatar-35 ">
-                                              </a>
-                                                <span class="chat-time mt-1">6:56</span>
-                                            </div>
-                                            <div class="chat-detail">
-                                              <div class="chat-message">
-                                                <p>Okay Thanks..</p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                       </div>
-                                       <div class="chat-footer p-3 bg-white">
-                                          <form class="d-flex align-items-center"  action="javascript:void(0);">
-                                           <div class="chat-attagement d-flex">
-                                              <a href="javascript:void();"><i class="fa fa-smile-o pr-3" aria-hidden="true"></i></a>
-                                              <a href="javascript:void();"><i class="fa fa-paperclip pr-3" aria-hidden="true"></i></a>
-                                             </div>
-                                           <input type="text" class="form-control mr-3" placeholder="Type your message">
-                                           <button type="submit" class="btn btn-primary d-flex align-items-center p-2"><i class="fa fa-paper-plane-o" aria-hidden="true"></i><span class="d-none d-lg-block ml-1">Send</span></button>
-                                         </form>
-                                       </div>
-                                    </div>
-                                    --------------
-                                 </div>
-                              </div>--->
-                           </div>
-                        </div>
-                        </div>
-                     </div>
-      <!-- Wrapper END -->
-      <!-- Footer -->
-        <footer class="bg-white iq-footer">
-            <div class="container-fluid">
-               <div class="row">
-                  <div class="col-lg-6">
-                     <ul class="list-inline mb-0">
-                        <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
-                        <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
-                     </ul>
-                  </div>
-                  <div class="col-lg-6 text-right">
-                     Copyright 2020 <a href="#">Medicpin</a> All Rights Reserved.
-                  </div>
-               </div>
-            </div>
-         </footer>
-         
-         @endsection
+@if (auth()->user()->status == 'Active')
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+   <div class="container-fluid">
+      <div class="row align-items-center">
+         <div class="col-md-12 col-12">
+            <nav aria-label="breadcrumb" class="page-breadcrumb">
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="./dashboard">Dashboard</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Inbox</li>
+               </ol>
+            </nav>
+            <h2 class="breadcrumb-title">My Inbox</h2>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- /Breadcrumb -->
+@include('inc.sidebar')
+						
+<div class="col-md-7 col-lg-8 col-xl-9">
+   <div class="col-md-12">
+      
+      @if (
+         //if there is data in the db
+     count($messages) > 0
+     )
+ 
+      @foreach (
+      // Loop through them
+      $messages as $message
+      )
+      <a href="chat/{{$message->id}}">
+         <style>
+            p.text-info{
+               padding: 0;
+               font-size: 12px;
+            }
+         </style>
+      <div class="card card-table mb-0">
+         <div class="card-header">
+            <h5 class="card-title"><b> {{$message->sender_name}}</b></h5>
+            <p><strong>{!!Str::words($message->message,8)!!}</strong></p>
+            <p class="text-info"><i class="fa fa-calendar"></i> {!!$message->created_at!!}</p>
+            
+         </div>
+       </div>
+      </a>
+      @endforeach
+      <div class="pull-right">
+              <!-----The pagination link----->
+              {{$messages->links()}}
+      </div>
+          @else
+          <p class="text-center">No message found</p>
+          @endif
+   </div>
+</div>
+</div>
+</div>
+
+@else
+<div class="text-center" style="background: #ffffff; padding-top:30px; padding-bottom:100px; margin-bottom:30px; border-radius:50px;">
+   <img src="{{ URL::to('img/oop.jpg')}}" alt="" class="img-fluid" />
+   <h5 class="text-center">Your account has been suspended, kindly contact the administrators to restore account access.</h5>
+
+</div>
+@endif   
+
+<!-- Footer 
+<footer class="bg-white iq-footer">
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-lg-6">
+            <ul class="list-inline mb-0">
+               <li class="list-inline-item"><a href="./privacy">Privacy Policy</a></li>
+               <li class="list-inline-item"><a href="./terms">Terms of Use</a></li>
+              </ul>
+           </div>
+           <div class="col-lg-6 text-right">
+              Copyright 2020 <a href="./">Medicpin</a> All Rights Reserved.
+         </div>
+      </div>
+   </div>
+</footer>
+Footer END -->
+@endsection

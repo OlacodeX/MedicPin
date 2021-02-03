@@ -12,12 +12,26 @@
 */
 
 Route::get('/', 'PagesController@index');
+Route::get('/home', 'PagesController@home');
+Route::get('/about', 'PagesController@about');
+Route::get('/privacy', 'PagesController@privacy');
+Route::get('/terms', 'PagesController@terms');
+Route::get('/symptoms_checker', 'PagesController@symptoms_checker');
+Route::get('/out-breaks', 'PagesController@out_breaks');
+Route::get('/faqs', 'PagesController@faqs');
+Route::get('/contact', 'PagesController@contact');
+Route::get('/blog', 'PagesController@blog');
 Route::get('/blood_bank', 'PagesController@blood_bank');
 Route::get('/mybills', 'PagesController@bills');
 Route::get('/wards', 'PagesController@wards');
+Route::post('/patient_search_result', 'PagesController@search_patient');
 Route::get('/create_ward', 'PagesController@create_ward');
+Route::get('/create_lab', 'PagesController@create_lab');
+Route::get('/my_lab', 'PagesController@my_lab');
 Route::post('/update_ward', 'PagesController@update_ward');
+Route::post('/drug_search_result', 'PagesController@search_drug');
 Route::post('/store_ward', 'PagesController@store_ward');
+Route::post('/store_lab', 'PagesController@store_lab');
 Route::post('/send_request_mail', 'PagesController@send_request_mail');
 Route::get('/myprofile', 'PagesController@pro');
 Route::get('/doctors', 'PagesController@doctors');
@@ -52,9 +66,12 @@ Route::post('/mark_as_sold_out', 'PatientsController@status_change');
 Route::post('/edit_drug', 'PatientsController@edit_drug');
 Route::post('/drug_detail', 'PatientsController@get_drug');
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route::post('/status_change', 'HomeController@status_change');
 
-
-Route::post('/pay', 'PagesController@payment');
+Route::post('/pay', 'PaymentController@Transaction')->name('pay');
+Route::get('/paid', 'PaymentController@Callback')->name('paid');
+Route::post('/paynow', 'PagesController@Transaction')->name('paynow');
+Route::get('/paidfull', 'PagesController@Callback')->name('paidfull');
 //Route::get('/dashboard', 'PagesController@index')->name('dashboard');
 
 //shopping cart
@@ -121,6 +138,7 @@ Route::post('/store_hospital', 'HmoController@store_hospital');
 Route::post('/store_staff', 'HmoController@store_staff');
 Route::post('/store_cat', 'HmoController@store_cat');
 Route::post('/destroy_cat', 'HmoController@destroy_cat');
+Route::post('/destroy_package', 'HmoController@destroy_package');
 Route::post('/store_add', 'HmoController@store_add');
 Route::get('/staff_list', 'HmoController@staff_list');
 Route::post('/add', 'HmoController@add');
@@ -128,4 +146,8 @@ Route::get('/buy_hmo', 'HmoController@buy_hmo');
 Route::get('/add_category', 'HmoController@add_cat');
 Route::post('/get_category', 'HmoController@get_cat');
 Route::post('/complete_add', 'HmoController@complete_add');
+Route::get('/get_packages', 'HmoController@packages');
+Route::post('/edit_package', 'HmoController@edit_package');
+Route::post('/update_package', 'HmoController@update_package');
+Route::post('/reject_bill', 'HmoController@reject');
 Route::get('/view_hmo', 'HmoController@view');

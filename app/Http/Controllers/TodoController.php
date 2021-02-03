@@ -28,9 +28,11 @@ class TodoController extends Controller
         //
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $todos = todo::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->whereDay('date', now()->day)->get();
+        $upcoming_todos = todo::orderBy('created_at', 'desc')->where('user_id', auth()->user()->id)->whereDay('date', '>', now()->day)->get();
         $data = array(
             'new_messages' => $new_messages,
-            'todos' => $todos
+            'todos' => $todos,
+            'upcoming_todos' => $upcoming_todos
         );
         return view('todo.index', $data);
 

@@ -43,6 +43,7 @@ class PrescriptionController extends Controller
     {
         //
         $prescription1 = new Prescriptions;
+        if ($request->input('drug1') !== 'Select') {
         $prescription1->sickness = $request->input('sickness');
         $prescription1->drug = $request->input('drug1');
         $prescription1->patient_pin = $request->input('pin');
@@ -50,6 +51,10 @@ class PrescriptionController extends Controller
         $prescription1->frequency = $request->input('frequency1');
         $prescription1->prescribed_by = auth()->user()->pin;
         $prescription1->save();
+        }
+        else{
+            return redirect()->back()->with('error', 'oops, you have not entered any information to be sent to the pharmacist!');
+        }
         if ($request->input('drug2') !== 'Select') {
             $prescription2 = new Prescriptions;
             $prescription2->sickness = $request->input('sickness');

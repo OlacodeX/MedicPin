@@ -148,6 +148,10 @@ class AppointmentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+      $appointment = Appointments::find($id);
+
+              $appointment->delete();
+              return redirect()->back()->with('success', 'Appointment Deleted');
     }
 }

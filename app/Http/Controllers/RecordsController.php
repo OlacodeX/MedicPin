@@ -35,6 +35,9 @@ class RecordsController extends Controller
         $username = $_GET['username'];
         $consult = Consortations::where('patient_pin', $pin)->where('doc_pin', auth()->user()->pin)->where('created_at',now()->day);
         $record = Records::where('pin', $pin)->orderBy('created_at', 'desc')->first();
+        $bg = Records::where('pin', $pin)->where('b_group', '!=', '')->orderBy('created_at', 'desc')->first();
+        $weight = Records::where('pin', $pin)->where('weight', '!=', '')->orderBy('created_at', 'desc')->first();
+        $gen = Records::where('pin', $pin)->where('genotype', '!=', '')->orderBy('created_at', 'desc')->first();
         $records = Records::where('pin', $pin)->orderBy('created_at', 'desc')->paginate(50);
         if (empty($record)) {
             return redirect('/patients')->with('error', 'No record found for user with pin '.$pin.' kindly add a new record.');//I just set the message for session(success).
@@ -44,6 +47,9 @@ class RecordsController extends Controller
             $data = array(
                 'username' => $username,
                 'new_messages' => $new_messages,
+                'bg' => $bg,
+                'weight' => $weight,
+                'gen' => $gen,
                 'records' => $records,
                 'record' => $record
             );
@@ -112,6 +118,12 @@ class RecordsController extends Controller
              $patient->BMI = $request->input('BMI');
              $patient->note = $request->input('note');
              $patient->prescription = $request->input('pre');
+             $patient->diabetes = $request->input('diabetes');
+             $patient->epilepsy = $request->input('epilepsy');
+             $patient->hypertension = $request->input('hypertension');
+             $patient->s_cell = $request->input('sickle');
+             $patient->allergies = $request->input('allergies');
+             $patient->other = $request->input('other');
              $patient->pin = $pin;
              if($request->input('b_group') !== 'select'){
              $patient->b_group = $request->input('b_group');

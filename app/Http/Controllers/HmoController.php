@@ -13,6 +13,7 @@ use App\hmo_h;
 use App\hmo_p;
 use App\hospitals;
 use App\Mail\PaymentRequestMail;
+use App\Mail\PaymentRejectionMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
@@ -38,6 +39,17 @@ class HmoController extends Controller
     {
         //
 
+    }
+    public function packages()
+    {
+        $id = $_GET['id'];
+        $cat = hmo_cat::where('id', $id)->first();
+        $packages = HMO::where('cat_id', $id)->get(); 
+        $data = array(
+            'cat' => $cat,
+            'packages' => $packages
+   );
+        return view('pages.packages', $data);
     }
 
      /**
@@ -255,6 +267,18 @@ class HmoController extends Controller
                     $get_user->hmo = $request->input('hmo');
                     $get_user->cat_id = $request->input('category');
                     $get_user->package_value = $value->description;
+                    if ($value->type == 'Daily') {
+                        $get_user->expires_after = now()->addDays(1);
+                        
+                    }
+                    if ($value->type == 'Monthly') {
+                        $get_user->expires_after = now()->addMonth(1);
+                        
+                    }
+                    if ($value->type == 'Yearly') {
+                        $get_user->expires_after = now()->addMonth(12);
+                        
+                    }
                    $get_user->save();
                    $bill = new Bills;
                    $user = User::where('email', $request->input('email'))->first();
@@ -285,6 +309,18 @@ class HmoController extends Controller
                     $user->hmo = $request->input('hmo');
                     $user->cat_id = $request->input('category');
                     $user->package_value = $value->description;
+                    if ($value->type == 'Daily') {
+                        $user->expires_after = now()->addDays(1);
+                        
+                    }
+                    if ($value->type == 'Monthly') {
+                        $user->expires_after = now()->addMonth(1);
+                        
+                    }
+                    if ($value->type == 'Yearly') {
+                        $user->expires_after = now()->addMonth(12);
+                        
+                    }
                     $user->added_by = auth()->user()->id;
                    $user->save();
                    $bill = new Bills;
@@ -314,6 +350,18 @@ class HmoController extends Controller
                    $get_user->package_on = $request->input('package');
                    $get_user->hmo = $request->input('hmo');
                    $get_user->cat_id = $request->input('category');
+                   if ($value->type == 'Daily') {
+                       $get_user->expires_after = now()->addDays(1);
+                       
+                   }
+                   if ($value->type == 'Monthly') {
+                       $get_user->expires_after = now()->addMonth(1);
+                       
+                   }
+                   if ($value->type == 'Yearly') {
+                       $get_user->expires_after = now()->addMonth(12);
+                       
+                   }
                    $get_user->package_value = $value->description;
                   $get_user->save();
                   $bill = new Bills;
@@ -344,6 +392,18 @@ class HmoController extends Controller
                    $user->hmo = $request->input('hmo');
                    $user->cat_id = $request->input('category');
                    $user->package_value = $value->description;
+                   if ($value->type == 'Daily') {
+                       $user->expires_after = now()->addDays(1);
+                       
+                   }
+                   if ($value->type == 'Monthly') {
+                       $user->expires_after = now()->addMonth(1);
+                       
+                   }
+                   if ($value->type == 'Yearly') {
+                       $user->expires_after = now()->addMonth(12);
+                       
+                   }
                    $user->added_by = auth()->user()->id;
                   $user->save();
                   $bill = new Bills;
@@ -395,19 +455,46 @@ class HmoController extends Controller
              $pin = $_GET['pin'];
              $user = User::where('pin', $pin)->first();
              $hmo = User::where('id', $user->hmo)->first();
+             $limit = HMO::where('id', $user->hmo_package)->first();
+             if ($user->No_of_times_used <= $limit->No_of_times) {
 
-             $bills = Bills::where('patient_pin', $pin)->whereDay('created_at', now()->day)->get();
-             foreach ($bills as $bills) {
-                 $bills->patient_pin = $hmo->pin;
-                 $bills->patient_name = $hmo->hmo_org_name;
-                 $bills->inherited_from = $pin;
-                 $bills->save();
+                $bills = Bills::where('patient_pin', $pin)->where('status', 'Unpaid')->get();
+                foreach ($bills as $bills) {
+                    $bills->patient_pin = $hmo->pin;
+                    $bills->patient_name = $hmo->hmo_org_name;
+                    $bills->inherited_from = $pin;
+                    $bills->save();
+                }
+                $number = '1';
+                $user->No_of_times_used = $user->No_of_times_used + $number;
+                $user->save();
+                Mail::to($hmo->email)->send(new PaymentRequestMail(auth()->user()->pin));
+                return redirect()->back()->with('success','Great!, Your HMO has been notified of your claims request');
+                
+             } else {
+                return redirect()->back()->with('error','oops!, Your HMO package limit has been reached, kindly pay bill yourself');
              }
-             Mail::to($hmo->email)->send(new PaymentRequestMail(auth()->user()->pin));
-             return redirect()->back()->with('success','Great!, Your HMO has been notified of your claims request');
              
     }
 
+    public function reject(Request $request)
+    {
+        //
+        $this->validate($request, [
+            'id' => 'nullable',
+             ]);
+             $id = $_POST['id'];
+                $bills = Bills::where('id', $id)->first();
+                    $bills->patient_pin = $bills->inherited_from;
+                    $user = User::where('pin', $bills->inherited_from)->first();
+                    $bills->patient_name = $user->name;
+                    $bills->inherited_from = '';
+                    $bills->save();
+                
+                Mail::to($user->email)->send(new PaymentRejectionMail(auth()->user()->pin));
+                return redirect()->back()->with('success','Great!, User has been notified of claims rejection');
+           
+    }
 
 /**
      * Store a newly created resource in storage.
@@ -473,12 +560,15 @@ class HmoController extends Controller
             'name' => 'required',
             'price' => 'nullable',
             'value' => 'nullable',
+            'type' => 'nullable',
             'img' => 'nullable|max:3000',
              ]);
              if (!empty($request->input('id'))) {
                 $package = new HMO;
                 $package->name = $request->input('name');
                 $package->price = $request->input('price');
+                $package->type = $request->input('type');
+                $package->No_of_times = $request->input('time');
                 $package->cat_id = $request->input('id');
                 $package->description = $request->input('value');
                 $package->hmo = auth()->user()->id;
@@ -516,6 +606,7 @@ class HmoController extends Controller
                 $package = new HMO;
                 $package->name = $request->input('name');
                 $package->price = $request->input('price');
+                $package->type = $request->input('type');
                 $package->description = $request->input('value');
                 $package->hmo = auth()->user()->id;
                 
@@ -679,6 +770,20 @@ class HmoController extends Controller
 
         return view('pages.editcat', $data);
     }
+    public function edit_package()
+    {
+        //
+        $id = $_POST['id'];
+        $package = HMO::find($id);
+        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+       $data = array(
+                'package' => $package,
+                'new_messages' => $new_messages
+       );
+
+        return view('pages.editpackage', $data);
+    }
+
 
     /**
      * Update the specified resource in storage.
@@ -687,13 +792,14 @@ class HmoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update_package(Request $request)
     {
         //
         $this->validate($request, [
             'name' => 'nullable',
             ]);  
-            $cat = hmo_cat::find($id);
+            $id = $_POST['id'];
+            $package = HMO::find($id);
              
             if($request->hasFile('img')){
                //Get file name with the extension
@@ -708,7 +814,7 @@ class HmoController extends Controller
                $fileNameTostore = auth()->user()->hmo_org_name.'_'.$request->input('name').'.'.$extension;
        
                // Upload Image
-               $path = $request->file('img')->move('img/hmo/cat', $fileNameTostore);
+               $path = $request->file('img')->move('img/hmo/packages', $fileNameTostore);
        
                // crop image
                /*** 
@@ -720,16 +826,63 @@ class HmoController extends Controller
         
                // you can save crop image path below in database
                $path = asset('img/profile/crop/'.$filenametostore);*/
-               $cat->img = $fileNameTostore;
+               $package->img = $fileNameTostore;
            }
        
-            $cat->name = $request->input('name');
+            $package->name = $request->input('name');
+            $package->price = $request->input('price');
+            $package->No_of_times = $request->input('time');
+            $package->description = $request->input('value');
             //$cat->HMO = auth()->user()->id;
-           $cat->save();
-           return redirect()->back()->with('success', 'Great!, category updated successfully.');//I just set the message for session(success).
-    
+           $package->save();
+           return redirect('get_packages?id='.$package->cat_id)->with('success', 'Great!, category updated successfully.');//I just set the message for session(success).
+        }
 
-    }
+           public function update(Request $request, $id)
+           {
+               //
+               $this->validate($request, [
+                   'name' => 'nullable',
+                   ]);  
+                   $cat = hmo_cat::find($id);
+                    
+                   if($request->hasFile('img')){
+                      //Get file name with the extension
+                     $filenameWithExt = $request->file('img')->getClientOriginalName();
+                      //get just file name
+                      $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+              
+                      // Get just Ext
+                      $extension = $request->file('img')->getClientOriginalExtension();
+              
+                      // File name to store
+                      $fileNameTostore = auth()->user()->hmo_org_name.'_'.$request->input('name').'.'.$extension;
+              
+                      // Upload Image
+                      $path = $request->file('img')->move('img/hmo/cat', $fileNameTostore);
+              
+                      // crop image
+                      /*** 
+                      $img = Image::make(public_path('img/profile/'.$filenametostore));
+                      $croppath = public_path('img/profile/crop/'.$filenametostore);
+               
+                      $img->crop($request->input('w'), $request->input('h'), $request->input('x1'), $request->input('y1'));
+                      $img->save($croppath);
+               
+                      // you can save crop image path below in database
+                      $path = asset('img/profile/crop/'.$filenametostore);*/
+                      $cat->img = $fileNameTostore;
+                  }
+              
+                   $cat->name = $request->input('name');
+                   //$cat->HMO = auth()->user()->id;
+                  $cat->save();
+                  return redirect()->back()->with('success', 'Great!, category updated successfully.');//I just set the message for session(success).
+           
+       
+           }
+       
+   
 
     /**
      * Remove the specified resource from storage.
@@ -762,7 +915,16 @@ class HmoController extends Controller
         //
         $cat = hmo_cat::find($_POST['id']);
         $cat->delete();
-         return redirect()->back()->with('success', 'Staff Removed From Your Organization.');
+         return redirect()->back()->with('success', 'Category Removed From Your Product List.');
+         
+
+    }
+    public function destroy_package()
+    {
+        //
+        $package = HMO::find($_POST['id']);
+        $package->delete();
+         return redirect()->back()->with('success', 'Package Removed Successfully.');
          
 
     }

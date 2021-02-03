@@ -65,6 +65,9 @@ class LabsController extends Controller
              //image means it must be in image format|nullable means the field is optional, then max size is 1999
              ///'pp' => 'image|nullable|max:1999'
              ]);
+               if ($request->input('test1') == 'Select') {
+                return redirect()->back()->with('error', 'oops!, you need to select test to be carried out.');
+               } else {
                
             $test = new Lab;    
             $patientt = patients::where('pin', $request->input('p_pin'))->first();
@@ -72,6 +75,9 @@ class LabsController extends Controller
             $test->patient_name = $patientt->name;
             $test->patient_pin = $request->input('p_pin');
             $test->status = 'Pending';
+            if (!empty($request->input('lab'))) {
+                $test->lab = $request->input('lab');
+            }
             $test->doc_name = auth()->user()->name;
             $test->doc_pin = auth()->user()->pin;
             $test->save();
@@ -81,11 +87,16 @@ class LabsController extends Controller
                 $test2->patient_name = $patientt->name;
                 $test2->patient_pin = $request->input('p_pin');
                 $test2->status = 'Pending';
+                if (!empty($request->input('lab'))) {
+                    $test->lab = $request->input('lab');
+                }
                 $test2->doc_name = auth()->user()->name;
                 $test2->doc_pin = auth()->user()->pin;
                 $test2->save();
             }
             return redirect()->back()->with('success', 'Great!, Patient can now proceed to the lab to carry out test.');
+            
+        }
     }
 
     /**

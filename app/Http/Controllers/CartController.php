@@ -35,8 +35,9 @@ class CartController extends Controller
         ));
 $check = StoreCart::where('drug_id',$drug->id)->where('user_id',auth()->user()->id)->first();
 if (!empty($check)) {
-    $check->quantity = $check->quantity + '1';
-    $check->price = ($check->quantity) * $drug->price;
+    $new_qty = $check->quantity + '1';
+    $check->quantity = $new_qty;
+    $check->price = ($new_qty) * $drug->price;
     $check->save();
     return redirect()->route('cart.index');
 }

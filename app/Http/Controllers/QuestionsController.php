@@ -76,6 +76,7 @@ class QuestionsController extends Controller
             $question->asker_id = auth()->user()->id;
             $question->asker_pin = auth()->user()->pin;
             $question->asker_role = auth()->user()->role;
+            $question->asker_identity = $request->input('identity');
             $question->question_cat = $request->input('expertise');
             //Save to db
             $question->save();
@@ -97,6 +98,7 @@ class QuestionsController extends Controller
         $question->asker_id = auth()->user()->id;
         $question->asker_pin = auth()->user()->pin;
         $question->asker_role = auth()->user()->role;
+        $question->asker_identity = $request->input('identity');
 
         //Save to db
         $question->save();
