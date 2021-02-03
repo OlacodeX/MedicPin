@@ -65,15 +65,6 @@
                          @else
                          <li><a href="./hospitals/create" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>Add Hospital</span></a></li>
                           @endif
-                          @php
-                          $lab = App\Laboratories::where('created_by',auth()->user()->pin)->first();
-                              //$hospital = App\HospitalDoctors::orderBy('created_at', 'desc')->where('doctor_pin', auth()->user()->pin)->first(); 
-                          @endphp
-                          @if (!empty($lab))
-                          <li><a href="./my_lab" class="iq-waves-effect"><i class="ri-hospital-line"></i><span>My Laboratory</span></a></li>
-                         @else
-                         <li><a href="./create_lab" class="iq-waves-effect"><i class="ri-hospital-line"></i><span>Create Laboratory</span></a></li>
-                          @endif
                           <li><a href="./add_op" class="iq-waves-effect"><i class="ri-folders-fill"></i><span>Add Operation Record</span></a></li>
                           <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
                           <li><a href="./questions" class="iq-waves-effect"><i class="ri-message-fill"></i><span>Forum</span></a></li>
