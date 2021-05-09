@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Mail;
 
 class VisitorController extends Controller
 {
+    
+   public function __construct()
+   {
+       $this->middleware('auth');
+   }
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +37,7 @@ class VisitorController extends Controller
     {
         //
         $pin = $_POST['pin'];
-    $p_visitors = Visitors::where('patient_pin', $pin)->paginate(10);
+         $p_visitors = Visitors::where('patient_pin', $pin)->paginate(10);
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $visitors = Visitors::orderBy('created_at', 'desc')->where('patient_pin', auth()->user()->pin)->paginate(10);
         $data = array(
@@ -52,8 +57,8 @@ class VisitorController extends Controller
     public function create()
     {
         //
-        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
-        return view("patients.add_visitor")->with('new_messages', $new_messages);
+        //$new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
+        return view("patients.add_visitor");//->with('new_messages', $new_messages);
     }
 
     /**

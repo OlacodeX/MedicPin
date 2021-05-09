@@ -26,7 +26,22 @@
 			<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
 	<style>
-        
+  input.form-control,
+  select.form-control{
+      color: #dcdcdc;
+  }        
+div.fie.one,
+div.two{
+    display:none;
+    margin-bottom: 10px;
+}
+#loadMoreeinput {
+    transition: all 600ms ease-in-out;
+    -webkit-transition: all 600ms ease-in-out;
+    -moz-transition: all 600ms ease-in-out;
+    -o-transition: all 600ms ease-in-out;
+    
+}
             /* enable absolute positioning */
     .inner-addon {
       position: relative;
@@ -49,6 +64,10 @@
     .left-addon input  { padding-left:  30px; } */
     .right-addon input { padding-right: 30px; }
     
+.footer-contact-info p {
+	color: #fff;
+	font-size: 15px;
+}
     </style>
 	</head>
 	<body>

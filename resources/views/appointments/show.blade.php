@@ -3,118 +3,85 @@
 @section('content')
 @include('inc.navmaininner')
 @if (auth()->user()->status == 'Active')
-         <div>
-          <div class="">
-    <div class="row">
-    <div class="col-sm-12" style="text-align:justify; margin-top:30px;">
-      @if (auth()->user()->name == $question->asker_name)
-          
-      <h5 class="title"><span>Your Question:</span></h5>
-      @else
-      <h5 class="title"><span>{{$question->asker_name}} Says:</span></h5>
-      @endif
-      <small><i class="fa fa-calendar"></i>{!!$question->created_at!!}</small>
-      <hr>
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+   <div class="container-fluid">
+      <div class="row align-items-center">
+         <div class="col-md-12 col-12">
+            <nav aria-label="breadcrumb" class="page-breadcrumb">
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../dashboard">Dashboard</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Answers to Question</li>
+               </ol>
+            </nav>
+            <h2 class="breadcrumb-title">Answers to Question</h2>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- /Breadcrumb -->
+@include('inc.sidebarinner')
+						
+<div class="col-md-7 col-lg-8 col-xl-9">
+   <div class="col-md-12">
+   <div class="card">
+      <div class="card-header">
+         @if (auth()->user()->name == $question->asker_name)
+             
+         <h5 class="card-title">
+            <a href="../questions/{{$question->id}}">
+            <b>Your Question:</b>
+            <span class="d-block text-info">{!!$question->created_at!!}</span></a>
+         </h5>
+         @else
+         <h5 class="card-title">
+            
+            @if ($question->asker_identity == 'No')
+            @php
+                $anonymous = 'ANONYMOUS';
+            @endphp
+            <b>{!!$anonymous!!} Says:</b>
+            @else
+            <b>{{$question->asker_name}} Says:</b>
+            @endif
+            
+         </h5>
+         @endif
+      </div>
+      <div class="card-body">
       <p>{!!$question->question!!}</p>
-      <hr>
-                         
-      <div class="iq-card iq-card-block iq-card-stretch iq-card-height overflow-hidden fadeInUp" style="padding-bottom: 0; background:transparent;" data-wow-delay="0.6s">
+      </div>
+   </div>
+</div>
+<div class="col-md-12">
+      <div class="card">
+         <div class="card-header">
+            <h5 class="card-title">
+               <b>Answers</b>
+            </h5>
+         </div>
+      <div class="card-body">
          @include('inc.messages')
                      
          @if (count($answers) > 0)
-         <h4 class="title"><span>Answers</span></h4><br>
          <div class="iq-card-body p-0" style="padding-bottom: 0; background:transparent;">
          @foreach ($answers as $answer)
-            <style>
-               div.iq-card-body.p-0,
-               h4.title,
-               h5.title{
-                  margin-left: 15px;
-               }
-               div.iq-card-body.p-0{
-                  background:transparent;
-               }
-               /* enable absolute positioning */
-       .inner-addon {
-         position: relative;
-       }
-       
-       /* style glyph */
-       .inner-addon .fa {
-         position: absolute;
-         padding: 10px;
-         pointer-events: none;
-         color: #0178ff7b;
-         font-weight: 900;
-       }
-       
-       /* align glyph 
-       .left-addon .fa  { left:  0px;}*/
-       .right-addon .fa { right: 260px;}
-       
-       /* add padding 
-       .left-addon input  { padding-left:  30px; } */
-       .right-addon input { padding-right: 30px; }
-                div.panel-body,
-                div.panel-default{
-                    border-radius: 0;
-                    border-top: none;
-                }
-                .btn.btn-info.btn-sm{
-                    background: transparent;
-                    border: none;
-                    color: rgb(20, 109, 224);
-                }
-                
-                
-                .btn.btn-info.btn-sm i.fa{
-                    font-size: 12px;
-                    margin: 0;
-                }
-              @media only screen and (max-width: 768px) {
-       /* align glyph 
-       .left-addon .fa  { left:  0px;}*/
-       .right-addon .fa { right: 20px;}
-       
-                 
-                .btn.btn-info.btn-sm{
-                    background: transparent;
-                    border: none;
-                    color: rgb(20, 109, 224);
-                    float: right;
-                    display: inline;
-                }
-                
-                .btn.btn-info.btn-sm i.fa{
-                    font-size: 12px;
-                    margin: 0;
-                    padding: 0;
-                }
-                div.panel-body span.pull-left{
-                    font-size: 12px;
-                    margin-bottom: 0;
-                }
-                div.panel-body span.user-list-files.d-flex.float-right{
-                   margin-top: 0;
-                }
-              }
-            </style>
             @php
                 $name = App\User::where('id', $answer->user_id)->first();
             @endphp
-            <h5 class="title"><span>{{$name->name}}</span></h5>
-            <small><i class="fa fa-calendar"></i>{!!$answer->created_at!!}</small>
+            <h6 class="title"><span>{{$name->name}}</span></h6>
+            <small><i class="fa fa-calendar"></i> {!!$answer->created_at!!}</small>
             <p>{!!$answer->answer!!}
             @if (auth()->user()->id == $answer->user_id)
             <span class="user-list-files d-flex float-left">
             {!!Form::open(['action' => 'QuestionsController@edit_answer', 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
             {{Form::hidden('id', $answer->id)}}
-            <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Edit Answer"><i class="fa fa-edit"></i></button>
+            <button type="submit" class ="btn bg-info-light btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Edit Answer"><i class="fa fa-edit"></i> Edit Answer</button>
            
                {!!Form::close()!!}
                    {!!Form::open(['action' => 'QuestionsController@destroyy', 'method' => 'POST', 'id' => 'my_form_1', 'style' => 'margin-right:20px;'])!!}
                   {{Form::hidden('id', $answer->id)}}
-                  <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete Answer"><i class="fa fa-trash-o"></i></button>
+                  <button type="submit" class ="btn bg-danger-light btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete Answer"><i class="fas fa-trash"></i> Delete Answer</button>
                  
                   {!!Form::close()!!}
             </span>
@@ -133,8 +100,17 @@
            
        @endif    
        @endif
+      </div>
+      </div>
+</div>
+
        @if (auth()->user()->role == 'Doctor')
-       <h5 class="title">Answer Question</h5>
+       <div class="col-md-12">
+             <div class="card">
+                <div class="card-header">
+                   <h5 class="card-title">Answer Question</h5>
+                </div>
+      <div class="card-body">
        {!! Form::open(['action' => 'QuestionsController@store_answer', 'method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
        **/ !!}
        {{Form::hidden('question_id', $question->id)}}
@@ -143,10 +119,17 @@
         </div>
         {{Form::submit('Answer', ['class' => 'btn btn-primary btn-md pull-left', 'style' => 'text-transform:uppercase;'])}}
        {!! Form::close() !!}
-           
-       @endif
       </div>
-    </div>
+       @endif
+     </div>
+   </div>
+     <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+     <script>
+        CKEDITOR.replace( 'pre' );
+     </script> 
+</div>
+</div>
+</div>
 </div>
 </div>
 @else
@@ -157,27 +140,21 @@
 </div>
 @endif   
 
-          <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
-          <script>
-              CKEDITOR.replace( 'pre' );
-          </script> 
-                      <hr>
-     <!-- Wrapper END -->
-      <!-- Footer -->
-        <footer class="bg-white iq-footer" style="margin-top:80px;">
-           <div class="container-fluid">
-              <div class="row">
-                 <div class="col-lg-6">
-                    <ul class="list-inline mb-0">
-                     <li class="list-inline-item"><a href="../privacy">Privacy Policy</a></li>
-                     <li class="list-inline-item"><a href="../terms">Terms of Use</a></li>
-                    </ul>
-                 </div>
-                 <div class="col-lg-6 text-right">
-                    Copyright 2020 <a href="../">Medicpin</a> All Rights Reserved.
-                 </div>
-              </div>
+<!-- Footer 
+<footer class="bg-white iq-footer">
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-lg-6">
+            <ul class="list-inline mb-0">
+               <li class="list-inline-item"><a href="./privacy">Privacy Policy</a></li>
+               <li class="list-inline-item"><a href="./terms">Terms of Use</a></li>
+              </ul>
            </div>
-        </footer>
-        <!-- Footer END -->
+           <div class="col-lg-6 text-right">
+              Copyright 2020 <a href="./">Medicpin</a> All Rights Reserved.
+         </div>
+      </div>
+   </div>
+</footer>
+Footer END -->
 @endsection

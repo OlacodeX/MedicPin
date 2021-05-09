@@ -513,16 +513,103 @@
                @endif
           </div>
         </div>
-    </div>
-    {{Form::hidden('id', $user->id)}}
-          <button type="submit" class="btn btn-primary" style="margin-left:20px;">Update</button>
-          {!! Form::close() !!}
-</div>
+      </div>
+   </div> 
+        
+   @if (auth()->user()->role == 'Doctor')
+							<!-- About Me -->
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">About Me</h4>
+									<div class="form-group mb-0">
+										<label>Biography</label>
+										<textarea class="form-control" rows="5" id="about" name="about">{{auth()->user()->about}}</textarea>
+									</div>
+								</div> 
+                     </div>
+                     <!-- /About Me -->
+                     <!-- Clinic Info -->
+                     @if (!empty(auth()->user()->h_id))
+                         
+                        @php
+                        $hospital = App\Hospitals::where('id', auth()->user()->h_id)->first();
+                     @endphp
+                     <div class="card">
+                        <div class="card-body">
+                           <h4 class="card-title">Hospital Info</h4>
+                           <div class="row form-row">
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Hospital Name</label>
+                                    <input type="text" class="form-control" style="background: #ffffff;" value="{{$hospital->h_name . $hospital->h_type}} hospital" readonly>
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Hospital Address</label>
+                                    <input type="text" class="form-control" value="{{$hospital->h_add}}" style="background: #ffffff;" readonly>
+                                 </div>
+                              </div>
+                     @else 
+                           <div class="card">
+                              <div class="card-body">
+                                 <p class="text-center">You are not working for any hospital yet.</p>
+                           </div>
+                         
+                     @endif
+                     <!--
+										<div class="col-md-12">
+											<div class="form-group">
+												<label>Clinic Images</label>
+												<form action="#" class="dropzone"></form>
+											</div>
+											<div class="upload-wrap">
+												<div class="upload-images">
+													<img src="assets/img/features/feature-01.jpg" alt="Upload Image">
+													<a href="javascript:void(0);" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
+												</div>
+												<div class="upload-images">
+													<img src="assets/img/features/feature-02.jpg" alt="Upload Image">
+													<a href="javascript:void(0);" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
+												</div>
+											</div>-->
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /Clinic Info -->
+							<!-- Services and Specialization 
+							<div class="card services-card">
+								<div class="card-body">
+									<h4 class="card-title">Services and Specialization</h4>
+									<div class="form-group">
+										<label>Services</label>
+										<input type="text" data-role="tagsinput" class="input-tags form-control" placeholder="Enter Services" name="services" value="Tooth cleaning " id="services">
+										<small class="form-text text-muted">Note : Type & Press enter to add new services</small>
+									</div> 
+									<div class="form-group mb-0">
+										<label>Specialization </label>
+										<input class="input-tags form-control" type="text" data-role="tagsinput" placeholder="Enter Specialization" name="specialist" value="Children Care,Dental Care" id="specialist">
+										<small class="form-text text-muted">Note : Type & Press  enter to add new specialization</small>
+									</div> 
+								</div>              
+							</div>-->
+							<!-- /Services and Specialization -->
+   @endif
+   <div class="submit-section submit-btn-bottom">
+           {{Form::hidden('id', $user->id)}}
+            <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+            {!! Form::close() !!} 
+   </div> 
 </div>
 </div>
 </div>
 </div>
 
+<script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+<script>
+   CKEDITOR.replace( 'about' );
+</script> 
 @else
 <div class="text-center" style="background: #ffffff; padding-top:30px; padding-bottom:100px; margin-bottom:30px; border-radius:50px;">
    <img src="{{ URL::to('img/oop.jpg')}}" alt="" class="img-fluid" />

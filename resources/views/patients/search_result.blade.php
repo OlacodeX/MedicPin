@@ -4,13 +4,30 @@
 @include('inc.navmain')
    <!-- Page Content  -->
 @if (auth()->user()->status == 'Active')
-   <div>
-    <div class="">
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+   <div class="container-fluid">
+      <div class="row align-items-center">
+         <div class="col-md-12 col-12">
+            <nav aria-label="breadcrumb" class="page-breadcrumb">
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="./dashboard">Dashboard</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Patient</li>
+               </ol>
+            </nav>
+            <h2 class="breadcrumb-title">Patient</h2>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- /Breadcrumb -->
+@include('inc.sidebar')
+<div class="col-md-7 col-lg-8 col-xl-9"> 
        <div class="row">
           <div class="col-sm-12">
-                <div class="iq-card">
-                   <div class="iq-card-header d-flex justify-content-between">
-                      <div class="iq-header-title">
+                <div class="card">
+                   <div class="card-header">
+                      <div class="header-title">
                          <h4 class="card-title">Your Search Result</h4>
                       </div>
                    </div>
@@ -84,13 +101,12 @@
                                     }
                                   }
                                 </style>
-                                <div class="iq-card-body">
+                                <div class="card-body">
                                  <table class="table mb-0 table-borderless">
                                     <thead>
                                        <tr>
                                         <th scope="col">MedicPin</th>
-                                          <th scope="col">Name</th>
-                                          <th scope="col">Category</th>
+                                          <th scope="col">Name</th> 
                                           <th scope="col">Gender</th>
                                           <th scope="col">Address</th>
                                           <th scope="col">Action</th>
@@ -103,12 +119,7 @@
                                           <td>{{$user->name}}</td>
                                           @php
                                               $type = App\User::where('pin',$user->pin)->first();
-                                          @endphp
-                                      @if (!empty($type))
-                                      <td>{{$type->nhis}}</td>
-                                      @else
-                                      <td>N/A</td>
-                                      @endif
+                                          @endphp 
                                           <td>{{$user->gender}}</td>
                                           <td>{{$user->address}}</td>
                                           <td>
@@ -230,6 +241,8 @@
                            </div>
                               </div>
                         </div>
+                     </div>
+               </div>
                         @else
                         <div class="text-center" style="background: #ffffff; padding-top:30px; padding-bottom:100px; margin-bottom:30px; border-radius:50px;">
                            <img src="{{ URL::to('img/oop.jpg')}}" alt="" class="img-fluid" />
@@ -238,7 +251,7 @@
                         </div>
                         @endif   
  <!-- Wrapper END -->
-  <!-- Footer -->
+  <!-- Footer 
     <footer class="bg-white iq-footer" style="margin-top:300px;">
        <div class="container-fluid">
           <div class="row">
@@ -253,6 +266,6 @@
              </div>
           </div>
        </div>
-    </footer>
+    </footer>-->
     <!-- Footer END -->
 @endsection

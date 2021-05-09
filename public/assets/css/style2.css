@@ -7126,6 +7126,10 @@ ul.benifits-col li i{
 	}
 	.section-search {
 		min-height: 330px;
+		background: #f9f9f9 url(../img/search-bg.png) no-repeat bottom center;
+		background-size: 100% auto;
+		position: relative;
+		background-blend-mode: Darken;
 	}
 	.section-specialities {
 		padding: 50px 0;
@@ -7368,7 +7372,10 @@ ul.benifits-col li i{
 		text-transform: uppercase;
 	}
 	.section-search {
-		background: #f9f9f9;
+		background: #f9f9f9 url(../img/search-bg.png) no-repeat bottom center;
+		background-size: 100% auto;
+		position: relative;
+		background-blend-mode: Darken;
 	}
 	.day-slot li span {
 		font-size: 16px;
@@ -7845,6 +7852,10 @@ ul.benifits-col li i{
 	.section-search {
 		min-height: 410px;
 		padding: 30px 15px;
+		background: #f9f9f9 url(../img/search-bg.png) no-repeat bottom center; 
+		background-size: 100% auto;
+		position: relative;
+		background-blend-mode: Darken;
 	}
 	.specialities-slider .slick-slide {
 		margin-right: 10px;

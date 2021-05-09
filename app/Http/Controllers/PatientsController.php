@@ -67,7 +67,7 @@ class PatientsController extends Controller
     }
     public function transfered()
     {
-        $users = Transfers::where('from_doc_email', auth()->user()->email)->paginate(100);
+        $users = Transfers::where('from_doc_email', auth()->user()->email)->paginate(9);
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = array(
             'users' => $users,
@@ -99,7 +99,7 @@ class PatientsController extends Controller
     }
     public function myshop()
     {
-        $drugs = pharmacy::where('doc_pin', auth()->user()->pin)->orderBy('created_at', 'desc')->paginate(3);
+        $drugs = pharmacy::where('doc_pin', auth()->user()->pin)->orderBy('created_at', 'desc')->paginate(9);
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
         $data = array(
             'drugs' => $drugs,

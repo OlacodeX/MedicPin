@@ -17,7 +17,7 @@
       <title> Medicpin | Covid 19 - Outbreak</title>
       <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
       <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
-      <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+      <link rel="stylesheet" type="text/css" href="assets/css/style_new.css">
       <!---------favicon--------------->
       <link rel="icon" type="image/png" href="assets/image/favicon-32x32.png" sizes="32x32">
       <link rel="icon" type="image/png" href="assets/image/favicon-16x16.png" sizes="16x16">

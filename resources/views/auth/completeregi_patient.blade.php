@@ -1,78 +1,184 @@
 @extends('layouts.main')
 
-@section('content')
+@section('content')	<!-- Main Wrapper -->
+<div class="main-wrapper">
 
-<!-- Sign up Start -->
-        <section class="sign-in-page">
-            <div class="container sign-in-page-bg mt-5 p-0" style="padding-bottom: 400px;">
-                <div class="row no-gutters">
-                    <div class="col-md-6 text-center">
-                        <div class="sign-in-detail text-white">
-                    <a class="sign-in-logo mb-5 text-white" href="./"><h3 class="text-white">MedicPin EHR</h3></a>
-                    <div class="owl-carousel" data-autoplay="true" data-loop="true" data-nav="false" data-dots="true" data-items="1" data-items-laptop="1" data-items-tab="1" data-items-mobile="1" data-items-mobile-sm="1" data-margin="0">
-                        <div class="item">
-                            <img src="img/cope.png" class="img-fluid mb-4" alt="logo">
-                            <h4 class="mb-1 text-white">Go paperless</h4>
-                            <p>
-                                Manage appointments, access medical records anytime, anywhere and lots more....
-                            </p>
-                        </div>
-                        <div class="item">
-                            <img src="img/hp.jpg" class="img-fluid mb-4" alt="logo">
-                            <h4 class="mb-1 text-white">No more loss of records and data</h4>
-                            <p>Migrate from paper records to cloud data management....</p>
-                        </div>
-                        <div class="item">
-                            <img src="img/bg3.jpg" class="img-fluid mb-4" alt="logo">
-                            <h4 class="mb-1 text-white">MedicPin EHR Services</h4>
-                            <p>Fast, Secure and Reliable.....</p>
-                        </div>
-                            </div>
-                            <div class="sign-info">
-                                <span class="dark-color d-inline-block line-height-2">Already Have Account ? <a href="{{ route('login') }}" class="text-white">Sign In</a></span>
-                                <ul class="iq-social-media">
-                                    <li><a href="https://www.facebook.com/"><i class="ri-facebook-box-line"></i></a></li>
-                                    <li><a href="https://www.twitter.com/"><i class="ri-twitter-line"></i></a></li>
-                                    <li><a href="https://www.instagram.com/"><i class="ri-instagram-line"></i></a></li>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg header-nav">
+            <div class="navbar-header">
+                <a id="mobile_btn" href="javascript:void(0);">
+                    <span class="bar-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </a>
+                <a href="./" class="navbar-brand logo">
+                    <img src="assets/img/mpin.png" class="img-fluid" alt="Logo">
+                </a>
+            </div>
+            <div class="main-menu-wrapper">
+                <div class="menu-header">
+                    <a href="./" class="menu-logo">
+                        <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+                    </a>
+                    <a id="menu_close" class="menu-close" href="javascript:void(0);">
+                        <i class="fas fa-times"></i>
+                    </a>
+          </div>
+          <style>
+             ul.main-nav{
+                padding-left: 70px;
+             }
+@media (max-width: 1300px) {
+             ul.main-nav{
+                padding-left: 5px;
+             }
+          }
+@media only screen and (max-width: 768px) {
+             ul.main-nav{
+                padding-left: 5px;
+             }
+          }
+
+          </style>
+          
+                <ul class="main-nav">
+                    <li>
+                        <a href="./">Home</a>
+                    </li>
+                    <li class="has-submenu active">
+                        <a href="#">Doctor's Resources <i class="fas fa-chevron-down"></i></a>
+                        <ul class="submenu">
+                            <li class="active"><a href="./dashboard">Dashboard</a></li>
+                   <li><a href="./appointments" class="iq-waves-effect"><i class="ri-calendar-event-fill"></i><span>My Appointments</span></a></li>
+                   
+                     <li><a href="./blood_bank" class="iq-waves-effect"><i class="ri-briefcase-4-fill"></i><span>Blood Bank</span></a></li>
+                     
+                  <li><a href="./add_op" class="iq-waves-effect"><i class="ri-folders-fill"></i><span>Add Operation Record</span></a></li>
+                  <li><a href="./chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                  <li><a href="./questions" class="iq-waves-effect"><i class="ri-message-fill"></i><span>Forum</span></a></li>
+                  
+                            <li class="has-submenu">
+                                <a href="#">To Do</a>
+                                <ul class="submenu">
+                         <li><a href="./schedule">My To Do</a></li>
+                         <li><a href="./schedule/create">Add To Do</a></li>
                                 </ul>
-                            </div>
-                        </div>
+                            </li>
+                   <li><a href="./notifications">Sent Notifications</a></li>
+                   <li><a href="./notifications/create">Send Notification</a></li>
+                   <!---<li><a href="profile-edit.html">User Edit</a></li>--->
+                   <li><a href="./doctors">Doctors List</a></li>
+                   <li>
+                    <a href="./mybills"><i class="ri-device-fill"></i><span>My Bills</span></a>
+                   
+                 </li>
+                        </ul>
+                    </li>	
+                    <li class="has-submenu">
+                        <a href="#">Patients <i class="fas fa-chevron-down"></i></a>
+                        <ul class="submenu">
+                   <li><a href="./doctors">Patients List</a></li>
+                   <li><a href="./transfered_patients">Transferred Patients</a></li>  
+                   <li><a href="./patients/create">Add Patient</a></li>
+                        </ul>
+                    </li>	
+                    <li class="has-submenu">
+                        <a href="#">Pharmacy <i class="fas fa-chevron-down"></i></a>
+                        <ul class="submenu">
+                   <li><a href="./pharmacist_shop" class="iq-waves-effect"><i class="ion-medkit"></i><span>Buy Drugs</span></a></li>
+                   <!----
+                            <li><a href="pharmacy-index.html">Pharmacy</a></li>
+                            <li><a href="pharmacy-details.html">Pharmacy Details</a></li>
+                            <li><a href="pharmacy-search.html">Pharmacy Search</a></li>
+                            <li><a href="product-all.html">Product</a></li>
+                            <li><a href="product-description.html">Product Description</a></li>
+                            <li><a href="cart.html">Cart</a></li>
+                            <li><a href="product-checkout.html">Product Checkout</a></li>
+                            <li><a href="payment-success.html">Payment Success</a></li>--->
+                        </ul>
+             </li>
+             <!----
+                    <li class="has-submenu">
+                        <a href="#">Pages <i class="fas fa-chevron-down"></i></a>
+                        <ul class="submenu">
+                            <li><a href="voice-call.html">Voice Call</a></li>
+                            <li><a href="video-call.html">Video Call</a></li>
+                            <li><a href="search.html">Search Doctors</a></li>
+                            <li><a href="calendar.html">Calendar</a></li>
+                            <li><a href="components.html">Components</a></li>
+                            <li class="has-submenu">
+                                <a href="invoices.html">Invoices</a>
+                                <ul class="submenu">
+                                    <li><a href="invoices.html">Invoices</a></li>
+                                    <li><a href="invoice-view.html">Invoice View</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="blank-page.html">Starter Page</a></li>
+                            <li><a href="login.html">Login</a></li>
+                            <li><a href="register.html">Register</a></li>
+                            <li><a href="forgot-password.html">Forgot Password</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="#">Blog <i class="fas fa-chevron-down"></i></a>
+                        <ul class="submenu">
+                            <li><a href="blog-list.html">Blog List</a></li>
+                            <li><a href="blog-grid.html">Blog Grid</a></li>
+                            <li><a href="blog-details.html">Blog Details</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="#" target="_blank">Admin <i class="fas fa-chevron-down"></i></a>
+                        <ul class="submenu">
+                            <li><a href="admin/index.html" target="_blank">Admin</a></li>
+                            <li><a href="pharmacy/index.html" target="_blank">Pharmacy Admin</a></li>
+                        </ul>
+                    </li>
+                    <li class="login-link">
+                        <a href="login.html">Login / Signup</a>
+                    </li>--->
+                </ul>	 
+            </div>		 
+            <ul class="nav header-navbar-rht">
+                <li class="nav-item contact-item">
+                    <div class="header-contact-img">
+                        <i class="far fa-hospital"></i>							
                     </div>
-                    <!----
-                    <style>
-                        section.sign-in-page { 
-                            margin-bottom: 100px;
-                         }
-                         
-                         section.sign-in-page div.sign-in-page-bg::after { position: absolute; content: ""; top: 0; bottom: 0; left: 0; right: 270px; z-index: -1; border-radius: 40px; background: rgba(8, 155, 171, 1); background: -moz-linear-gradient(left, rgba(8, 155, 171, 1) 0%, rgba(13, 181, 200, 1) 100%); background: -webkit-gradient(left top, right top, color-stop(0%, rgba(8, 155, 171, 1)), color-stop(100%, rgba(13, 181, 200, 1))); background: -webkit-linear-gradient(left, rgba(8, 155, 171, 1) 0%, rgba(13, 181, 200, 1) 100%); background: -o-linear-gradient(left, rgba(8, 155, 171, 1) 0%, rgba(13, 181, 200, 1) 100%); background: -ms-linear-gradient(left, rgba(8, 155, 171, 1) 0%, rgba(13, 181, 200, 1) 100%); background: linear-gradient(to right, rgba(8, 155, 171, 1) 0%, rgba(13, 181, 200, 1) 100%); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#089bab', endColorstr='#0db5c8', GradientType=1); }
-
-                         section.sign-in-page div.sign-in-page-bg { position: relative; overflow: hidden; }
-                        div.sign-in-from { padding: 20px 60px; border-radius: 37px; position: absolute; top: 2%; bottom: 2%; left: 0; right: 0; background: #fff; }
-                    </style>---->
-                    <div class="col-md-6 position-relative">
-                        <div class="sign-in-from">
-                            <h1 class="mb-0">Complete Sign Up</h1>
-                            <style>
-
-                                /*---------------------------------------------------------------------
-                                                               Sign In
-                                -----------------------------------------------------------------------*/
-                                .sign-in-page { height: 100%; margin-bottom: 30px; }
-                                .sign-in-detail { padding: 100px; height: 100vh; border-radius: 40px; }
-                                .sign-in-logo { display: inline-block; width: 100%; }
-                                .sign-in-logo img { height: 100px; }
-                                .sign-in-from { padding: 20px 60px; border-radius: 37px; position: absolute; top: 0%; bottom: 0%; left: 0; right: 0; background: #fff; }
-                                .sign-info { border-top: 1px solid #cdd1f3; margin-top: 30px; padding-top: 20px; }
-                                .iq-social-media { margin: 0; padding: 0; float: right; }
-                                .iq-social-media li { list-style: none; float: left; margin-right: 10px; }
-                                .iq-social-media li:last-child { margin-right: 0; }
-                                .iq-social-media li a { height: 30px; width: 30px; text-align: center; font-size: 18px; line-height: 30px; display: inline-block; -webkit-border-radius: 7px; -moz-border-radius: 7px; border-radius: 7px; background: #eff7f8; color: #089bab !important; }
-                                .iq-social-media li a:hover { text-decoration: none; }
-                                .sign-in-page .sign-in-page-bg { position: relative; overflow: hidden; }
-                                .sign-in-page .sign-in-page-bg::after { position: absolute; content: ""; top: 0; bottom: 0; left: 0; right: 270px; z-index: -1; border-radius: 40px; background: rgba(8, 155, 171, 1); background: -moz-linear-gradient(left, rgba(8, 155, 171, 1) 0%, rgba(13, 181, 200, 1) 100%); background: -webkit-gradient(left top, right top, color-stop(0%, rgba(8, 155, 171, 1)), color-stop(100%, rgba(13, 181, 200, 1))); background: -webkit-linear-gradient(left, rgba(8, 155, 171, 1) 0%, rgba(13, 181, 200, 1) 100%); background: -o-linear-gradient(left, rgba(8, 155, 171, 1) 0%, rgba(13, 181, 200, 1) 100%); background: -ms-linear-gradient(left, rgba(8, 155, 171, 1) 0%, rgba(13, 181, 200, 1) 100%); background: linear-gradient(to right, rgba(8, 155, 171, 1) 0%, rgba(13, 181, 200, 1) 100%); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#089bab', endColorstr='#0db5c8', GradientType=1); }
-                                
-
-                            </style>
+                    <div class="header-contact-detail">
+                        <p class="contact-header">Contact</p>
+                        <p class="contact-info-header"> +234 802 551 0164</p>
+                    </div>
+                </li>
+                
+						<li class="nav-item">
+							<a class="nav-link header-login" href="./login">login / Signup </a>
+						</li>
+                <!-- /User Menu -->
+                
+            </ul>
+        </nav>
+    </header>
+    <!-- /Header -->
+<!-- Page Content -->
+<div class="content">
+    <div class="container-fluid">
+        
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                
+                <!-- Login Tab Content -->
+                <div class="account-content">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-md-7 col-lg-5 login-left">
+                            <img src="assets/img/login-banner.png" class="img-fluid" alt="MedicPin Login">	
+                        </div>
+                        <div class="col-md-12 col-lg-7 login-right" style="margin-bottom: 20px;">
+                            <div class="login-header">
+                                <h3>Complete <span>MedicPin</span> Account Setup</h3>
+                            </div>
                             {!! Form::open(['action' => 'PatientsController@reg_patient', 'method' => 'POST', 'enctype' => 'multipart/form-data']) /** The action should be the block of code in the store function in PostsController
                             **/ !!}
                                 @include('inc.messages')
@@ -87,21 +193,25 @@
                                 <input id="password" type="hidden"  name="password" value="{{ $password }}">
 
                                 <input id="role" type="hidden"  name="role" value="Patient">
-                                <div class="form-group">
-                                    <input type="text" class="form-control mb-0" name="occupation" id="occupation" placeholder="What do you do for a living?">
+                                <div class="form-group form-focus">
+                                    <input type="text" class="form-control floating" name="occupation" id="occupation" placeholder="What do you do for a living?">
+                                    <label class="focus-label">What do you do for a living?</label>
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control mb-0" name="add" id="add" placeholder="Enter Address">
+                                <div class="form-group form-focus">
+                                    <input type="text" class="form-control floating" name="add" id="add" placeholder="Enter Address">
+                                    <label class="focus-label">Your Address</label>
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control mb-0" name="nok"  placeholder="Next of Kin name">
+                                <div class="form-group form-focus">
+                                    <input type="text" class="form-control floating" name="nok"  placeholder="Next of Kin name">
+                                    <label class="focus-label">Next of Kin Name</label>
                                 </div>
-                                    <div class="form-group">
-                                        <input type="number" class="form-control mb-0" name="nokp" id="nokp" placeholder="Next of Kin phone number">
-                                    
+                                    <div class="form-group form-focus">
+                                        <input type="number" class="form-control floating" name="nokp" id="nokp" placeholder="Next of Kin phone number">
+                                        <label class="focus-label">Next of Kin Number</label>
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control mb-0" name="nok_relation"  placeholder="Relationship With Next of Kin">
+                                <div class="form-group form-focus">
+                                    <input type="text" class="form-control floating" name="nok_relation"  placeholder="Relationship With Next of Kin">
+                                    <label class="focus-label">Next of Kin Relationship</label>
                                 </div>
                                 <div class="form-group">
                                    <select class="form-control mb-0" id="nhis" name="nhis">
@@ -208,18 +318,35 @@
                                     <button type="submit" class="btn btn-primary float-right">Sign Up</button>
                                 </div>
                             </form>
-                            <!--
-                            <div class="row mt-5">
-                                <p><img id="previewimage" style="display:none;"/></p>
-                                @if(session('path'))
-                                    <img src="{{ session('path') }}" />
-                                @endif
-                            </div>--->
                         </div>
                     </div>
                 </div>
+                <!-- /Login Tab Content -->
+                    
             </div>
-            
-        </section>
-<!-- Sign up END -->
+        </div>
+
+    </div>
+
+</div>		
+<!-- /Page Content -->
+
+
+<!-- Footer 
+<footer class="bg-white iq-footer">
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-lg-6">
+            <ul class="list-inline mb-0">
+               <li class="list-inline-item"><a href="./privacy">Privacy Policy</a></li>
+               <li class="list-inline-item"><a href="./terms">Terms of Use</a></li>
+              </ul>
+           </div>
+           <div class="col-lg-6 text-right">
+              Copyright 2020 <a href="./">Medicpin</a> All Rights Reserved.
+         </div>
+      </div>
+   </div>
+</footer>
+Footer END -->
 @endsection

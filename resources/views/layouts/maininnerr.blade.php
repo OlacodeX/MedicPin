@@ -25,31 +25,51 @@
 			<script src="assets/js/html5shiv.min.js"></script>
 			<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
-	<style>
-        
-            /* enable absolute positioning */
-    .inner-addon {
-      position: relative;
-    }
-    
-    /* style glyph */
-    .inner-addon .fa {
-      position: absolute;
-      padding: 10px;
-      pointer-events: none;
-      color: #09e5ab;
-      font-weight: 900;
-    }
-    
-    /* align glyph 
-    .left-addon .fa  { left:  0px;}*/
-    .right-addon .fa { right: 0px;}
-    
-    /* add padding 
-    .left-addon input  { padding-left:  30px; } */
-    .right-addon input { padding-right: 30px; }
-    
-    </style>
+
+        <style>
+            input.form-control,
+            select.form-control{
+                color: #dcdcdc;
+            }        
+          div.fie.one,
+          div.two{
+              display:none;
+              margin-bottom: 10px;
+          }
+          #loadMoreeinput {
+              transition: all 600ms ease-in-out;
+              -webkit-transition: all 600ms ease-in-out;
+              -moz-transition: all 600ms ease-in-out;
+              -o-transition: all 600ms ease-in-out;
+              
+          }
+                      /* enable absolute positioning */
+              .inner-addon {
+                position: relative;
+              }
+              
+              /* style glyph */
+              .inner-addon .fa {
+                position: absolute;
+                padding: 10px;
+                pointer-events: none;
+                color: #09e5ab;
+                font-weight: 900;
+              }
+              
+              /* align glyph 
+              .left-addon .fa  { left:  0px;}*/
+              .right-addon .fa { right: 0px;}
+              
+              /* add padding 
+              .left-addon input  { padding-left:  30px; } */
+              .right-addon input { padding-right: 30px; }
+                  
+.footer-contact-info p {
+	color: #fff;
+	font-size: 15px;
+}
+              </style>
 	</head>
 	<body>
 

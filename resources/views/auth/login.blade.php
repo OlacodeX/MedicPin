@@ -173,9 +173,9 @@
                 <div class="account-content">
                     <div class="row align-items-center justify-content-center">
                         <div class="col-md-7 col-lg-6 login-left">
-                            <img src="assets/img/login-banner.png" class="img-fluid" alt="Doccure Login">	
+                            <img src="assets/img/login-banner.png" class="img-fluid" alt="MedicPin Login">	
                         </div>
-                        <div class="col-md-12 col-lg-6 login-right">
+                        <div class="col-md-12 col-lg-6 login-right" style="margin-bottom: 20px;">
                             <div class="login-header">
                                 <h3>Login Into <span>MedicPin</span></h3>
                             </div>
@@ -209,6 +209,7 @@
                                     <span class="or-line"></span>
                                     <span class="span-or">or</span>
                                 </div>
+                                <!-----
                                 <div class="row form-row social-login">
                                     <div class="col-6">
                                         <a href="#" class="btn btn-facebook btn-block"><i class="fab fa-facebook-f mr-1"></i> Login</a>
@@ -216,7 +217,7 @@
                                     <div class="col-6">
                                         <a href="#" class="btn btn-google btn-block"><i class="fab fa-google mr-1"></i> Login</a>
                                     </div>
-                                </div>
+                                </div>--->
                                 <div class="text-center dont-have">Don’t have an account? <a href="./register">Register</a></div>
                             </form>
                         </div>

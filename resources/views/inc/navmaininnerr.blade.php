@@ -20,7 +20,7 @@
 					<div class="main-menu-wrapper">
 						<div class="menu-header">
 							<a href="../../" class="menu-logo">
-								<img src="../../assets/img/logo.png" class="img-fluid" alt="Logo">
+								<img src="../../assets/img/mpin.png" class="img-fluid" alt="Logo">
 							</a>
 							<a id="menu_close" class="menu-close" href="javascript:void(0);">
 								<i class="fas fa-times"></i>
@@ -43,6 +43,99 @@
 
                   </style>
                   
+                  @if (auth()->user()->role == 'Pharmacist')
+						<ul class="main-nav">
+							<li>
+								<a href="../../">Home</a>
+							</li>
+							<li class="has-submenu active">
+								<a href="#">Resources <i class="fas fa-chevron-down"></i></a>
+								<ul class="submenu">
+									<li class="active"><a href="../../dashboard">Dashboard</a></li>
+                                    <li><a href="../../appointments" class="iq-waves-effect"><i class="ri-calendar-event-fill"></i><span>My Appointments</span></a></li>
+                            
+                          @php
+                          $hospital = App\hospitals::where('id',auth()->user()->h_id)->first();
+                              //$hospital = App\HospitalDoctors::orderBy('created_at', 'desc')->where('doctor_pin', auth()->user()->pin)->first(); 
+                          @endphp
+                          @if (!empty($hospital))
+                          <li><a href="../../hospitals/{{$hospital->id}}" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>My Hospital</span></a></li>
+                         @else
+                         <li><a href="../../hospitals/create" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>Add Hospital</span></a></li>
+						  @endif 
+						  <li><a href="../../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+                          <li><a href="../../questions" class="iq-waves-effect"><i class="ri-message-fill"></i><span>Forum</span></a></li>
+                          
+									<li class="has-submenu">
+										<a href="#">To Do</a>
+										<ul class="submenu">
+                                 <li><a href="../../schedule">My To Do</a></li>
+                                 <li><a href="../../schedule/create">Add To Do</a></li>
+										</ul>
+									</li>
+                           <li><a href="../../patients/{{auth()->user()->id}}/edit">My Profile</a></li>
+                           <li><a href="../../notifications">Sent Notifications</a></li>
+                           <li><a href="../../notifications/create">Send Notification</a></li>
+                           <!---<li><a href="profile-edit.html">User Edit</a></li>---> 
+                           <li>
+                            <a href="../../mybills"><i class="ri-device-fill"></i><span>My Bills</span></a>
+                           
+                         </li>
+								</ul>
+							</li>	
+							<li class="has-submenu">
+								<a href="#">Pharmacy <i class="fas fa-chevron-down"></i></a>
+								<ul class="submenu">
+									<li><a href="../../add_drug">Add Drug</a></li>
+									<li><a href="../../myshop">My Shop</a></li>
+									<li><a href="../../pharmacy">Pharmacy Shop</a></li>
+								</ul>
+							</li>	 
+					</div>		 
+					<ul class="nav header-navbar-rht">
+						<li class="nav-item contact-item">
+							<div class="header-contact-img">
+								<i class="far fa-hospital"></i>							
+							</div>
+							<div class="header-contact-detail">
+								<p class="contact-header">Contact</p>
+								<p class="contact-info-header"> +234 802 551 0164</p>
+							</div>
+						</li>
+						
+						<!-- User Menu -->
+						<li class="nav-item dropdown has-arrow logged-item">
+							<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+								<span class="user-img">
+									<img class="rounded-circle" src="../../img/profile/{{auth()->user()->img}}" width="31" alt="{{auth()->user()->name}}">
+								</span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<div class="user-header">
+									<div class="avatar avatar-sm">
+										<img src="../../img/profile/{{auth()->user()->img}}" alt="User Image" class="avatar-img rounded-circle">
+									</div>
+									<div class="user-text">
+										<h6>{{auth()->user()->name}}</h6>
+										<p class="text-muted mb-0">{{auth()->user()->role}}</p>
+									</div>
+								</div>
+								<a class="dropdown-item" href="../../dashboard">Dashboard</a>
+								<a class="dropdown-item" href="../../patients/{{auth()->user()->id}}/edit">Profile Settings</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+                       
+                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                           @csrf
+                       </form>
+							</div>
+						</li>
+						<!-- /User Menu -->
+						
+					</ul>
+				</nav>
+			</header>
+			<!-- /Header -->
+			@endif
                   @if (auth()->user()->role == 'Doctor')
 						<ul class="main-nav">
 							<li>
@@ -190,7 +283,7 @@
 									</div>
 								</div>
 								<a class="dropdown-item" href="../../dashboard">Dashboard</a>
-								<a class="dropdown-item" href="../../myprofile">Profile Settings</a>
+								<a class="dropdown-item" href="../../patients/{{auth()->user()->id}}/edit">Profile Settings</a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sign out</a>
                        
                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -205,3 +298,383 @@
 			</header>
 			<!-- /Header -->
 			@endif
+			@if (auth()->user()->role == 'Admin')
+			<ul class="main-nav">
+				<li>
+					<a href="../../">Home</a>
+				</li>
+				<li class="has-submenu active">
+					<a href="#">Resources <i class="fas fa-chevron-down"></i></a>
+					<ul class="submenu">
+						<li class="active"><a href="./dashboard">Dashboard</a></li>  
+			<li><a href="../../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+			<li><a href="../../questions" class="iq-waves-effect"><i class="ri-message-fill"></i><span>Forum</span></a></li>
+			
+						<li class="has-submenu">
+							<a href="#">To Do</a>
+							<ul class="submenu">
+					<li><a href="../../schedule">My To Do</a></li>
+					<li><a href="../../schedule/create">Add To Do</a></li>
+							</ul>
+						</li>
+			<li><a href="../../patients/{{auth()->user()->id}}/edit">My Profile</a></li>  
+			</ul>	 
+		</div>		 
+		<ul class="nav header-navbar-rht">
+			<li class="nav-item contact-item">
+				<div class="header-contact-img">
+					<i class="far fa-hospital"></i>							
+				</div>
+				<div class="header-contact-detail">
+					<p class="contact-header">Contact</p>
+					<p class="contact-info-header"> +234 802 551 0164</p>
+				</div>
+			</li>
+			
+			<!-- User Menu -->
+			<li class="nav-item dropdown has-arrow logged-item">
+				<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+					<span class="user-img">
+						<img class="rounded-circle" src="../../img/profile/{{auth()->user()->img}}" width="31" alt="{{auth()->user()->name}}">
+					</span>
+				</a>
+				<div class="dropdown-menu dropdown-menu-right">
+					<div class="user-header">
+						<div class="avatar avatar-sm">
+							<img src="../../img/profile/{{auth()->user()->img}}" alt="User Image" class="avatar-img rounded-circle">
+						</div>
+						<div class="user-text">
+							<h6>{{auth()->user()->name}}</h6>
+							<p class="text-muted mb-0">{{auth()->user()->role}}</p>
+						</div>
+					</div>
+					<a class="dropdown-item" href="../../dashboard">Dashboard</a>
+					<a class="dropdown-item" href="../../patients/{{auth()->user()->id}}/edit">Profile Settings</a>
+			<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+		
+		<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+			@csrf
+		</form>
+				</div>
+			</li>
+			<!-- /User Menu -->
+			
+		</ul>
+	</nav>
+</header>
+<!-- /Header -->
+@endif
+
+@if (auth()->user()->role == 'Ward Maid')
+<ul class="main-nav">
+	<li>
+		<a href="../../">Home</a>
+	</li>
+	<li class="has-submenu active">
+		<a href="#">Resources <i class="fas fa-chevron-down"></i></a>
+		<ul class="submenu">
+			<li class="active"><a href="../../dashboard">Dashboard</a></li>  
+<li><a href="../../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+<li><a href="../../questions" class="iq-waves-effect"><i class="ri-message-fill"></i><span>Forum</span></a></li>
+
+			<li class="has-submenu">
+				<a href="#">To Do</a>
+				<ul class="submenu">
+		<li><a href="../../schedule">My To Do</a></li>
+		<li><a href="../../schedule/create">Add To Do</a></li>
+				</ul>
+			</li>
+<li><a href="../../patients/{{auth()->user()->id}}/edit">My Profile</a></li>  
+</ul>	 
+</div>		 
+<ul class="nav header-navbar-rht">
+<li class="nav-item contact-item">
+	<div class="header-contact-img">
+		<i class="far fa-hospital"></i>							
+	</div>
+	<div class="header-contact-detail">
+		<p class="contact-header">Contact</p>
+		<p class="contact-info-header"> +234 802 551 0164</p>
+	</div>
+</li>
+
+<!-- User Menu -->
+<li class="nav-item dropdown has-arrow logged-item">
+	<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+		<span class="user-img">
+			<img class="rounded-circle" src="../../img/profile/{{auth()->user()->img}}" width="31" alt="{{auth()->user()->name}}">
+		</span>
+	</a>
+	<div class="dropdown-menu dropdown-menu-right">
+		<div class="user-header">
+			<div class="avatar avatar-sm">
+				<img src="../../img/profile/{{auth()->user()->img}}" alt="User Image" class="avatar-img rounded-circle">
+			</div>
+			<div class="user-text">
+				<h6>{{auth()->user()->name}}</h6>
+				<p class="text-muted mb-0">{{auth()->user()->role}}</p>
+			</div>
+		</div>
+		<a class="dropdown-item" href="../../dashboard">Dashboard</a>
+		<a class="dropdown-item" href="../../patients/{{auth()->user()->id}}/edit">Profile Settings</a>
+<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+@csrf
+</form>
+	</div>
+</li>
+<!-- /User Menu -->
+
+</ul>
+</nav>
+</header>
+<!-- /Header -->
+@endif
+			@if (auth()->user()->role == 'Biochemist/Microbiologist')
+			<ul class="main-nav">
+				<li>
+					<a href="../../">Home</a>
+				</li>
+				<li class="has-submenu active">
+					<a href="#">Resources <i class="fas fa-chevron-down"></i></a>
+					<ul class="submenu">
+						<li class="active"><a href="./dashboard">Dashboard</a></li> 
+			  @php
+			  $hospital = App\hospitals::where('id',auth()->user()->h_id)->first();
+				  //$hospital = App\HospitalDoctors::orderBy('created_at', 'desc')->where('doctor_pin', auth()->user()->pin)->first(); 
+			  @endphp
+			  @if (!empty($hospital))
+			  <li><a href="../../hospitals/{{$hospital->id}}" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>My Hospital</span></a></li> 
+			  @endif  
+			   <li><a href="../../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+			  <li><a href="../../questions" class="iq-waves-effect"><i class="ri-message-fill"></i><span>Forum</span></a></li>
+			  
+						<li class="has-submenu">
+							<a href="#">To Do</a>
+							<ul class="submenu">
+					 <li><a href="../../schedule">My To Do</a></li>
+					 <li><a href="../../schedule/create">Add To Do</a></li>
+							</ul>
+						</li>
+			   <li><a href="../../patients/{{auth()->user()->id}}/edit">My Profile</a></li>
+			   <li><a href="../../notifications">Sent Notifications</a></li>
+			   <li><a href="../../notifications/create">Send Notification</a></li> 
+			   <li>
+				<a href="../../mybills"><i class="ri-device-fill"></i><span>My Bills</span></a>
+			   
+			 </li>
+					</ul>
+				</li>	 
+				<li class="has-submenu">
+					<a href="#">Pharmacy <i class="fas fa-chevron-down"></i></a>
+					<ul class="submenu">
+			   <li><a href="../../pharmacist_shop" class="iq-waves-effect"><span>Buy Drugs</span></a></li>
+			   
+					</ul>
+		 </li> 
+			</ul>	 
+		</div>		 
+		<ul class="nav header-navbar-rht">
+			<li class="nav-item contact-item">
+				<div class="header-contact-img">
+					<i class="far fa-hospital"></i>							
+				</div>
+				<div class="header-contact-detail">
+					<p class="contact-header">Contact</p>
+					<p class="contact-info-header"> +234 802 551 0164</p>
+				</div>
+			</li>
+			
+			<!-- User Menu -->
+			<li class="nav-item dropdown has-arrow logged-item">
+				<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+					<span class="user-img">
+						<img class="rounded-circle" src="../../img/profile/{{auth()->user()->img}}" width="31" alt="{{auth()->user()->name}}">
+					</span>
+				</a>
+				<div class="dropdown-menu dropdown-menu-right">
+					<div class="user-header">
+						<div class="avatar avatar-sm">
+							<img src="../../img/profile/{{auth()->user()->img}}" alt="User Image" class="avatar-img rounded-circle">
+						</div>
+						<div class="user-text">
+							<h6>{{auth()->user()->name}}</h6>
+							<p class="text-muted mb-0">{{auth()->user()->role}}</p>
+						</div>
+					</div>
+					<a class="dropdown-item" href="../../dashboard">Dashboard</a>
+					<a class="dropdown-item" href="../../patients/{{auth()->user()->id}}/edit">Profile Settings</a>
+			<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+		   
+		   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+			   @csrf
+		   </form>
+				</div>
+			</li>
+			<!-- /User Menu -->
+			
+		</ul>
+	</nav>
+</header>
+<!-- /Header -->
+@endif
+				
+@if (auth()->user()->role == 'HMO')
+<ul class="main-nav">
+	<li>
+		<a href="../../">Home</a>
+	</li>
+	<li class="has-submenu active">
+		<a href="#">Resources <i class="fas fa-chevron-down"></i></a>
+		<ul class="submenu">
+			<li class="active"><a href="./dashboard">Dashboard</a></li>  
+   <li><a href="../../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+  <li><a href="../../questions" class="iq-waves-effect"><i class="ri-message-fill"></i><span>Forum</span></a></li>
+   
+   <li><a href="../../patients/{{auth()->user()->id}}/edit">My Profile</a></li> 
+  </ul>
+	</li> 
+</ul>	 
+</div>		 
+<ul class="nav header-navbar-rht">
+<li class="nav-item contact-item">
+	<div class="header-contact-img">
+		<i class="far fa-hospital"></i>							
+	</div>
+	<div class="header-contact-detail">
+		<p class="contact-header">Contact</p>
+		<p class="contact-info-header"> +234 802 551 0164</p>
+	</div>
+</li>
+
+<!-- User Menu -->
+<li class="nav-item dropdown has-arrow logged-item">
+	<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+		<span class="user-img">
+			<img class="rounded-circle" src="../../img/profile/{{auth()->user()->img}}" width="31" alt="{{auth()->user()->name}}">
+		</span>
+	</a>
+	<div class="dropdown-menu dropdown-menu-right">
+		<div class="user-header">
+			<div class="avatar avatar-sm">
+				<img src="../../img/profile/{{auth()->user()->img}}" alt="User Image" class="avatar-img rounded-circle">
+			</div>
+			<div class="user-text">
+				<h6>{{auth()->user()->name}}</h6>
+				<p class="text-muted mb-0">{{auth()->user()->role}}</p>
+			</div>
+		</div>
+		<a class="dropdown-item" href="../../dashboard">Dashboard</a>
+		<a class="dropdown-item" href="../../patients/{{auth()->user()->id}}/edit">Profile Settings</a>
+<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+   @csrf
+</form>
+	</div>
+</li>
+<!-- /User Menu -->
+
+</ul>
+</nav>
+</header>
+<!-- /Header -->
+@endif		
+			@if (auth()->user()->role == 'Nurse')
+			<ul class="main-nav">
+				<li>
+					<a href="../../">Home</a>
+				</li>
+				<li class="has-submenu active">
+					<a href="#">Resources <i class="fas fa-chevron-down"></i></a>
+					<ul class="submenu">
+						<li class="active"><a href="../../dashboard">Dashboard</a></li> 
+			  @php
+			  $hospital = App\hospitals::where('id',auth()->user()->h_id)->first();
+				  //$hospital = App\HospitalDoctors::orderBy('created_at', 'desc')->where('doctor_pin', auth()->user()->pin)->first(); 
+			  @endphp
+			  @if (!empty($hospital))
+			  <li><a href="../../hospitals/{{$hospital->id}}" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>My Hospital</span></a></li>
+			 @else
+			 <li><a href="../../hospitals/create" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>Add Hospital</span></a></li>
+			  @endif  
+			   <li><a href="../../chat" class="iq-waves-effect"><i class="ri-message-line"></i><span>Inbox</span></a></li>
+			  <li><a href="../../questions" class="iq-waves-effect"><i class="ri-message-fill"></i><span>Forum</span></a></li>
+			  
+						<li class="has-submenu">
+							<a href="#">To Do</a>
+							<ul class="submenu">
+					 <li><a href="../../schedule">My To Do</a></li>
+					 <li><a href="../../schedule/create">Add To Do</a></li>
+							</ul>
+						</li>
+			   <li><a href="../../patients/{{auth()->user()->id}}/edit">My Profile</a></li>
+			   <li><a href="../../notifications">Sent Notifications</a></li>
+			   <li><a href="../../notifications/create">Send Notification</a></li> 
+			   <li>
+				<a href="../../mybills"><i class="ri-device-fill"></i><span>My Bills</span></a>
+			   
+			 </li>
+					</ul>
+				</li>	
+				<li class="has-submenu">
+					<a href="#">Patients <i class="fas fa-chevron-down"></i></a>
+					<ul class="submenu">
+			   <li><a href="../../patients">Patients List</a></li> 
+			   <li><a href="../../patients/create">Add Patient</a></li>
+					</ul>
+				</li>	
+				<li class="has-submenu">
+					<a href="#">Pharmacy <i class="fas fa-chevron-down"></i></a>
+					<ul class="submenu">
+			   <li><a href="../../pharmacist_shop" class="iq-waves-effect"><i class="ion-medkit"></i><span>Buy Drugs</span></a></li>
+			   
+					</ul>
+		 </li> 
+			</ul>	 
+		</div>		 
+		<ul class="nav header-navbar-rht">
+			<li class="nav-item contact-item">
+				<div class="header-contact-img">
+					<i class="far fa-hospital"></i>							
+				</div>
+				<div class="header-contact-detail">
+					<p class="contact-header">Contact</p>
+					<p class="contact-info-header"> +234 802 551 0164</p>
+				</div>
+			</li>
+			
+			<!-- User Menu -->
+			<li class="nav-item dropdown has-arrow logged-item">
+				<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+					<span class="user-img">
+						<img class="rounded-circle" src="../../img/profile/{{auth()->user()->img}}" width="31" alt="{{auth()->user()->name}}">
+					</span>
+				</a>
+				<div class="dropdown-menu dropdown-menu-right">
+					<div class="user-header">
+						<div class="avatar avatar-sm">
+							<img src="../../img/profile/{{auth()->user()->img}}" alt="User Image" class="avatar-img rounded-circle">
+						</div>
+						<div class="user-text">
+							<h6>{{auth()->user()->name}}</h6>
+							<p class="text-muted mb-0">{{auth()->user()->role}}</p>
+						</div>
+					</div>
+					<a class="dropdown-item" href="../../dashboard">Dashboard</a>
+					<a class="dropdown-item" href="../../patients/{{auth()->user()->id}}/edit">Profile Settings</a>
+			<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ri-login-box-line ml-2"></i>Sign out</a>
+		   
+		   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+			   @csrf
+		   </form>
+				</div>
+			</li>
+			<!-- /User Menu -->
+			
+		</ul>
+	</nav>
+</header>
+<!-- /Header -->
+@endif

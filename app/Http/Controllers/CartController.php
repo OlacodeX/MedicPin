@@ -23,19 +23,19 @@ class CartController extends Controller
   
     public function add(pharmacy $drug)
     {
-        //$qty = $_GET['qty'];
+        $qty = $_GET['quantity'];
         // add the product to cart
         \Cart::session(auth()->id())->add(array(
             'id' => $drug->id,
             'name' => $drug->name,
             'price' => $drug->price,
-            'quantity' =>'1',
+            'quantity' => $qty,
             'attributes' => array(),
             'associatedModel' => $drug
         ));
 $check = StoreCart::where('drug_id',$drug->id)->where('user_id',auth()->user()->id)->first();
 if (!empty($check)) {
-    $new_qty = $check->quantity + '1';
+    $new_qty = $check->quantity + $qty;
     $check->quantity = $new_qty;
     $check->price = ($new_qty) * $drug->price;
     $check->save();
@@ -49,7 +49,7 @@ else{
         $Store->price = $drug->price;
         $Store->img = $drug->img;
         $Store->description = $drug->description;
-        $Store->quantity = '1';
+        $Store->quantity = $qty;
        // $Store->price_sum = $qty * $product->price;
          //Save to db
          $Store->save();

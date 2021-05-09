@@ -6,7 +6,7 @@ use App\Payments;
 use App\Bills;
 
 class PaymentController{
-   
+    
     public function Transaction(Request $request){ /** Prepare the post data to be sent via request
         * @param array data
         * @return post response

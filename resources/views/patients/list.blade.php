@@ -208,7 +208,6 @@
                                      $type = App\User::where('pin',$h_user->pin)->first();
                                     
                                  @endphp
-                  <h4>Patients From Your Hospital</h4>
                                  @if (!empty($type))
                                  <a class="booking-doc-img">
                                     <img src="img/profile/{{$type->img}}" alt="User Image">
@@ -269,7 +268,7 @@
                                               {!!Form::close()!!}
                                              </a>
                                              <a class="dropdown-item">
-                                              @if ($user->status == 'Admitted')
+                                              @if ($h_user->status == 'Admitted')
                                               {!!Form::open(['action' => ['AdmissionController@update', $h_user->pin], 'method' => 'POST', 'style' => 'margin-right:20px;'])!!}
                                               {{Form::hidden('pin', $h_user->pin)}}
                                               {{Form::hidden('_method', 'PUT')}}

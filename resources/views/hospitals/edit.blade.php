@@ -4,64 +4,106 @@
      <!-- Page Content  -->
 @if (auth()->user()->status == 'Active')
      <div>
-        <div class="">
-                <div class="iq-card" style="padding-bottom:50px;">
-                       <div class="iq-card-header d-flex justify-content-between">
-                          <div class="iq-header-title">
-                             <h4 class="card-title">Edit Hospital Details.</span></h4>
-                          </div>
-                       </div>
-                       <div class="iq-card-body">
+      <style>
+          
+div.jumbotron-fluid{
+             background:linear-gradient(rgba(1, 0, 2, 0),rgba(0, 0, 2, 0)), url('../../img/search-bg.png') no-repeat;
+             background-size: contain;
+             background-position: top;
+             background-attachment:fixed;
+             padding-top: 10px; 
+             height: 100px;
+             width: 100%;
+             text-align: center;
+             margin-bottom: 0px;
+             color: rgb(39, 39, 39);
+}
+div.jumbotron-fluid h4.card-title{
+ color: rgb(39, 39, 39);
+ font-size: 35px;
+ top: 20px;
+}
+h4.card-title{
+ font-size: 15px;
+}
+div.card{
+   margin-top: 0;
+   margin-bottom: 0;
+}
+output{
+ border: 1.5px solid rgba(214, 209, 209, 0.748);
+ padding: 6px;
+ border-radius: 5px;
+}
+      </style>
+      <div class="jumbotron-fluid"> 
+      </div>
+      <div class="card">
+         <div class="card-header">
+            <h4 class="card-title"><b>Edit Hospital Details.</b></h4>
+            <small>Update Your Hospital Details.</small>
+         </div>
+         <div class="card-body">
                         @include('inc.messages')
                         <!---If file upload is involved always add enctype to your opening
                             form tag and set it to multipart/form-data--->
-                       {!! Form::open(['action' => ['HospitalController@update', $hospital->id],'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
-                       **/ !!}
+                            {!! Form::open(['action' => ['HospitalController@update', $hospital->id],'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
+                            **/ !!}
                                 <div class="row">
-                                 <div class="form-group col-md-6">
-                                    <label for="h_name">Hospital Name </label>
-                                    <div class="inner-addon right-addon">
-                                        <i class="fa fa-user"></i>
-                                    <input type="text" class="form-control" id="h_name" name="h_name" value="{{$hospital->h_name}}">
+                                   <div class="col-md-6">
+                                       <div class="form-group form-focus">
+                                          <div class="inner-addon right-addon">
+                                             <i class="fa fa-user"></i>
+                                             <input type="text" class="form-control floating" id="h_name" name="h_name" value="{{$hospital->h_name}}">
+                                          </div>
+                                          <label for="h_name" class="focus-label">Hospital Name </label>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                       <div class="form-group form-focus">
+                                          <div class="inner-addon right-addon">
+                                             <i class="fa fa-address-book-o"></i>
+                                             <input type="text" class="form-control floating" name="h_add" id="h_add" value="{{$hospital->h_add}}">
+                                          </div>
+                                          <label for="h_add" class="focus-label">Hospital Address</label>
+                                       </div>
+                                    </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group form-focus">
+                                       <div class="inner-addon right-addon">
+                                          <i class="fa fa-phone"></i>
+                                          <input type="text" class="form-control floating" id="h_number" name="h_number" value="{{$hospital->h_number}}">
+                                       </div>
+                                       <label for="mobno" class="focus-label">Hospital Contact Number</label>
                                     </div>
                                  </div>
-                                 <div class="form-group col-md-6">
-                                    <label for="h_add">Hospital Address</label>
-                                    <div class="inner-addon right-addon">
-                                        <i class="fa fa-address-book-o"></i>
-                                    <input type="text" class="form-control" name="h_add" id="h_add" value="{{$hospital->h_add}}">
+                                 <div class="col-md-6">
+                                    <div class="form-group form-focus">
+                                       <div class="inner-addon right-addon">
+                                          <i class="fa fa-envelope"></i>
+                                          <input type="email" class="form-control floating" id="h_email" value="{{$hospital->h_email}}" name="h_email">
+                                       </div>
+                                       <label for="email" class="focus-label">Hospital Email</label>
                                     </div>
                                  </div>
-                                 <div class="form-group col-md-6">
-                                    <label for="mobno">Hospital Contact Number</label>
-                                    <div class="inner-addon right-addon">
-                                        <i class="fa fa-phone"></i>
-                                    <input type="text" class="form-control" id="h_number" name="h_number" value="{{$hospital->h_number}}">
-                                    </div>
-                                 </div>
-                                 <div class="form-group col-md-6">
-                                    <label for="email">Hospital Email</label>
-                                    <div class="inner-addon right-addon">
-                                        <i class="fa fa-envelope"></i>
-                                    <input type="email" class="form-control" id="h_email" value="{{$hospital->h_email}}" name="h_email">
-                                    </div>
-                                 </div>
+                                 <div class="col-md-6">
 
-                                 <div class="form-group col-md-6">
-                                    <label for="Blood Group">Hospital Type</label>
-                                    <select class="form-control" id="selecthtype" name="h_type">
-                                       <option value="{{$hospital->h_type}}">{{$hospital->h_type}}</option>
-                                       <option value="General">General Hospital</option>
-                                       <option value="District">District</option>
-                                       <option value="Specialized">Specialized</option>
-                                       <option value="Teaching">Teaching</option>
-                                       <option value="Clinic">Clinic</option>
-                                    </select>
+                                       <div class="form-group ">
+                                          <label for="Hospital Type">Hospital Type</label>
+                                          <select class="form-control" id="selecthtype" name="h_type">
+                                             <option value="{{$hospital->h_type}}">{{$hospital->h_type}}</option>
+                                             <option value="General">General Hospital</option>
+                                             <option value="District">District</option>
+                                             <option value="Specialized">Specialized</option>
+                                             <option value="Teaching">Teaching</option>
+                                             <option value="Clinic">Clinic</option>
+                                          </select>
+                                       </div>
+                                    </div>
                                  </div>
-                              </div>
-                              {{Form::hidden('_method', 'PUT')}}
-                        {{Form::submit('Update', ['class' => 'btn btn-primary btn-md pull-left', 'style' => 'text-transform:uppercase;'])}}
-                       {!! Form::close() !!}
+                                 {{Form::hidden('_method', 'PUT')}}
+                           {{Form::submit('Update', ['class' => 'btn btn-primary btn-md pull-left', 'style' => 'text-transform:uppercase;'])}}
+                          {!! Form::close() !!}
                     </div>
                     <script src="{{ URL::asset('../vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
                     <script>
@@ -78,20 +120,20 @@
                     </div>
                     @endif   
      <!-- Wrapper END -->
-      <!-- Footer -->
+      <!-- Footer 
         <footer class="bg-white iq-footer">
            <div class="container-fluid">
               <div class="row">
                  <div class="col-lg-6">
                     <ul class="list-inline mb-0">
-                     <li class="list-inline-item"><a href="../../privacy">Privacy Policy</a></li>
-                     <li class="list-inline-item"><a href="../../terms">Terms of Use</a></li>
+                     <li class="list-inline-item"><a href="../privacy">Privacy Policy</a></li>
+                     <li class="list-inline-item"><a href="../terms">Terms of Use</a></li>
                     </ul>
                  </div>
                  <div class="col-lg-6 text-right">
-                    Copyright 2020 <a href="../../">Medicpin</a> All Rights Reserved.
+                    Copyright 2020 <a href="../">Medicpin</a> All Rights Reserved.
                  </div>
               </div>
            </div>
-        </footer>
+        </footer>-->
 @endsection

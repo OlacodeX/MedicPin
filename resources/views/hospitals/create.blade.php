@@ -7,15 +7,15 @@
       <style>
           
 div.jumbotron-fluid{
-             background:linear-gradient(rgba(1, 0, 2, 0),rgba(0, 0, 2, 0)), url('../img/hp.jpg') no-repeat;
-             background-size: cover;
+             background:linear-gradient(rgba(1, 0, 2, 0),rgba(0, 0, 2, 0)), url('../img/search-bg.png') no-repeat;
+             background-size: contain;
              background-position: top;
              background-attachment:fixed;
-             padding-top: 100px;
-             padding-bottom: 200px;
+             padding-top: 10px; 
+             height: 100px;
              width: 100%;
              text-align: center;
-             margin-bottom: 40px;
+             margin-bottom: 0px;
              color: rgb(39, 39, 39);
 }
 div.jumbotron-fluid h4.card-title{
@@ -26,70 +26,81 @@ div.jumbotron-fluid h4.card-title{
 h4.card-title{
  font-size: 15px;
 }
+div.card{
+   margin-top: 0;
+   margin-bottom: 0;
+}
 output{
  border: 1.5px solid rgba(214, 209, 209, 0.748);
  padding: 6px;
  border-radius: 5px;
 }
       </style>
-      <div class="jumbotron-fluid">
-         <h4 class="card-title">Create Hospital</h4>
-         <p>Manage Your Hospital Easily.</p>
+      <div class="jumbotron-fluid"> 
       </div>
-        <div class="">
-                <div class="iq-card" style="padding-bottom:50px;">
-                       <div class="iq-card-header d-flex justify-content-between">
-                          <div class="iq-header-title">
-                          </div>
-                       </div>
-                       <div class="iq-card-body">
+      <div class="card">
+         <div class="card-header">
+            <h4 class="card-title"><b>Create Hospital</b></h4>
+            <small>Manage Your Hospital Easily.</small>
+         </div>
+         <div class="card-body">
                         @include('inc.messages')
                         <!---If file upload is involved always add enctype to your opening
                             form tag and set it to multipart/form-data--->
                        {!! Form::open(['action' => 'HospitalController@store', 'method' => 'POST']) /** The action should be the block of code in the store function in PostsController
                        **/ !!}
                                 <div class="row">
-                                 <div class="form-group col-md-6">
-                                    <label for="h_name">Hospital Name </label>
-                                    <div class="inner-addon right-addon">
-                                        <i class="fa fa-user"></i>
-                                    <input type="text" class="form-control" id="h_name" name="h_name" placeholder="What is your hospital called?">
+                                   <div class="col-md-6">
+                                       <div class="form-group form-focus">
+                                          <div class="inner-addon right-addon">
+                                             <i class="fa fa-user"></i>
+                                          <input type="text" class="form-control floating" id="h_name" name="h_name" placeholder="What is your hospital called?">
+                                          </div>
+                                          <label for="h_name" class="focus-label">Hospital Name </label>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                       <div class="form-group form-focus">
+                                          <div class="inner-addon right-addon">
+                                             <i class="fa fa-address-book-o"></i>
+                                          <input type="text" class="form-control floating" name="h_add" id="h_add" placeholder="Where is your hospital located?">
+                                          </div>
+                                          <label for="h_add" class="focus-label">Hospital Address</label>
+                                       </div>
+                                    </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group form-focus">
+                                       <div class="inner-addon right-addon">
+                                          <i class="fa fa-phone"></i>
+                                       <input type="text" class="form-control floating" id="h_number" name="h_number" placeholder="Mobile Number">
+                                       </div>
+                                       <label for="mobno" class="focus-label">Hospital Contact Number</label>
                                     </div>
                                  </div>
-                                 <div class="form-group col-md-6">
-                                    <label for="h_add">Hospital Address</label>
-                                    <div class="inner-addon right-addon">
-                                        <i class="fa fa-address-book-o"></i>
-                                    <input type="text" class="form-control" name="h_add" id="h_add" placeholder="Where is your hospital located?">
+                                 <div class="col-md-6">
+                                    <div class="form-group form-focus">
+                                       <div class="inner-addon right-addon">
+                                          <i class="fa fa-envelope"></i>
+                                       <input type="email" class="form-control floating" id="h_email" placeholder="Email" name="h_email">
+                                       </div>
+                                       <label for="email" class="focus-label">Hospital Email</label>
                                     </div>
                                  </div>
-                                 <div class="form-group col-md-6">
-                                    <label for="mobno">Hospital Contact Number</label>
-                                    <div class="inner-addon right-addon">
-                                        <i class="fa fa-phone"></i>
-                                    <input type="text" class="form-control" id="h_number" name="h_number" placeholder="Mobile Number">
-                                    </div>
-                                 </div>
-                                 <div class="form-group col-md-6">
-                                    <label for="email">Hospital Email</label>
-                                    <div class="inner-addon right-addon">
-                                        <i class="fa fa-envelope"></i>
-                                    <input type="email" class="form-control" id="h_email" placeholder="Email" name="h_email">
-                                    </div>
-                                 </div>
+                                 <div class="col-md-6">
 
-                                 <div class="form-group col-md-6">
-                                    <label for="Blood Group">Hospital Type</label>
-                                    <select class="form-control" id="selecthtype" name="h_type">
-                                       <option>Select</option>
-                                       <option value="General">General Hospital</option>
-                                       <option value="District">District</option>
-                                       <option value="Specialized">Specialized</option>
-                                       <option value="Teaching">Teaching</option>
-                                       <option value="Clinic">Clinic</option>
-                                    </select>
+                                       <div class="form-group ">
+                                          <label for="Hospital Type">Hospital Type</label>
+                                          <select class="form-control" id="selecthtype" name="h_type">
+                                             <option>Select</option>
+                                             <option value="General">General Hospital</option>
+                                             <option value="District">District</option>
+                                             <option value="Specialized">Specialized</option>
+                                             <option value="Teaching">Teaching</option>
+                                             <option value="Clinic">Clinic</option>
+                                          </select>
+                                       </div>
+                                    </div>
                                  </div>
-                              </div>
                         {{Form::submit('Create Hospital', ['class' => 'btn btn-primary btn-md pull-left', 'style' => 'text-transform:uppercase;'])}}
                        {!! Form::close() !!}
                     </div>
@@ -108,7 +119,7 @@ output{
                     </div>
                     @endif   
      <!-- Wrapper END -->
-      <!-- Footer -->
+      <!-- Footer 
         <footer class="bg-white iq-footer">
            <div class="container-fluid">
               <div class="row">
@@ -123,5 +134,5 @@ output{
                  </div>
               </div>
            </div>
-        </footer>
+        </footer>-->
 @endsection

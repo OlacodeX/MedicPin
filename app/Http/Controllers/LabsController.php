@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class LabsController extends Controller
 {
+    
+   public function __construct()
+   {
+       $this->middleware('auth');
+   }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +24,7 @@ class LabsController extends Controller
     {
         //
         $pin = $_GET['pin'];
-        $patient = patients::orderBy('created_at', 'desc')->where('pin', $pin)->first();
+        $patient = patients::where('pin', $pin)->first();
         $patients = Lab::orderBy('created_at', 'desc')->where('patient_pin', $pin)->whereDay('created_at', now()->day)->get();
         $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
        

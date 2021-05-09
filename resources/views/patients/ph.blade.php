@@ -81,9 +81,11 @@ span.pull-right.in{
                   <div class="col-lg-6">
                      <span class="price">₦{{$drug->price}}/{{$drug->sell}}</span>
                      <!---<span class="price-strike">$45.00</span>---->
+                     
                      @php
-                        $user = App\User::where('pin', $drug->doc_pin)->first();
-                     @endphp
+                     $h_id = App\User::where('pin', $drug->doc_pin)->first();
+                 @endphp
+                 @if (auth()->user()->h_id == $h_id->h_id)
                <div class="dropdown">
                   <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false"> Actions </a>
                   <div class="dropdown-menu">
@@ -115,6 +117,7 @@ span.pull-right.in{
                      @endif
                   </div>
                </div>
+               @endif
                   </div>
                   <div class="col-lg-6 text-right">
                      <a href="{{route('cart.add', $drug->id)}}" class="cart-icon"><i class="fas fa-shopping-cart"></i></a>

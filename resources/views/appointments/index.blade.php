@@ -40,11 +40,11 @@
              $doctor = App\User::where('pin', $appointment->doctor)->first();
          @endphp
          <div class="profile-info-widget">
-            <a href="patient-profile.html" class="booking-doc-img">
+            <a href="" class="booking-doc-img">
                <img src="img/profile/{{$doctor->img}}" alt="User Image">
             </a>
             <div class="profile-det-info">
-               <h3><a href="patient-profile.html">{{$doctor->name}}</a></h3>
+               <h3><a href="">{{$doctor->name}}</a></h3>
                <div class="patient-details">
                   <h5><i class="far fa-clock"></i> {{$appointment->date}}, {{$appointment->time}}</h5>
                   <h5><i class="fas fa-envelope"></i> {{$doctor->email}}</h5>
@@ -100,11 +100,11 @@
          <img src="img/profile/{{$patient_profile->img}}" alt="User Image">
       </a>
       <div class="profile-det-info">
-         <h3><a href="patient-profile.html">{{$patient->name}}</a></h3>
+         <h3><a href="patient-profile.html">{{$patient_profile->name}}</a></h3>
          <div class="patient-details">
             <h5><i class="far fa-clock"></i> {{$appointment->date}}, {{$appointment->time}}</h5>
-            <h5><i class="fas fa-envelope"></i> {{$patient->email}}</h5>
-            <h5 class="mb-0"><i class="fas fa-phone"></i> <a href="tel:{{$patient->phone}}" style="text-decoration: none;">{{$patient->phone}}</a></h5>
+            <h5><i class="fas fa-envelope"></i> {{$patient_profile->email}}</h5>
+            <h5 class="mb-0"><i class="fas fa-phone"></i> <a href="tel:{{$patient_profile->cc . $patient_profile->p_number}}" style="text-decoration: none;">{{$patient_profile->cc . $patient_profile->p_number}}</a></h5>
          </div>
       </div>
    </div>

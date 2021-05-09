@@ -38,23 +38,7 @@ class PagesController extends Controller
         return view('pages.index1');//here i can return any page i want.
     }
     public function home(){
-        $notices = Notifications::where('to',auth()->user()->id)->paginate(5);
-        $notice_sents = Notifications::where('from',auth()->user()->id)->paginate(5);
-        $patient = patients::where('email',auth()->user()->email)->first();
-        $patients = patients::where('doc_email',auth()->user()->email)->paginate(10);
-        $new_messages = Messages::orderBy('created_at', 'desc')->where('receiver_id', auth()->user()->id)->where('status', 'unread')->get();
-        $questions_all = Questions::orderBy('created_at', 'desc')->paginate(5);
-        $data = array(
-            //'calendar' => $calendar,
-            'patient' => $patient,
-            'patients' => $patients,
-            'notice_sents' => $notice_sents,
-            'notices' => $notices,
-            //'hospital' => $hospital,
-            'questions_all' => $questions_all,
-            'new_messages' => $new_messages
-        );
-        return view('home_old', $data);//here i can return any page i want.
+        return redirect('dashboard');//here i can return any page i want.
     }
     public function about(){
         return view('pages.about');//here i can return any page i want.
@@ -531,6 +515,7 @@ return redirect()->back();
             'pp' => ['nullable', 'max:2000'],
             'gender' => ['nullable', 'string', 'max:255'],
             'expertise' => ['nullable', 'string', 'max:255'],
+            'about' => ['nullable', 'string', 'max:500'],
             'twitter' => ['nullable', 'string', 'max:255'],
             'facebook' => ['nullable', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:255'],
@@ -588,6 +573,7 @@ return redirect()->back();
             $path = $request->file('pp')->move('img/profile', $fileNameTostore);
               }
         $user->name = $request->input('name');
+        $user->about = $request->input('about');
         $user->email = $request->input('email');
         $user->p_number = $request->input('phone');
         $user->cc = $request->input('cc');

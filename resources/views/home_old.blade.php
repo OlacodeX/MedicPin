@@ -396,14 +396,7 @@
                           
                            <button type="submit" class ="btn btn-info btn-sm br" data-toggle="tooltip" data-placement="top" data-original-title="Add New Product Category"><i class="fa fa-plus"></i>Add New Product Category</button>
                           
-                           {!!Form::close()!!}
-                        <!---
-                             {!!Form::open(['action' => 'HmoController@create', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
-                            
-                             <button type="submit" class ="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Add New Package"><i class="fa fa-plus"></i></button>
-                            
-                             {!!Form::close()!!}
-                                 --->
+                           {!!Form::close()!!} 
                              {!!Form::open(['action' => 'HmoController@add_hospital', 'method' => 'GET', 'style' => 'margin-right:20px;'])!!}
                             
                              <!---{{Form::hidden('id', auth()->user()->id)}}--->
@@ -562,11 +555,8 @@
                      <h4 class="card-title">Registered Users</h4>
                   </div>
                </div>
-               @php
-
-                     $users = App\User::where('hmo', auth()->user()->id)->paginate(100);
-                  
-                   
+               @php 
+                     $users = App\User::where('hmo', auth()->user()->id)->paginate(100);  
                @endphp  
                            @if (count($users) > 0)
                            <table class="table mb-0 table-borderless">
